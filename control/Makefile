@@ -1,12 +1,8 @@
-### DISCLAIMER
-### This is an example Makefile and it MUST be configured to suit your needs.
-### For detailled explanations about all the avalaible options,
-### please refer to https://github.com/sudar/Arduino-Makefile/blob/master/arduino-mk-vars.md
-
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
 # PROJECT_DIR 		= /home/davidzhang/Programming/AVBotz2018/Control
 PROJECT_DIR       = $(shell dirname $(shell pwd))
+# PROJECT_DIR       = $(shell pwd)
 # $(info $(PROJECT_DIR))
 
 ### AVR_GCC_VERSION

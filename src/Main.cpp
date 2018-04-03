@@ -8,19 +8,45 @@
  */
 
 /*
- * Treat run() as main().
+ * Treat this as main().
  */
 void run()
 {
-	Serial << "Beginning Nautical!" << '\n';
+
 
 	while (true)
 	{
-		// Receive input through /dev/tty* port 
 		if (Serial.available() > 0)
 		{
-			String input = Serial.readStringUntil('\n');
-			Serial << "Received input! " << input << '\n';
+			/*
+			 * 's' = setting state 
+			 * 'p' = setting power
+			 * 'c' = request state 
+			 * 'a' = request kill 
+			 */
+			char c = Serial.read();
+
+			switch (c)
+			{
+				case 's':
+				{
+					String desiredState = Serial.readStringUntil('\n');
+					break;
+				}
+				case 'p':
+				{
+					char k = Serial.read();
+					break;
+				}
+				case 'c': 
+				{	
+					break; 
+				}
+				case 'a':
+				{
+					break;
+				}
+			}
 		}
 	}
 }

@@ -1,4 +1,4 @@
-#include "State.hpp"
+#include "state.hpp"
 
 void State::read()
 {
@@ -14,4 +14,12 @@ void State::print()
 {
 	Serial << this->x << " " << this->y << " " << this->z << " " << 
 		this->yaw << " " << this->pitch << " " << this->roll << '\n';
+}
+
+void State::printfull()
+{
+	Serial << this->x << " " << this->y << " " << this->z << " " << 
+		this->yaw << " " << this->pitch << " " << this->roll << 
+		" " << this->surge << " " << this->sway << " " << 
+		this->heave << '\n';
 }

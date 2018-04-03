@@ -1,7 +1,8 @@
 #include <Arduino.h>
 
-#include "Streaming.h"
-#include "State.hpp"
+#include "streaming.h"
+#include "state.hpp"
+#include "io.hpp"
 
 /*
  * IMPORTANT: The entire structure of this program hacks around the required
@@ -49,10 +50,13 @@ void run()
 				}
 				case 'c': 
 				{	
+					current = getState();
+					current.print();
 					break; 
 				}
 				case 'a':
 				{
+					Serial << (alive()?1:0) << "\n";
 					break;
 				}
 			}
@@ -66,6 +70,7 @@ void run()
 void setup()
 {
 	Serial.begin(9600);
+	init_io();
 	run();
 }
 void loop() {}

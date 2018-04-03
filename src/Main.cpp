@@ -1,5 +1,7 @@
 #include <Arduino.h>
+
 #include "Streaming.h"
+#include "State.hpp"
 
 /*
  * IMPORTANT: The entire structure of this program hacks around the required
@@ -12,17 +14,23 @@
  */
 void run()
 {
-
+	Serial << "Beginning Nautical!" << '\n';
+	
+	/*
+	 * Current state holds where the sub thinks it is at.
+	 * Desired state holds where the sub wants to be.
+	 */
+	State current, desired;
 
 	while (true)
 	{
 		if (Serial.available() > 0)
 		{
 			/*
-			 * 's' = setting state 
-			 * 'p' = setting power
-			 * 'c' = request state 
-			 * 'a' = request kill 
+			 * 's' = set state 
+			 * 'p' = set power
+			 * 'c' = req state 
+			 * 'a' = req kills
 			 */
 			char c = Serial.read();
 
@@ -30,7 +38,8 @@ void run()
 			{
 				case 's':
 				{
-					String desiredState = Serial.readStringUntil('\n');
+					desired.read();
+					desired.print();
 					break;
 				}
 				case 'p':

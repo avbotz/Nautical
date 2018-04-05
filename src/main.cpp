@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
 #include "streaming.h"
+#include "motor.hpp"
 #include "state.hpp"
 #include "io.hpp"
-#include "m5/m5.h"
 
 /*
  * IMPORTANT: The entire structure of this program hacks around the required
@@ -76,7 +76,7 @@ void run()
 				}
 				case 'a':
 				{
-					Serial << alive() ? 1:0 << "\n";
+					Serial << (alive() ? 1:0) << '\n';
 					break;
 				}
 			}

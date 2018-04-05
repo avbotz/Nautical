@@ -7,6 +7,7 @@
 #include "m5/m5.h"
 #include "macrodef.h"
 #include "io.hpp"
+#include "motor.hpp"
 #include "state.hpp"
 
 #define KILL_PIN 30
@@ -23,8 +24,8 @@ void init_io()
 	pinMode(KILL_PIN, INPUT);
 
 	// M5
-	io_m5_init("");
 	float powers[NUM_THRUSTERS] = {0.f};
+	io_m5_init("");
 	setpowers(powers); 
 	io_m5_trans_set(m5_power_trans);	
 }
@@ -36,7 +37,7 @@ bool alive()
 
 void setMotor(Motor m)
 {
-	m5_power((enum thruster) m.pos, m.pow);
+	m5_power((enum thruster) m.pos, m.thrust);
 	m5_power_offer_resume();
 }
 

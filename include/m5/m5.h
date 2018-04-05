@@ -7,35 +7,7 @@ extern "C" {
 
 #include <stdbool.h>
 
-/**
- * Each value should equal the named thruster's Motor ID (For easy compatibility with
- * PROPULSION_COMMAND).
- */
-enum thruster
-{
-	// No motor ID 0, because with the firmware 0.9.8 that our thrusters came
-	// with, setting motor ID to 0 seemed to really mess up communications,
-	// probably due to a firmware bug.
-	//
-	// Since PROPULSION_COMMAND needs to output power values consecutively
-	// starting from motor ID 0, we will just be outputting unspecified power
-	// values for motor ID 0.
-	VERT_FR = 2,
-	VERT_FL = 1,
-	VERT_BR = 4,
-	VERT_BL = 3,
-	SURGE_FR = 6,
-	SURGE_FL = 5,
-	SURGE_BR = 8,
-	SURGE_BL = 7,
-	NUM_THRUSTERS
-};
-
-struct Motor {
-	
-	enum thruster pos;
-	float pow;
-};
+#include "motor.hpp"
 
 /**
  * writes the next byte of the propulsion command packet to the m5's

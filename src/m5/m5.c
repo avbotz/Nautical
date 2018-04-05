@@ -17,6 +17,7 @@
 #include "m5/m5.h"
 #include "m5/io_m5.h"
 #include "m5/crc32.h"
+#include "motor.hpp"
 #include "macrodef.h"
 
 

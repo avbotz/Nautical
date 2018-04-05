@@ -20,8 +20,8 @@ enum thruster
 	// Since PROPULSION_COMMAND needs to output power values consecutively
 	// starting from motor ID 0, we will just be outputting unspecified power
 	// values for motor ID 0.
-	VERT_FR = 1,
-	VERT_FL = 2,
+	VERT_FR = 2,
+	VERT_FL = 1,
 	VERT_BR = 4,
 	VERT_BL = 3,
 	SURGE_FR = 6,

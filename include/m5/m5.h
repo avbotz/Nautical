@@ -31,6 +31,12 @@ enum thruster
 	NUM_THRUSTERS
 };
 
+struct Motor {
+	
+	enum thruster pos;
+	float pow;
+};
+
 /**
  * writes the next byte of the propulsion command packet to the m5's
  *

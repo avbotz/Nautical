@@ -9,5 +9,6 @@ void init_io();
 State getState();
 bool alive();
 void setpowers(float vals[NUM_THRUSTERS]);
+void setMotor(Motor s);
 
 #endif

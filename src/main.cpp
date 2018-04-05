@@ -3,6 +3,7 @@
 #include "streaming.h"
 #include "state.hpp"
 #include "io.hpp"
+#include "m5/m5.h"
 
 /*
  * IMPORTANT: The entire structure of this program hacks around the required
@@ -48,21 +49,24 @@ void run()
 					float powers[NUM_THRUSTERS] = {0.f};
 					//kill motors
 					setpowers(powers);
+					break;
 				}
 				case 'p':
 				{
 					float k = Serial.parseFloat();
 					float powers[NUM_THRUSTERS] = {k};
 					setpowers(powers);
-					Serial << k;
+					Serial << k << "\n";
 					break;
 				}
 				case 't':
 				{
 					int x = Serial.parseInt();
 					float k = Serial.parseFloat();
+					Motor blah = {(enum thruster)x, k};
+					setMotor(blah);
 					Serial << x << " " << k << "\n";
-				//	setMotor({(enum thruster)x, k});
+					break;
 				}
 				case 'c': 
 				{	
@@ -72,7 +76,7 @@ void run()
 				}
 				case 'a':
 				{
-					Serial << (alive()?1:0) << "\n";
+					Serial << alive() ? 1:0 << "\n";
 					break;
 				}
 			}

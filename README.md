@@ -1,3 +1,8 @@
+On Marlin there are added commands:
+	upload: platformio run -t upload
+	monitor: platformio device monitor
+
+
 # initialize directory - only on first creation
 platformio init --board megaatmega2560
 

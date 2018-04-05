@@ -43,10 +43,26 @@ void run()
 					desired.print();
 					break;
 				}
+				case 'x':
+				{
+					float powers[NUM_THRUSTERS] = {0.f};
+					//kill motors
+					setpowers(powers);
+				}
 				case 'p':
 				{
-					char k = Serial.read();
+					float k = Serial.parseFloat();
+					float powers[NUM_THRUSTERS] = {k};
+					setpowers(powers);
+					Serial << k;
 					break;
+				}
+				case 't':
+				{
+					int x = Serial.parseInt();
+					float k = Serial.parseFloat();
+					Serial << x << " " << k << "\n";
+				//	setMotor({(enum thruster)x, k});
 				}
 				case 'c': 
 				{	

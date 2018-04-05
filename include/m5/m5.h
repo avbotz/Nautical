@@ -22,12 +22,12 @@ enum thruster
 	// values for motor ID 0.
 	VERT_FR = 1,
 	VERT_FL = 2,
-	VERT_BR = 3,
-	VERT_BL = 4,
-	SURGE_FR = 5,
-	SURGE_FL = 6,
-	SURGE_BR = 7,
-	SURGE_BL = 8,
+	VERT_BR = 4,
+	VERT_BL = 3,
+	SURGE_FR = 6,
+	SURGE_FL = 5,
+	SURGE_BR = 8,
+	SURGE_BL = 7,
 	NUM_THRUSTERS
 };
 

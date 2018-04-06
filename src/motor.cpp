@@ -28,9 +28,9 @@ void set_motor(Motor m)
 
 void set_motors(Motor *motors)
 {
-	for (int t = 1; t <= NUM_THRUSTERS; t++) 
+	for (int t = 0; t < NUM_THRUSTERS; t++) 
 	{
-		m5_power((enum thruster) motors[t].pos, motors[t].pos);
+		m5_power((enum thruster) motors[t].pos, motors[t].thrust);
 	}
 	m5_power_offer_resume();
 }
@@ -46,8 +46,16 @@ void run_motors(const State	&current, const State &desired, Motor *motors, float
 	int dz = desired.z - current.z;
 
 	// TODO Compute constants based on how far we are from the target
-	int kx = 1;
-	int ky = 1;
-	int kz = 1;
+	// Right now, these are set to + or - without regard to closeness
+	int kx = (dx < 0) ? -1 : 1;
+	int ky = (dy < 0) ? -1 : 1;
+	int kz = (dz < 0) ? -1 : 1;
 
+	// Compute final thrust given to each motor based on orientation matrix
+	for (int i = 0; i < 8; i++)
+	{
+		motors[i].thrust += kx * p;
+		motors[i].thrust += ky * p;
+		motors[i].thrust += kz * p;
+	}
 }

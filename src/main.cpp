@@ -40,6 +40,7 @@ void run()
 			 * 'c' = req state 
 			 * 'a' = req kills
 			 * 'x' = terminate
+			 * 'd' =
 			 */
 			char c = Serial.read();
 			switch (c)
@@ -70,12 +71,12 @@ void run()
 					set_powers(powers);
 					break;
 				}
-				case 't':
+				case 'd':
 				{
-					int x = Serial.parseInt();
+					int id = Serial.parseInt();
 					float k = Serial.parseFloat();
-					Motor blah = { (enum thruster) x, k };
-					set_motor(blah);
+					Motor m = { (enum thruster) id, k };
+					set_motor(m);
 					break;
 				}
 			}
@@ -84,8 +85,7 @@ void run()
 		// Move sub towards the desired location 
 		run_motors(current, desired, motors, p);	
 
-		// Compute new state using AHRS data 
-		// TODO	
+		// TODO Compute new state using AHRS data 
 	}
 }
 

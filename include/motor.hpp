@@ -2,24 +2,8 @@
 #define MOTOR_HPP 
 
 #include "m5/m5.h"
+#include "config.h"
 #include "state.hpp"
-
-/*
- * Motor Orientation Configuration.
- * Rows = motors, Columns = directions, Values = weights.
- */
-static const int ORIENTATION[8][6] = 
-{
-	//X, 	Y, 	 Z, 	Yaw,  Pitch Roll
-	{ 0,	0,	 -1,	0,	  1,	-1 },
-	{ 0,	0,	 1,		0, 	  -1,   -1 },
-	{ 0,	0,	 1,		0, 	  1, 	1 },
-	{ 0,	0,	 -1,	0, 	  -1, 	1 },
-	{ -1,	1,	 0,		1, 	  0, 	0 },
-	{ 1,	1,	 0,		1, 	  0,	0 },
-	{ 1,	1,	 0,		-1,   0,	0 }, 
-	{ -1,	1,	 0,		-1,   0,	0 }
-};
 
 struct Motor 
 {
@@ -28,7 +12,9 @@ struct Motor
 };
 
 struct Motor* init_motors();
-void set_motors();
-// void run_motors(const State&, const State&, struct Motor*);
+void set_powers(float vals[NUM_THRUSTERS]);
+void set_motor(struct Motor);
+void set_motors(struct Motor*);
+void run_motors(const State&, const State&, struct Motor*);
 
 #endif 

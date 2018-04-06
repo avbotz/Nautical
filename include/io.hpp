@@ -7,8 +7,6 @@
 #include "m5/io_m5.h"
 
 void init_io();
-void set_powers(float vals[NUM_THRUSTERS]);
-void set_motor(Motor s);
 bool alive();
 State get_state();
 

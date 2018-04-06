@@ -27,7 +27,7 @@ void run()
 	// Intialize motors 
 	Motor *motors = init_motors();
 
-	// Desired holds destination state
+	// Current holds location, desired holds destination
 	State current, desired;
 
 	while (true)
@@ -42,7 +42,6 @@ void run()
 			 * 'x' = terminate
 			 */
 			char c = Serial.read();
-
 			switch (c)
 			{
 				case 's':
@@ -77,13 +76,16 @@ void run()
 					float k = Serial.parseFloat();
 					Motor blah = { (enum thruster) x, k };
 					set_motor(blah);
-					Serial << x << " " << k << "\n";
 					break;
 				}
 			}
 		}
 
-		
+		// Move sub towards the desired location 
+		run_motors(current, desired, motors);	
+
+		// Compute new state using AHRS data 
+		// TODO	
 	}
 }
 

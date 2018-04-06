@@ -15,16 +15,16 @@
 
 void init_io()
 {
-	// AHRS
+	// Initialize communication with the AHRS
 	io_ahrs_init("");
 	ahrs_set_datacomp();
 	ahrs_cont_start();
-	io_ahrs_recv_start(ahrs_att_recv); // Start receiving data asynchronously
+	io_ahrs_recv_start(ahrs_att_recv);
 
-	// KILL SWITCH
+	// Initialize communication with the kill switch 
 	pinMode(KILL_PIN, INPUT);
 
-	// M5
+	// Initialize communication with the M5
 	float powers[NUM_THRUSTERS] = { 0.f };
 	io_m5_init("");
 	set_powers(powers); 
@@ -34,21 +34,6 @@ void init_io()
 bool alive()
 {
 	return digitalRead(KILL_PIN) ? false : true;
-}
-
-void set_motor(Motor m)
-{
-	m5_power((enum thruster) m.pos, m.thrust);
-	m5_power_offer_resume();
-}
-
-void set_powers(float vals[NUM_THRUSTERS])
-{
-	for (uint_fast8_t t = NUM_THRUSTERS; t--;)
-	{
-		// zero powers
-		m5_power((enum thruster)t, vals[t]);
-	}
 }
 
 State get_state()

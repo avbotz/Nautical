@@ -82,7 +82,7 @@ void run()
 		}
 
 		// Move sub towards the desired location 
-		run_motors(current, desired, motors);	
+		run_motors(current, desired, motors, p);	
 
 		// Compute new state using AHRS data 
 		// TODO	

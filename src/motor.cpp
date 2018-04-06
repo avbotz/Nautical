@@ -32,9 +32,22 @@ void set_motors(Motor *motors)
 	{
 		m5_power((enum thruster) motors[t].pos, motors[t].pos);
 	}
+	m5_power_offer_resume();
 }
 
-void run_motors(const State	&current, const State &desired, Motor *motors)
+/*
+ * TODO Still need to compute Y/P/R movement.
+ */
+void run_motors(const State	&current, const State &desired, Motor *motors, float p)
 {
-	
+	// Compute state difference 
+	int dx = desired.x - current.x;
+	int dy = desired.y - current.y;
+	int dz = desired.z - current.z;
+
+	// TODO Compute constants based on how far we are from the target
+	int kx = 1;
+	int ky = 1;
+	int kz = 1;
+
 }

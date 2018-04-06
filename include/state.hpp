@@ -9,10 +9,9 @@ struct State
 	 * Y = right/left 
 	 * Z = down/up
 	 * Yaw, Pitch, and Roll are obvious.
-	 * Acceleration: 
-	 * Surge = forward
-	 * Sway = right/left
-	 * Heave = down/up
+	 * Surge 	= forward/backward
+	 * Sway 	= right/left
+	 * Heave 	= down/up
 	 */
 	float x, y, z;
 	float yaw, pitch, roll;

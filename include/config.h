@@ -5,6 +5,7 @@
  * Motor ID Configuration.
  * 8 motors on the sub.
  * VERTICAL + SURGE for FL, FR, BL, BR.
+ * Important! These must be in order from 1-8.
  */
 enum thruster
 {
@@ -22,10 +23,12 @@ enum thruster
 /*
  * Motor Orientation Configuration.
  * Rows = motors, Columns = directions, Values = weights.
+ * 1 means clockwise, -1 means counterclockwise, 0 means not used.
+ * TODO Someone needs to double check this orientation matrix!
  */
 static const int ORIENTATION[8][6] = 
 {
-	//X, 	Y, 	 Z, 	Yaw,  Pitch Roll
+	//X, 	Y, 	 Z, 	Y,	  P, 	R
 	{ 0,	0,	 -1,	0,	  1,	-1 },
 	{ 0,	0,	 1,		0, 	  -1,   -1 },
 	{ 0,	0,	 1,		0, 	  1, 	1 },

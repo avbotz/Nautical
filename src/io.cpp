@@ -15,16 +15,16 @@
 
 void init_io()
 {
-	// Initialize communication with the AHRS
+	// Init communication with the AHRS
 	io_ahrs_init("");
 	ahrs_set_datacomp();
 	ahrs_cont_start();
 	io_ahrs_recv_start(ahrs_att_recv);
 
-	// Initialize communication with the kill switch 
+	// Init communication with the kill switch 
 	pinMode(KILL_PIN, INPUT);
 
-	// Initialize communication with the M5
+	// Init communication with the M5
 	float powers[NUM_THRUSTERS] = { 0.f };
 	io_m5_init("");
 	set_powers(powers); 

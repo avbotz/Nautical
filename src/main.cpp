@@ -17,11 +17,17 @@
 void run()
 {
 	Serial << "Beginning Nautical!" << '\n';
-	
-	/*
-	 * Current state holds where the sub thinks it is at.
-	 * Desired state holds where the sub wants to be.
-	 */
+
+	// Initialize IO between hardware and software 
+	init_io();
+
+	// Initial power is 0
+	float p = 0.f;
+
+	// Intialize motors 
+	Motor *motors = init_motors();
+
+	// Desired holds destination state
 	State current, desired;
 
 	while (true)
@@ -33,6 +39,7 @@ void run()
 			 * 'p' = set power
 			 * 'c' = req state 
 			 * 'a' = req kills
+			 * 'x' = terminate
 			 */
 			char c = Serial.read();
 
@@ -41,42 +48,35 @@ void run()
 				case 's':
 				{
 					desired.read();
-					desired.print();
-					break;
-				}
-				case 'x':
-				{
-					float powers[NUM_THRUSTERS] = {0.f};
-					//kill motors
-					setpowers(powers);
 					break;
 				}
 				case 'p':
 				{
-					float k = Serial.parseFloat();
-					float powers[NUM_THRUSTERS] = {k};
-					setpowers(powers);
-					Serial << k << "\n";
+					p = Serial.parseFloat();
+					break;
+				}
+				case 'c': 
+				{	
+					break; 
+				}
+				case 'a':
+				{
+					Serial << (alive() ? 1:0) << '\n';
+					break;
+				}
+				case 'x':
+				{
+					float powers[NUM_THRUSTERS] = { 0.f };
+					set_powers(powers);
 					break;
 				}
 				case 't':
 				{
 					int x = Serial.parseInt();
 					float k = Serial.parseFloat();
-					Motor blah = {(enum thruster)x, k};
-					setMotor(blah);
+					Motor blah = { (enum thruster) x, k };
+					set_motor(blah);
 					Serial << x << " " << k << "\n";
-					break;
-				}
-				case 'c': 
-				{	
-					current = getState();
-					current.print();
-					break; 
-				}
-				case 'a':
-				{
-					Serial << (alive() ? 1:0) << '\n';
 					break;
 				}
 			}
@@ -90,7 +90,6 @@ void run()
 void setup()
 {
 	Serial.begin(9600);
-	init_io();
 	run();
 }
 void loop() {}

@@ -42,6 +42,8 @@ struct Motor
 	float thrust;
 };
 
-// void runMotors(const State&, const State&, Motor*);
+Motor* init_motors();
+void set_motors();
+// void run_motors(const State&, const State&, Motor*);
 
 #endif 

@@ -24,9 +24,9 @@ void init_io()
 	pinMode(KILL_PIN, INPUT);
 
 	// M5
-	float powers[NUM_THRUSTERS] = {0.f};
+	float powers[NUM_THRUSTERS] = { 0.f };
 	io_m5_init("");
-	setpowers(powers); 
+	set_powers(powers); 
 	io_m5_trans_set(m5_power_trans);	
 }
 
@@ -35,13 +35,13 @@ bool alive()
 	return digitalRead(KILL_PIN) ? false : true;
 }
 
-void setMotor(Motor m)
+void set_motor(Motor m)
 {
 	m5_power((enum thruster) m.pos, m.thrust);
 	m5_power_offer_resume();
 }
 
-void setpowers(float vals[NUM_THRUSTERS])
+void set_powers(float vals[NUM_THRUSTERS])
 {
 	for (uint_fast8_t t = NUM_THRUSTERS; t--;)
 	{
@@ -50,7 +50,7 @@ void setpowers(float vals[NUM_THRUSTERS])
 	}
 }
 
-State getState()
+State get_state()
 {
 	ahrs_att_update();
 	State out;

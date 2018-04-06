@@ -1,6 +1,6 @@
 #include <Arduino.h>
-
 #include "streaming.h"
+
 #include "motor.hpp"
 #include "state.hpp"
 #include "io.hpp"
@@ -56,7 +56,8 @@ void run()
 					break;
 				}
 				case 'c': 
-				{	
+				{
+					current.print();
 					break; 
 				}
 				case 'a':
@@ -81,6 +82,8 @@ void run()
 				}
 			}
 		}
+
+		
 	}
 }
 

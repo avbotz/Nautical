@@ -1,23 +1,8 @@
 #ifndef MOTOR_HPP
 #define MOTOR_HPP 
 
-/*
- * Motor ID Configuration.
- * 8 motors on the sub.
- * VERTICAL + SURGE for FL, FR, BL, BR.
- */
-enum thruster
-{
-	VERT_FL = 1,
-	VERT_FR = 2,
-	VERT_BL = 3,
-	VERT_BR = 4,
-	SURGE_FL = 5,
-	SURGE_FR = 6,
-	SURGE_BL = 7,
-	SURGE_BR = 8,
-	NUM_THRUSTERS
-};
+#include "m5/m5.h"
+#include "state.hpp"
 
 /*
  * Motor Orientation Configuration.
@@ -42,8 +27,8 @@ struct Motor
 	float thrust;
 };
 
-Motor* init_motors();
+struct Motor* init_motors();
 void set_motors();
-// void run_motors(const State&, const State&, Motor*);
+// void run_motors(const State&, const State&, struct Motor*);
 
 #endif 

@@ -17,9 +17,7 @@
 #include "m5/m5.h"
 #include "m5/io_m5.h"
 #include "m5/crc32.h"
-#include "motor.hpp"
 #include "macrodef.h"
-
 
 #define SYNC_REQUEST_0 0xF5U // Per VRCSR doc
 #define SYNC_REQUEST_1 0x5FU //

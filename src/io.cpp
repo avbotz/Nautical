@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <math.h>
 #include <stdio.h>
 
@@ -61,8 +62,6 @@ State get_state()
 	out.sway = ahrs_accel((enum accel_axis)(SWAY));
 	out.heave = ahrs_accel((enum accel_axis)(HEAVE));
 	out.surge = ahrs_accel((enum accel_axis)(SURGE));
-
-	out.hstatus = ahrs_headingstatus();
 
 	return out;
 }

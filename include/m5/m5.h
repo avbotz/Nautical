@@ -7,7 +7,25 @@ extern "C" {
 
 #include <stdbool.h>
 
-#include "motor.hpp"
+/*
+ * Motor ID Configuration.
+ * 8 motors on the sub.
+ * VERTICAL + SURGE for FL, FR, BL, BR.
+ * FYI: I would have preferred to put this in motor.hpp, but it needs to be in a
+ * .h file. 
+ */
+enum thruster
+{
+	VERT_FL = 1,
+	VERT_FR = 2,
+	VERT_BL = 3,
+	VERT_BR = 4,
+	SURGE_FL = 5,
+	SURGE_FR = 6,
+	SURGE_BL = 7,
+	SURGE_BR = 8,
+	NUM_THRUSTERS
+};
 
 /**
  * writes the next byte of the propulsion command packet to the m5's

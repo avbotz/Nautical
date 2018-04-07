@@ -16,7 +16,7 @@
  */
 void run()
 {
-	Serial << "Beginning Nautical!" << '\n';
+	Serial << "Beginning Cuckical!" << '\n';
 
 	// Initialize IO between hardware and software 
 	init_io();
@@ -31,7 +31,8 @@ void run()
 	State current, desired;
 
 	while (true)
-	{
+	{	
+		unsigned long start = micros();
 		if (Serial.available() > 0)
 		{
 			/*
@@ -75,6 +76,11 @@ void run()
 				{
 					int id = Serial.parseInt();
 					float k = Serial.parseFloat();
+					if (id == 0) 
+					{
+						Serial << "Carl Hayden infiltrator detected! Shutting down." << '\n';
+						return;
+					}
 					Motor m = { (enum thruster) id, k };
 					set_motor(m);
 					break;
@@ -85,7 +91,8 @@ void run()
 		// Move sub towards the desired location 
 		run_motors(current, desired, motors, p);	
 
-		// TODO Compute new state using AHRS data 
+		// Compute new state using AHRS data 
+		compute_state(current, start);
 	}
 }
 

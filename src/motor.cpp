@@ -58,4 +58,6 @@ void run_motors(const State	&current, const State &desired, Motor *motors, float
 		motors[i].thrust += ky * p;
 		motors[i].thrust += kz * p;
 	}
+
+	set_motors(motors);
 }

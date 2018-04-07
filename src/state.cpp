@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "ahrs/ahrs.h"
 #include "streaming.h"
 #include "state.hpp"
 
@@ -16,4 +17,22 @@ void State::print()
 {
 	Serial << this->x << " " << this->y << " " << this->z << " " << 
 		this->yaw << " " << this->pitch << " " << this->roll << '\n';
+}
+
+void compute_state(State &state, unsigned long start)
+{
+	ahrs_att_update();
+	state.yaw 		= ahrs_att((enum att_axis)(YAW));
+	state.pitch 	= ahrs_att((enum att_axis)(PITCH));
+	state.roll 		= ahrs_att((enum att_axis)(ROLL));
+	state.surge 	= ahrs_accel((enum accel_axis)(SURGE));
+	state.sway 		= ahrs_accel((enum accel_axis)(SWAY));
+	state.heave 	= ahrs_accel((enum accel_axis)(HEAVE));
+
+	float td = (float)(start-micros())/(float)(1000000);
+	state.x += 0.5 * state.surge * td * td;
+	state.y += 0.5 * state.sway * td * td;
+	state.x += 0.5 * state.heave * td * td;
+
+	return state;
 }

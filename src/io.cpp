@@ -35,18 +35,3 @@ bool alive()
 {
 	return digitalRead(KILL_PIN) ? false : true;
 }
-
-State get_state()
-{
-	ahrs_att_update();
-	State out;
-	out.yaw = ahrs_att((enum att_axis)(YAW));
-	out.pitch = ahrs_att((enum att_axis)(PITCH));
-	out.roll = ahrs_att((enum att_axis)(ROLL));
-
-	out.sway = ahrs_accel((enum accel_axis)(SWAY));
-	out.heave = ahrs_accel((enum accel_axis)(HEAVE));
-	out.surge = ahrs_accel((enum accel_axis)(SURGE));
-
-	return out;
-}

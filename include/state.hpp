@@ -21,4 +21,6 @@ struct State
 	void print();
 };
 
+void compute_state(struct State &state, unsigned long start);
+
 #endif 

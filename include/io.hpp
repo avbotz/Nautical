@@ -8,6 +8,5 @@
 
 void init_io();
 bool alive();
-State get_state();
 
 #endif

@@ -1,8 +1,6 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-#define NPIN A0
-
 struct State
 {
 	/*

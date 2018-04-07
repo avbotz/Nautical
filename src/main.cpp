@@ -18,27 +18,27 @@ void run()
 {
 	Serial << "Beginning Cuckical!" << '\n';
 
-	// Initialize IO between hardware and software 
+	// Initialize IO between hardware and software
 	init_io();
 
 	// Initial power is 0
 	float p = 0.f;
 
-	// Intialize motors 
+	// Intialize motors
 	Motor *motors = init_motors();
 
 	// Current holds location, desired holds destination
 	State current, desired;
 
 	while (true)
-	{	
+	{
 		unsigned long start = micros();
 		if (Serial.available() > 0)
 		{
 			/*
-			 * 's' = set state 
+			 * 's' = set state
 			 * 'p' = set power
-			 * 'c' = req state 
+			 * 'c' = req state
 			 * 'a' = req kills
 			 * 'x' = terminate
 			 * 'd' =
@@ -56,10 +56,10 @@ void run()
 					p = Serial.parseFloat();
 					break;
 				}
-				case 'c': 
+				case 'c':
 				{
 					current.print_complete();
-					break; 
+					break;
 				}
 				case 'a':
 				{
@@ -76,7 +76,7 @@ void run()
 				{
 					int id = Serial.parseInt();
 					float k = Serial.parseFloat();
-					if (id == 0) 
+					if (id == 0)
 					{
 						Serial << "Carl Hayden infiltrator detected! Shutting down." << '\n';
 						return;
@@ -85,13 +85,43 @@ void run()
 					set_motor(m);
 					break;
 				}
+				case 'r':
+				{
+					int id = Serial.parseInt();
+					switch (id) {
+						case 0:
+						{
+							toggleRelay(DROPPER_PIN);
+							break;
+						}
+						case 1:
+						{
+							toggleRelay(GRABBER_L_PIN);
+							break;
+						}
+						case 2:
+						{
+							toggleRelay(GRABBER_R_PIN);
+							break;
+						}
+						case 3:
+						{
+							toggleRelay(TORPEDO_L_PIN);
+							break;
+						}
+						case 4:
+						{
+							toggleRelay(TORPEDO_R_PIN);
+							break;
+						}
+				}
 			}
 		}
 
-		// Move sub towards the desired location 
-		// run_motors(current, desired, motors, p);	
+		// Move sub towards the desired location
+		// run_motors(current, desired, motors, p);
 
-		// Compute new state using AHRS data 
+		// Compute new state using AHRS data
 		compute_state(current, start);
 	}
 }

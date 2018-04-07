@@ -58,7 +58,7 @@ void run()
 				}
 				case 'c': 
 				{
-					current.print();
+					current.print_complete();
 					break; 
 				}
 				case 'a':
@@ -89,7 +89,7 @@ void run()
 		}
 
 		// Move sub towards the desired location 
-		run_motors(current, desired, motors, p);	
+		// run_motors(current, desired, motors, p);	
 
 		// Compute new state using AHRS data 
 		compute_state(current, start);

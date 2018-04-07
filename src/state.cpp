@@ -19,6 +19,13 @@ void State::print()
 		this->yaw << " " << this->pitch << " " << this->roll << '\n';
 }
 
+void State::print_complete()
+{
+	Serial << this->x << " " << this->y << " " << this->z << " " << 
+		this->yaw << " " << this->pitch << " " << this->roll << " " << 
+		this->surge << " " << this->sway << " " << this->heave << '\n';
+}
+
 void compute_state(State &state, unsigned long start)
 {
 	ahrs_att_update();
@@ -29,10 +36,9 @@ void compute_state(State &state, unsigned long start)
 	state.sway 		= ahrs_accel((enum accel_axis)(SWAY));
 	state.heave 	= ahrs_accel((enum accel_axis)(HEAVE));
 
-	float td = (float)(start-micros())/(float)(1000000);
+	float td = (float)(micros() - start)/(float)(1000000);
+	
 	state.x += 0.5 * state.surge * td * td;
 	state.y += 0.5 * state.sway * td * td;
-	state.x += 0.5 * state.heave * td * td;
-
-	return state;
+	state.z += 0.5 * state.heave * td * td;
 }

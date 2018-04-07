@@ -1,12 +1,14 @@
 #ifndef STATE_HPP
-#define STATE_HPP 
+#define STATE_HPP
 
-struct State 
+#define NPIN A0
+
+struct State
 {
 	/*
-	 * D | +/- 	
+	 * D | +/-
 	 * X = forward/backward
-	 * Y = right/left 
+	 * Y = right/left
 	 * Z = down/up
 	 * Yaw, Pitch, and Roll are obvious.
 	 * Surge 	= forward/backward
@@ -25,4 +27,4 @@ struct State
 
 void compute_state(struct State &state, unsigned long start);
 
-#endif 
+#endif

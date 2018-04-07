@@ -21,14 +21,15 @@ void init_io()
 	ahrs_cont_start();
 	io_ahrs_recv_start(ahrs_att_recv);
 
-	// Init communication with the kill switch 
+	// Init communication with the kill switch
 	pinMode(KILL_PIN, INPUT);
+	pinMode(NPIN, INPUT);
 
 	// Init communication with the M5
 	float powers[NUM_THRUSTERS] = { 0.f };
 	io_m5_init("");
-	set_powers(powers); 
-	io_m5_trans_set(m5_power_trans);	
+	set_powers(powers);
+	io_m5_trans_set(m5_power_trans);
 }
 
 bool alive()

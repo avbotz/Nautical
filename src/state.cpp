@@ -15,14 +15,14 @@ void State::read()
 
 void State::print()
 {
-	Serial << this->x << " " << this->y << " " << this->z << " " << 
+	Serial << this->x << " " << this->y << " " << this->z << " " <<
 		this->yaw << " " << this->pitch << " " << this->roll << '\n';
 }
 
 void State::print_complete()
 {
-	Serial << this->x << " " << this->y << " " << this->z << " " << 
-		this->yaw << " " << this->pitch << " " << this->roll << " " << 
+	Serial << this->x << " " << this->y << " " << this->z << " " <<
+		this->yaw << " " << this->pitch << " " << this->roll << " " <<
 		this->surge << " " << this->sway << " " << this->heave << '\n';
 }
 
@@ -37,8 +37,9 @@ void compute_state(State &state, unsigned long start)
 	state.heave 	= ahrs_accel((enum accel_axis)(HEAVE));
 
 	float td = (float)(micros() - start)/(float)(1000000);
-	
+
 	state.x += 0.5 * state.surge * td * td;
 	state.y += 0.5 * state.sway * td * td;
-	state.z += 0.5 * state.heave * td * td;
+	state.z = analogRead(NPIN);
+	//state.z += 0.5 * state.heave * td * td;
 }

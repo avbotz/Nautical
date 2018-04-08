@@ -2,9 +2,9 @@
 #include "motor.hpp"
 
 
-void set_motor(Motor m)
+void set_motor(int id, float k)
 {
-	m5_power((enum thruster) m.pos, m.thrust);
+	m5_power((enum thruster) id, k);
 	m5_power_offer_resume();
 }
 
@@ -41,12 +41,13 @@ void run_motors(const State	&current, const State &desired, float p)
 	// Compute final thrust given to each motor based on orientation matrix
 	for (int i = 0; i < 8; i++)
 	{
-		motors[i] += kx * p; 
-		motors[i] += ky * p;
-		motors[i] += kz * p;
+		motors[i] += kx * p * ORIENTATION[i][0]; 
+		motors[i] += ky * p * ORIENTATION[i][1];
+		motors[i] += kz * p * ORIENTATION[i][2];
 	}
 
 	// k-dir * d-dir returns a positive value
+	// 0.1 is to ensure that we are moving somewhere worthwhile
 	if (kx*dx > 0.1 || ky*dy > 0.1 || kz*dz > 0.1)
 		set_motors(motors);
 }

@@ -24,10 +24,6 @@ void run()
 	// Initial power is 0
 	float p = 0.f;
 
-	// Intialize motors 
-	// Motor motors* = init_motors();
-	float motors[NUM_THRUSTERS] = { 0.f };
-
 	// Current holds location, desired holds destination
 	State current, desired;
 
@@ -89,7 +85,7 @@ void run()
 		}
 
 		// Move sub towards the desired location 
-		run_motors(current, desired, motors, p);	
+		run_motors(current, desired, p);	
 
 		// Compute new state using AHRS data 
 		compute_state(current, start);

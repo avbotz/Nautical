@@ -5,16 +5,8 @@
 #include "config.h"
 #include "state.hpp"
 
-struct Motor 
-{
-	enum thruster pos;
-	float thrust;
-};
-
-struct Motor* init_motors();
-void set_powers(float vals[NUM_THRUSTERS]);
-void set_motor(struct Motor);
+void set_motor(int id, float p);
 void set_motors(float motors[NUM_THRUSTERS]);
-void run_motors(const State&, const State&, float motors[NUM_THRUSTERS], float p);
+void run_motors(const State &current, const State &desired, float p);
 
 #endif 

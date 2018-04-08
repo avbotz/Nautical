@@ -70,8 +70,6 @@ void run()
 				}
 				case 'x':
 				{
-					float powers[NUM_THRUSTERS] = { 0.f };
-					set_powers(powers);
 					p = 0.f;
 					break;
 				}
@@ -84,8 +82,7 @@ void run()
 						Serial << "Carl Hayden infiltrator detected! Shutting down." << '\n';
 						return;
 					}
-					Motor m = { (enum thruster) id, k };
-					set_motor(m);
+					set_motor(id, k);
 					break;
 				}
 			}
@@ -96,7 +93,6 @@ void run()
 
 		// Compute new state using AHRS data 
 		compute_state(current, start);
-		// delay(500);
 	}
 }
 

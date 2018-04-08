@@ -25,9 +25,7 @@ void init_io()
 	pinMode(KILL_PIN, INPUT);
 
 	// Init communication with the M5
-	float powers[NUM_THRUSTERS] = { 0.f };
 	io_m5_init("");
-	set_powers(powers); 
 	io_m5_trans_set(m5_power_trans);	
 }
 

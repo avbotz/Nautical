@@ -36,7 +36,7 @@ void compute_state(State &state, unsigned long start)
 	state.sway 		= ahrs_accel((enum accel_axis)(SWAY));
 	state.heave 	= ahrs_accel((enum accel_axis)(HEAVE));
 
-	float td = (float)(micros() - start)/(float)(1000000);
+	double td = (double)(micros() - start)/(double)(1000000);
 	
 	state.x += 0.5 * state.surge * td * td;
 	state.y += 0.5 * state.sway * td * td;

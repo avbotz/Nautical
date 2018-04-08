@@ -14,7 +14,7 @@ struct Motor
 struct Motor* init_motors();
 void set_powers(float vals[NUM_THRUSTERS]);
 void set_motor(struct Motor);
-void set_motors(struct Motor*);
-void run_motors(const State&, const State&, struct Motor*, float p);
+void set_motors(float motors[NUM_THRUSTERS]);
+void run_motors(const State&, const State&, float motors[NUM_THRUSTERS], float p);
 
 #endif 

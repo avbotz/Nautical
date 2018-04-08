@@ -25,7 +25,8 @@ void run()
 	float p = 0.f;
 
 	// Intialize motors 
-	Motor *motors = init_motors();
+	// Motor motors* = init_motors();
+	float motors[NUM_THRUSTERS] = { 0.f };
 
 	// Current holds location, desired holds destination
 	State current, desired;
@@ -49,6 +50,7 @@ void run()
 				case 's':
 				{
 					desired.read();
+					Serial << desired.x << " " << desired.y << " " << desired.z << '\n';
 					break;
 				}
 				case 'p':
@@ -70,6 +72,7 @@ void run()
 				{
 					float powers[NUM_THRUSTERS] = { 0.f };
 					set_powers(powers);
+					p = 0.f;
 					break;
 				}
 				case 'd':
@@ -89,10 +92,11 @@ void run()
 		}
 
 		// Move sub towards the desired location 
-		// run_motors(current, desired, motors, p);	
+		run_motors(current, desired, motors, p);	
 
 		// Compute new state using AHRS data 
 		compute_state(current, start);
+		// delay(500);
 	}
 }
 

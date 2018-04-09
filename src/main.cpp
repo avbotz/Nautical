@@ -18,11 +18,14 @@ void run()
 {
 	Serial << "Beginning Cuckical!" << '\n';
 
-	// Initialize IO between hardware and software 
+	// Initial IO between hardware and software 
 	init_io();
 
 	// Initial power is 0
 	float p = 0.f;
+
+	// Initial velocity of the sub
+	float vx=0.f, vy=0.f, vz=0.f;
 
 	// Current holds location, desired holds destination
 	State current, desired;
@@ -46,7 +49,6 @@ void run()
 				case 's':
 				{
 					desired.read();
-					Serial << desired.x << " " << desired.y << " " << desired.z << '\n';
 					break;
 				}
 				case 'p':
@@ -88,7 +90,7 @@ void run()
 		run_motors(current, desired, p);	
 
 		// Compute new state using AHRS data 
-		compute_state(current, start);
+		compute_state(current, vx, vy, vz, start);
 	}
 }
 

@@ -23,22 +23,27 @@ void State::print_complete()
 {
 	Serial << this->x << " " << this->y << " " << this->z << " " << 
 		this->yaw << " " << this->pitch << " " << this->roll << " " << 
-		this->surge << " " << this->sway << " " << this->heave << '\n';
+		this->ax << " " << this->ay << " " << this->az << '\n';
 }
 
-void compute_state(State &state, unsigned long start)
+void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long start)
 {
 	ahrs_att_update();
 	state.yaw 		= ahrs_att((enum att_axis)(YAW));
 	state.pitch 	= ahrs_att((enum att_axis)(PITCH));
 	state.roll 		= ahrs_att((enum att_axis)(ROLL));
-	state.surge 	= ahrs_accel((enum accel_axis)(SURGE));
-	state.sway 		= ahrs_accel((enum accel_axis)(SWAY));
-	state.heave 	= ahrs_accel((enum accel_axis)(HEAVE));
+	state.ax	 	= ahrs_accel((enum accel_axis)(SURGE));
+	state.ay 		= ahrs_accel((enum accel_axis)(SWAY));
+	state.az 		= ahrs_accel((enum accel_axis)(HEAVE));
 
-	double td = (double)(micros() - start)/(double)(1000000);
-	
-	state.x += 0.5 * state.surge * td * td;
-	state.y += 0.5 * state.sway * td * td;
-	state.z += 0.5 * state.heave * td * td;
+	unsigned long end = micros();
+	float td = (double)(end - start)/(double)(1000000.f);
+
+	vx += state.ax * td;
+	vy += state.ay * td;
+	vz += state.az * td;
+
+	state.x += vx * td;
+	state.y += vy * td;
+	state.z += vz * td;
 }

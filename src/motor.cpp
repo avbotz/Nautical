@@ -8,9 +8,9 @@ void set_motor(int id, float k)
 	m5_power_offer_resume();
 }
 
-void set_motors(float motors[NUM_THRUSTERS])
+void set_motors(float motors[NUM_MOTORS])
 {
-	for (int t = 0; t < NUM_THRUSTERS; t++) 
+	for (int t = 0; t < NUM_MOTORS; t++) 
 	{
 		// Serial << "ID " << t+1 << " T " << motors[t] << '\n';
 		// m5_power((enum thruster) motors[t].pos, motors[t].thrust);
@@ -25,7 +25,7 @@ void set_motors(float motors[NUM_THRUSTERS])
 void run_motors(const State	&current, const State &desired, float p)
 {
 	// Reset motors to 0
-	float motors[8] = { 0.f };
+	float motors[NUM_MOTORS] = { 0.f };
 
 	// Compute state difference 
 	float dx = desired.x - current.x;
@@ -39,7 +39,7 @@ void run_motors(const State	&current, const State &desired, float p)
 	float kz = (dz < 0) ? -1 : 1;
 
 	// Compute final thrust given to each motor based on orientation matrix
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < NUM_MOTORS; i++)
 	{
 		motors[i] += kx * p * ORIENTATION[i][0]; 
 		motors[i] += ky * p * ORIENTATION[i][1];

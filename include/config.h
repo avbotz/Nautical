@@ -19,6 +19,7 @@ enum thruster
 	SURGE_BR = 8,
 	NUM_THRUSTERS
 };
+static const int NUM_MOTORS = 8;
 
 /*
  * Motor Orientation Configuration.

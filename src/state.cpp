@@ -1,4 +1,5 @@
 #include <Arduino.h>
+
 #include "ahrs/ahrs.h"
 #include "streaming.h"
 #include "state.hpp"
@@ -32,8 +33,8 @@ void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long 
 	state.yaw 		= ahrs_att((enum att_axis)(YAW));
 	state.pitch 	= ahrs_att((enum att_axis)(PITCH));
 	state.roll 		= ahrs_att((enum att_axis)(ROLL));
-	state.ax	 	= ahrs_accel((enum accel_axis)(SURGE));
-	state.ay 		= ahrs_accel((enum accel_axis)(SWAY));
+	state.ax	 	= ahrs_accel((enum accel_axis)(SURGE)) - state.iax;
+	state.ay 		= ahrs_accel((enum accel_axis)(SWAY)) - state.iay;
 	state.az 		= ahrs_accel((enum accel_axis)(HEAVE));
 
 	unsigned long end = micros();
@@ -46,4 +47,11 @@ void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long 
 	state.x += vx * td;
 	state.y += vy * td;
 	state.z += vz * td;
+}
+
+void compute_initial_state(State &state)
+{
+	ahrs_att_update();
+	state.iax = ahrs_accel((enum accel_axis)(SURGE));
+	state.iay = ahrs_accel((enum accel_axis)(SWAY));
 }

@@ -29,6 +29,7 @@ void run()
 
 	// Current holds location, desired holds destination
 	State current, desired;
+	compute_initial_state(current);
 
 	while (true)
 	{	

@@ -42,7 +42,8 @@ void run()
 			 * 'c' = req state 
 			 * 'a' = req kills
 			 * 'x' = terminate
-			 * 'd' =
+			 * 'd' = debug 
+			 * 'r' = reset
 			 */
 			char c = Serial.read();
 			switch (c)
@@ -82,6 +83,12 @@ void run()
 						return;
 					}
 					set_motor(id, k);
+					break;
+				}
+				case 'r':
+				{
+					reset_state(current);
+					reset_state(desired);
 					break;
 				}
 			}

@@ -27,6 +27,14 @@ void State::print_complete()
 		this->ax << " " << this->ay << " " << this->az << '\n';
 }
 
+void reset_state(State &state)
+{
+	state.x = 0.f;
+	state.y = 0.f;
+	state.z = 0.f;
+	compute_initial_state(state);
+}
+
 void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long start)
 {
 	ahrs_att_update();

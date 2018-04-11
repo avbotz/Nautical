@@ -43,7 +43,7 @@ void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long 
 	state.roll 		= ahrs_att((enum att_axis)(ROLL));
 	state.ax	 	= ahrs_accel((enum accel_axis)(SURGE)) - state.iax;
 	state.ay 		= ahrs_accel((enum accel_axis)(SWAY)) - state.iay;
-	state.az 		= ahrs_accel((enum accel_axis)(HEAVE));
+	state.az 		= ahrs_accel((enum accel_axis)(HEAVE)) - state.iaz;
 
 	unsigned long end = micros();
 	float td = (double)(end - start)/(double)(1000000.f);
@@ -62,4 +62,5 @@ void compute_initial_state(State &state)
 	ahrs_att_update();
 	state.iax = ahrs_accel((enum accel_axis)(SURGE));
 	state.iay = ahrs_accel((enum accel_axis)(SWAY));
+	state.iaz = ahrs_accel((enum accel_axis)(HEAVE));
 }

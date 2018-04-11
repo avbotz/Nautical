@@ -16,10 +16,9 @@
  */
 void run()
 {
-	Serial << "Beginning Cuckical!" << '\n';
-
 	// Initial IO between hardware and software 
 	init_io();
+	delay(3000);
 
 	// Initial power is 0
 	float p = 0.f;

@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <math.h>
 #include <stdio.h>
-#include <map>
 
 #include "ahrs/ahrs.h"
 #include "ahrs/io_ahrs.h"
@@ -14,7 +13,7 @@
 
 #define KILL_PIN 30
 
-std::map<int, bool> relayStates;
+int relayStates[5][2];
 
 void init_io()
 {
@@ -37,11 +36,11 @@ void init_io()
 	pinMode(TORPEDO_R_PIN, OUTPUT);
 
 	// Init relay state map
-	relayStates.insert(pair<int,int>(DROPPER_PIN, false));
-	relayStates.insert(pair<int,int>(GRABBER_L_PIN, false));
-	relayStates.insert(pair<int,int>(GRABBER_R_PIN, false));
-	relayStates.insert(pair<int,int>(TORPEDO_L_PIN, false));
-	relayStates.insert(pair<int,int>(TORPEDO_R_PIN, false));
+	relayStates[0][0] = DROPPER_PIN;
+	relayStates[1][0] = GRABBER_L_PIN;
+	relayStates[2][0] = GRABBER_R_PIN;
+	relayStates[3][0] = TORPEDO_L_PIN;
+	relayStates[4][0] = TORPEDO_R_PIN;
 
 	// Init communication with the M5
 	float powers[NUM_THRUSTERS] = { 0.f };
@@ -55,17 +54,44 @@ bool alive()
 	return digitalRead(KILL_PIN) ? false : true;
 }
 
-void toggleRelay(int pin) {
-	auto state = relayStates.find(pin);
-	if (state != relayStates.end()) {
-		if (state->second == true) {
-			digitalWrite(pin, LOW);
-			relayStates.insert(pair<int,int>(pin, false));
-		} else {
-			digitalWrite(pin, HIGH);
-			relayStates.insert(pair<int,int>(pin, true));
+int getRelayState(int pin)
+{
+	for (int i = 0; i < 5; i++)
+	{
+		if (relayStates[i][0] == pin)
+		{
+			return relayStates[i][1];
 		}
-	} else {
+	}
+	return -1;
+}
+
+void setRelayState(int pin, int state)
+{
+	for (int i = 0; i < 5; i++)
+	{
+		if (relayStates[i][0] == pin)
+		{
+			relayStates[i][1] == state;
+		}
+	}
+}
+
+void toggleRelay(int pin)
+{
+	int state = getRelayState(pin);
+	if (state == 1)
+	{
+		digitalWrite(pin, LOW);
+		setRelayState(pin, 0);
+	}
+	else if (state == 0)
+	{
+		digitalWrite(pin, HIGH);
+		setRelayState(pin, 1);
+	}
+	else if (state == -1)
+	{
 		std::cout << "error: invalid pin" << std::endl;
 		return;
 	}

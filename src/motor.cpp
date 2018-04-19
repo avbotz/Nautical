@@ -53,6 +53,6 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 
 	// k-dir * d-dir returns a positive value.
 	// 0.1 is to ensure that we are moving somewhere worthwhile.
-	if (k[0]*dstate[0] > 0.1f || k[1]*dstate[1] > 0.1f || k[2]*dstate[2] > 0.1f)
+	if (dir[0]*dstate[0] > 0.1f || dir[1]*dstate[1] > 0.1f || dir[2]*dstate[2] > 0.1f)
 		set_motors(motors);
 }

@@ -30,9 +30,9 @@ void State::print_complete()
 
 void reset_state(State &state)
 {
-	state.x = 0.f;
-	state.y = 0.f;
-	state.z = 0.f;
+	state.x = 0.0f;
+	state.y = 0.0f;
+	state.z = 0.0f;
 	compute_initial_state(state);
 }
 
@@ -46,15 +46,14 @@ void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long 
 	state.ay 		= ahrs_accel((enum accel_axis)(SWAY)) - state.iay;
 	state.az 		= ahrs_accel((enum accel_axis)(HEAVE)) - state.iaz;
 
-	unsigned long end = micros();
-	float td = (double)(end - start)/(double)(1000000.f);
+	float dt = (float)(micros() - start)/(float)(1000000);
 
-	vx += state.ax * td;
-	vy += state.ay * td;
-	vz += state.az * td;
+	vx += state.ax * dt;
+	vy += state.ay * dt;
+	vz += state.az * dt;
 
-	state.x += vx * td;
-	state.y += vy * td;
+	state.x += vx * dt;
+	state.y += vy * dt;
 	state.z = analogRead(NPIN);
 }
 

@@ -3,6 +3,7 @@
 
 #include "motor.hpp"
 #include "state.hpp"
+#include "pid.hpp"
 #include "io.hpp"
 
 /*
@@ -16,17 +17,28 @@
  */
 void run()
 {
-	// Initial IO between hardware and software 
+	/*
+	 * Initial IO between software and hardware.
+	 * Added a 3 second delay because there is lag when we first start our AHRS.
+	 */
 	init_io();
 	delay(3000);
 
-	// Initial power is 0
+	// Set initial kill status.
+	bool alive = alive();
+
+	// Initial power is 0, Aquastorm should set initial power.
 	float p = 0.f;
 
-	// Initial velocity of the sub
+	// Initial velocity of the sub is 0.
 	float vx=0.f, vy=0.f, vz=0.f;
 
-	// Current holds location, desired holds destination
+	// Create PID controllers for each degree of freedom our sub has.
+	PID controllers[DOF];
+	for (int i = 0; i < DOF; i++)
+		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
+
+	// Current holds location, desired holds destination.
 	State current, desired;
 	compute_initial_state(current);
 
@@ -93,11 +105,20 @@ void run()
 			}
 		}
 
-		// Move sub towards the desired location 
-		run_motors(current, desired, p);	
+		/*
+		 * Compute kill state before running other parts to Nautical.
+		 * PID and motors shouldn't be running while the sub is killed or at 0
+		 * power, as we don't want to accumulate negligible error. 
+		 */
+		alive = alive();
+		if (alive && p < 0.001)
+		{
+			// Move sub towards the desired location 
+			run_motors(current, desired, p);	
 
-		// Compute new state using AHRS data 
-		compute_state(current, vx, vy, vz, start);
+			// Compute new state using AHRS data 
+			compute_state(current, vx, vy, vz, start);
+		}
 	}
 }
 

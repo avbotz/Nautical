@@ -40,4 +40,19 @@ static const int ORIENTATION[8][6] =
 	{ -1,	1,	 0,		-1,   0,	0 }
 };
 
+/*
+ * PID Gains Configuration.
+ * Rows correspond to X, Y, Z, Y, P, R. Cols correspond to kp, ki, kd.
+ */
+static const int DOF = 6;
+static const float GAINS[6][3] = 
+{
+ 	{ 4, 0, 0 },
+	{ 4, 0, 0 },
+	{ 4, .0020, 300 },
+	{ 4, .0005, 600 },
+	{ 4, .0005, 600 },
+	{ 4, .0000, 600 }
+};
+
 #endif 

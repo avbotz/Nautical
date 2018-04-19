@@ -116,11 +116,11 @@ void run()
 		killed = !alive();
 		if (!killed && p < 0.001)
 		{
-			// Move sub towards the desired location. 
-			run_motors(current, desired, p);	
-
 			// Compute new state using AHRS data. 
 			compute_state(current, vx, vy, vz, start);
+			
+			// Move sub towards the desired location. 
+			run_motors(current, desired, controllers, p, start);	
 		}
 	}
 }

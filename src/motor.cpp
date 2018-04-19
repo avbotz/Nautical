@@ -1,4 +1,5 @@
 #include "streaming.h"
+#include "pid.hpp"
 #include "motor.hpp"
 
 
@@ -22,32 +23,36 @@ void set_motors(float motors[NUM_MOTORS])
 /*
  * TODO Still need to compute Y/P/R movement.
  */
-void run_motors(const State	&current, const State &desired, float p)
+void run_motors(const State	&current, const State &desired, PID controllers[DOF], float p, unsigned long start)
 {
 	// Default motors to 0.
-	float motors[NUM_MOTORS] = { 0.f };
+	float motors[NUM_MOTORS] = { 0.0f };
 
 	// Compute state difference.
-	float dx = desired.x - current.x;
-	float dy = desired.y - current.y;
-	float dz = desired.z - current.z;
-
-	// TODO Compute constants based on how far we are from the target.
+	float dstate[DOF] = { 0.0f };
+	dstate[0] = desired.x - current.x;
+	dstate[1] = desired.y - current.y;
+	dstate[2] = desired.z - current.z;
+	
+	// TODO Compute directional constants based on how far we are from the target.
 	// Right now, these are set to + or - without regard to closeness.
-	float kx = (dx < 0) ? -1 : 1;
-	float ky = (dy < 0) ? -1 : 1;
-	float kz = (dz < 0) ? -1 : 1;
+	float dir[DOF] = { 1.0f };
+	for (int i = 0; i < DOF; i++)
+		dir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
+	
+	// Calculate PID values using the state difference.
+	float pid[DOF] = { 1.0f };
+	float dt = (float)(micros() - start)/(float)(1000000);
+	for (int i = 0; i < DOF; i++)
+		pid[i] = controllers[i].calculate(dstate[i], dt);
 
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
-	{
-		motors[i] += kx * p * ORIENTATION[i][0]; 
-		motors[i] += ky * p * ORIENTATION[i][1];
-		motors[i] += kz * p * ORIENTATION[i][2];
-	}
+		for (int j = 0; j < DOF; j++) 
+			motors[i] += p * pid[j] * dir[j] * ORIENTATION[i][j];
 
 	// k-dir * d-dir returns a positive value.
 	// 0.1 is to ensure that we are moving somewhere worthwhile.
-	if (kx*dx > 0.1 || ky*dy > 0.1 || kz*dz > 0.1)
+	if (k[0]*dstate[0] > 0.1f || k[1]*dstate[1] > 0.1f || k[2]*dstate[2] > 0.1f)
 		set_motors(motors);
 }

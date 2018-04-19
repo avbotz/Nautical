@@ -4,9 +4,10 @@
 #include "m5/m5.h"
 #include "config.h"
 #include "state.hpp"
+#include "pid.hpp"
 
 void set_motor(int id, float p);
 void set_motors(float motors[NUM_THRUSTERS]);
-void run_motors(const State &current, const State &desired, float p);
+void run_motors(const State &current, const State &desired, PID controllers[DOF], float p, unsigned long start);
 
 #endif 

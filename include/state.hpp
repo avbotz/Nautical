@@ -1,12 +1,12 @@
 #ifndef STATE_HPP
-#define STATE_HPP 
+#define STATE_HPP
 
-struct State 
+struct State
 {
 	/*
-	 * D | +/- 	
+	 * D | +/-
 	 * X = forward/backward
-	 * Y = right/left 
+	 * Y = right/left
 	 * Z = down/up
 	 * Yaw, Pitch, and Roll are obvious.
 	 * Surge (AX) 	= forward/backward
@@ -28,4 +28,4 @@ void reset_state(struct State &state);
 void compute_state(struct State &state, float &vx, float &vy, float &vz, unsigned long start);
 void compute_initial_state(struct State &state);
 
-#endif 
+#endif

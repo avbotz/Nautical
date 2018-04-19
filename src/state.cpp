@@ -3,6 +3,7 @@
 #include "ahrs/ahrs.h"
 #include "streaming.h"
 #include "state.hpp"
+#include "io.hpp"
 
 void State::read()
 {
@@ -16,7 +17,7 @@ void State::read()
 
 void State::print()
 {
-	Serial << this->x << " " << this->y << " " << this->z << " " << 
+	Serial << this->x << " " << this->y << " " << this->z << " " <<
 		this->yaw << " " << this->pitch << " " << this->roll << '\n';
 }
 
@@ -54,7 +55,7 @@ void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long 
 
 	state.x += vx * td;
 	state.y += vy * td;
-	state.z += vz * td;
+	state.z = analogRead(NPIN);
 }
 
 void compute_initial_state(State &state)
@@ -63,4 +64,5 @@ void compute_initial_state(State &state)
 	state.iax = ahrs_accel((enum accel_axis)(SURGE));
 	state.iay = ahrs_accel((enum accel_axis)(SWAY));
 	state.iaz = ahrs_accel((enum accel_axis)(HEAVE));
+	state.z = analogRead(NPIN);
 }

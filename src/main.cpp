@@ -1,3 +1,4 @@
+
 #include <Arduino.h>
 #include "streaming.h"
 
@@ -43,14 +44,14 @@ void run()
 	compute_initial_state(current);
 
 	while (true)
-	{	
+	{
 		unsigned long start = micros();
 		if (Serial.available() > 0)
 		{
 			/*
-			 * 's' = set state 
+			 * 's' = set state
 			 * 'p' = set power
-			 * 'c' = req state 
+			 * 'c' = req state
 			 * 'a' = req kills
 			 * 'x' = terminate
 			 * 'd' = debug 
@@ -69,10 +70,10 @@ void run()
 					p = Serial.parseFloat();
 					break;
 				}
-				case 'c': 
+				case 'c':
 				{
 					current.print_complete();
-					break; 
+					break;
 				}
 				case 'a':
 				{
@@ -88,7 +89,7 @@ void run()
 				{
 					int id = Serial.parseInt();
 					float k = Serial.parseFloat();
-					if (id == 0) 
+					if (id == 0)
 					{
 						Serial << "Carl Hayden infiltrator detected! Shutting down." << '\n';
 						return;

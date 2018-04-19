@@ -24,21 +24,21 @@ void set_motors(float motors[NUM_MOTORS])
  */
 void run_motors(const State	&current, const State &desired, float p)
 {
-	// Reset motors to 0
+	// Default motors to 0.
 	float motors[NUM_MOTORS] = { 0.f };
 
-	// Compute state difference 
+	// Compute state difference.
 	float dx = desired.x - current.x;
 	float dy = desired.y - current.y;
 	float dz = desired.z - current.z;
 
-	// TODO Compute constants based on how far we are from the target
-	// Right now, these are set to + or - without regard to closeness
+	// TODO Compute constants based on how far we are from the target.
+	// Right now, these are set to + or - without regard to closeness.
 	float kx = (dx < 0) ? -1 : 1;
 	float ky = (dy < 0) ? -1 : 1;
 	float kz = (dz < 0) ? -1 : 1;
 
-	// Compute final thrust given to each motor based on orientation matrix
+	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 	{
 		motors[i] += kx * p * ORIENTATION[i][0]; 
@@ -46,8 +46,8 @@ void run_motors(const State	&current, const State &desired, float p)
 		motors[i] += kz * p * ORIENTATION[i][2];
 	}
 
-	// k-dir * d-dir returns a positive value
-	// 0.1 is to ensure that we are moving somewhere worthwhile
+	// k-dir * d-dir returns a positive value.
+	// 0.1 is to ensure that we are moving somewhere worthwhile.
 	if (kx*dx > 0.1 || ky*dy > 0.1 || kz*dz > 0.1)
 		set_motors(motors);
 }

@@ -37,6 +37,9 @@ void run_motors(const State	&current, const State &desired, float p)
 	float kx = (dx < 0) ? -1 : 1;
 	float ky = (dy < 0) ? -1 : 1;
 	float kz = (dz < 0) ? -1 : 1;
+	if (dx == 0) kx = 0;
+	if (dy == 0) ky = 0;
+	if (dz == 0) kz = 0;
 
 	// Compute final thrust given to each motor based on orientation matrix
 	for (int i = 0; i < NUM_MOTORS; i++)

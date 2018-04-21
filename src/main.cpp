@@ -68,7 +68,8 @@ void run()
 				}
 				case 'x':
 				{
-					p = 0.f;
+					Serial << "Killing!" << '\n';
+					p = 0;
 					break;
 				}
 				case 'd':
@@ -90,7 +91,7 @@ void run()
 		run_motors(current, desired, p);	
 
 		// Compute new state using AHRS data 
-		compute_state(current, vx, vy, vz, start);
+		// compute_state(current, vx, vy, vz, start);
 	}
 }
 

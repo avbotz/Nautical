@@ -48,6 +48,6 @@ void compute_state(State &state, State &desired, unsigned long start, float p)
 
 	// Using sub-units, mapping power to distance (time * p)
 	state.x += kdir[0] * p * dt;
-	state.y += kdir[0] * p * dt;
-	state.z += kdir[0] * p * dt;
+	state.y += kdir[1] * p * dt;
+	state.z += kdir[2] * p * dt;
 }

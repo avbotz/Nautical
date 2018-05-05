@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include "streaming.h"
 
@@ -58,31 +57,27 @@ void run()
 			switch (c)
 			{
 				case 's':
-				{
 					desired.read();
 					break;
-				}
 				case 'p':
-				{
 					p = Serial.parseFloat();
 					break;
-				}
 				case 'c':
 				{
-					current.print_complete();
+					char next = Serial.read();
+					if (next == 'c')
+						current.print_complete();
+					else 
+						desired.print();
 					break;
 				}
 				case 'a':
-				{
 					Serial << (alive() ? 1:0) << '\n';
 					break;
-				}
 				case 'x':
-				{
 					Serial << "Killing!" << '\n';
 					p = 0;
 					break;
-				}
 				case 'd':
 				{
 					int id = Serial.parseInt();
@@ -96,11 +91,9 @@ void run()
 					break;
 				}
 				case 'r':
-				{
 					reset_state(current);
 					reset_state(desired);
 					break;
-				}
 			}
 		}
 

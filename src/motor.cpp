@@ -1,6 +1,7 @@
 #include "streaming.h"
 #include "pid.hpp"
 #include "motor.hpp"
+#include "util.hpp"
 
 
 void set_motor(int id, float k)
@@ -33,12 +34,12 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 	dstate[0] = desired.x - current.x;
 	dstate[1] = desired.y - current.y;
 	dstate[2] = desired.z - current.z;
-	dstate[3] = desired.yaw - current.yaw;
+	dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
 
 	// Don't run the motors if we are close enough to the target.
 	float kdir[DOF] = { 0.0f };
 	for (int i = 0; i < DOF; i++)
-		if (dstate[i] > 0.1f && dstate[i] < -0.1f)
+		if (dstate[i] > 0.1f || dstate[i] < -0.1f)
 			kdir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
 	
 	// Calculate PID values using the state difference.

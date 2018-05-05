@@ -111,15 +111,12 @@ void run()
 		 * desired strength before starting PID, with a time delay of 50-100 ms.
 		 */
 		// killed = !alive();
-		killed = false;
-		if (!killed && p > 0.001)
-		{	
-			// Move sub towards the desired location. 
-			run_motors(current, desired, controllers, p, start);	
 			
-			// Compute new state using AHRS data. 
-			compute_state(current, desired, start, p);
-		}
+		// Move sub towards the desired location. 
+		run_motors(current, desired, controllers, p, start);	
+		
+		// Compute new state using AHRS data. 
+		compute_state(current, desired, start, p);
 	}
 }
 

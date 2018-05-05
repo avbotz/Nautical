@@ -28,7 +28,7 @@ void run()
 	bool killed = !alive();
 
 	// Initial power is 0, Aquastorm should set initial power.
-	float p = 0.f;
+	float p = 0.0f;
 
 	// Create PID controllers for each degree of freedom our sub has.
 	PID controllers[DOF];
@@ -104,8 +104,6 @@ void run()
 		 * should add code to ensure that the thrusters are running their
 		 * desired strength before starting PID, with a time delay of 50-100 ms.
 		 */
-		// killed = !alive();
-			
 		// Move sub towards the desired location. 
 		run_motors(current, desired, controllers, p, start);	
 		

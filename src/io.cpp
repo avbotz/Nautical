@@ -10,7 +10,6 @@
 #include "motor.hpp"
 #include "state.hpp"
 
-int relayStates[5][2];
 
 void init_io()
 {
@@ -23,22 +22,8 @@ void init_io()
 	// Init communication with the kill switch
 	pinMode(KILL_PIN, INPUT);
 	
-	// Init communicatino with depth
+	// Init communication with depth
 	pinMode(NPIN, INPUT);
-
-	// Init communicatin with relays
-	pinMode(DROPPER_PIN, OUTPUT);
-	pinMode(GRABBER_L_PIN, OUTPUT);
-	pinMode(GRABBER_R_PIN, OUTPUT);
-	pinMode(TORPEDO_L_PIN, OUTPUT);
-	pinMode(TORPEDO_R_PIN, OUTPUT);
-
-	// Init relay state map
-	relayStates[0][0] = DROPPER_PIN;
-	relayStates[1][0] = GRABBER_L_PIN;
-	relayStates[2][0] = GRABBER_R_PIN;
-	relayStates[3][0] = TORPEDO_L_PIN;
-	relayStates[4][0] = TORPEDO_R_PIN;
 
 	// Init communication with the M5
 	io_m5_init("");
@@ -50,6 +35,7 @@ bool alive()
 	return digitalRead(KILL_PIN) ? false : true;
 }
 
+/*
 int getRelayState(int pin)
 {
 	for (int i = 0; i < 5; i++)
@@ -85,3 +71,4 @@ void toggleRelay(int pin)
 		return;
 	}
 }
+*/

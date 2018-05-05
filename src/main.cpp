@@ -104,15 +104,13 @@ void run()
 		 * should add code to ensure that the thrusters are running their
 		 * desired strength before starting PID, with a time delay of 50-100 ms.
 		 */
-		killed = !alive();
-		if (!killed && p > 0.001)
-		{
-			// Compute new state using AHRS data. 
-			compute_state(current, desired, start, p);
+		// killed = !alive();
 			
-			// Move sub towards the desired location. 
-			run_motors(current, desired, controllers, p, start);	
-		}
+		// Move sub towards the desired location. 
+		run_motors(current, desired, controllers, p, start);	
+		
+		// Compute new state using AHRS data. 
+		compute_state(current, desired, start, p);
 	}
 }
 

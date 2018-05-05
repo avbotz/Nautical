@@ -60,6 +60,7 @@ void compute_state(State &state, State &desired, unsigned long start, float p)
 	state.x += kdir[0] * p * dt;
 	state.y += kdir[1] * p * dt;
 	state.z += kdir[2] * p * dt;
+	// state.z = analogRead(NPIN);
 }
 
 void compute_initial_state(State &state)

@@ -33,28 +33,33 @@ void reset_state(State &state)
 	state.x = 0.0f;
 	state.y = 0.0f;
 	state.z = 0.0f;
-	compute_initial_state(state);
+	// compute_initial_state(state);
 }
 
-void compute_state(State &state, float &vx, float &vy, float &vz, unsigned long start)
+void compute_state(State &state, State &desired, unsigned long start, float p)
 {
 	ahrs_att_update();
 	state.yaw 		= ahrs_att((enum att_axis)(YAW));
 	state.pitch 	= ahrs_att((enum att_axis)(PITCH));
 	state.roll 		= ahrs_att((enum att_axis)(ROLL));
-	state.ax	 	= ahrs_accel((enum accel_axis)(SURGE)) - state.iax;
-	state.ay 		= ahrs_accel((enum accel_axis)(SWAY)) - state.iay;
-	state.az 		= ahrs_accel((enum accel_axis)(HEAVE)) - state.iaz;
+	
+	unsigned long end = micros();
+	float dt = (float)(end - start)/1000000.0f;
 
-	float dt = (float)(micros() - start)/(float)(1000000);
+	float dstate[3] = { 0.0f };
+	dstate[0] = desired.x - state.x;
+	dstate[1] = desired.y - state.y;
+	dstate[2] = desired.z - state.z;
 
-	vx += state.ax * dt;
-	vy += state.ay * dt;
-	vz += state.az * dt;
+	float kdir[3] = { 0.0f };
+	for (int i = 0; i < 3; i++) 
+		if (dstate[i] > 0.01f) 
+			kdir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
 
-	state.x += vx * dt;
-	state.y += vy * dt;
-	state.z = analogRead(NPIN);
+	// Using sub-units, mapping power to distance (time * p)
+	state.x += kdir[0] * p * dt;
+	state.y += kdir[1] * p * dt;
+	state.z += kdir[2] * p * dt;
 }
 
 void compute_initial_state(State &state)
@@ -63,5 +68,5 @@ void compute_initial_state(State &state)
 	state.iax = ahrs_accel((enum accel_axis)(SURGE));
 	state.iay = ahrs_accel((enum accel_axis)(SWAY));
 	state.iaz = ahrs_accel((enum accel_axis)(HEAVE));
-	state.z = analogRead(NPIN);
+	// state.z = analogRead(NPIN);
 }

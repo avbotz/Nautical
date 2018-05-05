@@ -25,7 +25,7 @@ struct State
 };
 
 void reset_state(struct State &state);
-void compute_state(struct State &state, float &vx, float &vy, float &vz, unsigned long start);
+void compute_state(struct State &state, struct State &desired, unsigned long start, float p);
 void compute_initial_state(struct State &state);
 
 #endif

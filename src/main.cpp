@@ -31,9 +31,6 @@ void run()
 	// Initial power is 0, Aquastorm should set initial power.
 	float p = 0.f;
 
-	// Initial velocity of the sub is 0.
-	float vx=0.f, vy=0.f, vz=0.f;
-
 	// Create PID controllers for each degree of freedom our sub has.
 	PID controllers[DOF];
 	for (int i = 0; i < DOF; i++)
@@ -82,7 +79,8 @@ void run()
 				}
 				case 'x':
 				{
-					p = 0.f;
+					Serial << "Killing!" << '\n';
+					p = 0;
 					break;
 				}
 				case 'd':
@@ -114,10 +112,10 @@ void run()
 		 * desired strength before starting PID, with a time delay of 50-100 ms.
 		 */
 		killed = !alive();
-		if (!killed && p < 0.001)
+		if (!killed && p > 0.001)
 		{
 			// Compute new state using AHRS data. 
-			compute_state(current, vx, vy, vz, start);
+			compute_state(current, desired, start, p);
 			
 			// Move sub towards the desired location. 
 			run_motors(current, desired, controllers, p, start);	

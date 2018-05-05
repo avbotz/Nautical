@@ -24,9 +24,6 @@ void run()
 	// Initial power is 0
 	float p = 0.f;
 
-	// Initial velocity of the sub
-	float vx=0.f, vy=0.f, vz=0.f;
-
 	// Current holds location, desired holds destination
 	State current, desired;
 
@@ -91,7 +88,7 @@ void run()
 		run_motors(current, desired, p);	
 
 		// Compute new state using AHRS data 
-		// compute_state(current, vx, vy, vz, start);
+		compute_state(current, desired, start, p);
 	}
 }
 

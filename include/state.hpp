@@ -23,6 +23,6 @@ struct State
 	void print_complete();
 };
 
-void compute_state(struct State &state, float &vx, float &vy, float &vz, unsigned long start);
+void compute_state(struct State &state, struct State &desired, unsigned long start, float p);
 
 #endif 

@@ -21,6 +21,7 @@ void run()
 	 * Initial IO between software and hardware.
 	 * Added a 3 second delay because there is lag when we first start our AHRS.
 	 */
+	Serial << "Fuck control!" << '\n';
 	init_io();
 	delay(3000);
 
@@ -28,7 +29,7 @@ void run()
 	bool killed = !alive();
 
 	// Initial power is 0, Aquastorm should set initial power.
-	float p = 0.f;
+	float p = 0.0f;
 
 	// Create PID controllers for each degree of freedom our sub has.
 	PID controllers[DOF];
@@ -64,6 +65,7 @@ void run()
 				case 'p':
 				{
 					p = Serial.parseFloat();
+					Serial << "Set power." << '\n';
 					break;
 				}
 				case 'c':

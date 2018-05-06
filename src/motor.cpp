@@ -51,7 +51,7 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
-			motors[i] += p * kpid[j] * kdir[j] * ORIENTATION[i][j];
+			motors[i] += p * kpid[j] * ORIENTATION[i][j];
 
 	// k-dir * d-dir returns a positive value.
 	// 0.1 is to ensure that we are moving somewhere worthwhile.

@@ -21,6 +21,7 @@ void run()
 	 * Initial IO between software and hardware.
 	 * Added a 3 second delay because there is lag when we first start our AHRS.
 	 */
+	Serial << "Fuck control!" << '\n';
 	init_io();
 	delay(3000);
 
@@ -61,6 +62,7 @@ void run()
 					break;
 				case 'p':
 					p = Serial.parseFloat();
+					Serial << "Set power." << '\n';
 					break;
 				case 'c':
 				{

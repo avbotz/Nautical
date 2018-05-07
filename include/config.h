@@ -44,7 +44,6 @@ static const int ORIENTATION[8][6] =
  * PID Gains Configuration.
  * Rows correspond to X, Y, Z, Y, P, R. Cols correspond to kp, ki, kd.
  */
-static const int DOF = 6;
 static const float GAINS[6][3] = 
 {
  	{ 0.75, 0, 0 },
@@ -54,5 +53,22 @@ static const float GAINS[6][3] =
 	{ 0.05, 0, 0 },
 	{ 0.05, 0, 0 }
 };
+
+/*
+ * State configuration.
+ * This should never change, unless our state system changes or we gain another
+ * degree of freedom (never).
+ * Also GYRO_DOF refers to axes 4-6.
+ */
+static const int DOF = 6;
+static const int MOVE_DOF = 3;
+static const int GYRO_DOF = 6;
+
+static const int X = 0;
+static const int Y = 1;
+static const int Z = 2;
+static const int YAW = 3;
+static const int PITCH = 4;
+static const int ROLL = 5;
 
 #endif 

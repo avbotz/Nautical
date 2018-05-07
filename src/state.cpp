@@ -8,25 +8,21 @@
 
 void State::read()
 {
-	this->x = Serial.parseFloat();
-	this->y = Serial.parseFloat();
-	this->z = Serial.parseFloat();
-	this->yaw 	= Serial.parseFloat();
-	this->pitch = Serial.parseFloat();
-	this->roll 	= Serial.parseFloat();
+	for (int i = 0; i < DOF; i++)
+		this->axis[i] = Serial.parseFloat();
 }
 
 void State::print()
 {
-	Serial << this->x << " " << this->y << " " << this->z << " " <<
-		this->yaw << " " << this->pitch << " " << this->roll << '\n';
+	Serial << this->axis[X] << " " << this->axis[Y] << " " << this->axis[Z] << " " <<
+		this->axis[YAW] << " " << this->axis[PITCH] << " " << this->axis[ROLL] << '\n';
 }
 
 void State::print_complete()
 {
-	Serial << this->x << " " << this->y << " " << this->z << " " << 
-		this->yaw << " " << this->pitch << " " << this->roll << " " << 
-		this->ax << " " << this->ay << " " << this->az << '\n';
+	Serial << this->axis[X] << " " << this->axis[Y] << " " << this->axis[Z] << " " <<
+		this->axis[YAW] << " " << this->axis[PITCH] << " " << this->axis[ROLL] << 
+		this->accel[SURGE] << this->accel[SWAY] << this->accel[HEAVE] << '\n';
 }
 
 void reset_state(State &state)
@@ -39,14 +35,17 @@ void reset_state(State &state)
 
 uint32_t compute_state(State &state, State &desired, float p, uint32_t start)
 {
+	// Get angle data in degrees from IMU.
 	ahrs_att_update();
-	state.yaw 		= ahrs_att((enum att_axis)(YAW));
-	state.pitch 	= ahrs_att((enum att_axis)(PITCH));
-	state.roll 		= ahrs_att((enum att_axis)(ROLL));
-	
+	state.axis[YAW]		= ahrs_att((enum att_axis)(YAW));
+	state.axis[PITCH] 	= ahrs_att((enum att_axis)(PITCH));
+	state.axis[ROLL]	= ahrs_att((enum att_axis)(ROLL));
+
+	// Calculate time difference, needed for sub-units.
 	uint32_t end = micros();
 	float dt = (float)(end - start)/(float)(1000000);
 
+	// Calculate state difference.
 	float dstate[3] = { 0.0f };
 	dstate[0] = desired.x - state.x;
 	dstate[1] = desired.y - state.y;

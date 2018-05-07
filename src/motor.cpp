@@ -1,4 +1,5 @@
 #include "streaming.h"
+
 #include "pid.hpp"
 #include "motor.hpp"
 #include "util.hpp"
@@ -16,7 +17,9 @@ void set_motors(float motors[NUM_MOTORS])
 	{
 		// Serial << "ID " << t+1 << " T " << motors[t] << '\n';
 		// m5_power((enum thruster) motors[t].pos, motors[t].thrust);
-		m5_power((enum thruster) t+1, motors[t]);
+		
+		// Limit motor powers to be between -0.5 and 0.5.
+		m5_power((enum thruster) t+1, limit(motors[t]));
 	}
 	m5_power_offer_resume();
 }
@@ -36,15 +39,6 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 	dstate[2] = desired.z - current.z;
 	dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
 
-	// Don't run the motors if we are close enough to the target.
-	// Not using k-dir, the orientation is obtained from PID.
-	/*
-	float kdir[DOF] = { 0.0f };
-	for (int i = 0; i < DOF; i++)
-		if (dstate[i] > 0.1f || dstate[i] < -0.1f)
-			kdir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
-	*/
-
 	// Calculate PID values using the state difference.
 	float kpid[DOF] = { 1.0f };
 	float dt = (float)(micros() - start)/(float)(1000000);
@@ -60,7 +54,7 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 	// 0.1 is to ensure that we are moving somewhere worthwhile.
 	for (int i = 0; i < DOF; i++)
 	{
-		if (kdir[i]*dstate[i] > 0.1f)
+		if (dstate[i] > 0.1f || dstate[i] < -0.1f)
 		{
 			set_motors(motors);
 			break;

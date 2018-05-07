@@ -1,9 +1,10 @@
 #include <Arduino.h>
+#include "streaming.h"
 
 #include "ahrs/ahrs.h"
-#include "streaming.h"
 #include "state.hpp"
 #include "io.hpp"
+
 
 void State::read()
 {

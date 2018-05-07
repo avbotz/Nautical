@@ -21,7 +21,6 @@ void run()
 	 * Initial IO between software and hardware.
 	 * Added a 3 second delay because there is lag when we first start our AHRS.
 	 */
-	Serial << "Fuck control!" << '\n';
 	init_io();
 	delay(3000);
 
@@ -43,6 +42,8 @@ void run()
 	while (true)
 	{
 		unsigned long start = micros();
+		killed = !alive();
+
 		if (Serial.available() > 0)
 		{
 			/*
@@ -65,22 +66,19 @@ void run()
 					Serial << "Set power." << '\n';
 					break;
 				case 'c':
-				{
-					char next = Serial.read();
-					if (next == 'c')
-						current.print_complete();
-					else 
-						desired.print();
+					current.print_complete();
 					break;
-				}
+				case 'd':
+					desired.print();
+					break;
 				case 'a':
-					Serial << (alive() ? 1:0) << '\n';
+					Serial << (killed ? 0 : 1) << '\n';
 					break;
 				case 'x':
 					Serial << "Killing!" << '\n';
 					p = 0;
 					break;
-				case 'd':
+				case 'm':
 				{
 					int id = Serial.parseInt();
 					float k = Serial.parseFloat();

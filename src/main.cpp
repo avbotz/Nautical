@@ -3,6 +3,7 @@
 
 #include "motor.hpp"
 #include "state.hpp"
+#include "util.hpp"
 #include "pid.hpp"
 #include "io.hpp"
 
@@ -12,9 +13,7 @@
  * much easier with Serial.begin() and to incorporate helpful Arduino functions.
  */
 
-/*
- * Treat this as main().
- */
+// The "main()" of the program.
 void run()
 {
 	/*
@@ -39,7 +38,7 @@ void run()
 	State current, desired;
 	compute_initial_state(current);
 
-	// Separating the time intervals makes it easier to read. 
+	// Separating the time intervals makes it easier to read and more accurate.
 	uint32_t mtime = micros();
 	uint32_t stime = micros();
 
@@ -78,9 +77,13 @@ void run()
 					Serial << (killed ? 0 : 1) << '\n';
 					break;
 				case 'x':
+				{
 					Serial << "Killing!" << '\n';
-					p = 0;
+					float motors[NUM_MOTORS] = { 0.0f };
+					set_motors(motors);
+					p = 0.0f;
 					break;
+				}
 				case 'm':
 				{
 					int id = Serial.parseInt();
@@ -100,24 +103,33 @@ void run()
 			}
 		}
 
+		// Compute state difference between desired and current.
+		// Ignore pitch and roll for now, there is no need to barrel roll, etc.
+		float dstate[DOF] = { 0.0f };
+		for (int i = 0; i < MOVE_DOF; i++)
+			dstate[i] = desired.axis[i] - current.axis[i];
+		dstate[Yaw] = calc_angle_diff(desired.axis[Yaw], current.axis[Yaw]);
+		/*
+		for (int i = MOVE_DOF; i < GYRO_DOF; i++)
+			dstate[i] = calc_angle_diff(desired.axis[i], current.axis[i]);
+		*/
+
 		/*
 		 * Compute kill state before running other parts to Nautical.
 		 * PID and motors shouldn't be running while the sub is killed or at 0
 		 * power, as we don't want to accumulate negligible error. Also, someone
 		 * should add code to ensure that the thrusters are running their
 		 * desired strength before starting PID, with a time delay of 50-100 ms.
-		 */
+		 */	
 		// Move sub towards the desired location. 
-		mtime = run_motors(current, desired, controllers, p, mtime);	
+		mtime = run_motors(controllers, dstate, p, mtime);	
 		
 		// Compute new state using AHRS data. 
-		stime = compute_state(current, desired, p, stime);
+		stime = compute_state(current, dstate, p, stime);
 	}
 }
 
-/*
- * Don't change this!
- */
+// DO NOT TOUCH!
 void setup()
 {
 	Serial.begin(9600);

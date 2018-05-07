@@ -19,7 +19,7 @@ void set_motors(float motors[NUM_MOTORS])
 		// m5_power((enum thruster) motors[t].pos, motors[t].thrust);
 		
 		// Limit motor powers to be between -0.5 and 0.5.
-		m5_power((enum thruster) t+1, limit(motors[t]));
+		m5_power((enum thruster) t+1, limit(motors[t], -0.5, 0.5));
 	}
 	m5_power_offer_resume();
 }
@@ -27,21 +27,10 @@ void set_motors(float motors[NUM_MOTORS])
 /*
  * TODO Still need to compute Y/P/R movement.
  */
-uint32_t run_motors(const State &current, const State &desired, PID controllers[DOF], float p, uint32_t start)
+uint32_t run_motors(PID controllers[DOF], float dstate[DOF], float p, uint32_t start)
 {
 	// Default motors to 0.
 	float motors[NUM_MOTORS] = { 0.0f };
-
-	// Compute state difference.
-	// TODO Uncomment the code to manage pitch and roll, but not needed for now.
-	float dstate[DOF] = { 0.0f };
-	for (int i = 0; i < MOVE_DOF; i++)
-		dstate[i] = desired.axis[i] - current.axis[i];
-	dstate[Yaw] = calc_angle_diff(desired.axis[Yaw], current.axis[Yaw]);
-	/*
-	for (int i = MOVE_DOF; i < GYRO_DOF; i++)
-		dstate[i] = calc_angle_diff(desired.axis[i], current.axis[i]);
-	*/
 
 	// Calculate PID values using the state difference.
 	uint32_t end = micros();

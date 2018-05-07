@@ -36,6 +36,6 @@ struct State
 
 void reset_state(struct State &state);
 void compute_initial_state(struct State &state);
-uint32_t compute_state(struct State &state, struct State &desired, float p, uint32_t start);
+uint32_t compute_state(struct State &state, float dstate[DOF], float p, uint32_t start);
 
 #endif

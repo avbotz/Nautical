@@ -21,11 +21,11 @@ float calc_angle_diff(float a1, float a2)
 }
 
 /*
- * Prevents "party" mode by limiting power to 0.5. 
+ * Prevents "party" mode by limiting a value between two values.
  */
-float limit(float p)
+float limit(float p, float c1, float c2)
 {
-	if (p < -0.5) return -0.5;
-	if (p > 0.5) return 0.5;
+	if (p < c1) return c1;
+	if (p > c2) return c2;
 	return p;
 }

@@ -32,7 +32,7 @@ void reset_state(State &state)
 	// compute_initial_state(state);
 }
 
-uint32_t compute_state(State &state, State &desired, float p, uint32_t start)
+uint32_t compute_state(State &state, float dstate[DOF], float p, uint32_t start)
 {
 	// Get angle data in degrees from IMU.
 	ahrs_att_update();
@@ -40,20 +40,15 @@ uint32_t compute_state(State &state, State &desired, float p, uint32_t start)
 	state.axis[Pitch]	= ahrs_att((enum att_axis)(PITCH));
 	state.axis[Roll]	= ahrs_att((enum att_axis)(ROLL));
 
-	// Calculate time difference, needed for sub-units.
-	uint32_t end = micros();
-	float dt = (float)(end - start)/(float)(1000000);
-
-	// Calculate state difference.
-	float dstate[MOVE_DOF] = { 0.0f };
-	for (int i = 0; i < MOVE_DOF; i++)
-		dstate[i] = desired.axis[i] - state.axis[i];
-
 	// Calculate direction to change sub-units.
 	float kdir[MOVE_DOF] = { 0.0f };
 	for (int i = 0; i < MOVE_DOF; i++) 
 		if (dstate[i] > 0.01f) 
 			kdir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
+
+	// Calculate time difference, needed for sub-units.
+	uint32_t end = micros();
+	float dt = (float)(end - start)/(float)(1000000);
 
 	// Using sub-units, mapping power to distance (time * p).
 	for (int i = 0; i < MOVE_DOF; i++)

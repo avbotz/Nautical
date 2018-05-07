@@ -111,7 +111,7 @@ void run()
 		mtime = run_motors(current, desired, controllers, p, mtime);	
 		
 		// Compute new state using AHRS data. 
-		stime = compute_state(current, desired, stime, p);
+		stime = compute_state(current, desired, p, stime);
 	}
 }
 

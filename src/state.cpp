@@ -36,8 +36,8 @@ uint32_t compute_state(State &state, State &desired, float p, uint32_t start)
 {
 	// Get angle data in degrees from IMU.
 	ahrs_att_update();
-	state.axis[S_YAW]	= ahrs_att((enum att_axis)(YAW);
-	state.axis[S_PITCH]	= ahrs_att((enum att_axis)(PITCH);
+	state.axis[S_YAW]	= ahrs_att((enum att_axis)(YAW));
+	state.axis[S_PITCH]	= ahrs_att((enum att_axis)(PITCH));
 	state.axis[S_ROLL]	= ahrs_att((enum att_axis)(ROLL));
 
 	// Calculate time difference, needed for sub-units.

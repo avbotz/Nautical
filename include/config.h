@@ -56,9 +56,9 @@ static const float GAINS[6][3] =
 
 /*
  * State configuration.
- * This should never change, unless our state system changes or we gain another
- * degree of freedom (never).
- * Also GYRO_DOF refers to axes 4-6.
+ * GYRO_DOF refers to axes 4-6.
+ * TODO Someone get rid of all the S's, there is a conflict with ahrs.h so I
+ * can't use the defaults.
  */
 static const int DOF = 6;
 static const int MOVE_DOF = 3;

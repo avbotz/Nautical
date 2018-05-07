@@ -36,7 +36,7 @@ uint32_t run_motors(const State &current, const State &desired, PID controllers[
 	float dstate[DOF] = { 0.0f };
 	for (int i = 0; i < MOVE_DOF; i++)
 		dstate[i] = desired.axis[i] - current.axis[i];
-	dstate[YAW] = calc_angle_diff(desired.axis[YAW], current.axis[YAW]);
+	dstate[S_YAW] = calc_angle_diff(desired.axis[S_YAW], current.axis[S_YAW]);
 	/*
 	for (int i = MOVE_DOF; i < GYRO_DOF; i++)
 		dstate[i] = calc_angle_diff(desired.axis[i], current.axis[i]);

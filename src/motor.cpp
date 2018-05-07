@@ -4,7 +4,6 @@
 #include "motor.hpp"
 #include "util.hpp"
 
-
 void set_motor(int id, float k)
 {
 	m5_power((enum thruster) id, k);
@@ -33,11 +32,15 @@ uint32_t run_motors(const State &current, const State &desired, PID controllers[
 	float motors[NUM_MOTORS] = { 0.0f };
 
 	// Compute state difference.
+	// TODO Uncomment the code to manage pitch and roll, but not needed for now.
 	float dstate[DOF] = { 0.0f };
-	dstate[0] = desired.x - current.x;
-	dstate[1] = desired.y - current.y;
-	dstate[2] = desired.z - current.z;
-	dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
+	for (int i = 0; i < MOVE_DOF; i++)
+		dstate[i] = desired.axis[i] - current.axis[i];
+	dstate[YAW] = calc_angle_diff(desired.axis[YAW], current.axis[YAW]);
+	/*
+	for (int i = MOVE_DOF; i < GYRO_DOF; i++)
+		dstate[i] = calc_angle_diff(desired.axis[i], current.axis[i]);
+	*/
 
 	// Calculate PID values using the state difference.
 	uint32_t end = micros();

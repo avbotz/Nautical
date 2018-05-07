@@ -64,11 +64,14 @@ static const int DOF = 6;
 static const int MOVE_DOF = 3;
 static const int GYRO_DOF = 6;
 
-static const int X = 0;
-static const int Y = 1;
-static const int Z = 2;
-static const int YAW = 3;
-static const int PITCH = 4;
-static const int ROLL = 5;
+static const int X 			= 0;
+static const int Y 			= 1;
+static const int Z 			= 2;
+static const int S_YAW 		= 3;
+static const int S_PITCH 	= 4;
+static const int S_ROLL 	= 5;
+static const int S_SURGE 	= 0;
+static const int S_SWAY 	= 1;
+static const int S_HEAVE 	= 2;
 
 #endif 

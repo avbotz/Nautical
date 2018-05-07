@@ -18,7 +18,16 @@ struct State
 	float axis[DOF];
 	float accel[MOVE_DOF];
 	float initial_accel[MOVE_DOF];
-	State() : axis({ 0.0f }), accel({ 0.0f }), initial_accel(0.0f) {}
+	State()
+	{
+		for (int i = 0; i < DOF; i++)
+			axis[i] = 0.0f;
+		for (int i = 0; i < MOVE_DOF; i++)
+		{
+			accel[i] = 0.0f;
+			initial_accel[i] = 0.0f;
+		}
+	}
 
 	void read();
 	void print();

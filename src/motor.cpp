@@ -4,6 +4,7 @@
 #include "motor.hpp"
 #include "util.hpp"
 
+
 void set_motor(int id, float k)
 {
 	m5_power((enum thruster) id, k);
@@ -36,7 +37,7 @@ uint32_t run_motors(const State &current, const State &desired, PID controllers[
 	float dstate[DOF] = { 0.0f };
 	for (int i = 0; i < MOVE_DOF; i++)
 		dstate[i] = desired.axis[i] - current.axis[i];
-	dstate[S_YAW] = calc_angle_diff(desired.axis[S_YAW], current.axis[S_YAW]);
+	dstate[Yaw] = calc_angle_diff(desired.axis[Yaw], current.axis[Yaw]);
 	/*
 	for (int i = MOVE_DOF; i < GYRO_DOF; i++)
 		dstate[i] = calc_angle_diff(desired.axis[i], current.axis[i]);

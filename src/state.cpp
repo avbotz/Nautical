@@ -15,14 +15,14 @@ void State::read()
 void State::print()
 {
 	Serial << this->axis[X] << " " << this->axis[Y] << " " << this->axis[Z] << " " <<
-		this->axis[S_YAW] << " " << this->axis[S_PITCH] << " " << this->axis[S_ROLL] << '\n';
+		this->axis[Yaw] << " " << this->axis[Pitch] << " " << this->axis[Roll] << '\n';
 }
 
 void State::print_complete()
 {
 	Serial << this->axis[X] << " " << this->axis[Y] << " " << this->axis[Z] << " " <<
-		this->axis[S_YAW] << " " << this->axis[S_PITCH] << " " << this->axis[S_ROLL] << 
-		this->accel[S_SURGE] << this->accel[S_SWAY] << this->accel[S_HEAVE] << '\n';
+		this->axis[Yaw] << " " << this->axis[Pitch] << " " << this->axis[Roll] << " " <<
+		this->accel[Surge] << " " << this->accel[Sway] << " " << this->accel[Heave] << '\n';
 }
 
 void reset_state(State &state)
@@ -36,9 +36,9 @@ uint32_t compute_state(State &state, State &desired, float p, uint32_t start)
 {
 	// Get angle data in degrees from IMU.
 	ahrs_att_update();
-	state.axis[S_YAW]	= ahrs_att((enum att_axis)(YAW));
-	state.axis[S_PITCH]	= ahrs_att((enum att_axis)(PITCH));
-	state.axis[S_ROLL]	= ahrs_att((enum att_axis)(ROLL));
+	state.axis[Yaw]		= ahrs_att((enum att_axis)(YAW));
+	state.axis[Pitch]	= ahrs_att((enum att_axis)(PITCH));
+	state.axis[Roll]	= ahrs_att((enum att_axis)(ROLL));
 
 	// Calculate time difference, needed for sub-units.
 	uint32_t end = micros();
@@ -66,8 +66,8 @@ uint32_t compute_state(State &state, State &desired, float p, uint32_t start)
 void compute_initial_state(State &state)
 {
 	ahrs_att_update();
-	state.initial_accel[S_SURGE]	= ahrs_accel((enum accel_axis)(SURGE));
-	state.initial_accel[S_SWAY]	 	= ahrs_accel((enum accel_axis)(SWAY));
-	state.initial_accel[S_HEAVE]	= ahrs_accel((enum accel_axis)(HEAVE));
+	state.initial_accel[Surge]	= ahrs_accel((enum accel_axis)(SURGE));
+	state.initial_accel[Sway]	= ahrs_accel((enum accel_axis)(SWAY));
+	state.initial_accel[Heave]	= ahrs_accel((enum accel_axis)(HEAVE));
 	// state.z = analogRead(NPIN);
 }

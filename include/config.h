@@ -57,21 +57,21 @@ static const float GAINS[6][3] =
 /*
  * State configuration.
  * GYRO_DOF refers to axes 4-6.
- * TODO Someone get rid of all the S's, there is a conflict with ahrs.h so I
- * can't use the defaults.
+ * TODO All the IMU data is in [Case] because there is a conflict with
+ * ahrs/ahrs.h. Fixing it to be standard CASE would be good.
  */
 static const int DOF = 6;
 static const int MOVE_DOF = 3;
 static const int GYRO_DOF = 6;
 
-static const int X 			= 0;
-static const int Y 			= 1;
-static const int Z 			= 2;
-static const int S_YAW 		= 3;
-static const int S_PITCH 	= 4;
-static const int S_ROLL 	= 5;
-static const int S_SURGE 	= 0;
-static const int S_SWAY 	= 1;
-static const int S_HEAVE 	= 2;
+static const int X 	= 0;
+static const int Y 	= 1;
+static const int Z 	= 2;
+static const int Yaw = 3;
+static const int Pitch = 4;
+static const int Roll = 5;
+static const int Surge = 0;
+static const int Sway = 1;
+static const int Heave = 2;
 
 #endif 

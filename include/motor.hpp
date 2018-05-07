@@ -1,3 +1,4 @@
+
 #ifndef MOTOR_HPP
 #define MOTOR_HPP 
 
@@ -8,6 +9,6 @@
 
 void set_motor(int id, float p);
 void set_motors(float motors[NUM_THRUSTERS]);
-void run_motors(const State &current, const State &desired, PID controllers[DOF], float p, unsigned long start);
+uint32_t run_motors(const State &current, const State &desired, PID controllers[DOF], float p, uint32_t start);
 
 #endif 

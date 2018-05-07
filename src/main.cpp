@@ -39,9 +39,12 @@ void run()
 	State current, desired;
 	compute_initial_state(current);
 
+	// Separating the time intervals makes it easier to read. 
+	uint32_t mtime = micros();
+	uint32_t stime = micros();
+
 	while (true)
 	{
-		unsigned long start = micros();
 		killed = !alive();
 
 		if (Serial.available() > 0)
@@ -105,10 +108,10 @@ void run()
 		 * desired strength before starting PID, with a time delay of 50-100 ms.
 		 */
 		// Move sub towards the desired location. 
-		run_motors(current, desired, controllers, p, start);	
+		mtime = run_motors(current, desired, controllers, p, mtime);	
 		
 		// Compute new state using AHRS data. 
-		compute_state(current, desired, start, p);
+		stime = compute_state(current, desired, stime, p);
 	}
 }
 

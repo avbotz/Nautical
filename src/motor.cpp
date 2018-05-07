@@ -27,7 +27,7 @@ void set_motors(float motors[NUM_MOTORS])
 /*
  * TODO Still need to compute Y/P/R movement.
  */
-void run_motors(const State	&current, const State &desired, PID controllers[DOF], float p, unsigned long start)
+uint32_t run_motors(const State &current, const State &desired, PID controllers[DOF], float p, uint32_t start)
 {
 	// Default motors to 0.
 	float motors[NUM_MOTORS] = { 0.0f };
@@ -40,8 +40,9 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 	dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
 
 	// Calculate PID values using the state difference.
+	uint32_t end = micros();
 	float kpid[DOF] = { 1.0f };
-	float dt = (float)(micros() - start)/(float)(1000000);
+	float dt = (float)(end - start)/(float)(1000000);
 	for (int i = 0; i < DOF; i++)
 		kpid[i] = controllers[i].calculate(dstate[i], dt);
 
@@ -60,4 +61,6 @@ void run_motors(const State	&current, const State &desired, PID controllers[DOF]
 			break;
 		}
 	}
+
+	return end;
 }

@@ -29,6 +29,10 @@ void run()
 	// Initial power is 0, Aquastorm should set initial power.
 	float p = 0.0f;
 
+	// Setup initial velocites to be 0, should only be used if we use
+	// accelerometer data.
+	float velocites[MOVE_DOF] = { 0.0f };
+
 	// Create PID controllers for each degree of freedom our sub has.
 	PID controllers[DOF];
 	for (int i = 0; i < DOF; i++)
@@ -125,7 +129,7 @@ void run()
 		mtime = run_motors(controllers, dstate, p, mtime);	
 		
 		// Compute new state using AHRS data. 
-		stime = compute_state(current, dstate, p, stime);
+		stime = compute_state(current, velocites, stime);
 	}
 }
 

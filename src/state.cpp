@@ -32,6 +32,9 @@ void reset_state(State &state)
 	// compute_initial_state(state);
 }
 
+/*
+ * This implementation to compute state uses sub-units, which are power based. 
+ */
 uint32_t compute_state(State &state, float dstate[DOF], float p, uint32_t start)
 {
 	// Get angle data in degrees from IMU.
@@ -55,6 +58,36 @@ uint32_t compute_state(State &state, float dstate[DOF], float p, uint32_t start)
 		state.axis[i] += kdir[i] * p * dt;
 	// state.z = analogRead(NPIN);
 	
+	return end;
+}
+
+/*
+ * This implementation to compute state uses accelerometer data. 
+ */
+uint32_t compute_state(State &state, float velocities[MOVE_DOF], uint32_t start)
+{
+	// Get angle data in degrees from IMU.
+	ahrs_att_update();
+	state.axis[Yaw]		= ahrs_att((enum att_axis)(YAW));
+	state.axis[Pitch]	= ahrs_att((enum att_axis)(PITCH));
+	state.axis[Roll]	= ahrs_att((enum att_axis)(ROLL));
+
+	// Get acceleration data in m/s^2.
+	// Order is X, Y, Z accelerations.
+	state.accel[Surge]	= ahrs_accel((enum accel_axis)(SURGE)) - state.initial_accel[Surge];
+	state.accel[Sway]	= ahrs_accel((enum accel_axis)(SWAY)) - state.initial_accel[Sway];
+	state.accel[Heave]	= ahrs_accel((enum accel_axis)(HEAVE)) - state.initial_accel[Heave];
+
+	// Add acclerations to velocities.
+	for (int i = 0; i < MOVE_DOF; i++)
+		velocities[i] += state.accel[i];
+
+	// Calculate time difference, add distance to X, Y, and Z.
+	uint32_t end = micros();
+	float dt = (float)(end - start)/(float)(1000000);
+	for (int i = 0; i < MOVE_DOF; i++)
+		state.axis[i] += velocities[i] * dt;
+
 	return end;
 }
 

@@ -14,15 +14,15 @@ void State::read()
 
 void State::print()
 {
-	Serial << this->axis[X] << " " << this->axis[Y] << " " << this->axis[Z] << " " <<
-		this->axis[Yaw] << " " << this->axis[Pitch] << " " << this->axis[Roll] << '\n';
+	Serial << _FLOAT(this->axis[X], 6) << " " << _FLOAT(this->axis[Y], 6) << " " << _FLOAT(this->axis[Z], 6) << " " <<
+		_FLOAT(this->axis[Yaw], 6) << " " << _FLOAT(this->axis[Pitch], 6) << " " << _FLOAT(this->axis[Roll], 6) << '\n';
 }
 
 void State::print_complete()
 {
-	Serial << this->axis[X] << " " << this->axis[Y] << " " << this->axis[Z] << " " <<
-		this->axis[Yaw] << " " << this->axis[Pitch] << " " << this->axis[Roll] << " " <<
-		this->accel[Surge] << " " << this->accel[Sway] << " " << this->accel[Heave] << '\n';
+	Serial << _FLOAT(this->axis[X], 6) << " " << _FLOAT(this->axis[Y], 6) << " " << _FLOAT(this->axis[Z], 6) << " " <<
+		_FLOAT(this->axis[Yaw], 6) << " " << _FLOAT(this->axis[Pitch], 6) << " " << _FLOAT(this->axis[Roll], 6) << " " <<
+		_FLOAT(this->accel[Surge], 6) << " " << _FLOAT(this->accel[Sway], 6) << " " << _FLOAT(this->accel[Heave], 6) << '\n';
 }
 
 void reset_state(State &state)
@@ -104,23 +104,11 @@ void compute_initial_state(State &state)
 		float accel[MOVE_DOF] = { ahrs_accel((enum accel_axis)(SURGE)), ahrs_accel((enum accel_axis)(SWAY)), ahrs_accel((enum accel_axis)(HEAVE)) };
 		for (int i = 0; i < MOVE_DOF; i++)
 			totals[i] += accel[i];
-		/*
-		Serial.print(accel[0], 8);
-		Serial.print('\t');
-		Serial.print(accel[1], 8);
-		Serial.print('\t');
-		Serial.print(accel[2], 8);
-		Serial.print('\n');
-		*/
+		// Serial << _FLOAT(accel[0], 6) << " " << _FLOAT(accel[1], 6) << " " << _FLOAT(accel[2], 6) << '\n';
 	}
 	for (int i = 0; i < MOVE_DOF; i++)
 		state.initial_accel[i] = totals[i]/(float)(100);
-	Serial.print(state.initial_accel[0], 8);
-	Serial.print('\t');
-	Serial.print(state.initial_accel[1], 8);
-	Serial.print('\t');
-	Serial.print(state.initial_accel[2], 8);
-	Serial.print('\n');
+	// Serial << _FLOAT(state.initial_accel[0], 6) << " " << _FLOAT(state.initial_accel[1], 6) << " " << _FLOAT(state.initial_accel[2], 6) << '\n';
 
 	// state.z = analogRead(NPIN);
 }

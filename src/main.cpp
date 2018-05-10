@@ -31,7 +31,7 @@ void run()
 
 	// Setup initial velocites to be 0, should only be used if we use
 	// accelerometer data.
-	float velocites[MOVE_DOF] = { 0.0f };
+	float velocities[MOVE_DOF] = { 0.0f };
 
 	// Create PID controllers for each degree of freedom our sub has.
 	PID controllers[DOF];
@@ -79,6 +79,9 @@ void run()
 					break;
 				case 'a':
 					Serial << (killed ? 0 : 1) << '\n';
+					break;
+				case 'v':
+					Serial << velocities[0] << '\t' << velocities[1] << '\t' << velocities[2] << '\n';
 					break;
 				case 'x':
 				{
@@ -129,7 +132,7 @@ void run()
 		mtime = run_motors(controllers, dstate, p, mtime);	
 		
 		// Compute new state using AHRS data. 
-		stime = compute_state(current, velocites, stime);
+		stime = compute_state(current, velocities, stime);
 	}
 }
 

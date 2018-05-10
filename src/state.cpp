@@ -72,6 +72,10 @@ uint32_t compute_state(State &state, float velocities[MOVE_DOF], uint32_t start)
 	state.axis[Pitch]	= ahrs_att((enum att_axis)(PITCH));
 	state.axis[Roll]	= ahrs_att((enum att_axis)(ROLL));
 
+	// Calculate time difference
+	uint32_t end = micros();
+	float dt = (float)(end - start)/(float)(1000000);
+
 	// Get acceleration data in m/s^2.
 	// Order is X, Y, Z accelerations.
 	state.accel[Surge]	= ahrs_accel((enum accel_axis)(SURGE)) - state.initial_accel[Surge];
@@ -80,22 +84,43 @@ uint32_t compute_state(State &state, float velocities[MOVE_DOF], uint32_t start)
 
 	// Add acclerations to velocities.
 	for (int i = 0; i < MOVE_DOF; i++)
-		velocities[i] += state.accel[i];
+		velocities[i] += state.accel[i] * dt;
 
-	// Calculate time difference, add distance to X, Y, and Z.
-	uint32_t end = micros();
-	float dt = (float)(end - start)/(float)(1000000);
+	// Add distance to X, Y, and Z.
 	for (int i = 0; i < MOVE_DOF; i++)
-		state.axis[i] += velocities[i] * dt;
+		if (velocities[i] > 0.1f)
+			state.axis[i] += velocities[i] * dt;
 
 	return end;
 }
 
 void compute_initial_state(State &state)
 {
-	ahrs_att_update();
-	state.initial_accel[Surge]	= ahrs_accel((enum accel_axis)(SURGE));
-	state.initial_accel[Sway]	= ahrs_accel((enum accel_axis)(SWAY));
-	state.initial_accel[Heave]	= ahrs_accel((enum accel_axis)(HEAVE));
+	// Take the average of the first 100 values to find the average initial acceleration.
+	float totals[MOVE_DOF] = { 0.0f };
+	for (int i = 0; i < 100; i++)
+	{
+		ahrs_att_update();
+		float accel[MOVE_DOF] = { ahrs_accel((enum accel_axis)(SURGE)), ahrs_accel((enum accel_axis)(SWAY)), ahrs_accel((enum accel_axis)(HEAVE)) };
+		for (int i = 0; i < MOVE_DOF; i++)
+			totals[i] += accel[i];
+		/*
+		Serial.print(accel[0], 8);
+		Serial.print('\t');
+		Serial.print(accel[1], 8);
+		Serial.print('\t');
+		Serial.print(accel[2], 8);
+		Serial.print('\n');
+		*/
+	}
+	for (int i = 0; i < MOVE_DOF; i++)
+		state.initial_accel[i] = totals[i]/(float)(100);
+	Serial.print(state.initial_accel[0], 8);
+	Serial.print('\t');
+	Serial.print(state.initial_accel[1], 8);
+	Serial.print('\t');
+	Serial.print(state.initial_accel[2], 8);
+	Serial.print('\n');
+
 	// state.z = analogRead(NPIN);
 }

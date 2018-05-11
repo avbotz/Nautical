@@ -1,7 +1,7 @@
 I've been meaning to write documentation for Nautical control for a while, so here is the TLDR version. If by chance you end up running a pool test you'll need to know this info. I'll also add how the code works in a Google doc once I'm finished with it, but for now comments should explain most of it.
 
 Startup:
--> First ssh onto the sub (*ssh user@192.168.2.3* after connecting to the Smurfnet WiFi network, password avb123)
+-> First ssh onto the sub (*ssh user@192.168.2.3* after connecting to the Smurfnet WiFi network)
 -> Run *tmux*, then split into 3 different panes (quick Google should tell you, if not run *Ctrl-b "* and *Ctrl-b %* and navigate using *Ctrl-b o*)
 -> The latest version of Nautical should already be uploaded onto the Arduino, but if it's not, go to ~/Nautical and run *sudo make upload*
 -> Run *./comms.sh* in ~/Nautical so you can communicate to the Arduino

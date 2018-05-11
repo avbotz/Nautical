@@ -76,17 +76,24 @@ uint32_t compute_state(State &state, float velocities[MOVE_DOF], uint32_t start)
 	uint32_t end = micros();
 	float dt = (float)(end - start)/(float)(1000000);
 
-	// Get acceleration data in m/s^2.
-	// Order is X, Y, Z accelerations.
-	state.accel[Surge]	= ahrs_accel((enum accel_axis)(SURGE)) - state.initial_accel[Surge];
-	state.accel[Sway]	= ahrs_accel((enum accel_axis)(SWAY)) - state.initial_accel[Sway];
-	state.accel[Heave]	= ahrs_accel((enum accel_axis)(HEAVE)) - state.initial_accel[Heave];
+	// Get acceleration data in m/s^2. Order is X, Y, Z accelerations.
+	// Cut off accelerations that are not at least 0.01 m/s^2 because they are not
+	// significant to the result.
+	float a[MOVE_DOF] = { 
+		ahrs_accel((enum accel_axis)(SURGE)) - state.initial_accel[Surge], 
+		ahrs_accel((enum accel_axis)(SWAY)) - state.initial_accel[Sway], 
+		ahrs_accel((enum accel_axis)(HEAVE)) - state.initial_accel[Heave] 
+	};
+	state.accel[Surge] += abs(a[0]) > 0.01f ? a[0] : 0.0f; 
+	state.accel[Sway] += abs(a[1]) > 0.01f ? a[1] : 0.0f; 
+	state.accel[Heave] += abs(a[2]) > 0.01f ? a[2] : 0.0f; 
 
 	// Add acclerations to velocities.
 	for (int i = 0; i < MOVE_DOF; i++)
 		velocities[i] += state.accel[i] * dt;
 
 	// Add distance to X, Y, and Z.
+	// Similar to accelerations, velocities under 0.1 m/s don't matter.
 	for (int i = 0; i < MOVE_DOF; i++)
 		if (velocities[i] > 0.1f)
 			state.axis[i] += velocities[i] * dt;
@@ -98,7 +105,9 @@ void compute_initial_state(State &state)
 {
 	// Take the average of the first 100 values to find the average initial acceleration.
 	float totals[MOVE_DOF] = { 0.0f };
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 200; i++)
+		ahrs_att_update();
+	for (int i = 0; i < 200; i++)
 	{
 		ahrs_att_update();
 		float accel[MOVE_DOF] = { ahrs_accel((enum accel_axis)(SURGE)), ahrs_accel((enum accel_axis)(SWAY)), ahrs_accel((enum accel_axis)(HEAVE)) };
@@ -107,7 +116,7 @@ void compute_initial_state(State &state)
 		// Serial << _FLOAT(accel[0], 6) << " " << _FLOAT(accel[1], 6) << " " << _FLOAT(accel[2], 6) << '\n';
 	}
 	for (int i = 0; i < MOVE_DOF; i++)
-		state.initial_accel[i] = totals[i]/(float)(100);
+		state.initial_accel[i] = totals[i]/(float)(200);
 	// Serial << _FLOAT(state.initial_accel[0], 6) << " " << _FLOAT(state.initial_accel[1], 6) << " " << _FLOAT(state.initial_accel[2], 6) << '\n';
 
 	// state.z = analogRead(NPIN);

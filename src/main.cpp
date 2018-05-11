@@ -81,7 +81,7 @@ void run()
 					Serial << (killed ? 0 : 1) << '\n';
 					break;
 				case 'v':
-					Serial << velocities[0] << '\t' << velocities[1] << '\t' << velocities[2] << '\n';
+					Serial << _FLOAT(velocities[0], 6) << '\t' << _FLOAT(velocities[1], 6) << '\t' << _FLOAT(velocities[2], 6) << '\n';
 					break;
 				case 'x':
 				{

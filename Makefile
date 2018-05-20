@@ -3,6 +3,7 @@ all:
 
 upload:
 	platformio -f -c vim run --target upload
+	sudo ./comms.sh
 
 clean:
 	platformio -f -c vim run --target clean

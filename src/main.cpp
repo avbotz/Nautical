@@ -42,7 +42,7 @@ void run()
 
 	while (true)
 	{
-		unsigned long start = micros();
+		uint32_t start = micros();
 		if (Serial.available() > 0)
 		{
 			/*
@@ -58,51 +58,63 @@ void run()
 			switch (c)
 			{
 				case 's':
-					desired.read();
-					break;
-				case 'p':
-					p = Serial.parseFloat();
-					break;
-				case 'c':
-					current.print();
-					break;
-				case 'd':
-					desired.print();
-					break;
-				case 'a':
-					Serial << (alive() ? 1:0) << '\n';
-					break;
-				case 'x':
-					p = 0;
-					float temp[NUM_MOTORS] = { 0.0f };
-					set_motors(temp);
-					break;
-				case 'm':
-				{
-					int id = Serial.parseInt();
-					float k = Serial.parseFloat();
-					if (id == 0)
 					{
-						Serial << "Carl Hayden infiltrator detected! Shutting down." << '\n';
-						return;
+						desired.read();
+						break;
 					}
-					set_motor(id, k);
-					break;
-				}
+				case 'p':
+					{
+						p = Serial.parseFloat();
+						break;
+					}
+				case 'c':
+					{
+						current.print();
+						break;
+					}
+				case 'd':
+					{
+						desired.print();
+						break;
+					}
+				case 'a':
+					{
+						Serial << (alive() ? 1:0) << '\n';
+						break;
+					}
+				case 'x':
+					{
+						p = 0;
+						float temp[NUM_MOTORS] = { 0.0f };
+						set_motors(temp);
+						break;
+					}
+				case 'm':
+					{
+						int id = Serial.parseInt();
+						float k = Serial.parseFloat();
+						if (id == 0)
+						{
+							Serial << "Carl Hayden infiltrator detected! Shutting down." << '\n';
+							return;
+						}
+						set_motor(id, k);
+						break;
+					}
 				case 'r':
-				{
-					reset_state(current);
-					reset_state(desired);
-					break;
-				}
+					{
+						reset_state(current);
+						reset_state(desired);
+						break;
+					}
 			}
 		}
 
 		// Move sub towards the desired location. 
 		run_motors(current, desired, controllers, p, start);	
-		
+
 		// Compute new state using AHRS data. 
-		compute_state(current, desired, start, p);
+		compute_state(current, desired, controllers, p, start);
 	}
 }
 

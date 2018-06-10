@@ -1,6 +1,9 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
+#include "pid.hpp"
+#include "config.h"
+
 struct State
 {
 	/*
@@ -25,7 +28,7 @@ struct State
 };
 
 void reset_state(struct State &state);
-void compute_state(struct State &state, struct State &desired, unsigned long start, float p);
+void compute_state(struct State &state, struct State &desired, PID controllers[DOF], float p, uint32_t start);
 void compute_initial_state(struct State &state);
 
 #endif

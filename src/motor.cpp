@@ -24,7 +24,7 @@ void set_motors(float motors[NUM_MOTORS])
 /*
  * TODO Still need to compute Y/P/R movement.
  */
-void run_motors(const State	&current, const State &desired, PID controllers[DOF], float p, unsigned long start)
+void run_motors(const State	&current, const State &desired, PID controllers[DOF], float p, uint32_t start)
 {
 	// Default motors to 0.
 	float motors[NUM_MOTORS] = { 0.0f };

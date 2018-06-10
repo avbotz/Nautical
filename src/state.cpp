@@ -36,14 +36,14 @@ void reset_state(State &state)
 	// compute_initial_state(state);
 }
 
-void compute_state(State &state, State &desired, unsigned long start, float p)
+void compute_state(State &state, State &desired, PID controllers[DOF], float p, uint32_t start)
 {
 	ahrs_att_update();
 	state.yaw = ahrs_att((enum att_axis)(YAW));
 	state.pitch = ahrs_att((enum att_axis)(PITCH));
 	state.roll = ahrs_att((enum att_axis)(ROLL));
 	
-	unsigned long end = micros();
+	uint32_t end = micros();
 	float dt = (float)(end - start)/1000000.0f;
 
 	float dstate[3] = { 0.0f };

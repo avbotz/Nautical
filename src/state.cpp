@@ -35,30 +35,20 @@ void reset_state(State &state)
 	state.z = 0.0f;
 }
 
-void compute_state(State &state, float dstate[DOF], float pid[DOF], float p, uint32_t start)
+uint32_t compute_state(State &state, float pid[DOF], float p, uint32_t start)
 {
 	ahrs_att_update();
 	state.yaw = ahrs_att((enum att_axis)(YAW));
 	state.pitch = ahrs_att((enum att_axis)(PITCH));
 	state.roll = ahrs_att((enum att_axis)(ROLL));
 	
-	uint32_t end = micros();
-	float dt = (float)(end - start)/1000000.0f;
-
-	float dstate[3] = { 0.0f };
-	dstate[0] = desired.x - state.x;
-	dstate[1] = desired.y - state.y;
-	dstate[2] = desired.z - state.z;
-
-	float kdir[3] = { 0.0f };
-	for (int i = 0; i < 3; i++) 
-		kdir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
-
 	// Using sub-units, mapping power to distance (time * p)
-	state.x += kdir[0] * p * dt;
-	state.y += kdir[1] * p * dt;
+	float dt = (float)(micros() - start)/(float)(1000000);
+	state.x += pid[0] * p * dt;
+	state.y += pid[1] * p * dt;
 	// state.z += kdir[2] * p * dt;
 	state.z = analogRead(NPIN);
+	return micros();
 }
 
 void compute_initial_state(State &state)

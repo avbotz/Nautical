@@ -2,6 +2,7 @@
 #include "streaming.h"
 
 #include "motor.hpp"
+#include "util.hpp"
 #include "state.hpp"
 #include "pid.hpp"
 #include "io.hpp"
@@ -123,15 +124,16 @@ void run()
 	
 		// Compute PID using state difference.
 		float dt = (float)(micros() - ptime)/(float)(1000000);	
+		float pid[DOF] = { 0.0f };
 		for (int i = 0; i < DOF; i++)
-			kpid[i] = controllers[i].calculate(dstate[i], dt);
+			pid[i] = controllers[i].calculate(dstate[i], dt);
 		ptime = micros();
 
 		// Move sub towards the desired location. 
 		compute_motors(dstate, pid, p);	
 
 		// Compute new state using AHRS data. 
-		compute_state(current, dstate, pid, p, start);
+		compute_state(current, pid, p, start);
 	}
 }
 

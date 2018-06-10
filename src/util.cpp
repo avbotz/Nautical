@@ -1,12 +1,7 @@
 #include <Arduino.h>
-
 #include "util.hpp"
 
-
-/*
- * Angle system is based on 0 - 360.
- * The edge case is at 0/360, where the difference is 0.
- */
+// Assuming that angle system is based on 0 to 360.
 float calc_angle_diff(float a1, float a2)
 {
 	float c1 = a1 - a2;
@@ -20,12 +15,11 @@ float calc_angle_diff(float a1, float a2)
 		return c3;
 }
 
-/*
- * Prevents "party" mode by limiting a value between two values.
- */
-float limit(float p, float c1, float c2)
+float limit(float input, float lower, float upper)
 {
-	if (p < c1) return c1;
-	if (p > c2) return c2;
-	return p;
+	if (input < lower) 
+		return lower;
+	if (input > upper)
+		return upper;
+	return input;
 }

@@ -8,6 +8,6 @@
 
 void set_motor(int id, float p);
 void set_motors(float motors[NUM_THRUSTERS]);
-uint32_t run_motors(PID controllers[DOF], float dstate[DOF], float p, uint32_t start);
+void run_motors(const State &current, const State &desired, PID controllers[DOF], float p, unsigned long start);
 
 #endif 

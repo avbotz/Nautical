@@ -44,34 +44,15 @@ static const int ORIENTATION[8][6] =
  * PID Gains Configuration.
  * Rows correspond to X, Y, Z, Y, P, R. Cols correspond to kp, ki, kd.
  */
+static const int DOF = 6;
 static const float GAINS[6][3] = 
 {
- 	{ 0.75, 0, 0 },
+ 	{ 1.00, 0, 0 },
+	{ 1.25, 0, 0 },
 	{ 0.75, 0, 0 },
-	{ 0.75, 0, 0 },
-	{ 0.05, 0, 0 },
-	{ 0.05, 0, 0 },
-	{ 0.05, 0, 0 }
+	{ 0.10, 0, 0 },
+	{ 0.10, 0, 0 },
+	{ 0.10, 0, 0 }
 };
-
-/*
- * State configuration.
- * GYRO_DOF refers to axes 4-6.
- * TODO All the IMU data is in [Case] because there is a conflict with
- * ahrs/ahrs.h. Fixing it to be standard CASE would be good.
- */
-static const int DOF = 6;
-static const int MOVE_DOF = 3;
-static const int GYRO_DOF = 6;
-
-static const int X 	= 0;
-static const int Y 	= 1;
-static const int Z 	= 2;
-static const int Yaw = 3;
-static const int Pitch = 4;
-static const int Roll = 5;
-static const int Surge = 0;
-static const int Sway = 1;
-static const int Heave = 2;
 
 #endif 

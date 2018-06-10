@@ -36,13 +36,17 @@ void run()
 	for (int i = 0; i < DOF; i++)
 		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
 
-	// Current holds location, desired holds destination.
+	// Current holds location and desired holds destination.
 	State current, desired;
-	compute_initial_state(current);
+	// compute_initial_state(current);
+
+	// Setup calculations for time difference. 
+	uint32_t start = micros();
+	uint32_t ptime = start;
+	uint32_t stime = start;
 
 	while (true)
 	{
-		uint32_t start = micros();
 		if (Serial.available() > 0)
 		{
 			/*
@@ -110,11 +114,24 @@ void run()
 			}
 		}
 
+		// Compute state difference.
+		float dstate[DOF] = { 0.0f };
+		dstate[0] = desired.x - current.x;
+		dstate[1] = desired.y - current.y;
+		dstate[2] = desired.z - current.z;
+		dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
+	
+		// Compute PID using state difference.
+		float dt = (float)(micros() - ptime)/(float)(1000000);	
+		for (int i = 0; i < DOF; i++)
+			kpid[i] = controllers[i].calculate(dstate[i], dt);
+		ptime = micros();
+
 		// Move sub towards the desired location. 
-		run_motors(current, desired, controllers, p, start);	
+		compute_motors(dstate, pid, p);	
 
 		// Compute new state using AHRS data. 
-		compute_state(current, desired, controllers, p, start);
+		compute_state(current, dstate, pid, p, start);
 	}
 }
 

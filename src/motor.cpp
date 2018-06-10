@@ -24,43 +24,14 @@ void set_motors(float motors[NUM_MOTORS])
 /*
  * TODO Still need to compute Y/P/R movement.
  */
-void run_motors(const State	&current, const State &desired, PID controllers[DOF], float p, uint32_t start)
+void compute_motors(float dstate[DOF], float pid[DOF], float p, uint32_t start)
 {
 	// Default motors to 0.
 	float motors[NUM_MOTORS] = { 0.0f };
 
-	// Compute state difference.
-	float dstate[DOF] = { 0.0f };
-	dstate[0] = desired.x - current.x;
-	dstate[1] = desired.y - current.y;
-	dstate[2] = desired.z - current.z;
-	dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
-
-	// Don't run the motors if we are close enough to the target.
-	float kdir[DOF] = { 0.0f };
-	for (int i = 0; i < DOF; i++)
-		if (dstate[i] > 0.1f || dstate[i] < -0.1f)
-			kdir[i] = (dstate[i] < 0.0f) ? -1.0f : 1.0f;
-	
-	// Calculate PID values using the state difference.
-	float kpid[DOF] = { 1.0f };
-	float dt = (float)(micros() - start)/(float)(1000000);
-	for (int i = 0; i < DOF; i++)
-		kpid[i] = controllers[i].calculate(dstate[i], dt);
-
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
-			motors[i] += p * kpid[j] * ORIENTATION[i][j];
-
-	// k-dir * d-dir returns a positive value.
-	// 0.1 is to ensure that we are moving somewhere worthwhile.
-	for (int i = 0; i < DOF; i++)
-	{
-		if (kdir[i]*dstate[i] > 0.1f)
-		{
-			set_motors(motors);
-			break;
-		}
-	}
+			motors[i] += p * pid[j] * ORIENTATION[i][j];
+	set_motors(motors);
 }

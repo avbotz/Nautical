@@ -1,3 +1,4 @@
+#include <Arduino.h>
 /*
  * Battery Voltage Checking code as writtin by Maxim Vovenko from electrical
  * Honestly I used some of my old code that did work but altered it so that it should be able to read multiple voltages
@@ -8,14 +9,14 @@
  */
 
 void measure_voltage(){
-//  #define NUM_SAMPLES 10 //Number of samples per measurment (higher = bettery accuracy but longer time)
+  #define NUM_SAMPLES 10 //Number of samples per measurment (higher = bettery accuracy but longer time)
   int sumB1 = 0; //used for algebra
   int purgeAnalog = 0;
   float calibrateB1 = 23.88349514563107; //used to calibrate circuit set for a 10 1 voltage devider assuuming 5v reference and other stuff
   float voltageB1=0.0; //used as final volttage output
   unsigned char sample_count = 0;
   //Code to measure voltage of each battery seperatly
-  purgeAnalog = analogRead(A1); //preping ardino to read pin A1
+  purgeAnalog = analogRead(A7); //preping ardino to read pin A1
   delay(10);
   while (sample_count < NUM_SAMPLES){ //collecting data A1
     sumB1 += analogRead(A7);

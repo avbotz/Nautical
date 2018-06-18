@@ -3,6 +3,6 @@
 
 #define NUM_SAMPLES 10
 
-void measure_voltage()
+void measure_voltage();
 
 #endif

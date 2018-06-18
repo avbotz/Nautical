@@ -6,6 +6,7 @@
 #include "state.hpp"
 #include "pid.hpp"
 #include "io.hpp"
+#include "voltage.hpp"
 
 /*
  * IMPORTANT: The entire structure of this program hacks around the required

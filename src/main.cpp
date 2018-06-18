@@ -59,6 +59,7 @@ void run()
 			 * 'x' = terminate
 			 * 'd' = debug 
 			 * 'r' = reset
+			 * 'l' = measure voltage
 			 */
 			char c = Serial.read();
 			switch (c)
@@ -112,6 +113,10 @@ void run()
 						reset_state(current);
 						reset_state(desired);
 						break;
+					}
+				case 'l':
+					{
+						measure_voltage();
 					}
 			}
 		}

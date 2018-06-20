@@ -25,19 +25,17 @@ static const int NUM_MOTORS = 8;
  * Motor Orientation Configuration.
  * Rows = motors, Columns = directions, Values = weights.
  * 1 means clockwise, -1 means counterclockwise, 0 means not used.
- * TODO Someone needs to double check this orientation matrix!
  */
 static const int ORIENTATION[8][6] = 
 {
-	//X, 	Y, 	 Z, 	Y,	  P, 	R
-	{ 0,	0,	 -1,	0,	  1,	-1 },
-	{ 0,	0,	 1,		0, 	  -1,   -1 },
-	{ 0,	0,	 1,		0, 	  1, 	1 },
-	{ 0,	0,	 -1,	0, 	  -1, 	1 },
-	{ 1,	1,	 0,		1, 	  0, 	0 },
-	{ -1,	1,	 0,		1, 	  0,	0 },
-	{ -1,	1,	 0,		-1,   0,	0 }, 
-	{ 1,	1,	 0,		-1,   0,	0 }
+	{ 0, 0,	1, 0, 1, -1 },
+	{ 0, 0, -1, 0, -1, -1 },
+	{ 0, 0, -1,	0,  1, 1 },
+	{ 0, 0,	1, 0, -1, 1 },
+	{ 1, 1, 0, 1, 0, 0 },
+	{ -1, 1, 0,	1, 0, 0 },
+	{ -1, 1, 0,	-1, 0, 0 }, 
+	{ 1, 1, 0, -1, 0, 0 }
 };
 
 /*
@@ -45,11 +43,12 @@ static const int ORIENTATION[8][6] =
  * Rows correspond to X, Y, Z, Y, P, R. Cols correspond to kp, ki, kd.
  */
 static const int DOF = 6;
+static const int MOVE_DOF = 3;
 static const float GAINS[6][3] = 
 {
- 	{ 1.00, 0, 0 },
+	{ 2.00, 0, 0 },
 	{ 1.25, 0, 0 },
-	{ 0.75, 0, 0 },
+	{ 1.50, 0, 0 },
 	{ 0.10, 0, 0 },
 	{ 0.10, 0, 0 },
 	{ 0.10, 0, 0 }

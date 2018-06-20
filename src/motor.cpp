@@ -12,12 +12,24 @@ void set_motor(int id, float k)
 
 void set_motors(float motors[NUM_MOTORS])
 {
-	for (int t = 0; t < NUM_MOTORS; t++) 
-	{
-		// Serial << "ID " << t+1 << " T " << motors[t] << '\n';
-		// m5_power((enum thruster) motors[t].pos, motors[t].thrust);
-		m5_power((enum thruster) t+1, limit(motors[t], -0.3, 0.3));
+	// Serial << motors[0] << " " << motors[1] << " " << motors[2] << " " << motors[3] << " "
+	//  	<< motors[4] << " " << motors[5] << " " << motors[6] << " " << motors[7] << '\n';
+	/*
+	   for (int t = 0; t < NUM_MOTORS; t++) 
+	   {
+		Serial << (t+1) << " " << motors[t] << '\n';
+	// m5_power((enum thruster) motors[t].pos, motors[t].thrust);
+	m5_power((enum thruster) t+1, motors[t]);
 	}
+	*/
+	m5_power(VERT_FL, motors[0]);
+	m5_power(VERT_FR, motors[1]);
+	m5_power(VERT_BL, motors[2]);
+	m5_power(VERT_BR, motors[3]);
+	m5_power(SURGE_FL, motors[4]);
+	m5_power(SURGE_FR, motors[5]);
+	m5_power(SURGE_BL, motors[6]);
+	m5_power(SURGE_BR, motors[7]);
 	m5_power_offer_resume();
 }
 
@@ -27,11 +39,26 @@ void set_motors(float motors[NUM_MOTORS])
 void compute_motors(float dstate[DOF], float pid[DOF], float p)
 {
 	// Default motors to 0.
-	float motors[NUM_MOTORS] = { 0.0f };
+	float motors[NUM_MOTORS];
+	for (int i = 0; i < NUM_MOTORS; i++)
+		motors[i] = 0.0f;
 
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
 			motors[i] += p * pid[j] * ORIENTATION[i][j];
-	set_motors(motors);
+	if (p > 0.01)
+	{
+		motors[0] += 0.15f;
+		motors[1] -= 0.15f;
+		motors[2] -= 0.15f;
+		motors[3] += 0.15f;
+		set_motors(motors);
+	}
+	else
+	{
+		for (int i = 0; i < NUM_MOTORS; i++)
+			motors[i] = 0.0;
+		set_motors(motors);
+	}
 }

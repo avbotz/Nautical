@@ -23,3 +23,12 @@ float limit(float input, float lower, float upper)
 		return upper;
 	return input;
 }
+
+float limit(float input, float min)
+{
+	if (input < 0 && input > -1*min)
+		return -1*min;
+	if (input > 0 && input < min)
+		return min;
+	return input;
+}

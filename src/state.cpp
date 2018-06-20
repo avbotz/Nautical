@@ -46,14 +46,17 @@ uint32_t compute_state(State &state, float pid[DOF], float p, uint32_t start)
 	float dt = (float)(micros() - start)/(float)(1000000);
 	state.x += pid[0] * p * dt;
 	state.y += pid[1] * p * dt;
-	// state.z += kdir[2] * p * dt;
-	state.z = analogRead(NPIN);
+	// state.z += pid[2] * p * dt;
+	state.z = 0.2f * (analogRead(NPIN) - 230.f)/15.f;
 	return micros();
 }
 
 void compute_initial_state(State &state)
 {
 	ahrs_att_update();
+	state.yaw = ahrs_att((enum att_axis)(YAW));
+	state.pitch = ahrs_att((enum att_axis)(PITCH));
+	state.roll = ahrs_att((enum att_axis)(ROLL));
 	state.iax = ahrs_accel((enum accel_axis)(SURGE));
 	state.iay = ahrs_accel((enum accel_axis)(SWAY));
 	state.iaz = ahrs_accel((enum accel_axis)(HEAVE));

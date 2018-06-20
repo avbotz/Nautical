@@ -6,7 +6,6 @@
 #include "state.hpp"
 #include "pid.hpp"
 #include "io.hpp"
-#include "voltage.hpp"
 
 /*
  * IMPORTANT: The entire structure of this program hacks around the required
@@ -23,9 +22,8 @@ void run()
 	 * Initial IO between software and hardware.
 	 * Added a 3 second delay because there is lag when we first start our AHRS.
 	 */
-	Serial << "Beginning Cuckical!" << '\n';
+	// Serial << "Beginning Cuckical!" << '\n';
 	init_io();
-	delay(3000);
 
 	// Set initial kill status.
 	bool killed = !alive();
@@ -40,7 +38,7 @@ void run()
 
 	// Current holds location and desired holds destination.
 	State current, desired;
-	// compute_initial_state(current);
+	compute_initial_state(current);
 
 	// Setup calculations for time difference. 
 	uint32_t start = micros();
@@ -49,6 +47,7 @@ void run()
 
 	while (true)
 	{
+		delay(10);
 		if (Serial.available() > 0)
 		{
 			/*
@@ -59,7 +58,6 @@ void run()
 			 * 'x' = terminate
 			 * 'd' = debug 
 			 * 'r' = reset
-			 * 'l' = measure voltage
 			 */
 			char c = Serial.read();
 			switch (c)
@@ -114,32 +112,36 @@ void run()
 						reset_state(desired);
 						break;
 					}
-				case 'l':
-					{
-						measure_voltage();
-					}
 			}
 		}
 
+
 		// Compute state difference.
 		float dstate[DOF] = { 0.0f };
-		dstate[0] = desired.x - current.x;
-		dstate[1] = desired.y - current.y;
-		dstate[2] = desired.z - current.z;
-		dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
-	
+		if (fabs(desired.z - current.z) > 0.05)
+		{
+			dstate[2] = desired.z - current.z;	
+		}
+		else
+		{
+			dstate[0] = desired.x - current.x;
+			dstate[1] = desired.y - current.y;
+			dstate[3] = calc_angle_diff(desired.yaw, current.yaw);
+		}
+
 		// Compute PID using state difference.
 		float dt = (float)(micros() - ptime)/(float)(1000000);	
 		float pid[DOF] = { 0.0f };
-		for (int i = 0; i < DOF; i++)
-			pid[i] = controllers[i].calculate(dstate[i], dt);
+		for (int i = 0; i < MOVE_DOF; i++)
+			pid[i] = controllers[i].calculate(dstate[i], dt, 0.25);		
+		pid[3] = controllers[3].calculate(dstate[3], dt, 0.025);
 		ptime = micros();
+
+		// Compute new state using AHRS data. 
+		stime = compute_state(current, pid, p, stime);
 
 		// Move sub towards the desired location. 
 		compute_motors(dstate, pid, p);	
-
-		// Compute new state using AHRS data. 
-		compute_state(current, pid, p, start);
 	}
 }
 

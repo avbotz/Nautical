@@ -18,10 +18,6 @@
  */
 void run()
 {
-	/*
-	 * Initial IO between software and hardware.
-	 * Added a 3 second delay because there is lag when we first start our AHRS.
-	 */
 	// Serial << "Beginning Cuckical!" << '\n';
 	init_io();
 
@@ -117,11 +113,11 @@ void run()
 
 
 		// Compute state difference.
+		// Managing multiple axes at one time increases drift in the sub, so it
+		// will be avoided until the DVL is integrated.
 		float dstate[DOF] = { 0.0f };
 		if (fabs(desired.z - current.z) > 0.05)
-		{
 			dstate[2] = desired.z - current.z;	
-		}
 		else
 		{
 			dstate[0] = desired.x - current.x;

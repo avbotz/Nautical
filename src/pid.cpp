@@ -8,7 +8,7 @@ float PID::init(float a, float b, float c)
 	this->kd = c;
 }
 
-float PID::calculate(float error, float dt, float lowest)
+float PID::calculate(float error, float dt, float min)
 {
 	float pout = this->kp * error;
 	this->sum += error * dt;
@@ -21,6 +21,6 @@ float PID::calculate(float error, float dt, float lowest)
 
 	// float out = dir * limit(output*dir, 0.25, 2);
 	float out = limit(output, -1.5f, 1.5f);
-	out = limit(out, lowest);
+	out = limit(out, min);
 	return out;
 }

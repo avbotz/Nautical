@@ -14,14 +14,6 @@ void set_motors(float motors[NUM_MOTORS])
 {
 	// Serial << motors[0] << " " << motors[1] << " " << motors[2] << " " << motors[3] << " "
 	//  	<< motors[4] << " " << motors[5] << " " << motors[6] << " " << motors[7] << '\n';
-	/*
-	   for (int t = 0; t < NUM_MOTORS; t++) 
-	   {
-		Serial << (t+1) << " " << motors[t] << '\n';
-	// m5_power((enum thruster) motors[t].pos, motors[t].thrust);
-	m5_power((enum thruster) t+1, motors[t]);
-	}
-	*/
 	m5_power(VERT_FL, motors[0]);
 	m5_power(VERT_FR, motors[1]);
 	m5_power(VERT_BL, motors[2]);
@@ -53,12 +45,6 @@ void compute_motors(float dstate[DOF], float pid[DOF], float p)
 		motors[1] -= 0.15f;
 		motors[2] -= 0.15f;
 		motors[3] += 0.15f;
-		set_motors(motors);
 	}
-	else
-	{
-		for (int i = 0; i < NUM_MOTORS; i++)
-			motors[i] = 0.0;
-		set_motors(motors);
-	}
+	set_motors(motors);
 }

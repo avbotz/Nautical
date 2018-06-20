@@ -47,7 +47,7 @@ uint32_t compute_state(State &state, float pid[DOF], float p, uint32_t start)
 	state.x += pid[0] * p * dt;
 	state.y += pid[1] * p * dt;
 	// state.z += pid[2] * p * dt;
-	state.z = 0.2f * (analogRead(NPIN) - 230.f)/15.f;
+	state.z = (analogRead(NPIN) - 230.0f)/60.0f;
 	return micros();
 }
 

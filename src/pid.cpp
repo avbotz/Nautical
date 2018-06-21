@@ -1,6 +1,7 @@
 #include "pid.hpp"
 #include "util.hpp"
 
+
 float PID::init(float a, float b, float c)
 {
 	this->kp = a;
@@ -20,7 +21,6 @@ float PID::calculate(float error, float dt, float min)
 	if (output < 0) dir = -1.0;
 
 	// float out = dir * limit(output*dir, 0.25, 2);
-	float out = limit(output, -1.5f, 1.5f);
-	out = limit(out, min);
+	float out = limit(limit(output, -1.5f, 1.5f), min);
 	return out;
 }

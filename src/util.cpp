@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "util.hpp"
 
+
 // Assuming that angle system is based on 0 to 360.
 float calc_angle_diff(float a1, float a2)
 {

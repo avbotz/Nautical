@@ -5,6 +5,7 @@
 #include "state.hpp"
 #include "io.hpp"
 
+
 void State::read()
 {
 	this->x = Serial.parseFloat();

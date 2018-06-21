@@ -7,7 +7,6 @@
  *  Modified from code by RobH45345 on Arduino Forums, algorithm from
  *  NUMERICAL RECIPES: The Art of Scientific Computing.
  */
-
 #include "matrix.h"
 #define NR_END 1
 
@@ -31,7 +30,7 @@ void copy(float* A, int n, int m, float* B)
 {
 	int i, j, k;
 	for (i = 0; i < m; i++)
-		for(j = 0; j < n; j++)
+		for (j = 0; j < n; j++)
 		{
 			B[n * i + j] = A[n * i + j];
 		}
@@ -41,7 +40,7 @@ void multiply(float* A, float* B, int m, int p, int n, float* C)
 {
 	int i, j, k;
 	for (i = 0; i < m; i++)
-		for(j = 0; j < n; j++)
+		for (j = 0; j < n; j++)
 		{
 			C[n * i + j] = 0;
 			for (k = 0; k < p; k++)
@@ -53,7 +52,7 @@ void add(float* A, float* B, int m, int n, float* C)
 {
 	int i, j;
 	for (i = 0; i < m; i++)
-		for(j = 0; j < n; j++)
+		for (j = 0; j < n; j++)
 			C[n * i + j] = A[n * i + j] + B[n * i + j];
 }
 
@@ -61,7 +60,7 @@ void subtract(float* A, float* B, int m, int n, float* C)
 {
 	int i, j;
 	for (i = 0; i < m; i++)
-		for(j = 0; j < n; j++)
+		for (j = 0; j < n; j++)
 			C[n * i + j] = A[n * i + j] - B[n * i + j];
 }
 
@@ -69,7 +68,7 @@ void transpose(float* A, int m, int n, float* C)
 {
 	int i, j;
 	for (i = 0; i < m; i++)
-		for(j = 0; j < n; j++)
+		for (j = 0; j < n; j++)
 			C[m * j + i] = A[n * i + j];
 }
 

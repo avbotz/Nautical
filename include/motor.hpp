@@ -3,7 +3,6 @@
 
 #include "m5/m5.h"
 #include "config.h"
-#include "state.hpp"
 #include "pid.hpp"
 
 void set_motor(int id, float p);

@@ -40,10 +40,8 @@ static const int ORIENTATION[8][6] =
 
 /*
  * PID Gains Configuration.
- * Rows correspond to X, Y, Z, Y, P, R. Cols correspond to kp, ki, kd.
+ * Rows correspond to F, H, V, Y, P, R. Cols correspond to kp, ki, kd.
  */
-static const int DOF = 6;
-static const int MOVE_DOF = 3;
 static const float GAINS[6][3] = 
 {
 	{ 2.00, 0, 0 },
@@ -53,5 +51,20 @@ static const float GAINS[6][3] =
 	{ 0.10, 0, 0 },
 	{ 0.10, 0, 0 }
 };
+
+/*
+ * Makes code more readable. 
+ * Note, a for loop starting at BODY_DOF to GYRO_DOF only covers GYRO_DOF.
+ * Forward, Horizontal, Vertical, Yaw, Pitch, Roll.
+ */
+static const int DOF = 6;
+static const int BODY_DOF = 3;
+static const int GYRO_DOF = 6;
+static const int F = 0;
+static const int H = 1;
+static const int V = 2;
+static const int Y = 3;
+static const int P = 4;
+static const int R = 5;
 
 #endif 

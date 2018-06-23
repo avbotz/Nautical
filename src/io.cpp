@@ -8,10 +8,9 @@
 #include "macrodef.h"
 #include "io.hpp"
 #include "motor.hpp"
-#include "state.hpp"
 
 
-void init_io()
+void io()
 {
 	// Init communication with the AHRS
 	io_ahrs_init("");

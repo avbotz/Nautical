@@ -9,7 +9,7 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
-	float dt = temp - t;
+	float dt = (temp - t)/1000000;
 
 	// Predict new state using model.
 	float *a1 = new float[N];
@@ -48,7 +48,7 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	multiply(covar, c1, N, N, M, c2);
 	multiply(Hk, covar, M, N, N, c3);
 	multiply(c3, c1, M, N, M, c4);
-	add(R, c4, M, M, c5);
+	add(Rk, c4, M, M, c5);
 	invert(c5, M);
 	multiply(c2, c5, N, M, M, Kk);
 	delete[] c1;

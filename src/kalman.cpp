@@ -7,9 +7,11 @@
 
 uint32_t kalman(float *state, float *covar, uint32_t t)
 {
+	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
 	float dt = (temp - t);
 
+	// Predict new state using model.
 	float *a1 = new float[N];
 	float Fk[N*N] = {
 		1, dt, 0, 0, 0, 0,
@@ -23,6 +25,7 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	memcpy(state, a1, sizeof(float)*N*N);
 	delete[] a1;
 
+	// Predict new covariance.
 	float *b1 = new float[N*N];
 	float *b2 = new float[N*N];
 	float *b3 = new float[N*N];
@@ -34,6 +37,7 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	delete[] b2;
 	delete[] b3;
 
+	// Calculate the Kalman gain.
 	float *Kk = new float[N*M];
 	float *c1 = new float[N*M];
 	float *c2 = new float[N*M];
@@ -53,10 +57,12 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	delete[] c4;
 	delete[] c5;
 
+	// Receive measurements, taking into account accelerometer bias.
 	float *m = new float[M];
 	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - afbias;
 	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - ahbias;
 
+	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];
 	float *d2 = new float[M];
 	float *d3 = new float[N];
@@ -71,6 +77,7 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	delete[] d3;
 	delete[] d4;
 
+	// Update error covariance using Kalman gain.
 	float *e1 = new float[M*N];
 	float *e2 = new float[N*N];
 	float *e3 = new float[N*N];

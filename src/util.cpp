@@ -2,7 +2,7 @@
 #include "util.hpp"
 
 
-float calc_angle_diff(float a1, float a2)
+float angle_difference(float a1, float a2)
 {
 	float c1 = a1 - a2;
 	float c2 = a1 - a2 + 360;

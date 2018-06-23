@@ -59,6 +59,7 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 
 	// Receive measurements, taking into account accelerometer bias.
 	float *m = new float[M];
+	ahrs_att_update();
 	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - afbias;
 	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - ahbias;
 

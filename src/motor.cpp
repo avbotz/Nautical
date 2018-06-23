@@ -12,8 +12,6 @@ void set_motor(int id, float k)
 
 void set_motors(float motors[NUM_MOTORS])
 {
-	// Serial << motors[0] << " " << motors[1] << " " << motors[2] << " " << motors[3] << " "
-	//  	<< motors[4] << " " << motors[5] << " " << motors[6] << " " << motors[7] << '\n';
 	m5_power(VERT_FL, motors[0]);
 	m5_power(VERT_FR, motors[1]);
 	m5_power(VERT_BL, motors[2]);
@@ -25,9 +23,6 @@ void set_motors(float motors[NUM_MOTORS])
 	m5_power_offer_resume();
 }
 
-/*
- * TODO Still need to compute Y/P/R movement.
- */
 void compute_motors(float dstate[DOF], float pid[DOF], float p)
 {
 	// Default motors to 0.

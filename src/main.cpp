@@ -99,6 +99,15 @@ void run()
 			else if (c == 's')
 				for (int i = 0; i < DOF; i++)
 					desired[i] = Serial.parseFloat();
+			
+			// Receive new desired state (relative).
+			else if (c == 'r')
+			{
+				for (int i = 0; i < BODY_DOF; i++)
+					desired[i] += Serial.parseFloat();
+				for (int i = BODY_DOF; i < GYRO_DOF; i++)
+					desired[i] = angle_add(desired[i], Serial.parseFloat());
+			}
 		}
 		
 		// Kalman filter removes noise from measurements and estimates the new

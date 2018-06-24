@@ -15,6 +15,17 @@ float angle_difference(float a1, float a2)
 		return c3;
 }
 
+float angle_add(float a1, float add)
+{
+	float temp = a1 + add;
+	if (temp > 360.0)
+		return temp - 360.0;
+	else if (temp < 0)
+		return temp + 360.0;
+	
+	return temp;
+}
+
 float limit(float input, float lower, float upper)
 {
 	if (input < lower) 

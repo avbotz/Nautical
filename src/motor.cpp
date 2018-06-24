@@ -38,24 +38,15 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 
 	// Default body motors to 0.
 	for (int i = 0; i < 8; i++)
+		thrust[i] = 0.0f;
+	if (p > 0.01f)
 	{
-		if (p < 0.01f)
-			thrust[i] = 0.0f;
-		else 
-		{
-			if (i == 0)
-				thrust[i] = 0.15f;
-			if (i == 1)
-				thrust[i] = -0.15f;
-			if (i == 2)
-				thrust[i] = -0.15f;
-			if (i == 3)
-				thrust[i] = 0.15f;
-			if (i > 3)
-				thrust[i] = 0.0f;
-		}
+		thrust[0] += 0.15f;
+		thrust[1] -= 0.15f;
+		thrust[2] -= 0.15f;
+		thrust[3] += 0.15f;
 	}
-	
+
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 	{

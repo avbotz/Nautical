@@ -5,7 +5,28 @@
 #include "kalman.hpp"
 
 
-uint32_t kalman(float *state, float *covar, uint32_t t)
+void Kalman::bias()
+{
+	// Compute initial bias from the accelerometer.
+	afbias=0.0, ahbias=0.0;
+	for (int i = 0; i < 100; i++)
+	{
+		delay(1);
+		ahrs_att_update();
+	}
+	for (int i = 0; i < 100; i++)
+	{
+		delay(1);
+		ahrs_att_update();
+		afbias += ahrs_accel((enum accel_axis)(SURGE));
+		ahbias += ahrs_accel((enum accel_axis)(SWAY));
+	}
+	afbias /= 100.0;
+	ahbias /= 100.0;
+
+}
+
+uint32_t Kalman::compute(float *state, float *covar, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
@@ -60,8 +81,8 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
 	float *m = new float[M];
-	m[0] = ahrs_accel((enum accel_axis)(SURGE));
-	m[1] = ahrs_accel((enum accel_axis)(SWAY));
+	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - afbias;
+	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - ahbias;
 	m[0] = m[0] < 0.05 ? 0.0 : m[0];
 	m[1] = m[1] < 0.05 ? 0.0 : m[1];
 

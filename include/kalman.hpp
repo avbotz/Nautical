@@ -36,6 +36,12 @@ static float Rk[M*M] = {
 	0.000, 5.000
 };
 
-uint32_t kalman(float *state, float *covar, uint32_t t);
+struct Kalman
+{
+	float afbias, ahbias;
+
+	void bias();
+	uint32_t compute(float *state, float *covar, uint32_t t);
+};
 
 #endif 

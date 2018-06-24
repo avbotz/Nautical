@@ -18,11 +18,8 @@ void run()
 	Motors motors;
 	motors.p = 0.0f;
 
-	// Current state represents location, while desired state holds destination.
-	float current[DOF] = { 0.0f };
-	float desired[DOF] = { 0.0f };
-
-	// Kalman filter initial state and error covariance.
+	// Setup kalman filter, including state and covariance.
+	Kalman kalman;
 	float state[N] = {
 		0.000, 0.000, 0.000, 0.000, 0.000, 0.000
 	};
@@ -35,22 +32,9 @@ void run()
 		0.000, 0.000, 0.000, 0.000, 0.000, 1.000,
 	};
 
-	// Compute initial bias from the accelerometer.
-	float afbias=0.0, ahbias=0.0;
-	for (int i = 0; i < 100; i++)
-	{
-		delay(1);
-		ahrs_att_update();
-	}
-	for (int i = 0; i < 100; i++)
-	{
-		delay(1);
-		ahrs_att_update();
-		afbias += ahrs_accel((enum accel_axis)(SURGE));
-		ahbias += ahrs_accel((enum accel_axis)(SWAY));
-	}
-	afbias /= 100.0;
-	ahbias /= 100.0;
+	// Current state represents location, while desired state holds destination.
+	float current[DOF] = { 0.0f };
+	float desired[DOF] = { 0.0f };
 
 	// Initial time, helps compute time difference.
 	uint32_t ktime = micros();
@@ -68,7 +52,7 @@ void run()
 
 			// Return accelerometer bias. 
 			if (c == 'b')
-				Serial << _FLOAT(afbias, 6) << ' ' << _FLOAT(ahbias, 6) << '\n';
+				Serial << _FLOAT(kalman.afbias, 6) << ' ' << _FLOAT(kalman.ahbias, 6) << '\n';
 
 			// Return Kalman filter state and covariance.
 			else if (c == 'k')
@@ -119,7 +103,7 @@ void run()
 		
 		// Kalman filter removes noise from measurements and estimates the new
 		// state (linear).
-		ktime = kalman(state, covar, ktime);
+		ktime = kalman.compute(state, covar, ktime);
 		
 		// Compute rest of the DOF.
 		current[F] = state[0];

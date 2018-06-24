@@ -5,7 +5,7 @@
 #include "config.h"
 #include "pid.hpp"
 
-void set_motors(float motors[NUM_THRUSTERS]);
-void compute_motors(float dstate[DOF], float pid[DOF], float p);
+void powers(float motors[NUM_THRUSTERS]);
+uint32_t motors(PID controllers[DOF], float dstate[DOF], float mtr[NUM_MOTORS], float p, uint32_t t);
 
 #endif 

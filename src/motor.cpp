@@ -4,7 +4,7 @@
 #include "util.hpp"
 
 
-void set_motors(float motors[NUM_MOTORS])
+void powers(float motors[NUM_MOTORS])
 {
 	m5_power(VERT_FL, motors[0]);
 	m5_power(VERT_FR, motors[1]);
@@ -17,23 +17,33 @@ void set_motors(float motors[NUM_MOTORS])
 	m5_power_offer_resume();
 }
 
-void compute_motors(float dstate[DOF], float pid[DOF], float p)
+uint32_t motors(PID controllers[DOF], float dstate[DOF], float mtr[NUM_MOTORS], float p, uint32_t t)
 {
+	// Calculate time difference since last iteration.
+	uint32_t temp = micros();
+	float dt = (temp - t)/(float)(1000000);
+
+	// Calculate PID values.
+	float pid[DOF] = { 0.0f };
+	for (int i = 0; i < DOF; i++)
+		pid[i] = controllers[i].calculate(dstate[i], dt, 0.25);
+
 	// Default motors to 0.
-	float motors[NUM_MOTORS];
 	for (int i = 0; i < NUM_MOTORS; i++)
-		motors[i] = 0.0f;
+		mtr[i] = 0.0f;
 
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
-			motors[i] += p * pid[j] * ORIENTATION[i][j];
-	if (p > 0.01)
+			mtr[i] += p * pid[j] * ORIENTATION[i][j];
+	if (p > 0.01f)
 	{
-		motors[0] += 0.15f;
-		motors[1] -= 0.15f;
-		motors[2] -= 0.15f;
-		motors[3] += 0.15f;
+		mtr[0] += 0.15f;
+		mtr[1] -= 0.15f;
+		mtr[2] -= 0.15f;
+		mtr[3] += 0.15f;
 	}
-	set_motors(motors);
+	powers(mtr);
+
+	return temp;
 }

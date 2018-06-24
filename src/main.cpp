@@ -16,10 +16,15 @@ void run()
 
 	// Initial motor strength at 0.
 	float p = 0.0f;
+	float mtr[NUM_MOTORS] = { 0.0f };
+	Serial << _FLOAT(mtr[0], 6) << ' ' << _FLOAT(mtr[1], 6) << ' ' << 
+		_FLOAT(mtr[2], 6) << ' ' << _FLOAT(mtr[3], 6) << ' ' <<
+		_FLOAT(mtr[4], 6) << ' ' << _FLOAT(mtr[5], 6) << ' ' << 
+		_FLOAT(mtr[6], 6) << ' ' << _FLOAT(mtr[7], 6) << '\n';
 
 	// Current state represents location, while desired state holds destination.
-	float *current = new float[DOF];
-	float *desired = new float[DOF];
+	float current[DOF] = { 0.0f };
+	float desired[DOF] = { 0.0f };
 
 	// Kalman filter initial state and error covariance.
 	float state[N] = {
@@ -33,7 +38,7 @@ void run()
 		0.000, 0.000, 0.000, 0.000, 1.000, 0.000,
 		0.000, 0.000, 0.000, 0.000, 0.000, 1.000,
 	};
-	
+
 	// Compute initial bias from the accelerometer.
 	for (int i = 0; i < 100; i++)
 	{
@@ -52,6 +57,12 @@ void run()
 
 	// Initial time, helps compute time difference.
 	uint32_t ktime = micros();
+	uint32_t mtime = micros();
+
+	// Start PID controllers for each DOF.
+	PID controllers[DOF];
+	for (int i = 0; i < DOF; i++)
+		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
 
 	while (true)
 	{
@@ -75,7 +86,7 @@ void run()
 					_FLOAT(state[2], 6) << ' ' << _FLOAT(state[3], 6) << ' ' <<
 					_FLOAT(state[4], 6) << ' ' << _FLOAT(state[5], 6) << '\n';
 			}
-			
+
 			// Return current state.
 			else if (c == 'c')
 			{
@@ -95,10 +106,10 @@ void run()
 			// Return motor settings.
 			else if (c == 'm')
 			{
-				Serial << _FLOAT(m[0], 6) << ' ' << _FLOAT(m[1], 6) << ' ' << 
-					_FLOAT(m[2], 6) << ' ' << _FLOAT(m[3], 6) << ' ' <<
-					_FLOAT(m[4], 6) << ' ' << _FLOAT(m[5], 6) << ' ';
-					_FLOAT(m[6], 6) << ' ' << _FLOAT(m[7], 6) << '\n';
+				Serial << _FLOAT(mtr[0], 6) << ' ' << _FLOAT(mtr[1], 6) << ' ' << 
+					_FLOAT(mtr[2], 6) << ' ' << _FLOAT(mtr[3], 6) << ' ' <<
+					_FLOAT(mtr[4], 6) << ' ' << _FLOAT(mtr[5], 6) << ' ' << 
+					_FLOAT(mtr[6], 6) << ' ' << _FLOAT(mtr[7], 6) << '\n';
 			}
 
 			// Receive new power setting.
@@ -122,6 +133,14 @@ void run()
 		current[Y] = ahrs_att((enum att_axis) (YAW));
 		current[P] = ahrs_att((enum att_axis) (PITCH));
 		current[R] = ahrs_att((enum att_axis) (ROLL));
+
+		// Compute state difference.
+		float dstate[DOF] = { 0.0f };
+		for (int i = 0; i < BODY_DOF; i++)
+			dstate[i] = desired[i] - current[i];
+
+		// Compute PID within motors and set thrust.
+		mtime = motors(controllers, dstate, mtr, p, mtime);
 	}
 }
 

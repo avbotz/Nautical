@@ -20,7 +20,6 @@ float PID::calculate(float error, float dt, float min)
 	float dir = 1.0;
 	if (output < 0) dir = -1.0;
 
-	// float out = dir * limit(output*dir, 0.25, 2);
 	float out = limit(limit(output, -1.5f, 1.5f), min);
 	return out;
 }

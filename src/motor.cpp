@@ -28,20 +28,40 @@ uint32_t motors(PID *controllers, float *dstate, float *mtr, float p, uint32_t t
 	for (int i = 0; i < DOF; i++)
 		pid[i] = controllers[i].calculate(dstate[i], dt, 0.25);
 
-	// Default motors to 0.
-	for (int i = 0; i < NUM_MOTORS; i++)
-		mtr[i] = 0.0f;
+	/*
+	// Default vert motors to 0.15 if power is on.
+	for (int i = 0; i < 4; i++)
+		mtr[i] = p < 0.01f ? 0.0f : 0.15f;
+	*/
 
+	// Default body motors to 0.
+	for (int i = 0; i < 8; i++)
+	{
+		if (p < 0.01f)
+			mtr[i] = 0.0f;
+		else 
+		{
+			if (i == 0)
+				mtr[i] = 0.15f;
+			if (i == 1)
+				mtr[i] = -0.15f;
+			if (i == 2)
+				mtr[i] = -0.15f;
+			if (i == 3)
+				mtr[i] = 0.15f;
+			if (i > 3)
+				mtr[i] = 0.0f;
+		}
+	}
+	
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
-		for (int j = 0; j < DOF; j++) 
-			mtr[i] += p * pid[j] * ORIENTATION[i][j];
-	if (p > 0.01f)
 	{
-		mtr[0] += 0.15f;
-		mtr[1] -= 0.15f;
-		mtr[2] -= 0.15f;
-		mtr[3] += 0.15f;
+		for (int j = 0; j < DOF; j++) 
+		{
+			float thrust = p * pid[j] * ORIENTATION[i][j];
+			mtr[i] += p * pid[j] * ORIENTATION[i][j];
+		}
 	}
 	powers(mtr);
 

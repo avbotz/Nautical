@@ -63,7 +63,6 @@ void run()
 	while (true)
 	{
 		// Important, otherwise data is sent too fast.
-		delay(10);
 		ahrs_att_update();
 
 		// Check for user input.
@@ -121,11 +120,11 @@ void run()
 				for (int i = 0; i < DOF; i++)
 					desired[i] = Serial.parseFloat();
 		}
-
+		
 		// Kalman filter removes noise from measurements and estimates the new
 		// state (linear).
 		ktime = kalman(state, covar, ktime);
-
+		
 		// Compute rest of the DOF.
 		current[F] = state[0];
 		current[H] = state[2];

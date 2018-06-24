@@ -75,6 +75,40 @@ void run()
 					_FLOAT(state[2], 6) << ' ' << _FLOAT(state[3], 6) << ' ' <<
 					_FLOAT(state[4], 6) << ' ' << _FLOAT(state[5], 6) << '\n';
 			}
+			
+			// Return current state.
+			else if (c == 'c')
+			{
+				Serial << _FLOAT(current[0], 6) << ' ' << _FLOAT(current[1], 6) << ' ' << 
+					_FLOAT(current[2], 6) << ' ' << _FLOAT(current[3], 6) << ' ' <<
+					_FLOAT(current[4], 6) << ' ' << _FLOAT(current[5], 6) << '\n';
+			}
+
+			// Return desired state.
+			else if (c == 'd')
+			{
+				Serial << _FLOAT(desired[0], 6) << ' ' << _FLOAT(desired[1], 6) << ' ' << 
+					_FLOAT(desired[2], 6) << ' ' << _FLOAT(desired[3], 6) << ' ' <<
+					_FLOAT(desired[4], 6) << ' ' << _FLOAT(desired[5], 6) << '\n';
+			}
+
+			// Return motor settings.
+			else if (c == 'm')
+			{
+				Serial << _FLOAT(m[0], 6) << ' ' << _FLOAT(m[1], 6) << ' ' << 
+					_FLOAT(m[2], 6) << ' ' << _FLOAT(m[3], 6) << ' ' <<
+					_FLOAT(m[4], 6) << ' ' << _FLOAT(m[5], 6) << ' ';
+					_FLOAT(m[6], 6) << ' ' << _FLOAT(m[7], 6) << '\n';
+			}
+
+			// Receive new power setting.
+			else if (c == 'p')
+				p = Serial.parseFloat();
+
+			// Receive new desired state.
+			else if (c == 's')
+				for (int i = 0; i < DOF; i++)
+					desired[i] = Serial.parseFloat();
 		}
 
 		// Kalman filter removes noise from measurements and estimates the new

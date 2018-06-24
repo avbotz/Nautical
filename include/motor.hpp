@@ -5,7 +5,6 @@
 #include "config.h"
 #include "pid.hpp"
 
-void set_motor(int id, float p);
 void set_motors(float motors[NUM_THRUSTERS]);
 void compute_motors(float dstate[DOF], float pid[DOF], float p);
 

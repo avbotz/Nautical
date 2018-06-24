@@ -4,12 +4,6 @@
 #include "util.hpp"
 
 
-void set_motor(int id, float k)
-{
-	m5_power((enum thruster) id, k);
-	m5_power_offer_resume();
-}
-
 void set_motors(float motors[NUM_MOTORS])
 {
 	m5_power(VERT_FL, motors[0]);

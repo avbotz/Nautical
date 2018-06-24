@@ -24,18 +24,18 @@ static const int NUM_MOTORS = 8;
 /*
  * Motor Orientation Configuration.
  * Rows = motors, Columns = directions, Values = weights.
- * 1 means clockwise, -1 means counterclockwise, 0 means not used.
+ * 1 means clockwise, -1 means counterclockwise, 0.00 means not used.
  */
-static const int ORIENTATION[8][6] = 
+static const float ORIENTATION[8][6] = 
 {
-	{ 0, 0,	1, 0, 1, -1 },
-	{ 0, 0, -1, 0, -1, -1 },
-	{ 0, 0, -1,	0,  1, 1 },
-	{ 0, 0,	1, 0, -1, 1 },
-	{ 1, 1, 0, 1, 0, 0 },
-	{ -1, 1, 0,	1, 0, 0 },
-	{ -1, 1, 0,	-1, 0, 0 }, 
-	{ 1, 1, 0, -1, 0, 0 }
+	{ 0.00, 0.00, 1.00, 0.00, 1.00, -1.0 },
+	{ 0.00, 0.00, -1.0, 0.00, -1.0, -1.0 },
+	{ 0.00, 0.00, -1.0,	0.00, 1.00, 1.00 },
+	{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 },
+	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },
+	{ -1.0, 1.00, 0.00,	1.00, 0.00, 0.00 },
+	{ -1.0, 1.00, 0.00,	-1.0, 0.00, 0.00 }, 
+	{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 }
 };
 
 /*

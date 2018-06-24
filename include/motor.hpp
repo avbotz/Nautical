@@ -5,7 +5,15 @@
 #include "config.h"
 #include "pid.hpp"
 
-void powers(float *motors);
-uint32_t motors(PID *controllers, float *dstate, float *mtr, float p, uint32_t t);
+struct Motors
+{
+	PID controllers[DOF];
+	float thrust[NUM_MOTORS];
+	float p;
+	Motors();
+
+	void power();
+	uint32_t run(float *dstate, uint32_t t);
+};
 
 #endif 

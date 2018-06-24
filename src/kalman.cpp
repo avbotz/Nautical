@@ -60,8 +60,8 @@ uint32_t kalman(float *state, float *covar, uint32_t t)
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
 	float *m = new float[M];
-	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - afbias;
-	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - ahbias;
+	m[0] = ahrs_accel((enum accel_axis)(SURGE));
+	m[1] = ahrs_accel((enum accel_axis)(SWAY));
 	m[0] = m[0] < 0.05 ? 0.0 : m[0];
 	m[1] = m[1] < 0.05 ? 0.0 : m[1];
 

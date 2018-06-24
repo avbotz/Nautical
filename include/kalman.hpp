@@ -2,13 +2,6 @@
 #define KALMAN_HPP
 
 /*
- * Initial bias assumes that sub starts at 0 accleration. This means that all
- * accelerations are relative to the initial state.
- */
-static float afbias;
-static float ahbias;
-
-/*
  * N represents the number of elements in the state, while M represents the
  * number of sensors.
  */

@@ -4,20 +4,28 @@
 #include "util.hpp"
 
 
-void powers(float *motors)
+Motors::Motors()
 {
-	m5_power(VERT_FL, motors[0]);
-	m5_power(VERT_FR, motors[1]);
-	m5_power(VERT_BL, motors[2]);
-	m5_power(VERT_BR, motors[3]);
-	m5_power(SURGE_FL, motors[4]);
-	m5_power(SURGE_FR, motors[5]);
-	m5_power(SURGE_BL, motors[6]);
-	m5_power(SURGE_BR, motors[7]);
+	for (int i = 0; i < NUM_MOTORS; i++)
+		thrust[i] = 0.0f;
+	for (int i = 0; i < DOF; i++)
+		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
+}
+
+void Motors::power()
+{
+	m5_power(VERT_FL, thrust[0]);
+	m5_power(VERT_FR, thrust[1]);
+	m5_power(VERT_BL, thrust[2]);
+	m5_power(VERT_BR, thrust[3]);
+	m5_power(SURGE_FL, thrust[4]);
+	m5_power(SURGE_FR, thrust[5]);
+	m5_power(SURGE_BL, thrust[6]);
+	m5_power(SURGE_BR, thrust[7]);
 	m5_power_offer_resume();
 }
 
-uint32_t motors(PID *controllers, float *dstate, float *mtr, float p, uint32_t t)
+uint32_t Motors::run(float *dstate, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
@@ -28,29 +36,23 @@ uint32_t motors(PID *controllers, float *dstate, float *mtr, float p, uint32_t t
 	for (int i = 0; i < DOF; i++)
 		pid[i] = controllers[i].calculate(dstate[i], dt, 0.25);
 
-	/*
-	// Default vert motors to 0.15 if power is on.
-	for (int i = 0; i < 4; i++)
-		mtr[i] = p < 0.01f ? 0.0f : 0.15f;
-	*/
-
 	// Default body motors to 0.
 	for (int i = 0; i < 8; i++)
 	{
 		if (p < 0.01f)
-			mtr[i] = 0.0f;
+			thrust[i] = 0.0f;
 		else 
 		{
 			if (i == 0)
-				mtr[i] = 0.15f;
+				thrust[i] = 0.15f;
 			if (i == 1)
-				mtr[i] = -0.15f;
+				thrust[i] = -0.15f;
 			if (i == 2)
-				mtr[i] = -0.15f;
+				thrust[i] = -0.15f;
 			if (i == 3)
-				mtr[i] = 0.15f;
+				thrust[i] = 0.15f;
 			if (i > 3)
-				mtr[i] = 0.0f;
+				thrust[i] = 0.0f;
 		}
 	}
 	
@@ -59,11 +61,10 @@ uint32_t motors(PID *controllers, float *dstate, float *mtr, float p, uint32_t t
 	{
 		for (int j = 0; j < DOF; j++) 
 		{
-			float thrust = p * pid[j] * ORIENTATION[i][j];
-			mtr[i] += p * pid[j] * ORIENTATION[i][j];
+			thrust[i] += p * pid[j] * ORIENTATION[i][j];
 		}
 	}
-	powers(mtr);
+	power();
 
 	return temp;
 }

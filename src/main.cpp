@@ -14,9 +14,9 @@ void run()
 	// Start IO between Nautical and hardware.
 	io();
 
-	// Initial motor strength at 0.
-	float p = 0.0f;
-	float mtr[NUM_MOTORS] = { 0.0f };
+	// Setup motors.
+	Motors motors;
+	motors.p = 0.0f;
 
 	// Current state represents location, while desired state holds destination.
 	float current[DOF] = { 0.0f };
@@ -36,6 +36,7 @@ void run()
 	};
 
 	// Compute initial bias from the accelerometer.
+	float afbias=0.0, ahbias=0.0;
 	for (int i = 0; i < 100; i++)
 	{
 		delay(1);
@@ -54,11 +55,6 @@ void run()
 	// Initial time, helps compute time difference.
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
-
-	// Start PID controllers for each DOF.
-	PID controllers[DOF];
-	for (int i = 0; i < DOF; i++)
-		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
 
 	while (true)
 	{
@@ -101,19 +97,19 @@ void run()
 			// Return motor settings.
 			else if (c == 'm')
 			{
-				Serial << _FLOAT(mtr[0], 6) << ' ' << _FLOAT(mtr[1], 6) << ' ' << 
-					_FLOAT(mtr[2], 6) << ' ' << _FLOAT(mtr[3], 6) << ' ' <<
-					_FLOAT(mtr[4], 6) << ' ' << _FLOAT(mtr[5], 6) << ' ' << 
-					_FLOAT(mtr[6], 6) << ' ' << _FLOAT(mtr[7], 6) << '\n';
+				Serial << _FLOAT(motors.thrust[0], 6) << ' ' << _FLOAT(motors.thrust[1], 6) << ' ' << 
+					_FLOAT(motors.thrust[2], 6) << ' ' << _FLOAT(motors.thrust[3], 6) << ' ' <<
+					_FLOAT(motors.thrust[4], 6) << ' ' << _FLOAT(motors.thrust[5], 6) << ' ' << 
+					_FLOAT(motors.thrust[6], 6) << ' ' << _FLOAT(motors.thrust[7], 6) << '\n';
 			}
 
 			// Return power setting.
 			else if (c == 'o')
-				Serial << p << '\n';
+				Serial << motors.p << '\n';
 
 			// Receive new power setting.
 			else if (c == 'p')
-				p = Serial.parseFloat();
+				motors.p = Serial.parseFloat();
 
 			// Receive new desired state.
 			else if (c == 's')
@@ -139,7 +135,7 @@ void run()
 			dstate[i] = desired[i] - current[i];
 
 		// Compute PID within motors and set thrust.
-		mtime = motors(controllers, dstate, mtr, p, mtime);
+		mtime = motors.run(dstate, mtime);
 	}
 }
 

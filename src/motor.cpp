@@ -4,7 +4,7 @@
 #include "util.hpp"
 
 
-void powers(float motors[NUM_MOTORS])
+void powers(float *motors)
 {
 	m5_power(VERT_FL, motors[0]);
 	m5_power(VERT_FR, motors[1]);
@@ -17,7 +17,7 @@ void powers(float motors[NUM_MOTORS])
 	m5_power_offer_resume();
 }
 
-uint32_t motors(PID controllers[DOF], float dstate[DOF], float mtr[NUM_MOTORS], float p, uint32_t t)
+uint32_t motors(PID *controllers, float *dstate, float *mtr, float p, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();

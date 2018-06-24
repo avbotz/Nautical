@@ -17,10 +17,6 @@ void run()
 	// Initial motor strength at 0.
 	float p = 0.0f;
 	float mtr[NUM_MOTORS] = { 0.0f };
-	Serial << _FLOAT(mtr[0], 6) << ' ' << _FLOAT(mtr[1], 6) << ' ' << 
-		_FLOAT(mtr[2], 6) << ' ' << _FLOAT(mtr[3], 6) << ' ' <<
-		_FLOAT(mtr[4], 6) << ' ' << _FLOAT(mtr[5], 6) << ' ' << 
-		_FLOAT(mtr[6], 6) << ' ' << _FLOAT(mtr[7], 6) << '\n';
 
 	// Current state represents location, while desired state holds destination.
 	float current[DOF] = { 0.0f };
@@ -75,7 +71,7 @@ void run()
 		{
 			char c = Serial.read();
 
-			// Return accelerometer data. 
+			// Return accelerometer bias. 
 			if (c == 'b')
 				Serial << _FLOAT(afbias, 6) << ' ' << _FLOAT(ahbias, 6) << '\n';
 
@@ -111,6 +107,10 @@ void run()
 					_FLOAT(mtr[4], 6) << ' ' << _FLOAT(mtr[5], 6) << ' ' << 
 					_FLOAT(mtr[6], 6) << ' ' << _FLOAT(mtr[7], 6) << '\n';
 			}
+
+			// Return power setting.
+			else if (c == 'o')
+				Serial << p << '\n';
 
 			// Receive new power setting.
 			else if (c == 'p')

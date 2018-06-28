@@ -49,12 +49,8 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
-	{
 		for (int j = 0; j < DOF; j++) 
-		{
 			thrust[i] += p * pid[j] * ORIENTATION[i][j];
-		}
-	}
 	power();
 
 	return temp;

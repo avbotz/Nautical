@@ -116,7 +116,7 @@ void run()
 		
 		// Compute rest of the DOF.
 		current[F] = state[0];
-		current[H] = state[2];
+		current[H] = state[3];
 		current[V] = (analogRead(NPIN) - 230.0)/65.0;
 		current[Y] = ahrs_att((enum att_axis) (YAW));
 		current[P] = ahrs_att((enum att_axis) (PITCH));

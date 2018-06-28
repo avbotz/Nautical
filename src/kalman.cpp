@@ -23,7 +23,6 @@ void Kalman::bias()
 	}
 	afbias /= 100.0;
 	ahbias /= 100.0;
-
 }
 
 uint32_t Kalman::compute(float *state, float *covar, uint32_t t)

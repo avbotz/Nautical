@@ -54,6 +54,10 @@ void run()
 			if (c == 'b')
 				Serial << _FLOAT(kalman.afbias, 6) << ' ' << _FLOAT(kalman.ahbias, 6) << '\n';
 
+			// Return original measurements.
+			if (c == 'm')
+				Serial << _FLOAT(kalman.m_orig[0], 6) << ' ' << _FLOAT(kalman.m_orig[1], 6) << '\n';
+
 			// Return Kalman filter state and covariance.
 			else if (c == 'k')
 			{
@@ -78,8 +82,8 @@ void run()
 					_FLOAT(desired[4], 6) << ' ' << _FLOAT(desired[5], 6) << '\n';
 			}
 
-			// Return motor settings.
-			else if (c == 'm')
+			// Return thrust settings.
+			else if (c == 't')
 			{
 				Serial << _FLOAT(motors.thrust[0], 6) << ' ' << _FLOAT(motors.thrust[1], 6) << ' ' << 
 					_FLOAT(motors.thrust[2], 6) << ' ' << _FLOAT(motors.thrust[3], 6) << ' ' <<

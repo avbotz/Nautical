@@ -52,7 +52,7 @@ void run()
 
 			// Return accelerometer bias. 
 			if (c == 'b')
-				Serial << _FLOAT(kalman.afbias, 6) << ' ' << _FLOAT(kalman.ahbias, 6) << '\n';
+				Serial << _FLOAT(kalman.m_bias[0], 6) << ' ' << _FLOAT(kalman.m_bias[1], 6) << '\n';
 
 			// Return original measurements.
 			if (c == 'm')

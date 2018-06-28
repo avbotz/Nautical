@@ -5,24 +5,32 @@
 #include "kalman.hpp"
 
 
+Kalman::Kalman()
+{
+	this->bias();
+	this->skip = 100;
+	this->iter = 100;
+}
+
 void Kalman::bias()
 {
 	// Compute initial bias from the accelerometer.
-	afbias=0.0, ahbias=0.0;
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < M; i++)
+		m_bias[i] = 0.0;
+	for (int i = 0; i < skip; i++)
 	{
 		delay(1);
 		ahrs_att_update();
 	}
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iter; i++)
 	{
 		delay(1);
 		ahrs_att_update();
-		afbias += ahrs_accel((enum accel_axis)(SURGE));
-		ahbias += ahrs_accel((enum accel_axis)(SWAY));
+		m_bias[0] += ahrs_accel((enum accel_axis)(SURGE));
+		m_bias[1] += ahrs_accel((enum accel_axis)(SWAY));
 	}
-	afbias /= 100.0;
-	ahbias /= 100.0;
+	m_bias[0] /= (float)iter;
+	m_bias[1] /= (float)iter;
 }
 
 uint32_t Kalman::compute(float *state, float *covar, uint32_t t)
@@ -80,8 +88,8 @@ uint32_t Kalman::compute(float *state, float *covar, uint32_t t)
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
 	float *m = new float[M];
-	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - afbias;
-	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - ahbias;
+	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - m_bias[0];
+	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - m_bias[1];
 	for (int i = 0; i < M; i++)
 		m_orig[i] = m[i];
 	m[0] = m[0] < 0.05 ? 0.0 : m[0];

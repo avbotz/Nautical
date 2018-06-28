@@ -38,8 +38,10 @@ static float Rk[M*M] = {
 
 struct Kalman
 {
+	int skip, iter;
 	float m_orig[M];
-	float afbias, ahbias;
+	float m_bias[M];
+	Kalman();
 
 	void bias();
 	uint32_t compute(float *state, float *covar, uint32_t t);

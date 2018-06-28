@@ -38,6 +38,7 @@ static float Rk[M*M] = {
 
 struct Kalman
 {
+	float m_orig[M];
 	float afbias, ahbias;
 
 	void bias();

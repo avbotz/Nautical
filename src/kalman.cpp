@@ -82,6 +82,8 @@ uint32_t Kalman::compute(float *state, float *covar, uint32_t t)
 	float *m = new float[M];
 	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - afbias;
 	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - ahbias;
+	for (int i = 0; i < M; i++)
+		m_orig[i] = m[i];
 	m[0] = m[0] < 0.05 ? 0.0 : m[0];
 	m[1] = m[1] < 0.05 ? 0.0 : m[1];
 

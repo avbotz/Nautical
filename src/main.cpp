@@ -36,6 +36,9 @@ void run()
 	float current[DOF] = { 0.0f };
 	float desired[DOF] = { 0.0f };
 
+	// Hold difference between the states.
+	float dstate[DOF] = { 0.0f };
+
 	// Initial time, helps compute time difference.
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
@@ -49,14 +52,27 @@ void run()
 		if (Serial.available() > 0)
 		{
 			char c = Serial.read();
+		
+			// Return alive.
+			if (c == 'a')
+				Serial << alive() << '\n';
 
 			// Return accelerometer bias. 
-			if (c == 'b')
+			else if (c == 'b')
 				Serial << _FLOAT(kalman.m_bias[0], 6) << ' ' << _FLOAT(kalman.m_bias[1], 6) << '\n';
 
 			// Return original measurements.
-			if (c == 'm')
+			else if (c == 'm')
 				Serial << _FLOAT(kalman.m_orig[0], 6) << ' ' << _FLOAT(kalman.m_orig[1], 6) << '\n';
+
+			/*
+			else if (c == 'y'){
+				digitalWrite(49, LOW);
+			}
+			else if (c == 'l'){
+				digitalWrite(49, HIGH);
+			}
+			*/
 
 			// Return Kalman filter state and covariance.
 			else if (c == 'k')
@@ -82,6 +98,14 @@ void run()
 					_FLOAT(desired[4], 6) << ' ' << _FLOAT(desired[5], 6) << '\n';
 			}
 
+			// Return state difference.
+			else if (c == 'e')
+			{
+				Serial << _FLOAT(dstate[0], 6) << ' ' << _FLOAT(dstate[1], 6) << ' ' << 
+					_FLOAT(dstate[2], 6) << ' ' << _FLOAT(dstate[3], 6) << ' ' <<
+					_FLOAT(dstate[4], 6) << ' ' << _FLOAT(dstate[5], 6) << '\n';
+			}
+			
 			// Return thrust settings.
 			else if (c == 't')
 			{
@@ -116,8 +140,8 @@ void run()
 		
 		// Kalman filter removes noise from measurements and estimates the new
 		// state (linear).
-		ktime = kalman.compute(state, covar, ktime);
-		
+		ktime = kalman.compute(motors, state, covar, ktime);
+
 		// Compute rest of the DOF.
 		current[F] = state[0];
 		current[H] = state[3];
@@ -127,9 +151,11 @@ void run()
 		current[R] = ahrs_att((enum att_axis) (ROLL));
 
 		// Compute state difference.
-		float dstate[DOF] = { 0.0f };
 		for (int i = 0; i < BODY_DOF; i++)
 			dstate[i] = desired[i] - current[i];
+		// for (int i = BODY_DOF; i < GYRO_DOF; i++)
+		//	dstate[i] = angle_difference(desired[i], current[i]);
+		dstate[Y] = angle_difference(desired[Y], current[Y]);
 
 		// Compute PID within motors and set thrust.
 		mtime = motors.run(dstate, mtime);

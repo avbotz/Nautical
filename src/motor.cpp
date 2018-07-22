@@ -9,6 +9,8 @@ Motors::Motors()
 	for (int i = 0; i < NUM_MOTORS; i++)
 		thrust[i] = 0.0f;
 	for (int i = 0; i < DOF; i++)
+		pid[i] = 0.0f;
+	for (int i = 0; i < DOF; i++)
 		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
 }
 
@@ -32,12 +34,11 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 	float dt = (temp - t)/(float)(1000000);
 
 	// Calculate PID values.
-	float pid[DOF] = { 0.0f };
 	for (int i = 0; i < DOF; i++)
-		pid[i] = controllers[i].calculate(dstate[i], dt, 0.25);
+		pid[i] = controllers[i].calculate(dstate[i], dt, 0.00);
 
 	// Default body motors to 0.
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < NUM_MOTORS; i++)
 		thrust[i] = 0.0f;
 	if (p > 0.01f)
 	{

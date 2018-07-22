@@ -24,6 +24,9 @@ void io()
 	// Init communication with depth
 	pinMode(NPIN, INPUT);
 
+	pinMode(49, OUTPUT);
+	digitalWrite(49, HIGH); 
+
 	// Init communication with the M5
 	io_m5_init("");
 	io_m5_trans_set(m5_power_trans);	

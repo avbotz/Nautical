@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "ahrs/ahrs.h"
+#include "streaming.h"
 #include "config.h"
 #include "matrix.h"
 #include "kalman.hpp"
@@ -7,9 +8,9 @@
 
 Kalman::Kalman()
 {
+	this->skip = 1000;
+	this->iter = 1000;
 	this->bias();
-	this->skip = 100;
-	this->iter = 100;
 }
 
 void Kalman::bias()
@@ -33,13 +34,14 @@ void Kalman::bias()
 	m_bias[1] /= (float)iter;
 }
 
-uint32_t Kalman::compute(float *state, float *covar, uint32_t t)
+uint32_t Kalman::compute(const Motors &motors, float *state, float *covar, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
 	float dt = (temp - t)/(float)(1000000);
 
 	// Predict new state using model.
+	// X, VX, AX, Y, VY, AY
 	float *a1 = new float[N];
 	float Fk[N*N] = {
 		1, dt, 0, 0, 0, 0,
@@ -92,8 +94,22 @@ uint32_t Kalman::compute(float *state, float *covar, uint32_t t)
 	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - m_bias[1];
 	for (int i = 0; i < M; i++)
 		m_orig[i] = m[i];
-	m[0] = m[0] < 0.05 ? 0.0 : m[0];
-	m[1] = m[1] < 0.05 ? 0.0 : m[1];
+	m[0] = m[0] < 0.01 ? 0.0 : m[0];
+	m[1] = m[1] < 0.01 ? 0.0 : m[1];
+	if (abs(motors.pid[0]*motors.p) < 0.01)
+	{
+		m[0] = 0.0;
+		// state[0] = 0.0;
+		state[1] = 0.0;
+		state[2] = 0.0;
+	}
+	if (abs(motors.pid[1]*motors.p) < 0.01)
+	{
+		m[1] = 0.0;
+		// state[3] = 0.0;
+		state[4] = 0.0;
+		state[5] = 0.0;
+	}
 
 	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];

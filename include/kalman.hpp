@@ -1,6 +1,8 @@
 #ifndef KALMAN_HPP
 #define KALMAN_HPP
 
+#include "motor.hpp"
+
 /*
  * N represents the number of elements in the state, while M represents the
  * number of sensors.
@@ -44,7 +46,7 @@ struct Kalman
 	Kalman();
 
 	void bias();
-	uint32_t compute(float *state, float *covar, uint32_t t);
+	uint32_t compute(const Motors &motors, float *state, float *covar, uint32_t t);
 };
 
 #endif 

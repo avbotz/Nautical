@@ -9,6 +9,7 @@ struct Motors
 {
 	PID controllers[DOF];
 	float thrust[NUM_MOTORS];
+	float pid[DOF];
 	float p;
 	Motors();
 

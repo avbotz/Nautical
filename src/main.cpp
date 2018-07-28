@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <ServoTimer2.h>
 #include "ahrs/ahrs.h"
 #include "streaming.h"
 #include "config.h"
@@ -31,7 +32,12 @@ void run()
 		0.000, 0.000, 0.000, 0.000, 1.000, 0.000,
 		0.000, 0.000, 0.000, 0.000, 0.000, 1.000,
 	};
-
+/*
+    // Setup servos.
+    ServoTimer2 servo1, servo2;
+    servo1.attach(8);
+    servo1.attach(9); 
+*/
 	// Current state represents location, while desired state holds destination.
 	float current[DOF] = { 0.0f };
 	float desired[DOF] = { 0.0f };
@@ -64,15 +70,6 @@ void run()
 			// Return original measurements.
 			else if (c == 'm')
 				Serial << _FLOAT(kalman.m_orig[0], 6) << ' ' << _FLOAT(kalman.m_orig[1], 6) << '\n';
-
-			/*
-			else if (c == 'y'){
-				digitalWrite(49, LOW);
-			}
-			else if (c == 'l'){
-				digitalWrite(49, HIGH);
-			}
-			*/
 
 			// Return Kalman filter state and covariance.
 			else if (c == 'k')
@@ -136,15 +133,25 @@ void run()
 				for (int i = BODY_DOF; i < GYRO_DOF; i++)
 					desired[i] = angle_add(desired[i], Serial.parseFloat());
 			}
-		}
+
+            // Receive desired Arduino positions.
+            else if (c == 'z')
+            {
+                Serial <<"in z\n";
+                int idx = Serial.parseInt();
+                drop(idx);
+            }
+        }
 		
 		// Kalman filter removes noise from measurements and estimates the new
 		// state (linear).
-		ktime = kalman.compute(motors, state, covar, ktime);
+        ktime = kalman.compute(motors, state, covar, ktime);
 
 		// Compute rest of the DOF.
-		current[F] = state[0];
-		current[H] = state[3];
+		// current[F] = 0.0; // state[0];
+		// current[H] = 0.0; // state[3];
+        current[F] = state[0];
+        current[H] = state[3];
 		current[V] = (analogRead(NPIN) - 230.0)/65.0;
 		current[Y] = ahrs_att((enum att_axis) (YAW));
 		current[P] = ahrs_att((enum att_axis) (PITCH));
@@ -164,7 +171,7 @@ void run()
 
 void setup()
 {
-	Serial.begin(9600);
+	Serial.begin(115200);
 	run();
 }
 void loop() {}

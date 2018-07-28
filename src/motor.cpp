@@ -35,7 +35,7 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 
 	// Calculate PID values.
 	for (int i = 0; i < DOF; i++)
-		pid[i] = controllers[i].calculate(dstate[i], dt, 0.00);
+		pid[i] = controllers[i].calculate(dstate[i], dt, 0.0);
 
 	// Default body motors to 0.
 	for (int i = 0; i < NUM_MOTORS; i++)

@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-void measure_voltage(){
+void print_voltage(){
   #define NUM_SAMPLES 10 //Number of samples per measurment (higher = bettery accuracy but longer time)
   int sumB1 = 0; //used for algebra
   int purgeAnalog = 0;
@@ -22,3 +22,21 @@ void measure_voltage(){
   Serial.println(voltageB1);
 //  Serial.println(((float)sumB1/(float)NUM_SAMPLES)/1024*5);//CALLIRATION / DEBUG
 }
+
+float measure_voltage() {
+    uint8_t num_samples = 10;
+    float cal_constant = 23.88349514563107;
+    float voltage = 0.0f;
+    
+    analogRead(A1);
+    
+    for (size_t i = 0; i < num_samples; i++) {
+        voltage += analogRead(A1);
+        delay(1);
+    }
+
+    voltage = ((voltage / num_samples*5.0) / 1024.0) * cal_constant;
+    return voltage;
+}
+
+

@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <ServoTimer2.h>
 #include "ahrs/ahrs.h"
+#include "dvl/dvl.h"
 #include "streaming.h"
 #include "config.h"
 #include "kalman.hpp"
@@ -46,8 +47,11 @@ void run()
 
 	while (true)
 	{
-		// Important, otherwise data is sent too fast.
+		// Ask AHRS to update. 
 		ahrs_att_update();
+
+		// Ask DVL to update. 
+		dvl_data_update();
 
 		// Check for user input.
 		if (Serial.available() > 0)

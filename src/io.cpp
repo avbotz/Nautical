@@ -1,15 +1,17 @@
 #include <Arduino.h>
 #include "streaming.h"
-
 #include "ahrs/ahrs.h"
 #include "ahrs/io_ahrs.h"
 #include "m5/io_m5.h"
 #include "m5/m5.h"
+#include "dvl/io_dvl.h"
+#include "dvl/dvl.h"
 #include "macrodef.h"
 #include "io.hpp"
 #include "motor.hpp"
 
 ServoTimer2 dropper1, dropper2;
+
 
 void io()
 {

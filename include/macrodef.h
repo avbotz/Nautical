@@ -34,4 +34,19 @@
 // CC_NXN(USCR, USART_NUM, A, ) <--- becomes 'USCR2A'
 #define CC_NXN(a, b, c, dum) CC_NNN(a ## dum, b, c ##dum)
 
+// Sets the `bit`-th bit of `reg` to 1. (beginning from LSB). eg:
+// Pretend EXAMPLE_REG is a 1-byte register, initialized as 0000 0000.
+// Then SET_BIT_HIGH(EXAMPLE_REG, 3) will set the 3rd bit from LSB to 1, i.e. 0000 0100.
+// Same goes for the other macros below.
+#define SET_BIT_HIGH(reg, bit) reg |= (1U << bit) 
+
+// Sets the `bit`-th bit of `reg` to 0.
+#define SET_BIT_LOW(reg, bit) reg &= ~(1U << bit)
+
+// Gets the value of the `bit`-th bit of `reg`.
+#define BIT_VALUE(reg, bit) reg & (1U << bit)
+
+// Toggles `bit`-th bit of `reg`.
+#define TOGGLE_BIT(reg, bit) reg ^= (1U << bit)
+
 #endif

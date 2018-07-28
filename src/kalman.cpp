@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "ahrs/ahrs.h"
+#include "dvl/dvl.h"
 #include "streaming.h"
 #include "config.h"
 #include "matrix.h"
@@ -41,7 +42,7 @@ uint32_t Kalman::compute(const Motors &motors, float *state, float *covar, uint3
 	float dt = (temp - t)/(float)(1000000);
 
 	// Predict new state using model.
-	// X, VX, AX, Y, VY, AY
+	// X, VX, AX, Y, VY, AY.
 	float *a1 = new float[N];
 	float Fk[N*N] = {
 		1, dt, 0, 0, 0, 0,
@@ -90,6 +91,7 @@ uint32_t Kalman::compute(const Motors &motors, float *state, float *covar, uint3
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
 	float *m = new float[M];
+	/*
 	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - m_bias[0];
 	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - m_bias[1];
 	for (int i = 0; i < M; i++)
@@ -110,6 +112,9 @@ uint32_t Kalman::compute(const Motors &motors, float *state, float *covar, uint3
 		state[4] = 0.0;
 		state[5] = 0.0;
 	}
+	*/
+	m[0] = dvl_get_forward_vel();
+	m[1] = dvl_get_starboard_vel();
 
 	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];

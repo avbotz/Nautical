@@ -32,12 +32,7 @@ void run()
 		0.000, 0.000, 0.000, 0.000, 1.000, 0.000,
 		0.000, 0.000, 0.000, 0.000, 0.000, 1.000,
 	};
-/*
-    // Setup servos.
-    ServoTimer2 servo1, servo2;
-    servo1.attach(8);
-    servo1.attach(9); 
-*/
+
 	// Current state represents location, while desired state holds destination.
 	float current[DOF] = { 0.0f };
 	float desired[DOF] = { 0.0f };
@@ -137,7 +132,6 @@ void run()
             // Receive desired Arduino positions.
             else if (c == 'z')
             {
-                Serial <<"in z\n";
                 int idx = Serial.parseInt();
                 drop(idx);
             }

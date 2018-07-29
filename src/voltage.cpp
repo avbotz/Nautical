@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-void print_voltage()
+/*void print_voltage() //old code
 {
 #define NUM_SAMPLES 10 //Number of samples per measurment (higher = bettery accuracy but longer time)
 	int sumB1 = 0; //used for algebra
@@ -21,7 +21,7 @@ void print_voltage()
 	voltageB1 = (((float)sumB1 / (float)NUM_SAMPLES * 5.0) / 1024.0)*(float)calibrateB1; //calculating voltage WORKS!!!
 	Serial.print("Battery Both = "); //returning voltages
 	Serial.println(voltageB1);
-}
+}*/
 
 float measure_voltage() 
 {
@@ -37,6 +37,7 @@ float measure_voltage()
 	}
 
 	voltage = ((voltage / num_samples*5.0) / 1024.0) * cal_constant;
+	//voltage = ((voltage / num_samples*5.0) / 1024.0) //calibration
 	return voltage;
 }
 

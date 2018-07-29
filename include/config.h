@@ -1,6 +1,11 @@
 #ifndef CONFIG_H
 #define CONFIG_H 
 
+#define D2R 3.14/180.
+/*
+ * Conversions.
+ */ 
+
 /*
  * Motor ID Configuration.
  * 8 motors on the sub.

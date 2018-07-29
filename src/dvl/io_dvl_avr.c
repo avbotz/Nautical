@@ -36,7 +36,6 @@ static int uart_dvl_getchar(FILE *stream)
     }
     unsigned char const status = CC_XXX(UCSR, NUSART, A);
     unsigned char const data = CC_XXX(UDR, NUSART, );
-
     assert(!(BIT_VALUE(status, CC_XXX(UPE, NUSART, ))));
     if (BIT_VALUE(status, CC_XXX(FE, NUSART, )))
     {

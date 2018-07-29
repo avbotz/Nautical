@@ -175,29 +175,36 @@ void run()
 			pause_time = millis();
 		}
 
-		// Kalman filter removes noise from measurements and estimates the new
-		// state (linear).
-        ktime = kalman.compute(state, covar, current[Y], ktime);
+		// Regular running.
+		if (!pause && alive_state)
+		{
+			// Kalman filter removes noise from measurements and estimates the new
+			// state (linear).
+			ktime = kalman.compute(state, covar, current[Y], ktime);
 
-		// Compute rest of the DOF.
-		// current[F] = 0.0; // state[0];
-		// current[H] = 0.0; // state[3];
-        current[F] = state[0];
-        current[H] = state[3];
-		current[V] = (analogRead(NPIN) - 230.0)/65.0;
-		current[Y] = ahrs_att((enum att_axis) (YAW)) - north;
-		current[P] = ahrs_att((enum att_axis) (PITCH));
-		current[R] = ahrs_att((enum att_axis) (ROLL));
+			// Compute rest of the DOF.
+			// current[F] = 0.0; // state[0];
+			// current[H] = 0.0; // state[3];
+			current[F] = state[0];
+			current[H] = state[3];
+			current[V] = (analogRead(NPIN) - 230.0)/65.0;
+			current[Y] = ahrs_att((enum att_axis) (YAW)) - north;
+			current[P] = ahrs_att((enum att_axis) (PITCH));
+			current[R] = ahrs_att((enum att_axis) (ROLL));
 
-		// Compute state difference.
-		for (int i = 0; i < BODY_DOF; i++)
-			dstate[i] = desired[i] - current[i];
-		// for (int i = BODY_DOF; i < GYRO_DOF; i++)
-		//	dstate[i] = angle_difference(desired[i], current[i]);
-		dstate[Y] = angle_difference(desired[Y], current[Y]);
+			// Compute state difference.
+			float d0 = desired[F] - current[F];
+			float d1 = desired[H] - current[H];
+			dstate[F] = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
+			dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
+			dstate[V] = desired[V] - current[V];
+			dstate[Y] = angle_difference(desired[Y], current[Y]);
+			// for (int i = BODY_DOF; i < GYRO_DOF; i++)
+			//	dstate[i] = angle_difference(desired[i], current[i]);
 
-		// Compute PID within motors and set thrust.
-		mtime = motors.run(dstate, mtime);
+			// Compute PID within motors and set thrust.
+			mtime = motors.run(dstate, mtime);
+		}
 	}
 }
 

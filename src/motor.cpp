@@ -1,6 +1,7 @@
 #include "streaming.h"
 #include "pid.hpp"
 #include "motor.hpp"
+#include "m5/io_m5.h"
 #include "util.hpp"
 
 
@@ -25,6 +26,11 @@ void Motors::power()
 	m5_power(SURGE_BL, thrust[6]);
 	m5_power(SURGE_BR, thrust[7]);
 	m5_power_offer_resume();
+}
+
+void Motors::pause()
+{
+	io_m5_trans_stop();
 }
 
 uint32_t Motors::run(float *dstate, uint32_t t)

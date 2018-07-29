@@ -16,6 +16,16 @@ void run()
 	// Start IO between Nautical and hardware.
 	io();
 
+	// Set north heading to current heading.
+	ahrs_att_update();
+	float north = ahrs_att((enum att_axis) (YAW));
+
+	// Store kill state info. 
+	bool alive_state = false;
+	bool alive_state_prev = false;
+	bool pause = false;
+	uint32_t pause_time;
+
 	// Setup motors.
 	Motors motors;
 	motors.p = 0.0f;
@@ -133,6 +143,10 @@ void run()
 					desired[i] = angle_add(desired[i], Serial.parseFloat());
 			}
 
+			// Reset north heading. 
+			else if (c == 'x')
+				north = ahrs_att((enum att_axis) (YAW));
+
             // Receive desired Arduino positions.
             else if (c == 'z')
             {
@@ -140,10 +154,30 @@ void run()
                 drop(idx);
             }
         }
-		
+
+		// Save previous kill state and read new one.
+		alive_state_prev = alive_state;
+		alive_state = alive();
+
+		// Allow motors to start after pausing.
+		if (pause && millis() - pause_time > PAUSE_TIME)
+			pause = false;
+
+		// Just killed, pause motor communcations.
+		if (alive_state_prev && !alive_state)
+			motors.pause();
+
+		// Just unkilled, allow motors time to restart. 
+		if (!alive_state_prev && alive_state)
+		{
+			north = ahrs_att((enum att_axis) (YAW)); 
+			pause = true;
+			pause_time = millis();
+		}
+
 		// Kalman filter removes noise from measurements and estimates the new
 		// state (linear).
-        ktime = kalman.compute(motors, state, covar, ktime);
+        ktime = kalman.compute(state, covar, current[Y], ktime);
 
 		// Compute rest of the DOF.
 		// current[F] = 0.0; // state[0];
@@ -151,7 +185,7 @@ void run()
         current[F] = state[0];
         current[H] = state[3];
 		current[V] = (analogRead(NPIN) - 230.0)/65.0;
-		current[Y] = ahrs_att((enum att_axis) (YAW));
+		current[Y] = ahrs_att((enum att_axis) (YAW)) - north;
 		current[P] = ahrs_att((enum att_axis) (PITCH));
 		current[R] = ahrs_att((enum att_axis) (ROLL));
 

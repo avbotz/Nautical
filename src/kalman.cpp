@@ -9,9 +9,11 @@
 
 Kalman::Kalman()
 {
+	/*
 	this->skip = 1000;
 	this->iter = 1000;
 	this->bias();
+	*/
 }
 
 void Kalman::bias()
@@ -35,7 +37,7 @@ void Kalman::bias()
 	m_bias[1] /= (float)iter;
 }
 
-uint32_t Kalman::compute(const Motors &motors, float *state, float *covar, uint32_t t)
+uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
@@ -113,8 +115,12 @@ uint32_t Kalman::compute(const Motors &motors, float *state, float *covar, uint3
 		state[5] = 0.0;
 	}
 	*/
-	m[0] = dvl_get_forward_vel();
-	m[1] = dvl_get_starboard_vel();
+	float u = dvl_get_forward_vel();
+	float v = dvl_get_starboard_vel();
+	// m[0] = dvl_get_forward_vel();
+	// m[1] = dvl_get_starboard_vel();
+	m[0] = u*cos(heading) - v*sin(heading);
+	m[1] = u*sin(heading) + v*cos(heading);
 
 	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];

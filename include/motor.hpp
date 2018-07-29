@@ -5,6 +5,8 @@
 #include "config.h"
 #include "pid.hpp"
 
+#define PAUSE_TIME 4500
+
 struct Motors
 {
 	PID controllers[DOF];
@@ -14,6 +16,7 @@ struct Motors
 	Motors();
 
 	void power();
+	void pause();
 	uint32_t run(float *dstate, uint32_t t);
 };
 

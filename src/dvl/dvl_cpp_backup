@@ -16,11 +16,6 @@
 #define VELOCITY_FRAME_ID 0x0358
 #define RANGE_FRAME_ID 0x0458
 
-static bool velocity_good(int32_t const velocity)
-{
-    return (-500000 < velocity && velocity < 500000); //We don't expect our sub to go faster than
-}
-
 static struct dvl_data
 {
     int32_t velocity_starboard;
@@ -49,13 +44,14 @@ int32_t dvl_get_range_to_bottom()
     return dvl_data[io_dvl_tripbuf_get_read_idx()].range_to_bottom;
 }
 
-typedef enum
+static enum
 {
     COMMAND_READY,
     COMMAND_PROCESSING,
     PINGING,
-} cmd_state_t;
+} cmd_state = PINGING;
 
+/*
 typedef enum
 {
     SYNC,
@@ -73,8 +69,6 @@ typedef enum
     RANGE_DATA,
 } rx_state_t;
 
-static volatile cmd_state_t cmd_state = PINGING;
-
 static struct parser_var_t
 {
     rx_state_t rx_state;
@@ -90,6 +84,7 @@ static struct parser_var_t
     uint8_t velocity_up_byte_idx;
     uint8_t range_byte_idx;
 } parser_vars; // Structure that houses parser state variables (I didn't want to declare static variables all over the place)
+*/
 
 static void init_parser()
 {
@@ -100,21 +95,8 @@ static const struct parser_var_t blank;
 
 void reset_parser()
 {
+    parser_vars = blank;
     parser_vars.rx_state = SYNC;
-    parser_vars.datagram_bytecount = 0;
-    parser_vars.num_data_types = 0;
-    parser_vars.offsets[0] = 0;
-    parser_vars.offsets[1] = 0;
-    parser_vars.offsets[2] = 0;
-    parser_vars.offsets[3] = 0;
-    parser_vars.offset_loop_idx = 0;
-    parser_vars.rx_wait_bytecount = 0;
-    parser_vars.offset_wait_idx = 0;
-    parser_vars.frame_id = 0;
-    parser_vars.velocity_sb_byte_idx = 0;
-    parser_vars.velocity_fw_byte_idx = 0;
-    parser_vars.velocity_up_byte_idx = 0;
-    parser_vars.range_byte_idx = 0;
 }
 
 bool dvl_data_update()
@@ -135,36 +117,16 @@ bool dvl_data_update()
     return temp;
 }
 
-int send_command(char *cmd, bool wait)
-{
-    int status = fprintf(io_dvl, cmd);
-    fflush(io_dvl);
-    cmd_state = COMMAND_PROCESSING;
-    if (wait)
-        while (cmd_state != COMMAND_READY)
-        {
-        } // Wait for the DVL to print out welcome message, etc until command prompt is shown.
-    return status;
-}
-
-static void send_break()
-{
-    send_command("===", true);
-}
-
 static bool parse_velocities(unsigned char const c)
 {
-    // Serial.println('\n');
     switch (parser_vars.rx_state)
     {
     case SYNC:; // Semicolon is necessary because if next line is a declaration, C goes REEEEE
-        // Serial.write('a');
         if (c == DATAGRAM_ID)
             parser_vars.rx_state = DATA_ID;
         return false;
 
     case DATA_ID:;
-        // Serial.write('b');
         if (c == HEADER_ID)
             parser_vars.rx_state = SIZE_BYTE_1;
         else
@@ -172,67 +134,46 @@ static bool parse_velocities(unsigned char const c)
         return false;
 
     case SIZE_BYTE_1:;
-        // Serial.write('c');
         parser_vars.datagram_bytecount = (uint16_t)(c);
         parser_vars.rx_state = SIZE_BYTE_2;
         return false;
 
     case SIZE_BYTE_2:;
-        // Serial.write('d');
         parser_vars.datagram_bytecount |= (((uint16_t)(c)) << 8);
         parser_vars.rx_state = SPARE;
         return false;
 
     case SPARE:;
-        // Serial.write('e');
         parser_vars.rx_state = FRAME_COUNT;
         return false;
 
     case FRAME_COUNT:;
-        // Serial.write('f');
         parser_vars.num_data_types = c;
         parser_vars.rx_state = FRAME_OFFSET_LOOP;
         return false;
 
     case FRAME_OFFSET_LOOP:;
-        // Serial.write('g');
         if (!(parser_vars.offset_loop_idx % 2))
         {
-            // Serial.write('p');
             parser_vars.offsets[(parser_vars.offset_loop_idx / 2)] = (uint16_t)(c);
         }
         else
         {
-            // Serial.write('q');
             parser_vars.offsets[(parser_vars.offset_loop_idx / 2)] |= ((uint16_t)(c) << 8);
         }
-        // Serial.println(parser_vars.num_data_types*2-1);
-        // if (parser_vars.offset_loop_idx == (parser_vars.num_data_types * 2) - 1)
-        if (parser_vars.offset_loop_idx == 7)
+        if (parser_vars.offset_loop_idx == (parser_vars.num_data_types * 2) - 1)
         {
-            // Serial.write('r');
             parser_vars.rx_state = WAIT;
             parser_vars.rx_wait_bytecount = 6 + (2 * parser_vars.num_data_types);
             return false;
         }
-        // Serial.write('s');
-        // Serial.print(parser_vars.offset_loop_idx); Serial.print(" 0 \n");
         parser_vars.offset_loop_idx++;
-        // Serial.print(parser_vars.offset_loop_idx); Serial.print(" 1 \n");
         return false;
 
     case WAIT:;
-        // Serial.write('h');
-        if (parser_vars.offset_wait_idx >= parser_vars.num_data_types || parser_vars.rx_wait_bytecount > 1000)
-        // if (parser_vars.offset_wait_idx >= parser_vars.num_data_types)
+        if (parser_vars.offset_wait_idx >= parser_vars.num_data_types)
         {
-            // Serial.write('z');
-            // Serial.write('z');
-            // Serial.write('z');
             parser_vars.rx_state = SYNC;
-            reset_parser();
-            // send_break();
-            // dvl_begin_pinging();
             return false;
         }
         if (parser_vars.rx_wait_bytecount == parser_vars.offsets[parser_vars.offset_wait_idx])
@@ -245,7 +186,6 @@ static bool parse_velocities(unsigned char const c)
         return false;
 
     case FRAME_ID_BYTE_2:;
-        // Serial.write('i');
         parser_vars.frame_id |= (uint16_t)(c);
         parser_vars.rx_wait_bytecount++;
         if (parser_vars.frame_id == 0x0358)
@@ -266,7 +206,6 @@ static bool parse_velocities(unsigned char const c)
         }
 
     case VELOCITY_DATA_SB:;
-        // Serial.write('j');
         switch (parser_vars.velocity_sb_byte_idx)
         {
 
@@ -289,7 +228,6 @@ static bool parse_velocities(unsigned char const c)
         return false;
 
     case VELOCITY_DATA_FW:;
-        // Serial.write('k');
         switch (parser_vars.velocity_fw_byte_idx)
         {
         case 0:;
@@ -311,7 +249,6 @@ static bool parse_velocities(unsigned char const c)
         return false;
 
     case VELOCITY_DATA_UP:;
-        // Serial.write('l');
         switch (parser_vars.velocity_up_byte_idx)
         {
         case 0:;
@@ -333,7 +270,6 @@ static bool parse_velocities(unsigned char const c)
         return false;
 
     case RANGE_DATA:;
-        // Serial.write('m');
         switch (parser_vars.range_byte_idx)
         {
         case 0:;
@@ -354,6 +290,9 @@ static bool parse_velocities(unsigned char const c)
         parser_vars.range_byte_idx++;
         return false;
     }
+    Serial.println("NIGGER PT 2");
+    delay(1000);
+    assert(0); // Should never get here
 }
 
 bool dvl_receive_handler()
@@ -366,7 +305,7 @@ bool dvl_receive_handler()
     }
     else if (cmd_state == COMMAND_PROCESSING)
     { // If we know that the DVL is in command mode right now, ignore character but listen to beginning
-        // Serial.print((char)c);
+        Serial.print((char)c);
         if (c == '>')
         { // Once a command is received by the DVL, it prints a newline and the command line symbol. We can now send another command.
             cmd_state = COMMAND_READY;
@@ -375,7 +314,7 @@ bool dvl_receive_handler()
     }
     else if (cmd_state == COMMAND_READY)
     { // If we're sending a command, then the output of the DVL is irrelevant (it echoes characters back)
-        // Serial.print((char)c);
+        Serial.print((char)c);
         return false;
     }
     else if (c == EOF)
@@ -385,6 +324,23 @@ bool dvl_receive_handler()
     Serial.println("LYNCH NIGGERFAGGOTS");
     delay(1000);
     assert(0); // Should never get here
+}
+
+int send_command(char *cmd, bool wait)
+{
+    int status = fprintf(io_dvl, cmd);
+    fflush(io_dvl);
+    cmd_state = COMMAND_PROCESSING;
+    if (wait)
+        while (cmd_state != COMMAND_READY)
+        {
+        } // Wait for the DVL to print out welcome message, etc until command prompt is shown.
+    return status;
+}
+
+static void send_break()
+{
+    send_command("===", true);
 }
 
 void dvl_set_data_format()

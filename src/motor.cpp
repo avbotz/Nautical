@@ -9,7 +9,7 @@ Motors::Motors()
 {
 	for (int i = 0; i < NUM_MOTORS; i++)
 		thrust[i] = 0.0f;
-	for (int i = 0; i < DOF; i++)
+    for (int i = 0; i < DOF; i++)
 		pid[i] = 0.0f;
 	for (int i = 0; i < DOF; i++)
 		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
@@ -40,7 +40,10 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 	float dt = (temp - t)/(float)(1000000);
 
 	// Calculate PID values.
-	for (int i = 0; i < DOF; i++)
+    pid[F] = controllers[F].calculate(dstate[F], dt, 0.50);
+    pid[H] = controllers[H].calculate(dstate[H], dt, 0.50);
+	pid[V] = controllers[V].calculate(dstate[V], dt, 0.00);
+    for (int i = BODY_DOF; i < GYRO_DOF; i++)
 		pid[i] = controllers[i].calculate(dstate[i], dt, 0.0);
 
 	// Default body motors to 0.
@@ -51,14 +54,16 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 		thrust[0] += 0.15f;
 		thrust[1] -= 0.15f;
 		thrust[2] -= 0.15f;
-		thrust[3] += 0.15f;
+        thrust[3] += 0.15f;
 	}
 
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
 			thrust[i] += p * pid[j] * ORIENTATION[i][j];
-	power();
+    // for (int i = 0; i < NUM_MOTORS; i++)
+    //     Serial << thrust[i] << '\n';
+	if (!SIM) power();
 
 	return temp;
 }

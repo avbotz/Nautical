@@ -1,10 +1,18 @@
 #ifndef CONFIG_H
 #define CONFIG_H 
 
-#define D2R 3.14/180.
+/*
+ * Options.
+ */
+static const bool DVL_ON = false;
+static const bool FAR = true;
+static const bool SIM = true;
+
 /*
  * Conversions.
  */ 
+#define D2R 3.1415/180.
+#define R2D 180./3.1415
 
 /*
  * Motor ID Configuration.
@@ -38,8 +46,8 @@ static const float ORIENTATION[8][6] =
 	{ 0.00, 0.00, -1.0,	0.00, 1.00, 1.00 },
 	{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 },
 	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },
-	{ -1.0, 1.00, 0.00,	1.00, 0.00, 0.00 },
-	{ -1.0, 1.00, 0.00,	-1.0, 0.00, 0.00 }, 
+	{ -1.0, 0.85, 0.00,	1.00, 0.00, 0.00 },
+	{ -1.0, 0.85, 0.00,	-1.0, 0.00, 0.00 }, 
 	{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 }
 };
 
@@ -49,9 +57,9 @@ static const float ORIENTATION[8][6] =
  */
 static const float GAINS[6][3] = 
 {
-	{ 2.00, 0.00, 0.00 },
-	{ 1.25, 0.00, 0.00 },
 	{ 1.50, 0.00, 0.00 },
+	{ 1.50, 0.00, 0.00 },
+	{ 1.75, 0.00, 0.00 },
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 }

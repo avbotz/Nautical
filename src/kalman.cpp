@@ -42,7 +42,7 @@ uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
 	float dt = (temp - t)/(float)(1000000);
-
+/*
 	// Predict new state using model.
 	// X, VX, AX, Y, VY, AY.
 	float *a1 = new float[N];
@@ -89,39 +89,30 @@ uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
 	delete[] c3;
 	delete[] c4;
 	delete[] c5;
-
+*/
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
-	float *m = new float[M];
-	/*
-	m[0] = ahrs_accel((enum accel_axis)(SURGE)) - m_bias[0];
-	m[1] = ahrs_accel((enum accel_axis)(SWAY)) - m_bias[1];
-	for (int i = 0; i < M; i++)
-		m_orig[i] = m[i];
-	m[0] = m[0] < 0.01 ? 0.0 : m[0];
-	m[1] = m[1] < 0.01 ? 0.0 : m[1];
-	if (abs(motors.pid[0]*motors.p) < 0.01)
-	{
-		m[0] = 0.0;
-		// state[0] = 0.0;
-		state[1] = 0.0;
-		state[2] = 0.0;
-	}
-	if (abs(motors.pid[1]*motors.p) < 0.01)
-	{
-		m[1] = 0.0;
-		// state[3] = 0.0;
-		state[4] = 0.0;
-		state[5] = 0.0;
-	}
-	*/
-	float u = dvl_get_forward_vel();
-	float v = dvl_get_starboard_vel();
-	// m[0] = dvl_get_forward_vel();
-	// m[1] = dvl_get_starboard_vel();
-	m[0] = u*cos(heading) - v*sin(heading);
-	m[1] = u*sin(heading) + v*cos(heading);
-
+    float *m = new float[M];
+    float t1 = dvl_get_forward_vel()/100000.0f;
+    float t2 = dvl_get_starboard_vel()/100000.0f;
+    float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
+    float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
+    m_orig[0] = dvl_get_forward_vel();
+	m_orig[1] = dvl_get_starboard_vel();
+    if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
+    {
+        delete[] m;
+        // delete[] Kk;
+        return temp;
+    }
+	m[0] = u*cos(heading*D2R) - v*sin(heading*D2R);
+	m[1] = u*sin(heading*D2R) + v*cos(heading*D2R);
+    m_orig[0] = m[0];
+    m_orig[1] = m[1];
+    state[0] += m[0]*dt;
+    state[3] += m[1]*dt;
+    delete[] m; 
+/*
 	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];
 	float *d2 = new float[M];
@@ -151,7 +142,7 @@ uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
 	
 	delete[] m;
 	delete[] Kk;
-
+*/
 	return temp;
 }
 

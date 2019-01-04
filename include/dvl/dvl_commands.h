@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#define NUM_COMMANDS 10
+#define NUM_COMMANDS 12
 
 char* break_command = "===";
 
@@ -14,7 +14,8 @@ char* setup_commands[NUM_COMMANDS] = {
     "BX00100\r", // sets max depth to 100dm (33ft)
     "#BJ000110000\r", // enables high-res velocity and range output
     "CF11110\r", // sets auto-ping, binary output
-    //"EA????", //TODO: Determine the angle correction based on DVL mount angle
+    //"EA????, //TODO: Determine the angle correction based on DVL mount angle
+    "EA-04500\r", //TODO: Determine the angle correction based on DVL mount angle
     "ED00010\r", // Depth of transducer - setting to 1 meter because it's pretty irrelevant
 #ifdef SALTWATER
     "ES35\r",
@@ -24,6 +25,7 @@ char* setup_commands[NUM_COMMANDS] = {
     "EX01011\r",
     "EZ10000010\r",
     "#EU2\r",
+    "PA\r",
     "CK\r"
 };
 

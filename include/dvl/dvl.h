@@ -14,7 +14,7 @@ void dvl_begin_pinging();
 // Discards the datagram that is currently being parsed. 
 void reset_parser();
 
-int32_t dvl_data_update();
+bool dvl_data_update();
 
 // Returns signed 32-bit integer, representing velocity over bottom towards starboard in 0.01mm/s.
 int32_t dvl_get_starboard_vel();

@@ -9,29 +9,55 @@
 #include "util.hpp"
 #include "pid.hpp"
 #include "io.hpp"
+#include "memory.h"
+#include "voltage.hpp"
 
 
 void run()
 {
 	// Start IO between Nautical and hardware.
-	io();
+    Serial << "Starting Nautical!" << '\n';
+    if (!SIM) 
+    {
+        Serial << "Beginning I/O." << '\n';
+        io();
+        Serial << "Ending I/O." << '\n';
+    }
+    else
+    {
+        Serial << "I/O simulated." << '\n';
+    }
 
 	// Set north heading to current heading.
-	ahrs_att_update();
-	float north = ahrs_att((enum att_axis) (YAW));
+	if (!SIM) 
+    {
+        Serial << "Beginning AHRS update." << '\n';
+        ahrs_att_update();
+        Serial << "Ending AHRS update." << '\n';
+    }
+    else 
+    {
+        Serial << "AHRS simulated." << '\n';
+    }
+	float north = FAR ? 225.0f : 340.0f;
+    // float north = 235.0f;
 
 	// Store kill state info. 
-	bool alive_state = false;
-	bool alive_state_prev = false;
+	bool alive_state = alive();
+	bool alive_state_prev = alive_state;
 	bool pause = false;
 	uint32_t pause_time;
 
 	// Setup motors.
 	Motors motors;
 	motors.p = 0.0f;
+    Serial << "Motors setup." << '\n';
+    for (int i = 0; i < NUM_MOTORS; i++)
+        Serial << motors.thrust[i] << ' '; Serial << '\n';
 
 	// Setup kalman filter, including state and covariance.
-	Kalman kalman;
+    Kalman kalman;
+    Serial << "Kalman filter setup." << '\n';
 	float state[N] = {
 		0.000, 0.000, 0.000, 0.000, 0.000, 0.000
 	};
@@ -45,23 +71,27 @@ void run()
 	};
 
 	// Current state represents location, while desired state holds destination.
-	float current[DOF] = { 0.0f };
-	float desired[DOF] = { 0.0f };
+	float current[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+	float desired[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
 	// Hold difference between the states.
-	float dstate[DOF] = { 0.0f };
+	float dstate[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    Serial << "States setup." << '\n';
 
 	// Initial time, helps compute time difference.
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
 
+    Serial << "Completed setup." << '\n';
+
 	while (true)
 	{
 		// Ask AHRS to update. 
-		ahrs_att_update();
-
+		if (!SIM) ahrs_att_update();
+            
 		// Ask DVL to update. 
-		dvl_data_update();
+        if (DVL_ON && !SIM) 
+		    dvl_data_update();
 
 		// Check for user input.
 		if (Serial.available() > 0)
@@ -143,9 +173,24 @@ void run()
 					desired[i] = angle_add(desired[i], Serial.parseFloat());
 			}
 
+            // Get raw heading.
+            else if (c == 'h' && !SIM)
+                Serial << ahrs_att((enum att_axis) (YAW)) << '\n';
+
 			// Reset north heading. 
-			else if (c == 'x')
+			else if (c == 'x' && !SIM)
+            {
+                state[0] = 0.0;
+                state[1] = 0.0;
+                state[2] = 0.0;
+                state[3] = 0.0;
+                state[4] = 0.0;
+                state[5] = 0.0;
+                current[F] = 0.0;
+                current[H] = 0.0;
+                // current[V] = 0.0;
 				north = ahrs_att((enum att_axis) (YAW));
+            }
 
             // Receive desired Arduino positions.
             else if (c == 'z')
@@ -153,64 +198,140 @@ void run()
                 int idx = Serial.parseInt();
                 drop(idx);
             }
+
+            // Print the amount of memory left.
+            else if (c == 'y') 
+            {
+                uint32_t mem = getFreeMemory();
+                Serial << mem << '\n';
+            }
+
+            // Print the amount of voltage left.
+            else if (c == 'v') {
+                float voltage = measure_voltage();
+                Serial << voltage << '\n';
+            }
         }
+
+        // Serial << getFreeMemory() << " " << getMinMemory() << '\n';
 
 		// Save previous kill state and read new one.
 		alive_state_prev = alive_state;
 		alive_state = alive();
-
+            
 		// Allow motors to start after pausing.
-		if (pause && millis() - pause_time > PAUSE_TIME)
+		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
+        {
+			// north = ahrs_att((enum att_axis) (YAW)); 
 			pause = false;
+        }
 
 		// Just killed, pause motor communcations.
-		if (alive_state_prev && !alive_state)
+		if (alive_state_prev && !alive_state && !SIM)
 			motors.pause();
 
 		// Just unkilled, allow motors time to restart. 
-		if (!alive_state_prev && alive_state)
+		if (!alive_state_prev && alive_state &!SIM)
 		{
-			north = ahrs_att((enum att_axis) (YAW)); 
+            // Set state to 0 when running semis.
+            current[F] = 0;
+            current[H] = 0;
+            state[0] = 0.0;
+            state[3] = 0.0;
 			pause = true;
 			pause_time = millis();
+			north = ahrs_att((enum att_axis) (YAW)); 
 		}
 
 		// Regular running.
-		if (!pause && alive_state)
+		if (SIM || (!pause && alive_state))
 		{
 			// Kalman filter removes noise from measurements and estimates the new
 			// state (linear).
 			ktime = kalman.compute(state, covar, current[Y], ktime);
 
 			// Compute rest of the DOF.
-			// current[F] = 0.0; // state[0];
-			// current[H] = 0.0; // state[3];
 			current[F] = state[0];
 			current[H] = state[3];
-			current[V] = (analogRead(NPIN) - 230.0)/65.0;
-			current[Y] = ahrs_att((enum att_axis) (YAW)) - north;
-			current[P] = ahrs_att((enum att_axis) (PITCH));
-			current[R] = ahrs_att((enum att_axis) (ROLL));
+            if (!SIM)
+            {
+			    current[V] = (analogRead(NPIN) - 230.0)/65.0;
+                current[Y] = ahrs_att((enum att_axis) (YAW)) - north;
+                current[Y] += (current[Y] > 360.0) ? -360.0 : (current[Y] < 0.0) ? 360.0 : 0.0;
+                current[P] = ahrs_att((enum att_axis) (PITCH));
+                current[R] = ahrs_att((enum att_axis) (ROLL));
+            }
 
-			// Compute state difference.
-			float d0 = desired[F] - current[F];
-			float d1 = desired[H] - current[H];
-			dstate[F] = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
-			dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
-			dstate[V] = desired[V] - current[V];
-			dstate[Y] = angle_difference(desired[Y], current[Y]);
-			// for (int i = BODY_DOF; i < GYRO_DOF; i++)
-			//	dstate[i] = angle_difference(desired[i], current[i]);
+		    // Compute state difference.
+            for (int i = 0; i < DOF; i++)
+                dstate[i] = 0.0f;
 
-			// Compute PID within motors and set thrust.
+            // Change heading if desired state is far away.
+            if (fabs(desired[F]-current[F]) > 3.0 || fabs(desired[H]-current[H] > 3.0))
+                desired[Y] = atan2(desired[H]-current[H], desired[F]-current[F]) * R2D;
+            desired[Y] += (desired[Y] > 360.0) ? -360.0 : (desired[Y] < 0.0) ? 360.0 : 0.0;
+            
+            // Only handle angle if it is bad.
+            if (fabs(angle_difference(desired[Y], current[Y])) > 5.0)
+            {
+                dstate[Y] = angle_difference(desired[Y], current[Y]);
+            }
+            else 
+            {
+                dstate[Y] = angle_difference(desired[Y], current[Y]);
+                float d0 = desired[F] - current[F];
+                float d1 = desired[H] - current[H];
+                dstate[F] = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
+                dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
+            }
+            dstate[V] = desired[V] - current[V];
+
+            // dstate[Y] = angle_difference(desired[Y], current[Y]);
+            // float d0 = desired[F] - current[F];
+            // float d1 = desired[H] - current[H];
+            // dstate[F] = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
+            // dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
+            // dstate[V] = desired[V] - current[V];
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (isnan(motors.thrust[i]))
+                {
+                    Serial << "failed motor thrust" << '\n';
+                }
+                break;
+            }   
+
+            // Compute PID within motors and set thrust.
 			mtime = motors.run(dstate, mtime);
 		}
+        else 
+        {
+            ktime = micros();
+            mtime = micros();
+            if (DVL_ON)
+            {
+                kalman.m_orig[0] = dvl_get_forward_vel();
+                kalman.m_orig[1] = dvl_get_starboard_vel();
+            }
+        }
+
+        // kalman.m_orig[0] = dvl_get_forward_vel();
+        // kalman.m_orig[1] = dvl_get_starboard_vel();
+        // Serial << kalman.m_orig[0] << ' ' << kalman.m_orig[1] << ' ' << millis() << '\n';
+        // else 
+        // {
+        //     float u = dvl_get_forward_vel()/100000.f;
+        //     float v = dvl_get_starboard_vel()/100000.f;
+        //     kalman.m_orig[0] = u*cos(current[Y]*D2R) - v*sin(current[Y]*D2R);
+        //     kalman.m_orig[1] = u*sin(current[Y]*D2R) + v*cos(current[Y]*D2R);
+        // }
 	}
 }
 
 void setup()
 {
-	Serial.begin(115200);
+	Serial.begin(9600);
 	run();
 }
 void loop() {}

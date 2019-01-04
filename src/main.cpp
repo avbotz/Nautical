@@ -222,17 +222,45 @@ void run()
 		// Allow motors to start after pausing.
 		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
         {
+            for (int i = 0; i < 8; i++)
+            {
+                if (isnan(motors.thrust[i]))
+                {
+                    Serial << "failed motor thrust 1" << '\n';
+                }
+                break;
+            }   
+
 			// north = ahrs_att((enum att_axis) (YAW)); 
 			pause = false;
         }
 
 		// Just killed, pause motor communcations.
 		if (alive_state_prev && !alive_state && !SIM)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if (isnan(motors.thrust[i]))
+                {
+                    Serial << "failed motor thrust 2" << '\n';
+                }
+                break;
+            }   
 			motors.pause();
+        }
 
 		// Just unkilled, allow motors time to restart. 
 		if (!alive_state_prev && alive_state &!SIM)
 		{
+            for (int i = 0; i < 8; i++)
+            {
+                if (isnan(motors.thrust[i]))
+                {
+                    Serial << "failed motor thrust 3" << '\n';
+                }
+                break;
+            }   
+            
             // Set state to 0 when running semis.
             current[F] = 0;
             current[H] = 0;
@@ -297,7 +325,7 @@ void run()
             {
                 if (isnan(motors.thrust[i]))
                 {
-                    Serial << "failed motor thrust" << '\n';
+                    // Serial << "failed motor thrust" << '\n';
                 }
                 break;
             }   

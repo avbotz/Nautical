@@ -47,13 +47,13 @@ void run()
 	bool alive_state_prev = alive_state;
 	bool pause = false;
 	uint32_t pause_time;
-
-	// Setup motors.
+	
+    // Setup motors.
 	Motors motors;
 	motors.p = 0.0f;
     Serial << "Motors setup." << '\n';
-    for (int i = 0; i < NUM_MOTORS; i++)
-        Serial << motors.thrust[i] << ' '; Serial << '\n';
+    // for (int i = 0; i < NUM_MOTORS; i++)
+    //    Serial << motors.thrust[i] << ' '; Serial << '\n';
 
 	// Setup kalman filter, including state and covariance.
     Kalman kalman;
@@ -82,22 +82,21 @@ void run()
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
 
-    Serial << "Completed setup." << '\n';
-
+    // Serial << "Completed setup." << '\n';
 	while (true)
 	{
 		// Ask AHRS to update. 
-		if (!SIM) ahrs_att_update();
+        if (!SIM) ahrs_att_update();
             
 		// Ask DVL to update. 
         if (DVL_ON && !SIM) 
 		    dvl_data_update();
-
-		// Check for user input.
+		
+        // Check for user input.
 		if (Serial.available() > 0)
 		{
 			char c = Serial.read();
-		
+
 			// Return alive.
 			if (c == 'a')
 				Serial << alive() << '\n';
@@ -125,9 +124,9 @@ void run()
 					_FLOAT(dstate[2], 6) << ' ' << _FLOAT(dstate[3], 6) << ' ' <<
 					_FLOAT(dstate[4], 6) << ' ' << _FLOAT(dstate[5], 6) << '\n';
 			}
-			
+
 			// Return thrust settings.
-			else if (c == 't')
+			if (c == 't')
 			{
 				Serial << _FLOAT(motors.thrust[0], 6) << ' ' << _FLOAT(motors.thrust[1], 6) << ' ' << 
 					_FLOAT(motors.thrust[2], 6) << ' ' << _FLOAT(motors.thrust[3], 6) << ' ' <<
@@ -182,7 +181,7 @@ void run()
         }
 
         // Serial << getFreeMemory() << " " << getMinMemory() << '\n';
-
+    
 		// Save previous kill state and read new one.
 		alive_state_prev = alive_state;
 		alive_state = alive();
@@ -243,10 +242,10 @@ void run()
 		if (SIM || (!pause && alive_state))
 		{
 			// Kalman filter removes noise from measurements and estimates the new
-			// state (linear).
+			// state. Assume angle is correct so no need for EKF.
 			ktime = kalman.compute(state, covar, current[Y], ktime);
 
-			// Compute rest of the DOF.
+			// Find sumbarine state.
 			current[F] = state[0];
 			current[H] = state[3];
             if (!SIM)
@@ -282,25 +281,9 @@ void run()
             }
             dstate[V] = desired[V] - current[V];
 
-            // dstate[Y] = angle_difference(desired[Y], current[Y]);
-            // float d0 = desired[F] - current[F];
-            // float d1 = desired[H] - current[H];
-            // dstate[F] = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
-            // dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
-            // dstate[V] = desired[V] - current[V];
-
-            for (int i = 0; i < 8; i++)
-            {
-                if (isnan(motors.thrust[i]))
-                {
-                    // Serial << "failed motor thrust" << '\n';
-                }
-                break;
-            }   
-
             // Compute PID within motors and set thrust.
 			mtime = motors.run(dstate, mtime);
-		}
+        }
         else 
         {
             ktime = micros();
@@ -311,17 +294,6 @@ void run()
                 kalman.m_orig[1] = dvl_get_starboard_vel();
             }
         }
-
-        // kalman.m_orig[0] = dvl_get_forward_vel();
-        // kalman.m_orig[1] = dvl_get_starboard_vel();
-        // Serial << kalman.m_orig[0] << ' ' << kalman.m_orig[1] << ' ' << millis() << '\n';
-        // else 
-        // {
-        //     float u = dvl_get_forward_vel()/100000.f;
-        //     float v = dvl_get_starboard_vel()/100000.f;
-        //     kalman.m_orig[0] = u*cos(current[Y]*D2R) - v*sin(current[Y]*D2R);
-        //     kalman.m_orig[1] = u*sin(current[Y]*D2R) + v*cos(current[Y]*D2R);
-        // }
 	}
 }
 

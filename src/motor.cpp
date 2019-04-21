@@ -39,7 +39,7 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 	uint32_t temp = micros();
 	float dt = (temp - t)/(float)(1000000);
 
-	// Calculate PID values.
+    // Calculate PID values.
     pid[F] = controllers[F].calculate(dstate[F], dt, 0.50);
     pid[H] = controllers[H].calculate(dstate[H], dt, 0.50);
 	pid[V] = controllers[V].calculate(dstate[V], dt, 0.00);
@@ -64,6 +64,6 @@ uint32_t Motors::run(float *dstate, uint32_t t)
     // for (int i = 0; i < NUM_MOTORS; i++)
     //     Serial << thrust[i] << '\n';
 	if (!SIM) power();
-
-	return temp;
+	
+    return temp;
 }

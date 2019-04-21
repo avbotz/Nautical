@@ -11,9 +11,11 @@ struct Motors
 {
 	PID controllers[DOF];
 	float thrust[NUM_MOTORS];
+    float forces[BODY_DOF];
 	float pid[DOF];
 	float p;
-	Motors();
+
+    Motors();
 
 	void power();
 	void pause();

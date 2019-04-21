@@ -4,9 +4,9 @@
 /*
  * Options.
  */
-static const bool DVL_ON = true;
+static const bool DVL_ON = false;
 static const bool FAR = true;
-static const bool SIM = false;
+static const bool SIM = true;
 
 /*
  * Conversions.

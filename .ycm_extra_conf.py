@@ -1,200 +1,181 @@
 """
-YouCompleteMe "ycm_extra_conf.py" for Platformio based projects.
-The script calls [platformio -v run -t idedata] and process the output 
-to fill list with the SAME SET OF FLAGS used by platformio for the 
-project (compiler flags, Include dirs, compiler DEFINES, etc)
-Tested on the following development environment:
-    - Linux (LMDE 2)
-    - PlatformIO, version 3.3.0a1
-    - VIM 8.0
-    - YCM 2016-12-22
-This file should be copied in the "base" project dir (one ycm_extra_conf.py
-for every project)
-Installation:
- Copy this scrit in the project base dir (together with platformio.ini, etc)
- NOTE:
-   make sure you've already run "platformio init --board xxx" in the project dir
-Usage    
-    if everything works as expected you just call VIM to edit projet files
-    To test the script behaviour, run it as a standalone script:
-        phython .ycm_extra_conf
-    It outputs the FLAGS that will be handle back to YCM
-    Ideally You don't need to edit this file to add extra flags but,
-    in case you need it, add them to the "flags" list at the beginning of 
-    this script
-Lucabuka / 2016-12-27
-Based on Anthony Ford <github.com/ajford>ajford/.ycm_extra_conf.py
-    Based on the `.ycm_extra_conf.py` by @ladislas in his Bare-Arduino-Project.
-Based on the `neomake-platformio.py` by github -> coddingtonbear/neomake-platformio 
+YouCompleteMe extra configuration for Platformio based
+projects.
+Based on the `.ycm_extra_conf.py` by @ladislas in his Bare-Arduino-Project.
+Anthony Ford <github.com/ajford>
 """
-
-# This is free and unencumbered software released into the public domain.
-#
-# Anyone is free to copy, modify, publish, use, compile, sell, or
-# distribute this software, either in source code form or as a compiled
-# binary, for any purpose, commercial or non-commercial, and by any
-# means.
-#
-# In jurisdictions that recognize copyright laws, the author or authors
-# of this software dedicate any and all copyright interest in the
-# software to the public domain. We make this dedication for the benefit
-# of the public at large and to the detriment of our heirs and
-# successors. We intend this dedication to be an overt act of
-# relinquishment in perpetuity of all present and future rights to this
-# software under copyright law.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#
-# For more information, please refer to <http://unlicense.org/>
-
 import os
-import subprocess
+import ycm_core
 import logging
-import json
-if  __name__ != "__main__":
-    import ycm_core
 
 # Logger for additional logging.
 # To enable debug logging, add `let g:ycm_server_log_level = 'debug'` to
 # your .vimrc file.
 logger = logging.getLogger('ycm-extra-conf')
 
+# Platformio Autogen libs.
+## Platformio automatically copies over the libs you use after your first run.
+## Be warned that you will not receive autocompletion on libraries until after
+## your first `platformio run`.
+PlatformioAutogen = ".pioenvs/"
 
-# Add here any extra flag not automatically provided by "platformio run -t ide"
-# usually You don't need to 
+# All Platformio Arduin Libs
+## This will link directly to the Platformio Libs for Arduino.
+## Be warned that this can polute your namespace (in #include)
+## and slightly increase startup time (while crawling the lib
+## dir for header files). This will however allow you to
+## complete for header files you haven't included yet.
+PlatformioArduinoLibs = "~/.platformio/packages/framework-arduinoavr/libraries/"
+
+# Platformio Arduino Core
+## This links to the Platformio Arduino Cores. This provides 
+## the core libs, such as Arduino.h and HardwareSerial.h
+PlatformioArduinoCore = "~/.platformio/packages/framework-arduinoavr/cores/arduino/"
+
+# Platformio Arduino Std Libs
+## Arduino Std libs from .platformio packages. Provides stdlib.h and such.
+PlatformioArduinoSTD = '~/.platformio/packages/toolchain-atmelavr/avr/include'
+
+# This is the list of all directories to search for header files.
+# Dirs in this list can be paths relative to this file, absolute
+# paths, or paths relative to the user (using ~/path/to/file).
+libDirs = [
+           "include"
+           ,PlatformioAutogen
+           ,PlatformioArduinoCore
+           ,PlatformioArduinoLibs
+           ,PlatformioArduinoSTD
+           ]
+
 flags = [
     # General flags
-    # You 100% do NOT need -DUSE_CLANG_COMPLETER in your flags; only the YCM
-    # source code needs it.
-    '-DUSE_CLANG_COMPLETER'
+    '-Wall'
+    ,'-x'
+    ,'c++'
+    ,'-ansi'
+
+    # Customize microcontroler and Arduino version
+    ,'-mmcu=atmega328p'
+    ,'-DF_CPU=16000000L'
+    ,'-DARDUINO_ARCH_AVR'
+    ,'-DARDUINO_AVR_DUEMILANOVE'
+    ,'-DARDUINO=106000'
     # ,'-MMD -DUSB_VID=null'
     # ,'-DUSB_PID=null'
 ]
 
 
-def get_idestate(path):
-    """Calls [pio -f run -t idedata] to get compiler flags from PlatformIO env
-    """
+compilation_database_folder = ''
 
-    found_start = False
-    brace_count = 0
-    lines = subprocess.check_output([
-        'pio',
-        '-f',
-        '-c',
-        'vim',
-        'run',
-        '-t',
-        'idedata',
-        '-d',
-        path,
-    ], universal_newlines=True )
-    json_lines = []
+if os.path.exists( compilation_database_folder ):
+    database = ycm_core.CompilationDatabase( compilation_database_folder )
+else:
+    database = None
 
-    splitted=lines.splitlines()
+SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.ino', '.m', '.mm' ]
 
-    found = 0
-    env_names=[]
-    for line in splitted:
-        env_found = line.find("Processing")
-        if env_found != -1 : 
-            env_names.append(line[env_found+10:])
-        start_brace = line.find("{") 
-        if start_brace != -1:
-            found+=1
-            if found == 1:
-                end_brace = line.find("}") 
-                res=line[start_brace:end_brace+1] 
+def DirectoryOfThisScript():
+    return os.path.dirname( os.path.abspath( __file__ ) )
 
-    if found > 1:
-        if __name__ == "__main__":
-            print("\nWARNING !!!\n {num} Environments found:".format(num=found) )
-            for a in env_names: print("\t" + a)
-            print(" Includes and Flags taken from the FIRST one\n")
-        else:
-            logger.warning("!!! {num} Environments found:".format(num=found) )
-            for a in env_names: logger.warning("\t" + a)
-            logger.warning(" Includes and Flags taken from the FIRST one")
-            logger.warning("!!!")
+def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
+    if not working_directory:
+        return list( flags )
+
+    new_flags = []
+    make_next_absolute = False
+    path_flags = [ '-isystem', '-I', '-iquote', '--sysroot=' ]
+
+    for libDir in libDirs:
+
+        # dir is relative to $HOME
+        if libDir.startswith('~'):
+            libDir = os.path.expanduser(libDir)
+
+        # dir is relative to `working_directory`
+        if not libDir.startswith('/'):
+            libDir = os.path.join(working_directory,libDir)
+
+        # Else, assume dir is absolute
+
+        for path, dirs, files in os.walk(libDir):
+            # Add to flags if dir contains a header file and is not
+            # one of the metadata dirs (examples and extras). 
+            if any(IsHeaderFile(x) for x in files) and\
+              path.find("examples") is -1 and path.find("extras") is -1:
+                logger.debug("Directory contains header files - %s"%path)
+                flags.append('-I'+path)
 
 
-    if found: 
-        return json.loads(res)
+    for flag in flags:
+        new_flag = flag
 
-    return -1
+        if make_next_absolute:
+            make_next_absolute = False
+            if not flag.startswith( '/' ):
+                new_flag = os.path.join( working_directory, flag )
 
+        for path_flag in path_flags:
+            if flag == path_flag:
+                make_next_absolute = True
+                break
 
-def get_platformio_environment(wdir):
-    """Generate the complete flags list (-I, -D, ...) 
-    """
+            if flag.startswith( path_flag ):
+                path = flag[ len( path_flag ): ]
+                new_flag = path_flag + os.path.join( working_directory, path )
+                break
 
-    idestate = get_idestate(wdir)
-    if idestate == -1:
-        return ["ERROR: get_idestate() returns -1"]
-
-    _includes  = idestate['includes']    
-    _cxx_path  = idestate['cxx_path']    
-    _cxx_flags = idestate['cxx_flags']    
-    _cc_path   = idestate['cc_path']    
-    _cc_flags  = idestate['cc_flags']    
-    _defines   = idestate['defines']    
-    _lisbsource_dirs  = idestate['libsource_dirs']
-
-    # ADD to _cxx_flags symbols found only in "_defines"
-    new_cxx_flags=_cxx_flags.split()
-    for define in _defines:
-        found = _cxx_flags.find(define) 
-        if found == -1:
-            # not found -> add -d<define> to cxx_flags
-            new_cxx_flags.append('-D'+define)
-            
-    # insert into "includes" the working dir and ".pioenvs" (Platformio Autogen libs)
-    ## Platformio automatically copies over the libs you use after your first run.
-    ## Be warned that you will not receive autocompletion on libraries until after
-    ## your first `platformio run`.
-    _includes.insert(0,wdir + "/src")
-    _includes.insert(0,wdir + "/.pioenvs")
-   
-    # Create "-I<include_file>" list
-    inc_list=[]
-    for i in _includes: 
-        inc_list.append('-I'+i)
+        if new_flag:
+            new_flags.append( new_flag )
+    return new_flags
 
 
-    return(flags + new_cxx_flags + inc_list )
+def IsHeaderFile( filename ):
+    extension = os.path.splitext( filename )[ 1 ]
+    return extension in [ '.h', '.hxx', '.hpp', '.hh' ]
 
+
+def GetCompilationInfoForFile( filename ):
+    # The compilation_commands.json file generated by CMake does not have entries
+    # for header files. So we do our best by asking the db for flags for a
+    # corresponding source file, if any. If one exists, the flags for that file
+    # should be good enough.
+    if IsHeaderFile( filename ):
+        basename = os.path.splitext( filename )[ 0 ]
+        for extension in SOURCE_EXTENSIONS:
+            replacement_file = basename + extension
+            if os.path.exists( replacement_file ):
+                compilation_info = database.GetCompilationInfoForFile(
+                    replacement_file )
+                if compilation_info.compiler_flags_:
+                    return compilation_info
+        return None
+    return database.GetCompilationInfoForFile( filename )
 
 
 def FlagsForFile( filename, **kwargs ):
+    if database:
+        # Bear in mind that compilation_info.compiler_flags_ does NOT return a
+        # python list, but a "list-like" StringVec object
+        compilation_info = GetCompilationInfoForFile( filename )
+        if not compilation_info:
+            return None
 
-    relative_to = os.path.dirname( os.path.abspath( __file__ ) )
-    (allflags) = get_platformio_environment(relative_to)
+        final_flags = MakeRelativePathsInFlagsAbsolute(
+            compilation_info.compiler_flags_,
+            compilation_info.compiler_working_dir_ )
 
-    logger.debug("List of FLAGS hand back to YCM:")
-    for a in allflags: logger.debug(a)
+        # NOTE: This is just for YouCompleteMe. it's highly likely that your project
+        # does NOT need to remove the stdlib flag. DO NOT USE THIS IN YOUR
+        # ycm_extra_conf IF YOU'RE NOT 100% SURE YOU NEED IT.
+        #try:
+        #    final_flags.remove( '-stdlib=libc++' )
+        #except ValueError:
+        #    pass
+    else:
+        relative_to = DirectoryOfThisScript()
+        final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
     return {
-        'flags': allflags,
+        'flags': final_flags,
         'do_cache': True
     }
-
-
-
-
-# Used to TEST module output (Executd only if the module is used as a script)
-if __name__ == "__main__":
-    import sys
-    if len(sys.argv) > 1:
-        relative_to=sys.argv[1]
-    else:
-        relative_to = os.path.dirname( os.path.abspath( __file__ ) ) 
-
-    (allflags) = get_platformio_environment(relative_to)
-
-    for a in allflags: print(a)

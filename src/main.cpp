@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <ServoTimer2.h>
 #include "ahrs/ahrs.h"
 #include "dvl/dvl.h"
 #include "streaming.h"
@@ -10,6 +9,7 @@
 #include "pid.hpp"
 #include "io.hpp"
 #include "memory.h"
+#include "servo.h"
 #include "voltage.hpp"
 
 
@@ -173,22 +173,9 @@ void run()
 				north = ahrs_att((enum att_axis) (YAW));
             }
 
-            // Receive desired Arduino positions.
-            else if (c == 'z')
-            {
-                int idx = Serial.parseInt();
-                drop(idx);
-            }
-
-            // Print the amount of memory left.
-            else if (c == 'y') 
-            {
-                uint32_t mem = getFreeMemory();
-                Serial << mem << '\n';
-            }
-
             // Print the amount of voltage left.
-            else if (c == 'v') {
+            else if (c == 'v') 
+            {
                 float voltage = measure_voltage();
                 Serial << voltage << '\n';
             }

@@ -9,11 +9,14 @@
 
 Kalman::Kalman()
 {
-	/*
 	this->skip = 1000;
 	this->iter = 1000;
-	this->bias();
-	*/
+    for (int i = 0; i < M; i++)
+    {
+        m_orig[i] = 0.0f;
+        m_bias[i] = 0.0f;
+    }
+	// this->bias();
 }
 
 void Kalman::bias()

@@ -7,12 +7,15 @@
 
 Motors::Motors()
 {
-	for (int i = 0; i < NUM_MOTORS; i++)
-		thrust[i] = 0.0f;
-    for (int i = 0; i < DOF; i++)
-		pid[i] = 0.0f;
 	for (int i = 0; i < DOF; i++)
-		controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
+		this->controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
+	for (int i = 0; i < NUM_MOTORS; i++)
+		this->thrust[i] = 0.0f;
+    for (int i = 0; i < DOF; i++)
+        this->forces[i] = 0.0f;
+    for (int i = 0; i < DOF; i++)
+		this->pid[i] = 0.0f;
+    this->p = 0.0f;
 }
 
 void Motors::power()
@@ -61,8 +64,6 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
 			thrust[i] += p * pid[j] * ORIENTATION[i][j];
-    // for (int i = 0; i < NUM_MOTORS; i++)
-    //     Serial << thrust[i] << '\n';
 	if (!SIM) power();
 	
     return temp;

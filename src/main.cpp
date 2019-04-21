@@ -16,29 +16,10 @@
 void run()
 {
 	// Start IO between Nautical and hardware.
-    Serial << "Starting Nautical!" << '\n';
-    if (!SIM) 
-    {
-        Serial << "Beginning I/O." << '\n';
-        io();
-        Serial << "Ending I/O." << '\n';
-    }
-    else
-    {
-        Serial << "I/O simulated." << '\n';
-    }
+    if (!SIM) io();
 
 	// Set north heading to current heading.
-	if (!SIM) 
-    {
-        Serial << "Beginning AHRS update." << '\n';
-        ahrs_att_update();
-        Serial << "Ending AHRS update." << '\n';
-    }
-    else 
-    {
-        Serial << "AHRS simulated." << '\n';
-    }
+	if (!SIM) ahrs_att_update();
 	float north = FAR ? 225.0f : 340.0f;
     // float north = 235.0f;
 
@@ -50,14 +31,9 @@ void run()
 	
     // Setup motors.
 	Motors motors;
-	motors.p = 0.0f;
-    Serial << "Motors setup." << '\n';
-    // for (int i = 0; i < NUM_MOTORS; i++)
-    //    Serial << motors.thrust[i] << ' '; Serial << '\n';
 
 	// Setup kalman filter, including state and covariance.
     Kalman kalman;
-    Serial << "Kalman filter setup." << '\n';
 	float state[N] = {
 		0.000, 0.000, 0.000, 0.000, 0.000, 0.000
 	};
@@ -76,21 +52,18 @@ void run()
 
 	// Hold difference between the states.
 	float dstate[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-    Serial << "States setup." << '\n';
 
 	// Initial time, helps compute time difference.
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
 
-    // Serial << "Completed setup." << '\n';
 	while (true)
 	{
 		// Ask AHRS to update. 
         if (!SIM) ahrs_att_update();
             
 		// Ask DVL to update. 
-        if (DVL_ON && !SIM) 
-		    dvl_data_update();
+        if (DVL_ON && !SIM) dvl_data_update();
 		
         // Check for user input.
 		if (Serial.available() > 0)
@@ -180,54 +153,21 @@ void run()
             }
         }
 
-        // Serial << getFreeMemory() << " " << getMinMemory() << '\n';
-    
 		// Save previous kill state and read new one.
 		alive_state_prev = alive_state;
 		alive_state = alive();
             
 		// Allow motors to start after pausing.
 		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                if (isnan(motors.thrust[i]))
-                {
-                    Serial << "failed motor thrust 1" << '\n';
-                }
-                break;
-            }   
-
-			// north = ahrs_att((enum att_axis) (YAW)); 
 			pause = false;
-        }
 
 		// Just killed, pause motor communcations.
 		if (alive_state_prev && !alive_state && !SIM)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                if (isnan(motors.thrust[i]))
-                {
-                    Serial << "failed motor thrust 2" << '\n';
-                }
-                break;
-            }   
 			motors.pause();
-        }
 
 		// Just unkilled, allow motors time to restart. 
 		if (!alive_state_prev && alive_state &!SIM)
-		{
-            for (int i = 0; i < 8; i++)
-            {
-                if (isnan(motors.thrust[i]))
-                {
-                    Serial << "failed motor thrust 3" << '\n';
-                }
-                break;
-            }   
-            
+		{ 
             // Set state to 0 when running semis.
             current[F] = 0;
             current[H] = 0;

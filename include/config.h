@@ -5,6 +5,7 @@
  * Options.
  */
 static const bool DVL_ON = false;
+static const bool INITIAL_HEADING = true;
 static const bool FAR = true;
 static const bool SIM = true;
 

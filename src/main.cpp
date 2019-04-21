@@ -20,8 +20,9 @@ void run()
 
 	// Set north heading to current heading.
 	if (!SIM) ahrs_att_update();
-	float north = FAR ? 225.0f : 340.0f;
-    // float north = 235.0f;
+	float north; 
+    if (INITIAL_HEADING) north = ahrs_att((enum att_axis) (YAW));
+    else north = FAR ? 225.0f : 340.0f; 
 
 	// Store kill state info. 
 	bool alive_state = alive();

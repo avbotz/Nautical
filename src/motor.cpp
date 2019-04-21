@@ -66,5 +66,15 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 			thrust[i] += p * pid[j] * ORIENTATION[i][j];
 	if (!SIM) power();
 	
+    // Compute forces from motors.
+    /*
+    float MOUNT_ANGLE = sin(45.0);
+    for (int i = 0; i < DOF; i++)
+        forces[i] = 0.0f;
+    forces[F] = MOUNT_ANGLE*(thrust[4]-thrust[5]-thrust[6]+thrust[7]);
+    forces[H] = MOUNT_ANGLE*(thrust[4]+thrust[5]+thrust[6]+thrust[7]);
+    forces[V] = thrust[0]-thrust[1]-thrust[2]+thrust[3];
+    */
+
     return temp;
 }

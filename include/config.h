@@ -47,8 +47,8 @@ static const float ORIENTATION[8][6] =
 	{ 0.00, 0.00, -1.0,	0.00, 1.00, 1.00 },
 	{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 },
 	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },
-	{ -1.0, 0.85, 0.00,	1.00, 0.00, 0.00 },
-	{ -1.0, 0.85, 0.00,	-1.0, 0.00, 0.00 }, 
+	{ -1.0, 1.00, 0.00,	1.00, 0.00, 0.00 },
+	{ -1.0, 1.00, 0.00,	-1.0, 0.00, 0.00 }, 
 	{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 }
 };
 
@@ -69,7 +69,7 @@ static const float GAINS[6][3] =
 /*
  * Makes code more readable. 
  * Note, a for loop starting at BODY_DOF to GYRO_DOF only covers GYRO_DOF.
- * Forward, Horizontal, Vertical, Yaw, Pitch, Roll.
+ * Forward (North), Horizontal (East), Vertical (Down), Yaw, Pitch, Roll.
  */
 static const int DOF = 6;
 static const int BODY_DOF = 3;

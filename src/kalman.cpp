@@ -5,7 +5,7 @@
 #include "config.h"
 #include "matrix.h"
 #include "kalman.hpp"
-
+#include "rotation.h"
 
 Kalman::Kalman()
 {
@@ -40,11 +40,33 @@ void Kalman::bias()
 	m_bias[1] /= (float)iter;
 }
 
-uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
+uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
 	float dt = (temp - t)/(float)(1000000);
+	
+    // Receive measurements, taking into account accelerometer bias. Harsh
+	// cutoff to reduce accelerometer drift.
+    float *m = new float[3];
+    float t1 = dvl_get_forward_vel()/100000.0f;
+    float t2 = dvl_get_starboard_vel()/100000.0f;
+    float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
+    float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
+    m_orig[0] = dvl_get_forward_vel();
+	m_orig[1] = dvl_get_starboard_vel();
+    if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
+    {
+        delete[] m;
+        // delete[] Kk;
+        return temp;
+    }
+    body_to_inertial(new float[3]{u, v, 0}, angles, m);
+    m_orig[0] = m[0];
+    m_orig[1] = m[1];
+    state[0] += m[0]*dt;
+    state[3] += m[1]*dt;
+    delete[] m; 
 /*
 	// Predict new state using model.
 	// X, VX, AX, Y, VY, AY.
@@ -92,7 +114,7 @@ uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
 	delete[] c3;
 	delete[] c4;
 	delete[] c5;
-*/
+
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
     float *m = new float[M];
@@ -115,7 +137,7 @@ uint32_t Kalman::compute(float *state, float *covar, float heading, uint32_t t)
     state[0] += m[0]*dt;
     state[3] += m[1]*dt;
     delete[] m; 
-/*
+
 	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];
 	float *d2 = new float[M];

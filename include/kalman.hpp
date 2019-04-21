@@ -44,7 +44,7 @@ struct Kalman
 	Kalman();
 
 	void bias();
-	uint32_t compute(float *state, float *covar, float heading, uint32_t t);
+	uint32_t compute(float *state, float *covar, float *angles, uint32_t t);
 };
 
 #endif 

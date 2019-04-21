@@ -18,11 +18,12 @@ void run()
 	// Start IO between Nautical and hardware.
     if (!SIM) io();
 
-	// Set north heading to current heading.
+	// Set initial heading to current heading or pool.
+	float INITIAL_YAW, INITIAL_PITCH, INITIAL_ROLL; 
 	if (!SIM) ahrs_att_update();
-	float north; 
-    if (INITIAL_HEADING) north = ahrs_att((enum att_axis) (YAW));
-    else north = FAR ? 225.0f : 340.0f; 
+    INITIAL_YAW = INITIAL_HEADING ? ahrs_att((enum att_axis) (YAW)) : FAR ? 225.0f : 340.0f; 
+    INITIAL_PITCH = ahrs_att((enum att_axis) (PITCH));
+    INITIAL_ROLL = ahrs_att((enum att_axis) (ROLL));
 
 	// Store kill state info. 
 	bool alive_state = alive();
@@ -99,6 +100,14 @@ void run()
 					_FLOAT(dstate[4], 6) << ' ' << _FLOAT(dstate[5], 6) << '\n';
 			}
 
+            // Return estimated forces.
+            else if (c == 'f')
+            {
+				Serial << _FLOAT(motors.forces[0], 6) << ' ' << _FLOAT(motors.forces[1], 6) << ' ' << 
+					_FLOAT(motors.forces[2], 6) << ' ' << _FLOAT(motors.forces[3], 6) << ' ' <<
+					_FLOAT(motors.forces[4], 6) << ' ' << _FLOAT(motors.forces[5], 6) << '\n';
+            }
+
 			// Return thrust settings.
 			if (c == 't')
 			{
@@ -134,7 +143,7 @@ void run()
             else if (c == 'h' && !SIM)
                 Serial << ahrs_att((enum att_axis) (YAW)) << '\n';
 
-			// Reset north heading, state, and desired state.
+			// Reset INITIAL_YAW heading, state, and desired state.
 			else if (c == 'x' && !SIM)
             {
                 state[F] = 0.0;
@@ -143,7 +152,7 @@ void run()
                 desired[H] = 0.0;
                 current[F] = 0.0;
                 current[H] = 0.0;
-				north = ahrs_att((enum att_axis) (YAW));
+				INITIAL_YAW = ahrs_att((enum att_axis) (YAW));
             }
 
             // Print the amount of voltage left.
@@ -176,7 +185,7 @@ void run()
             state[3] = 0.0;
 			pause = true;
 			pause_time = millis();
-			north = ahrs_att((enum att_axis) (YAW)); 
+			INITIAL_YAW = ahrs_att((enum att_axis) (YAW)); 
 		}
 
 		// Regular running.
@@ -184,7 +193,7 @@ void run()
 		{
 			// Kalman filter removes noise from measurements and estimates the new
 			// state. Assume angle is correct so no need for EKF.
-			ktime = kalman.compute(state, covar, current[Y], ktime);
+			ktime = kalman.compute(state, covar, new float[3]{current[Y], current[P], current[R]}, ktime);
 
 			// Find sumbarine state.
 			current[F] = state[0];
@@ -192,10 +201,11 @@ void run()
             if (!SIM)
             {
 			    current[V] = (analogRead(NPIN) - 230.0)/65.0;
-                current[Y] = ahrs_att((enum att_axis) (YAW)) - north;
-                current[Y] += (current[Y] > 360.0) ? -360.0 : (current[Y] < 0.0) ? 360.0 : 0.0;
-                current[P] = ahrs_att((enum att_axis) (PITCH));
-                current[R] = ahrs_att((enum att_axis) (ROLL));
+                current[Y] = ahrs_att((enum att_axis) (YAW)) - INITIAL_YAW;
+                current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
+                current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
+                for (int i = BODY_DOF; i < GYRO_DOF; i++)
+                    current[i] += (current[i] > 360.0) ? -360.0 : (current[i] < 0.0) ? 360.0 : 0.0;
             }
 
 		    // Compute state difference.

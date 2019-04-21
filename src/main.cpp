@@ -102,22 +102,6 @@ void run()
 			if (c == 'a')
 				Serial << alive() << '\n';
 
-			// Return accelerometer bias. 
-			else if (c == 'b')
-				Serial << _FLOAT(kalman.m_bias[0], 6) << ' ' << _FLOAT(kalman.m_bias[1], 6) << '\n';
-
-			// Return original measurements.
-			else if (c == 'm')
-				Serial << _FLOAT(kalman.m_orig[0], 6) << ' ' << _FLOAT(kalman.m_orig[1], 6) << '\n';
-
-			// Return Kalman filter state and covariance.
-			else if (c == 'k')
-			{
-				Serial << _FLOAT(state[0], 6) << ' ' << _FLOAT(state[1], 6) << ' ' << 
-					_FLOAT(state[2], 6) << ' ' << _FLOAT(state[3], 6) << ' ' <<
-					_FLOAT(state[4], 6) << ' ' << _FLOAT(state[5], 6) << '\n';
-			}
-
 			// Return current state.
 			else if (c == 'c')
 			{
@@ -177,18 +161,15 @@ void run()
             else if (c == 'h' && !SIM)
                 Serial << ahrs_att((enum att_axis) (YAW)) << '\n';
 
-			// Reset north heading. 
+			// Reset north heading, state, and desired state.
 			else if (c == 'x' && !SIM)
             {
-                state[0] = 0.0;
-                state[1] = 0.0;
-                state[2] = 0.0;
-                state[3] = 0.0;
-                state[4] = 0.0;
-                state[5] = 0.0;
+                state[F] = 0.0;
+                state[H] = 0.0;
+                desired[F] = 0.0;
+                desired[H] = 0.0;
                 current[F] = 0.0;
                 current[H] = 0.0;
-                // current[V] = 0.0;
 				north = ahrs_att((enum att_axis) (YAW));
             }
 

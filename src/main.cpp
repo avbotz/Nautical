@@ -233,7 +233,7 @@ void run()
             dstate[V] = desired[V] - current[V];
 
             // Compute PID within motors and set thrust.
-			mtime = motors.run(dstate, mtime);
+			mtime = motors.run(dstate, new float[3]{current[Y], current[P], current[R]}, mtime);
         }
         else 
         {

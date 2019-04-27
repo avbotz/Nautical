@@ -3,6 +3,7 @@
 #include "motor.hpp"
 #include "m5/io_m5.h"
 #include "util.hpp"
+#include "rotation.h"
 
 
 Motors::Motors()
@@ -36,7 +37,7 @@ void Motors::pause()
 	io_m5_trans_stop();
 }
 
-uint32_t Motors::run(float *dstate, uint32_t t)
+uint32_t Motors::run(float *dstate, float *angles, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
@@ -67,14 +68,18 @@ uint32_t Motors::run(float *dstate, uint32_t t)
 	if (!SIM) power();
 	
     // Compute forces from motors.
-    /*
+    float bforces[BODY_DOF];
     float MOUNT_ANGLE = sin(45.0);
-    for (int i = 0; i < DOF; i++)
-        forces[i] = 0.0f;
-    forces[F] = MOUNT_ANGLE*(thrust[4]-thrust[5]-thrust[6]+thrust[7]);
-    forces[H] = MOUNT_ANGLE*(thrust[4]+thrust[5]+thrust[6]+thrust[7]);
-    forces[V] = thrust[0]-thrust[1]-thrust[2]+thrust[3];
-    */
+    for (int i = 0; i < BODY_DOF; i++)
+        bforces[i] = 0.0f;
+    bforces[F] = MOUNT_ANGLE*(thrust[4]-thrust[5]-thrust[6]+thrust[7]);
+    bforces[H] = MOUNT_ANGLE*(thrust[4]+thrust[5]+thrust[6]+thrust[7]);
+    bforces[V] = thrust[0]-thrust[1]-thrust[2]+thrust[3];
+    float iforces[BODY_DOF];
+    body_to_inertial(bforces, angles, iforces);
+    forces[F] = iforces[F];
+    forces[H] = iforces[H];
+    forces[V] = iforces[V]; 
 
     return temp;
 }

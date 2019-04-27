@@ -10,6 +10,7 @@
 #include "io.hpp"
 #include "memory.h"
 #include "servo.h"
+#include "rotation.h"
 #include "voltage.hpp"
 
 
@@ -131,12 +132,21 @@ void run()
 					desired[i] = Serial.parseFloat();
 			
 			// Receive new desired state (relative).
+            // Order goes F, H, V then angles.
 			else if (c == 'r')
 			{
-				for (int i = 0; i < BODY_DOF; i++)
-					desired[i] += Serial.parseFloat();
-				for (int i = BODY_DOF; i < GYRO_DOF; i++)
-					desired[i] = angle_add(desired[i], Serial.parseFloat());
+                for (int i = 0; i < DOF; i++)
+                    desired[i] = current[i];
+                float temp1[3];
+                float temp2[3] = {current[Y], current[P], current[R]};
+                for (int i = 0; i < BODY_DOF; i++)
+					temp1[i] = Serial.parseFloat();
+                float temp[3];
+                body_to_inertial(temp1, temp2, temp);
+                for (int i = 0; i < BODY_DOF; i++)
+                    desired[i] += temp[i];
+                for (int i = BODY_DOF; i < GYRO_DOF; i++)
+                    desired[i] = angle_add(current[i], Serial.parseFloat());
 			}
 
             // Get raw heading.
@@ -193,7 +203,8 @@ void run()
 		{
 			// Kalman filter removes noise from measurements and estimates the new
 			// state. Assume angle is correct so no need for EKF.
-			ktime = kalman.compute(state, covar, new float[3]{current[Y], current[P], current[R]}, ktime);
+            float temp1[3] = {current[Y], current[P], current[R]};
+			ktime = kalman.compute(state, covar, temp1, ktime);
 
 			// Find sumbarine state.
 			current[F] = state[0];
@@ -233,7 +244,8 @@ void run()
             dstate[V] = desired[V] - current[V];
 
             // Compute PID within motors and set thrust.
-			mtime = motors.run(dstate, new float[3]{current[Y], current[P], current[R]}, mtime);
+            float temp2[3] = {current[Y], current[P], current[R]};
+			mtime = motors.run(dstate, temp2, mtime);
         }
         else 
         {

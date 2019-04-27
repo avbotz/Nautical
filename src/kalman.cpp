@@ -61,7 +61,8 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
         // delete[] Kk;
         return temp;
     }
-    body_to_inertial(new float[3]{u, v, 0}, angles, m);
+    float temparr[3] = {u, v, 0};
+    body_to_inertial(temparr, angles, m);
     m_orig[0] = m[0];
     m_orig[1] = m[1];
     state[0] += m[0]*dt;

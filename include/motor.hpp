@@ -10,6 +10,7 @@
 struct Motors
 {
 	PID controllers[DOF];
+    int buttons[NUM_MOTORS];
 	float thrust[NUM_MOTORS];
     float forces[DOF];
 	float pid[DOF];
@@ -19,6 +20,7 @@ struct Motors
 
 	void power();
 	void pause();
+    void wiimote(int *buttons);
 	uint32_t run(float *dstate, float *angles, uint32_t t);
 };
 

@@ -60,6 +60,8 @@ void run()
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
 
+    Serial << "Finished setting up." << endl;
+
 	while (true)
 	{
 		// Ask AHRS to update. 
@@ -117,6 +119,23 @@ void run()
 					_FLOAT(motors.thrust[4], 6) << ' ' << _FLOAT(motors.thrust[5], 6) << ' ' << 
 					_FLOAT(motors.thrust[6], 6) << ' ' << _FLOAT(motors.thrust[7], 6) << '\n';
 			}
+            
+            // Wiimote data or thrust.
+            if (c == 'm')
+            {
+                float thrust[8];
+                for (int i = 0; i < 8; i++)
+                    thrust[i] = Serial.parseFloat();
+                m5_power(VERT_FL, thrust[0]);
+                m5_power(VERT_FR, thrust[1]);
+                m5_power(VERT_BL, thrust[2]);
+                m5_power(VERT_BR, thrust[3]);
+                m5_power(SURGE_FL, thrust[4]);
+                m5_power(SURGE_FR, thrust[5]);
+                m5_power(SURGE_BL, thrust[6]);
+                m5_power(SURGE_BR, thrust[7]);
+                m5_power_offer_resume();
+            }
 
 			// Return power setting.
 			else if (c == 'o')
@@ -124,8 +143,17 @@ void run()
 
 			// Receive new power setting.
 			else if (c == 'p')
+            {
 				motors.p = Serial.parseFloat();
-
+                if (motors.p < 0.05f)
+                {
+                    for (int i = 0; i < NUM_MOTORS; i++)
+                    {
+                        motors.thrust[i] = 0.0f;
+                        motors.buttons[i] = 0;
+                    }
+                }
+            }
 			// Receive new desired state.
 			else if (c == 's')
 				for (int i = 0; i < DOF; i++)
@@ -170,6 +198,34 @@ void run()
             {
                 float voltage = measure_voltage();
                 Serial << voltage << '\n';
+            }
+
+            // Wiimote buttons.
+            else if (c == 'w')
+            {
+                for (int i = 0; i < NUM_MOTORS; i++)
+                    motors.buttons[i] = Serial.parseInt();
+                if (motors.p > 0.05f) 
+                {
+                    float temp1[3] = {0, 0, 0};
+                    float temp2[3] = {current[Y], current[P], current[R]};
+                    if (motors.buttons[0] == 1)
+                        temp1[0] = 1.25;
+                    if (motors.buttons[1] == 1)
+                        temp1[1] = -0.75;
+                    if (motors.buttons[2] == 1)
+                        temp1[0] = -1.25;
+                    if (motors.buttons[3] == 1)
+                        temp1[1] = 0.75;
+                    if (motors.buttons[4] == 1)
+                        desired[Y] = angle_add(desired[Y], -30);
+                    if (motors.buttons[5] == 1)
+                        desired[Y] = angle_add(desired[Y], 30);
+                    float temp[3];
+                    body_to_inertial(temp1, temp2, temp);
+                    desired[F] = current[F] + temp[0];
+                    desired[H] = current[H] + temp[1];
+                }
             }
         }
 

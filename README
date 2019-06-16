@@ -52,6 +52,12 @@ COMMANDS
     X, Y, Z, Yaw, Pitch, Roll. This is relative to a North-East-Down coordinate
     frame.
 
+REMOTE
+
+    Marlin can also be controlled with WASD and arrow keys over a socket. To do
+    this, ensure that the remote_control node on Marlin's ROS stack is running
+    first. Then run "python manual.py".
+
 ADDITIONAL 
 
     Nautical uses a Kalman filter to reduce noise from DVL and other sensor

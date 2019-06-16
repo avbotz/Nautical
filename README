@@ -1,0 +1,67 @@
+ _   _             _   _           _ 
+| \ | | __ _ _   _| |_(_) ___ __ _| |
+|  \| |/ _` | | | | __| |/ __/ _` | |
+| |\  | (_| | |_| | |_| | (_| (_| | |
+|_| \_|\__,_|\__,_|\__|_|\___\__,_|_|
+
+Control code for the autonomous submarine, Marlin. 
+Copyright (C) 2019 AVBotz
+
+
+REQUIREMENTS 
+
+    Unix environment w/ connected Arduino.
+    Platformio. (sudo pip install -U platformio) 
+    Tmux (recommended, sudo apt-get install tmux)
+
+COMPILING
+
+    sudo make (local compile)
+    sudo make upload (compiles and uploads onto board, if connected)
+    sudo ./comms.sh && sudo chmod 666 /dev/ttyACM* (init serial communication)
+
+STARTUP
+
+    After compiling and uploading, run tmux in a terminal. Split the tmux window
+    into two panes. Run "cat < /dev/ttyACM*" in one and "cat > /dev/ttyACM*" in 
+    the other. The former pane is the DISPLAY pane, it will show the output from
+    Nautical. The latter is the COMMAND pane, it is where Nautical receives its
+    input.
+
+CONFIG
+    
+    All important configs are located and explained in "include/config.h". 
+    
+COMMANDS
+
+    (Check "src/main.cpp" for full list of commands.)
+
+    +---------------------+----------------------+-------------------+
+    |        Input        |     Description      |      Output       |
+    +---------------------+----------------------+-------------------+
+    | a                   | Kill switch (1=on).  | %i                |
+    | c                   | Sub location.        | %f %f %f %f %f %f |
+    | d                   | Sub destination.     | %f %f %f %f %f %f |
+    | p %f                | Set power (0-1).     | N/A               |
+    | s %f %f %f %f %f %f | Set destination.     | N/A               |
+    | r %f %f %f %f %f %f | Add relative state.  | N/A               |
+    | h                   | Raw heading (0-360). | N/A               |
+    +---------------------+----------------------+-------------------+
+    
+    Each 6 %f's represent a state, or sub position. The order of the numbers is
+    X, Y, Z, Yaw, Pitch, Roll. This is relative to a North-East-Down coordinate
+    frame.
+
+ADDITIONAL 
+
+    Nautical uses a Kalman filter to reduce noise from DVL and other sensor
+    readings. However, the current movement model doesn't represent Marlin's
+    movement well enough to provide a substantial upgrade over raw DVL data.
+
+    Nautical also needs better PID tunings or a slight change in the orientation
+    matrix. Marlin tends to pitch downward and strafe a bit to the right when
+    moving forward at high speeds.
+
+    Nautical can also be improved with quaternions over euler angles (:P).
+
+

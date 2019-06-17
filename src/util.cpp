@@ -22,7 +22,7 @@ float angle_add(float a1, float add)
 		return temp - 360.0;
 	else if (temp < 0)
 		return temp + 360.0;
-	
+
 	return temp;
 }
 

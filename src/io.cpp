@@ -39,16 +39,16 @@ void io()
 
 	// Start communication with DVL.
 	if (DVL_ON)
-    {
-        pinMode(19, INPUT);  
-        pinMode(A5, INPUT);
-        digitalWrite(19, HIGH);
-        io_dvl_init(dvl_receive_handler);
-        io_dvl_recv_begin();
-        // delay(5000);
-        dvl_set_data_format();
-        dvl_begin_pinging();
-    }
+	{
+		pinMode(19, INPUT);  
+		pinMode(A5, INPUT);
+		digitalWrite(19, HIGH);
+		io_dvl_init(dvl_receive_handler);
+		io_dvl_recv_begin();
+		// delay(5000);
+		dvl_set_data_format();
+		dvl_begin_pinging();
+	}
 
 	// Start communication with the M5. 
 	io_m5_init("");
@@ -79,7 +79,7 @@ void drop(int idx)
 
 bool alive()
 {
-    if (SIM) return true;
-    return digitalRead(KILL_PIN) ? false : true;
+	if (SIM) return true;
+	return digitalRead(KILL_PIN) ? false : true;
 }
 

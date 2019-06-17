@@ -34,14 +34,14 @@ int memory_min = 0x7FFF; // default bigger value
  */
 int getFreeMemory()
 {
-    int free_memory;
+	int free_memory;
 
-    if((int)__brkval == 0)
-        free_memory = ((int)&free_memory) - ((int)&__bss_end);
-    else
-        free_memory = ((int)&free_memory) - ((int)__brkval);
+	if((int)__brkval == 0)
+		free_memory = ((int)&free_memory) - ((int)&__bss_end);
+	else
+		free_memory = ((int)&free_memory) - ((int)__brkval);
 
-    return free_memory;
+	return free_memory;
 }
 
 /**
@@ -49,11 +49,11 @@ int getFreeMemory()
  */
 void memoryCheck()
 {
-    int free_memory = getFreeMemory();
+	int free_memory = getFreeMemory();
 
-    if (free_memory < memory_min) memory_min = free_memory;
+	if (free_memory < memory_min) memory_min = free_memory;
 
-    return;
+	return;
 }
 
 /**
@@ -61,5 +61,5 @@ void memoryCheck()
  */
 int getMinMemory()
 {
-    return memory_min;
+	return memory_min;
 }

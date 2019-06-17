@@ -1,28 +1,5 @@
 #include <Arduino.h>
 
-/*void print_voltage() //old code
-{
-#define NUM_SAMPLES 10 //Number of samples per measurment (higher = bettery accuracy but longer time)
-	int sumB1 = 0; //used for algebra
-	int purgeAnalog = 0;
-	float calibrateB1 = 23.88349514563107; //used to calibrate circuit set for a 10 1 voltage devider assuuming 5v reference and other stuff
-	float voltageB1=0.0; //used as final volttage output
-	unsigned char sample_count = 0;
-	purgeAnalog = analogRead(A1); //preping ardino to read pin A1
-	delay(10);
-	while (sample_count < NUM_SAMPLES)
-	{ 
-		sumB1 += analogRead(A1);
-		delay(10);
-		sample_count++;
-	}
-	sample_count=0;
-
-	voltageB1 = (((float)sumB1 / (float)NUM_SAMPLES * 5.0) / 1024.0)*(float)calibrateB1; //calculating voltage WORKS!!!
-	Serial.print("Battery Both = "); //returning voltages
-	Serial.println(voltageB1);
-}*/
-
 float measure_voltage() 
 {
 	uint8_t num_samples = 10;

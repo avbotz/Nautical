@@ -11,11 +11,11 @@ Kalman::Kalman()
 {
 	this->skip = 1000;
 	this->iter = 1000;
-    for (int i = 0; i < M; i++)
-    {
-        m_orig[i] = 0.0f;
-        m_bias[i] = 0.0f;
-    }
+	for (int i = 0; i < M; i++)
+	{
+		m_orig[i] = 0.0f;
+		m_bias[i] = 0.0f;
+	}
 	// this->bias();
 }
 
@@ -45,40 +45,40 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
 	float dt = (temp - t)/(float)(1000000);
-	
-    // Receive measurements, taking into account accelerometer bias. Harsh
+
+	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
-    float *m = new float[3];
-    float t1 = dvl_get_forward_vel()/100000.0f;
-    float t2 = dvl_get_starboard_vel()/100000.0f;
-    float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
-    float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
-    m_orig[0] = dvl_get_forward_vel();
+	float *m = new float[3];
+	float t1 = dvl_get_forward_vel()/100000.0f;
+	float t2 = dvl_get_starboard_vel()/100000.0f;
+	float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
+	float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
+	m_orig[0] = dvl_get_forward_vel();
 	m_orig[1] = dvl_get_starboard_vel();
-    if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
-    {
-        delete[] m;
-        // delete[] Kk;
-        return temp;
-    }
-    float temparr[3] = {u, v, 0};
-    body_to_inertial(temparr, angles, m);
-    m_orig[0] = m[0];
-    m_orig[1] = m[1];
-    state[0] += m[0]*dt;
-    state[3] += m[1]*dt;
-    delete[] m; 
-/*
+	if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
+	{
+		delete[] m;
+		// delete[] Kk;
+		return temp;
+	}
+	float temparr[3] = {u, v, 0};
+	body_to_inertial(temparr, angles, m);
+	m_orig[0] = m[0];
+	m_orig[1] = m[1];
+	state[0] += m[0]*dt;
+	state[3] += m[1]*dt;
+	delete[] m; 
+	/*
 	// Predict new state using model.
 	// X, VX, AX, Y, VY, AY.
 	float *a1 = new float[N];
 	float Fk[N*N] = {
-		1, dt, 0, 0, 0, 0,
-		0, 1, dt, 0, 0, 0,
-		0, 0, 1, 0, 0, 0,
-		0, 0, 0, 1, dt, 0,
-		0, 0, 0, 0, 1, dt,
-		0, 0, 0, 0, 0, 1
+	1, dt, 0, 0, 0, 0,
+	0, 1, dt, 0, 0, 0,
+	0, 0, 1, 0, 0, 0,
+	0, 0, 0, 1, dt, 0,
+	0, 0, 0, 0, 1, dt,
+	0, 0, 0, 0, 0, 1
 	};
 	multiply(Fk, state, N, N, 1, a1);
 	memcpy(state, a1, sizeof(float)*N);
@@ -118,26 +118,26 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
-    float *m = new float[M];
-    float t1 = dvl_get_forward_vel()/100000.0f;
-    float t2 = dvl_get_starboard_vel()/100000.0f;
-    float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
-    float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
-    m_orig[0] = dvl_get_forward_vel();
+	float *m = new float[M];
+	float t1 = dvl_get_forward_vel()/100000.0f;
+	float t2 = dvl_get_starboard_vel()/100000.0f;
+	float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
+	float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
+	m_orig[0] = dvl_get_forward_vel();
 	m_orig[1] = dvl_get_starboard_vel();
-    if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
-    {
-        delete[] m;
-        // delete[] Kk;
-        return temp;
-    }
+	if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
+	{
+	delete[] m;
+	// delete[] Kk;
+	return temp;
+	}
 	m[0] = u*cos(heading*D2R) - v*sin(heading*D2R);
 	m[1] = u*sin(heading*D2R) + v*cos(heading*D2R);
-    m_orig[0] = m[0];
-    m_orig[1] = m[1];
-    state[0] += m[0]*dt;
-    state[3] += m[1]*dt;
-    delete[] m; 
+	m_orig[0] = m[0];
+	m_orig[1] = m[1];
+	state[0] += m[0]*dt;
+	state[3] += m[1]*dt;
+	delete[] m; 
 
 	// Update state using measurements and Kalman gain.
 	float *d1 = new float[M];
@@ -165,10 +165,10 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	delete[] e1;
 	delete[] e2;
 	delete[] e3;
-	
+
 	delete[] m;
 	delete[] Kk;
-*/
+	*/
 	return temp;
 }
 

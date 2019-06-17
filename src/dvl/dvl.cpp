@@ -382,7 +382,6 @@ bool dvl_receive_handler()
     {
         return EOF;
     }
-    Serial.println("LYNCH NIGGERFAGGOTS");
     delay(1000);
     assert(0); // Should never get here
 }

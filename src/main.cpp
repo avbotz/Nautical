@@ -8,8 +8,6 @@
 #include "util.hpp"
 #include "pid.hpp"
 #include "io.hpp"
-#include "memory.h"
-#include "servo.h"
 #include "rotation.h"
 #include "voltage.hpp"
 

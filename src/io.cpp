@@ -11,8 +11,6 @@
 #include "io.hpp"
 #include "motor.hpp"
 
-ServoTimer2 dropper1, dropper2;
-
 
 void io()
 {
@@ -27,15 +25,8 @@ void io()
 
 	// Start communication with depth.
 	pinMode(NPIN, INPUT);
-
 	pinMode(49, OUTPUT);
 	digitalWrite(49, HIGH); 
-
-	// Setup droppers. 
-	dropper1.attach(8);
-	dropper2.attach(9);
-	dropper1.write(2400);
-	dropper2.write(2400);
 
 	// Start communication with DVL.
 	if (DVL_ON)
@@ -53,28 +44,6 @@ void io()
 	// Start communication with the M5. 
 	io_m5_init("");
 	io_m5_trans_set(m5_power_trans);	
-}
-
-void drop(int idx)
-{
-	if (idx == 0)
-	{
-		int angle = dropper1.read();
-		if (angle > 1700)
-			dropper1.write(600);
-		if (angle <= 1700)
-			dropper1.write(2700);
-		// Serial.println(dropper1.read());
-	}
-	else
-	{
-		int angle = dropper2.read();
-		if (angle > 1700)
-			dropper2.write(600);
-		if (angle <= 1700)
-			dropper2.write(2400);
-		// Serial.println(dropper2.read());
-	}
 }
 
 bool alive()

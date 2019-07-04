@@ -7,14 +7,15 @@
 #include "kalman.hpp"
 #include "rotation.h"
 
+
 Kalman::Kalman()
 {
 	this->skip = 1000;
 	this->iter = 1000;
 	for (int i = 0; i < M; i++)
 	{
-		m_orig[i] = 0.0f;
-		m_bias[i] = 0.0f;
+		m_orig[i] = 0.;
+		m_bias[i] = 0.;
 	}
 	// this->bias();
 }
@@ -23,7 +24,7 @@ void Kalman::bias()
 {
 	// Compute initial bias from the accelerometer.
 	for (int i = 0; i < M; i++)
-		m_bias[i] = 0.0;
+		m_bias[i] = 0.;
 	for (int i = 0; i < skip; i++)
 	{
 		delay(1);
@@ -49,13 +50,13 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.
 	float *m = new float[3];
-	float t1 = dvl_get_forward_vel()/100000.0f;
-	float t2 = dvl_get_starboard_vel()/100000.0f;
-	float u = cos(45.f*D2R)*t1 - sin(45.f*D2R)*t2;
-	float v = sin(45.f*D2R)*t1 + cos(45.f*D2R)*t2;
+	float t1 = dvl_get_forward_vel()/100000.;
+	float t2 = dvl_get_starboard_vel()/100000.;
+	float u = cos(45.*D2R)*t1 - sin(45.*D2R)*t2;
+	float v = sin(45.*D2R)*t1 + cos(45.*D2R)*t2;
 	m_orig[0] = dvl_get_forward_vel();
 	m_orig[1] = dvl_get_starboard_vel();
-	if (fabs(t1) > 3.0f || fabs(t2) > 3.0f)
+	if (fabs(t1) > 3. || fabs(t2) > 3.)
 	{
 		delete[] m;
 		// delete[] Kk;
@@ -68,6 +69,7 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	state[0] += m[0]*dt;
 	state[3] += m[1]*dt;
 	delete[] m; 
+
 	/*
 	// Predict new state using model.
 	// X, VX, AX, Y, VY, AY.

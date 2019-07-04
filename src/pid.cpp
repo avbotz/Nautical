@@ -22,9 +22,9 @@ float PID::calculate(float error, float dt, float min)
 	float dout = this->kd * (error - this->prev) / dt;
 	this->prev = error;
 	float output = pout + iout + dout;
-	float dir = 1.0;
-	if (output < 0) dir = -1.0;
+	float dir = 1.;
+	if (output < 0) dir = -1.;
 
-	float out = limit(limit(output, -2.0f, 2.0f), min);
+	float out = limit(limit(output, -2., 2.), min);
 	return out;
 }

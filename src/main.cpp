@@ -20,7 +20,7 @@ void run()
 	// Set initial heading to current heading or pool.
 	float INITIAL_YAW, INITIAL_PITCH, INITIAL_ROLL; 
 	if (!SIM) ahrs_att_update();
-	INITIAL_YAW = INITIAL_HEADING ? ahrs_att((enum att_axis) (YAW)) : FAR ? 225.0f : 340.0f; 
+	INITIAL_YAW = INITIAL_HEADING?ahrs_att((enum att_axis)(YAW)):FAR?225.:340.; 
 	INITIAL_PITCH = ahrs_att((enum att_axis) (PITCH));
 	INITIAL_ROLL = ahrs_att((enum att_axis) (ROLL));
 
@@ -48,17 +48,15 @@ void run()
 	};
 
 	// Current state represents location, while desired state holds destination.
-	float current[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-	float desired[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+	float current[DOF] = { 0., 0., 0., 0., 0., 0. };
+	float desired[DOF] = { 0., 0., 0., 0., 0., 0. };
 
 	// Hold difference between the states.
-	float dstate[DOF] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+	float dstate[DOF] = { 0., 0., 0., 0., 0., 0. };
 
-	// Initial time, helps compute time difference.
+	// Initial time to compute time difference.
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
-
-	Serial << "Finished setting up." << endl;
 
 	while (true)
 	{
@@ -80,45 +78,39 @@ void run()
 			// Return current state.
 			else if (c == 'c')
 			{
-				Serial << _FLOAT(current[0], 6) << ' ' << _FLOAT(current[1], 6) << ' ' << 
-					_FLOAT(current[2], 6) << ' ' << _FLOAT(current[3], 6) << ' ' <<
-					_FLOAT(current[4], 6) << ' ' << _FLOAT(current[5], 6) << '\n';
+				for (int i = 0; i < DOF; i++)
+					Serial << _FLOAT(current[i], 6) << ' '; Serial << '\n';
 			}
 
 			// Return desired state.
 			else if (c == 'd')
 			{
-				Serial << _FLOAT(desired[0], 6) << ' ' << _FLOAT(desired[1], 6) << ' ' << 
-					_FLOAT(desired[2], 6) << ' ' << _FLOAT(desired[3], 6) << ' ' <<
-					_FLOAT(desired[4], 6) << ' ' << _FLOAT(desired[5], 6) << '\n';
+				for (int i = 0; i < DOF; i++)
+					Serial << _FLOAT(desired[i], 6) << ' '; Serial << '\n';
 			}
 
 			// Return state difference.
 			else if (c == 'e')
 			{
-				Serial << _FLOAT(dstate[0], 6) << ' ' << _FLOAT(dstate[1], 6) << ' ' << 
-					_FLOAT(dstate[2], 6) << ' ' << _FLOAT(dstate[3], 6) << ' ' <<
-					_FLOAT(dstate[4], 6) << ' ' << _FLOAT(dstate[5], 6) << '\n';
+				for (int i = 0; i < DOF; i++)
+					Serial << _FLOAT(dstate[i], 6) << ' '; Serial << '\n';
 			}
 
 			// Return estimated forces.
 			else if (c == 'f')
 			{
-				Serial << _FLOAT(motors.forces[0], 6) << ' ' << _FLOAT(motors.forces[1], 6) << ' ' << 
-					_FLOAT(motors.forces[2], 6) << ' ' << _FLOAT(motors.forces[3], 6) << ' ' <<
-					_FLOAT(motors.forces[4], 6) << ' ' << _FLOAT(motors.forces[5], 6) << '\n';
+				for (int i = 0; i < DOF; i++)
+					Serial << _FLOAT(motors.forces[i], 6) << ' '; Serial << '\n';
 			}
 
 			// Return thrust settings.
 			if (c == 't')
 			{
-				Serial << _FLOAT(motors.thrust[0], 6) << ' ' << _FLOAT(motors.thrust[1], 6) << ' ' << 
-					_FLOAT(motors.thrust[2], 6) << ' ' << _FLOAT(motors.thrust[3], 6) << ' ' <<
-					_FLOAT(motors.thrust[4], 6) << ' ' << _FLOAT(motors.thrust[5], 6) << ' ' << 
-					_FLOAT(motors.thrust[6], 6) << ' ' << _FLOAT(motors.thrust[7], 6) << '\n';
+				for (int i = 0; i < NUM_MOTORS; i++)
+					Serial << _FLOAT(motors.thrust[i], 6) << ' '; Serial << '\n';
 			}
 
-			// Wiimote data or thrust.
+			// Short burst of motor power.
 			if (c == 'm')
 			{
 				float thrust[8];
@@ -143,11 +135,11 @@ void run()
 			else if (c == 'p')
 			{
 				motors.p = Serial.parseFloat();
-				if (motors.p < 0.05f)
+				if (motors.p < 0.05)
 				{
 					for (int i = 0; i < NUM_MOTORS; i++)
 					{
-						motors.thrust[i] = 0.0f;
+						motors.thrust[i] = 0.;
 						motors.buttons[i] = 0;
 					}
 				}
@@ -182,12 +174,15 @@ void run()
 			// Reset INITIAL_YAW heading, state, and desired state.
 			else if (c == 'x' && !SIM)
 			{
-				state[F] = 0.0;
-				state[H] = 0.0;
-				desired[F] = 0.0;
-				desired[H] = 0.0;
-				current[F] = 0.0;
-				current[H] = 0.0;
+				state[F] = 0.;
+				state[H] = 0.;
+				desired[F] = 0.;
+				desired[H] = 0.;
+				desired[V] = 0.;
+				desired[Y] = 0.;
+				current[F] = 0.;
+				current[H] = 0.;
+				current[Y] = 0.;
 				INITIAL_YAW = ahrs_att((enum att_axis) (YAW));
 			}
 
@@ -203,22 +198,23 @@ void run()
 			{
 				for (int i = 0; i < NUM_MOTORS; i++)
 					motors.buttons[i] = Serial.parseInt();
-				if (motors.p > 0.05f) 
+				if (motors.p > 0.01) 
 				{
+					// Relative distance of 10 ensures max speed is used.
 					float temp1[3] = {0, 0, 0};
 					float temp2[3] = {current[Y], current[P], current[R]};
 					if (motors.buttons[0] == 1)
-						temp1[0] = 1.25;
+						temp1[0] = 10.;
 					if (motors.buttons[1] == 1)
-						temp1[1] = -0.75;
+						temp1[1] = -10.;
 					if (motors.buttons[2] == 1)
-						temp1[0] = -1.25;
+						temp1[0] = -10.;
 					if (motors.buttons[3] == 1)
-						temp1[1] = 0.75;
+						temp1[1] = 10.;
 					if (motors.buttons[4] == 1)
-						desired[Y] = angle_add(desired[Y], -30);
+						desired[Y] = angle_add(desired[Y], -10.);
 					if (motors.buttons[5] == 1)
-						desired[Y] = angle_add(desired[Y], 30);
+						desired[Y] = angle_add(desired[Y], 10.);
 					float temp[3];
 					body_to_inertial(temp1, temp2, temp);
 					desired[F] = current[F] + temp[0];
@@ -240,13 +236,13 @@ void run()
 			motors.pause();
 
 		// Just unkilled, allow motors time to restart. 
-		if (!alive_state_prev && alive_state &!SIM)
+		if (!alive_state_prev && alive_state && !SIM)
 		{ 
 			// Set state to 0 when running semis.
-			current[F] = 0;
-			current[H] = 0;
-			state[0] = 0.0;
-			state[3] = 0.0;
+			current[F] = 0.;
+			current[H] = 0.;
+			state[0] = 0.;
+			state[3] = 0.;
 			pause = true;
 			pause_time = millis();
 			INITIAL_YAW = ahrs_att((enum att_axis) (YAW)); 
@@ -265,25 +261,28 @@ void run()
 			current[H] = state[3];
 			if (!SIM)
 			{
-				current[V] = (analogRead(NPIN) - 230.0)/65.0;
+				current[V] = (analogRead(NPIN)-230.)/65.;
 				current[Y] = ahrs_att((enum att_axis) (YAW)) - INITIAL_YAW;
 				current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
 				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
 				for (int i = BODY_DOF; i < GYRO_DOF; i++)
-					current[i] += (current[i] > 360.0) ? -360.0 : (current[i] < 0.0) ? 360.0 : 0.0;
+					current[i] += current[i]>360.?-360.:current[i] < 0.?360.:0.;
 			}
 
 			// Compute state difference.
 			for (int i = 0; i < DOF; i++)
-				dstate[i] = 0.0f;
+				dstate[i] = 0.;
 
-			// Change heading if desired state is far away.
-			if (fabs(desired[F]-current[F]) > 3.0 || fabs(desired[H]-current[H] > 3.0))
+			// Change heading if desired state is far. Turned off for now
+			// because we want to rely on DVL > AHRS.
+			/*
+			if (fabs(desired[F]-current[F]) > 3. || fabs(desired[H]-current[H] > 3.))
 				desired[Y] = atan2(desired[H]-current[H], desired[F]-current[F]) * R2D;
-			desired[Y] += (desired[Y] > 360.0) ? -360.0 : (desired[Y] < 0.0) ? 360.0 : 0.0;
+			desired[Y] += (desired[Y] > 360.) ? -360. : (desired[Y] < 0.) ? 360. : 0.;
+			*/
 
 			// Only handle angle if it is bad.
-			if (fabs(angle_difference(desired[Y], current[Y])) > 5.0)
+			if (fabs(angle_difference(desired[Y], current[Y])) > 5.)
 			{
 				dstate[Y] = angle_difference(desired[Y], current[Y]);
 			}
@@ -300,16 +299,6 @@ void run()
 			// Compute PID within motors and set thrust.
 			float temp2[3] = {current[Y], current[P], current[R]};
 			mtime = motors.run(dstate, temp2, mtime);
-		}
-		else 
-		{
-			ktime = micros();
-			mtime = micros();
-			if (DVL_ON)
-			{
-				kalman.m_orig[0] = dvl_get_forward_vel();
-				kalman.m_orig[1] = dvl_get_starboard_vel();
-			}
 		}
 	}
 }

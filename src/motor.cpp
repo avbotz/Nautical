@@ -11,14 +11,14 @@ Motors::Motors()
 	for (int i = 0; i < DOF; i++)
 		this->controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
 	for (int i = 0; i < NUM_MOTORS; i++)
-		this->thrust[i] = 0.0f;
+		this->thrust[i] = 0.;
 	for (int i = 0; i < NUM_MOTORS; i++)
 		this->buttons[i] = 0;
 	for (int i = 0; i < DOF; i++)
-		this->forces[i] = 0.0f;
+		this->forces[i] = 0.;
 	for (int i = 0; i < DOF; i++)
-		this->pid[i] = 0.0f;
-	this->p = 0.0f;
+		this->pid[i] = 0.;
+	this->p = 0.;
 }
 
 void Motors::power()
@@ -42,7 +42,7 @@ void Motors::pause()
 void Motors::wiimote(int *buttons)
 {
 	for (int i = 0; i < NUM_MOTORS; i++)
-		thrust[i] = 0.0f;
+		thrust[i] = 0.;
 
 	// Default down thrust, used to keep sub in place.
 	thrust[0] += 0.15;
@@ -142,26 +142,26 @@ uint32_t Motors::run(float *dstate, float *angles, uint32_t t)
 
 	// Default body motors to 0.
 	for (int i = 0; i < NUM_MOTORS; i++)
-		thrust[i] = 0.0f;
-	if (p > 0.01f)
+		thrust[i] = 0.;
+	if (p > 0.01)
 	{
-		thrust[0] += 0.15f;
-		thrust[1] -= 0.15f;
-		thrust[2] -= 0.15f;
-		thrust[3] += 0.15f;
+		thrust[0] += 0.15;
+		thrust[1] -= 0.15;
+		thrust[2] -= 0.15;
+		thrust[3] += 0.15;
 	}
 
 	// Compute final thrust given to each motor based on orientation matrix.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
-			thrust[i] += p * pid[j] * ORIENTATION[i][j];
+			thrust[i] += p*pid[j]*ORIENTATION[i][j];
 	if (!SIM) power();
 
 	// Compute forces from motors.
 	float bforces[BODY_DOF];
-	float MOUNT_ANGLE = sin(45.0);
+	float MOUNT_ANGLE = sin(45.);
 	for (int i = 0; i < BODY_DOF; i++)
-		bforces[i] = 0.0f;
+		bforces[i] = 0.;
 	bforces[F] = MOUNT_ANGLE*(thrust[4]-thrust[5]-thrust[6]+thrust[7]);
 	bforces[H] = MOUNT_ANGLE*(thrust[4]+thrust[5]+thrust[6]+thrust[7]);
 	bforces[V] = thrust[0]-thrust[1]-thrust[2]+thrust[3];

@@ -46,6 +46,7 @@ COMMANDS
     | s %f %f %f %f %f %f | Set destination.     | N/A               |
     | r %f %f %f %f %f %f | Add relative state.  | N/A               |
     | h                   | Raw heading (0-360). | N/A               |
+    | x                   | Reset all states.    | N/A               |
     +---------------------+----------------------+-------------------+
     
     Each 6 %f's represent a state, or sub position. The order of the numbers is
@@ -56,7 +57,7 @@ REMOTE
 
     Marlin can also be controlled with WASD and arrow keys over a socket. To do
     this, ensure that the remote_control node on Marlin's ROS stack is running
-    first. Then run "python manual.py".
+    first. Then run "sudo python manual.py".
 
 ADDITIONAL 
 

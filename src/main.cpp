@@ -14,30 +14,26 @@
 
 void run()
 {
-	// Start IO between Nautical and hardware.
 	if (!SIM) io();
-
-	// Set initial heading to current heading or pool.
-	float INITIAL_YAW, INITIAL_PITCH, INITIAL_ROLL; 
 	if (!SIM) ahrs_att_update();
-	INITIAL_YAW = INITIAL_HEADING?ahrs_att((enum att_axis)(YAW)):FAR?225.:340.; 
+
+	float INITIAL_YAW, INITIAL_PITCH, INITIAL_ROLL; 
+	if (USE_INITIAL_HEADING)
+		INITIAL_YAW = ahrs_att((enum att_axis) (YAW));
+	else 
+		INITIAL_YAW = FAR ? 225. : 340.;
 	INITIAL_PITCH = ahrs_att((enum att_axis) (PITCH));
 	INITIAL_ROLL = ahrs_att((enum att_axis) (ROLL));
 
-	// Store kill state info. 
 	bool alive_state = alive();
 	bool alive_state_prev = alive_state;
 	bool pause = false;
 	uint32_t pause_time;
 
-	// Setup motors.
 	Motors motors;
 
-	// Setup kalman filter, including state and covariance.
 	Kalman kalman;
-	float state[N] = {
-		0.000, 0.000, 0.000, 0.000, 0.000, 0.000
-	};
+	float state[N] = { 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 };
 	float covar[N*N] = {	
 		1.000, 0.000, 0.000, 0.000, 0.000, 0.000,
 		0.000, 1.000, 0.000, 0.000, 0.000, 0.000,
@@ -47,91 +43,38 @@ void run()
 		0.000, 0.000, 0.000, 0.000, 0.000, 1.000,
 	};
 
-	// Current state represents location, while desired state holds destination.
 	float current[DOF] = { 0., 0., 0., 0., 0., 0. };
 	float desired[DOF] = { 0., 0., 0., 0., 0., 0. };
 
-	// Hold difference between the states.
 	float dstate[DOF] = { 0., 0., 0., 0., 0., 0. };
 
-	// Initial time to compute time difference.
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
 
 	while (true)
 	{
-		// Ask AHRS to update. 
 		if (!SIM) ahrs_att_update();
 
-		// Ask DVL to update. 
 		if (DVL_ON && !SIM) dvl_data_update();
 
-		// Check for user input.
 		if (Serial.available() > 0)
 		{
 			char c = Serial.read();
 
-			// Return alive.
 			if (c == 'a')
+			{
 				Serial << alive() << '\n';
-
-			// Return current state.
+			}
 			else if (c == 'c')
 			{
 				for (int i = 0; i < DOF; i++)
 					Serial << _FLOAT(current[i], 6) << ' '; Serial << '\n';
 			}
-
-			// Return desired state.
 			else if (c == 'd')
 			{
 				for (int i = 0; i < DOF; i++)
 					Serial << _FLOAT(desired[i], 6) << ' '; Serial << '\n';
 			}
-
-			// Return state difference.
-			else if (c == 'e')
-			{
-				for (int i = 0; i < DOF; i++)
-					Serial << _FLOAT(dstate[i], 6) << ' '; Serial << '\n';
-			}
-
-			// Return estimated forces.
-			else if (c == 'f')
-			{
-				for (int i = 0; i < DOF; i++)
-					Serial << _FLOAT(motors.forces[i], 6) << ' '; Serial << '\n';
-			}
-
-			// Return thrust settings.
-			if (c == 't')
-			{
-				for (int i = 0; i < NUM_MOTORS; i++)
-					Serial << _FLOAT(motors.thrust[i], 6) << ' '; Serial << '\n';
-			}
-
-			// Short burst of motor power.
-			if (c == 'm')
-			{
-				float thrust[8];
-				for (int i = 0; i < 8; i++)
-					thrust[i] = Serial.parseFloat();
-				m5_power(VERT_FL, thrust[0]);
-				m5_power(VERT_FR, thrust[1]);
-				m5_power(VERT_BL, thrust[2]);
-				m5_power(VERT_BR, thrust[3]);
-				m5_power(SURGE_FL, thrust[4]);
-				m5_power(SURGE_FR, thrust[5]);
-				m5_power(SURGE_BL, thrust[6]);
-				m5_power(SURGE_BR, thrust[7]);
-				m5_power_offer_resume();
-			}
-
-			// Return power setting.
-			else if (c == 'o')
-				Serial << motors.p << '\n';
-
-			// Receive new power setting.
 			else if (c == 'p')
 			{
 				motors.p = Serial.parseFloat();
@@ -144,13 +87,11 @@ void run()
 					}
 				}
 			}
-			// Receive new desired state.
 			else if (c == 's')
+			{
 				for (int i = 0; i < DOF; i++)
 					desired[i] = Serial.parseFloat();
-
-			// Receive new desired state (relative).
-			// Order goes F, H, V then angles.
+			}
 			else if (c == 'r')
 			{
 				for (int i = 0; i < DOF; i++)
@@ -166,12 +107,10 @@ void run()
 				for (int i = BODY_DOF; i < GYRO_DOF; i++)
 					desired[i] = angle_add(current[i], Serial.parseFloat());
 			}
-
-			// Get raw heading.
 			else if (c == 'h' && !SIM)
+			{
 				Serial << ahrs_att((enum att_axis) (YAW)) << '\n';
-
-			// Reset INITIAL_YAW heading, state, and desired state.
+			}
 			else if (c == 'x' && !SIM)
 			{
 				state[F] = 0.;
@@ -185,15 +124,16 @@ void run()
 				current[Y] = 0.;
 				INITIAL_YAW = ahrs_att((enum att_axis) (YAW));
 			}
-
-			// Print the amount of voltage left.
+			else if (c == 'f')
+			{
+				for (int i = 0; i < DOF; i++)
+					Serial << _FLOAT(motors.forces[i], 6) << ' '; Serial << '\n';
+			}
 			else if (c == 'v') 
 			{
 				float voltage = measure_voltage();
 				Serial << voltage << '\n';
 			}
-
-			// Wiimote buttons.
 			else if (c == 'w')
 			{
 				for (int i = 0; i < NUM_MOTORS; i++)
@@ -223,55 +163,54 @@ void run()
 			}
 		}
 
-		// Save previous kill state and read new one.
 		alive_state_prev = alive_state;
 		alive_state = alive();
 
-		// Allow motors to start after pausing.
+		// Start motors after pause time has elapsed.
 		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
 			pause = false;
 
-		// Just killed, pause motor communcations.
+		// Pause motor communcations after killing and reset states so sub can
+		// restart mission on unkill.
 		if (alive_state_prev && !alive_state && !SIM)
+		{
 			motors.pause();
-
-		// Just unkilled, allow motors time to restart. 
-		if (!alive_state_prev && alive_state && !SIM)
-		{ 
-			// Set state to 0 when running semis.
-			current[F] = 0.;
-			current[H] = 0.;
 			state[0] = 0.;
 			state[3] = 0.;
-			pause = true;
-			pause_time = millis();
+			current[F] = 0.;
+			current[H] = 0.;
 			INITIAL_YAW = ahrs_att((enum att_axis) (YAW)); 
 		}
 
-		// Regular running.
+		// Allow motors time to restart after unkilling. 
+		if (!alive_state_prev && alive_state && !SIM)
+		{ 
+			pause = true;
+			pause_time = millis();
+		}
+
+		// Sub is allowed to operate.
 		if (SIM || (!pause && alive_state))
 		{
-			// Kalman filter removes noise from measurements and estimates the new
-			// state. Assume angle is correct so no need for EKF.
-			float temp1[3] = {current[Y], current[P], current[R]};
-			ktime = kalman.compute(state, covar, temp1, ktime);
-
-			// Find sumbarine state.
-			current[F] = state[0];
-			current[H] = state[3];
+			// Compute angles from AHRS and depth from pressure sensor.
 			if (!SIM)
 			{
 				current[V] = (analogRead(NPIN)-230.)/65.;
 				current[Y] = ahrs_att((enum att_axis) (YAW)) - INITIAL_YAW;
 				current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
 				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
-				for (int i = BODY_DOF; i < GYRO_DOF; i++)
-					current[i] += current[i]>360.?-360.:current[i] < 0.?360.:0.;
-			}
 
-			// Compute state difference.
-			for (int i = 0; i < DOF; i++)
-				dstate[i] = 0.;
+				// Handle angle overflow/underflow.
+			}
+			float temp[3] = { current[Y], current[P], current[R] };
+
+			// Kalman filter removes noise from measurements and estimates the new
+			// state. Assume angle is 100% correct so no need for EKF or UKF.
+			ktime = kalman.compute(state, covar, temp, ktime);
+
+			// Use KF for N and E components of state. 
+			current[F] = state[0];
+			current[H] = state[3];
 
 			// Change heading if desired state is far. Turned off for now
 			// because we want to rely on DVL > AHRS.
@@ -281,7 +220,10 @@ void run()
 			desired[Y] += (desired[Y] > 360.) ? -360. : (desired[Y] < 0.) ? 360. : 0.;
 			*/
 
-			// Only handle angle if it is bad.
+			// Compute the state difference. Change heading first if the error 
+			// is high. Make depth changes regardless. 
+			for (int i = 0; i < DOF; i++)
+				dstate[i] = 0.;
 			if (fabs(angle_difference(desired[Y], current[Y])) > 5.)
 			{
 				dstate[Y] = angle_difference(desired[Y], current[Y]);
@@ -297,8 +239,7 @@ void run()
 			dstate[V] = desired[V] - current[V];
 
 			// Compute PID within motors and set thrust.
-			float temp2[3] = {current[Y], current[P], current[R]};
-			mtime = motors.run(dstate, temp2, mtime);
+			mtime = motors.run(dstate, temp, mtime);
 		}
 	}
 }

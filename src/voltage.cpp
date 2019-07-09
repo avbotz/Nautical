@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+
 float measure_voltage() 
 {
 	uint8_t num_samples = 10;
@@ -15,7 +16,7 @@ float measure_voltage()
 	}
 
 	voltage = voltage/num_samples*5./1024.*cal_constant;
-	//voltage = ((voltage / num_samples*5.0) / 1024.0) //calibration
+	// voltage = ((voltage / num_samples*5.0) / 1024.0) 
 	return voltage;
 }
 

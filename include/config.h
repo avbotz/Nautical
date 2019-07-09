@@ -1,17 +1,21 @@
 #ifndef CONFIG_H
 #define CONFIG_H 
 
-/*
- * Options.
- */
 static const bool DVL_ON = false;
-static const bool INITIAL_HEADING = true;
+static const bool USE_INITIAL_HEADING = true;
 static const bool FAR = true;
 static const bool SIM = false;
 
-/*
- * Conversions.
- */ 
+static const int DOF = 6;
+static const int BODY_DOF = 3;
+static const int GYRO_DOF = 6;
+static const int F = 0;
+static const int H = 1;
+static const int V = 2;
+static const int Y = 3;
+static const int P = 4;
+static const int R = 5;
+
 #define D2R 3.1415/180.
 #define R2D 180./3.1415
 
@@ -19,7 +23,7 @@ static const bool SIM = false;
  * Motor ID Configuration.
  * 8 motors on the sub.
  * VERTICAL + SURGE for FL, FR, BL, BR.
- * Important! These must be in order from 1-8.
+ * Do NOT set an ID to 0, the motor will brick.
  */
 enum thruster
 {
@@ -37,8 +41,8 @@ static const int NUM_MOTORS = 8;
 
 /*
  * Motor Orientation Configuration.
- * Rows = motors, Columns = directions, Values = weights.
- * 1 means clockwise, -1 means counterclockwise, 0.00 means not used.
+ * Rows are motors, columns are directions.
+ * Positive means clockwise, negative means counterclockwise.
  */
 static const float ORIENTATION[8][6] = 
 {
@@ -47,8 +51,8 @@ static const float ORIENTATION[8][6] =
 	{ 0.00, 0.00, -1.0, 0.00, 1.00, 1.00 },
 	{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 },
 	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },
-	{ -1.0, 1.00, 0.00, 1.00, 0.00, 0.00 },
-	{ -1.0, 1.00, 0.00, -1.0, 0.00, 0.00 }, 
+	{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00 },
+	{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00 }, 
 	{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 }
 };
 
@@ -65,20 +69,5 @@ static const float GAINS[6][3] =
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 }
 };
-
-/*
- * Makes code more readable. 
- * Note, a for loop starting at BODY_DOF to GYRO_DOF only covers GYRO_DOF.
- * Forward (North), Horizontal (East), Vertical (Down), Yaw, Pitch, Roll.
- */
-static const int DOF = 6;
-static const int BODY_DOF = 3;
-static const int GYRO_DOF = 6;
-static const int F = 0;
-static const int H = 1;
-static const int V = 2;
-static const int Y = 3;
-static const int P = 4;
-static const int R = 5;
 
 #endif 

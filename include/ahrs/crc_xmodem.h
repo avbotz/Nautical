@@ -1,9 +1,12 @@
+/** @file crc_xmodem.h 
+ *  @brief Helper macros for CRC-XMODEM updating.
+ *  
+ *  @author Seth Girvan (Lord)
+ */
 #ifndef CRC_XMODEM_H
 #define CRC_XMODEM_H
 
-
 #define CRC_XMODEM_INIT_VAL 0x0000U
-
 
 #ifdef AVR
 #include <util/crc16.h> // use optimized avr crc function

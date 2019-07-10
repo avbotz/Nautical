@@ -1,0 +1,55 @@
+\hypertarget{crc__xmodem__generic_8h}{}\section{include/ahrs/crc\+\_\+xmodem\+\_\+generic.h File Reference}
+\label{crc__xmodem__generic_8h}\index{include/ahrs/crc\+\_\+xmodem\+\_\+generic.\+h@{include/ahrs/crc\+\_\+xmodem\+\_\+generic.\+h}}
+
+
+C\+RC update functions for testing.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for crc\+\_\+xmodem\+\_\+generic.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{crc__xmodem__generic_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{crc__xmodem__generic_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{crc__xmodem__generic_8h_a618a4e92162fc58fd2f3b8ba0b452e67}{generic\+\_\+crc\+\_\+xmodem\+\_\+update} (uint16\+\_\+t crc, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Update a C\+RC with 8 bits of additional data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+C\+RC update functions for testing. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{crc__xmodem__generic_8h_a618a4e92162fc58fd2f3b8ba0b452e67}\label{crc__xmodem__generic_8h_a618a4e92162fc58fd2f3b8ba0b452e67}} 
+\index{crc\+\_\+xmodem\+\_\+generic.\+h@{crc\+\_\+xmodem\+\_\+generic.\+h}!generic\+\_\+crc\+\_\+xmodem\+\_\+update@{generic\+\_\+crc\+\_\+xmodem\+\_\+update}}
+\index{generic\+\_\+crc\+\_\+xmodem\+\_\+update@{generic\+\_\+crc\+\_\+xmodem\+\_\+update}!crc\+\_\+xmodem\+\_\+generic.\+h@{crc\+\_\+xmodem\+\_\+generic.\+h}}
+\subsubsection{\texorpdfstring{generic\+\_\+crc\+\_\+xmodem\+\_\+update()}{generic\_crc\_xmodem\_update()}}
+{\footnotesize\ttfamily uint16\+\_\+t generic\+\_\+crc\+\_\+xmodem\+\_\+update (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{crc,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Update a C\+RC with 8 bits of additional data. 
+
+This is unoptimized and meant to be used for testing on computer. On avr, one should use the optimized \+\_\+crc\+\_\+xmodem\+\_\+update() in util/crc16.\+h
+
+\begin{DoxyReturn}{Returns}
+New C\+RC. 
+\end{DoxyReturn}

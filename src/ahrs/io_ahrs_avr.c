@@ -75,17 +75,6 @@ FILE *io_ahrs = &(FILE)FDEV_SETUP_STREAM(uart_ahrs_putchar, uart_ahrs_getchar,
 		_FDEV_SETUP_RW);
 
 
-/**
- * Assumes uart NUSART will be used and connected with the ahrs IEA-232
- * interface via a ttl<->IEA-232 converter.
- *
- * Per the TRAX PNI user manual:
- *     Start Bits: 1
- *     Number of Data Bits: 8
- *     Stop Bits: 1
- *     Parity: none
- *     Baud: BAUD
- */
 void io_ahrs_init(char const *path)
 {
 	(void)path;
@@ -192,8 +181,6 @@ static bool io_ahrs_tripbuf_update_crit()
  * May be interrupted by io_ahrs_tripbuf_offer, but cannot interrupt it (ie
  * this can be interrupted by handler_ahrs_recv, but one probably does not want
  * to call it from handler_ahrs_recv).
- *
- * returns whether there has been any new data since last call
  */
 bool io_ahrs_tripbuf_update()
 {

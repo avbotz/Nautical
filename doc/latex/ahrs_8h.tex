@@ -1,0 +1,194 @@
+\hypertarget{ahrs_8h}{}\section{include/ahrs/ahrs.h File Reference}
+\label{ahrs_8h}\index{include/ahrs/ahrs.\+h@{include/ahrs/ahrs.\+h}}
+
+
+Interface function definitions for the A\+H\+RS.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for ahrs.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{ahrs_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635}\label{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635}} 
+enum \{ {\bfseries C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+M\+IN}, 
+{\bfseries C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+M\+AX}
+ \}
+\item 
+\mbox{\Hypertarget{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cf}\label{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cf}} 
+enum {\bfseries att\+\_\+axis} \{ {\bfseries Y\+AW}, 
+{\bfseries P\+I\+T\+CH}, 
+{\bfseries R\+O\+LL}, 
+{\bfseries N\+U\+M\+\_\+\+A\+T\+T\+\_\+\+A\+X\+ES}
+ \}
+\item 
+\mbox{\Hypertarget{ahrs_8h_a98e4c2ebd3776f2226e168117904d6c1}\label{ahrs_8h_a98e4c2ebd3776f2226e168117904d6c1}} 
+enum {\bfseries accel\+\_\+axis} \{ {\bfseries S\+W\+AY}, 
+{\bfseries H\+E\+A\+VE}, 
+{\bfseries S\+U\+R\+GE}, 
+{\bfseries N\+U\+M\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+X\+ES}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{ahrs_8h_a653d935b0864f7e1ee7aa4dfbb522fcc}{ahrs\+\_\+cont\+\_\+start} ()
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to start sending data in continous mode. \end{DoxyCompactList}\item 
+float \hyperlink{ahrs_8h_a8432ad8e6e8fcc865fbb5d4e374b7c59}{ahrs\+\_\+att} (enum att\+\_\+axis dir)
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to return angle for a certain direction. \end{DoxyCompactList}\item 
+float \hyperlink{ahrs_8h_a49574e1c0ff13ef5edd5ea8d4d3d2914}{ahrs\+\_\+accel} (enum accel\+\_\+axis dir)
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to return acceleration for certain direction. \end{DoxyCompactList}\item 
+uint\+\_\+fast8\+\_\+t \hyperlink{ahrs_8h_aabcd9bcc5487394de174cb4b78f01d25}{ahrs\+\_\+headingstatus} ()
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to return accuracy of current data. \end{DoxyCompactList}\item 
+bool \hyperlink{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}{ahrs\+\_\+att\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Updates A\+H\+RS data. \end{DoxyCompactList}\item 
+int \hyperlink{ahrs_8h_a9298af19f8651e14c0f43505c2196876}{ahrs\+\_\+att\+\_\+recv} ()
+\begin{DoxyCompactList}\small\item\em Determines whether A\+H\+RS is returning data. \end{DoxyCompactList}\item 
+void \hyperlink{ahrs_8h_a76fe8dc1638d7c89f7e14bc86238283c}{ahrs\+\_\+parse\+\_\+att\+\_\+reset} ()
+\begin{DoxyCompactList}\small\item\em Discards incomplete A\+H\+RS data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ahrs_8h_aa55ad38ec0330c9981d4d25742d1bb65}\label{ahrs_8h_aa55ad38ec0330c9981d4d25742d1bb65}} 
+int {\bfseries ahrs\+\_\+set\+\_\+datacomp} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ahrs_8h_a4f242cea3e7c041553bf2648729d6598}\label{ahrs_8h_a4f242cea3e7c041553bf2648729d6598}} 
+float const {\bfseries ahrs\+\_\+range} \mbox{[}N\+U\+M\+\_\+\+A\+T\+T\+\_\+\+A\+X\+ES\mbox{]}\mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface function definitions for the A\+H\+RS. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ahrs_8h_a49574e1c0ff13ef5edd5ea8d4d3d2914}\label{ahrs_8h_a49574e1c0ff13ef5edd5ea8d4d3d2914}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+accel@{ahrs\+\_\+accel}}
+\index{ahrs\+\_\+accel@{ahrs\+\_\+accel}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+accel()}{ahrs\_accel()}}
+{\footnotesize\ttfamily float ahrs\+\_\+accel (\begin{DoxyParamCaption}\item[{enum accel\+\_\+axis}]{dir }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to return acceleration for certain direction. 
+
+The coordinates are left-\/handed with positive heave up, positive sway left, and positive surge back.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & The wanted direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The accelerometer value in G received from the ahrs for the dir. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8h_a8432ad8e6e8fcc865fbb5d4e374b7c59}\label{ahrs_8h_a8432ad8e6e8fcc865fbb5d4e374b7c59}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+att@{ahrs\+\_\+att}}
+\index{ahrs\+\_\+att@{ahrs\+\_\+att}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+att()}{ahrs\_att()}}
+{\footnotesize\ttfamily float ahrs\+\_\+att (\begin{DoxyParamCaption}\item[{enum att\+\_\+axis}]{dir }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to return angle for a certain direction. 
+
+If the ahrs is in degrees mode the values will range per ahrs\+\_\+range\mbox{[}dir\mbox{]}.
+
+The values returned will not changed until \hyperlink{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}{ahrs\+\_\+att\+\_\+update()} is called and it returns true.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & The wanted direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value received from the ahrs for the passed direction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8h_a9298af19f8651e14c0f43505c2196876}\label{ahrs_8h_a9298af19f8651e14c0f43505c2196876}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+att\+\_\+recv@{ahrs\+\_\+att\+\_\+recv}}
+\index{ahrs\+\_\+att\+\_\+recv@{ahrs\+\_\+att\+\_\+recv}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+att\+\_\+recv()}{ahrs\_att\_recv()}}
+{\footnotesize\ttfamily int ahrs\+\_\+att\+\_\+recv (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Determines whether A\+H\+RS is returning data. 
+
+\begin{DoxyReturn}{Returns}
+True if at least one valid data set has been completely read from the ahrs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}\label{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+att\+\_\+update@{ahrs\+\_\+att\+\_\+update}}
+\index{ahrs\+\_\+att\+\_\+update@{ahrs\+\_\+att\+\_\+update}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+att\+\_\+update()}{ahrs\_att\_update()}}
+{\footnotesize\ttfamily bool ahrs\+\_\+att\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates A\+H\+RS data. 
+
+Updates the values returned by ahrs\+\_\+att to the newest complete set of data that has been received from the ahrs before some point in time within this function\textquotesingle{}s lifetime.
+
+Should only be called between complete \char`\"{}uses\char`\"{} of the attitude data to avoid using disparate data together (ie between runs of a \hyperlink{structPID}{P\+ID} routine).
+
+\begin{DoxyReturn}{Returns}
+True when there has been a new complete set of data received from the ahrs since the last time \hyperlink{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}{ahrs\+\_\+att\+\_\+update()} has been called. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8h_a653d935b0864f7e1ee7aa4dfbb522fcc}\label{ahrs_8h_a653d935b0864f7e1ee7aa4dfbb522fcc}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+cont\+\_\+start@{ahrs\+\_\+cont\+\_\+start}}
+\index{ahrs\+\_\+cont\+\_\+start@{ahrs\+\_\+cont\+\_\+start}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+cont\+\_\+start()}{ahrs\_cont\_start()}}
+{\footnotesize\ttfamily int ahrs\+\_\+cont\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to start sending data in continous mode. 
+
+Make sure the desired data components are set first, such as with ahrs\+\_\+set\+\_\+datacomp().
+
+\begin{DoxyReturn}{Returns}
+0 on success 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8h_aabcd9bcc5487394de174cb4b78f01d25}\label{ahrs_8h_aabcd9bcc5487394de174cb4b78f01d25}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+headingstatus@{ahrs\+\_\+headingstatus}}
+\index{ahrs\+\_\+headingstatus@{ahrs\+\_\+headingstatus}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+headingstatus()}{ahrs\_headingstatus()}}
+{\footnotesize\ttfamily uint\+\_\+fast8\+\_\+t ahrs\+\_\+headingstatus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to return accuracy of current data. 
+
+Values\+: 1\+: uncertainty less than 2 degrees 2\+: uncertainty between 2 and 10 degres 3\+: uncertainty greater than 10 degrees However, it may give other values (I have known it to give the value 0).
+
+\begin{DoxyReturn}{Returns}
+The k\+Heading\+Status component from the ahrs associated with the current attitude data. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8h_a76fe8dc1638d7c89f7e14bc86238283c}\label{ahrs_8h_a76fe8dc1638d7c89f7e14bc86238283c}} 
+\index{ahrs.\+h@{ahrs.\+h}!ahrs\+\_\+parse\+\_\+att\+\_\+reset@{ahrs\+\_\+parse\+\_\+att\+\_\+reset}}
+\index{ahrs\+\_\+parse\+\_\+att\+\_\+reset@{ahrs\+\_\+parse\+\_\+att\+\_\+reset}!ahrs.\+h@{ahrs.\+h}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+parse\+\_\+att\+\_\+reset()}{ahrs\_parse\_att\_reset()}}
+{\footnotesize\ttfamily void ahrs\+\_\+parse\+\_\+att\+\_\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Discards incomplete A\+H\+RS data. 
+
+Causes any data from a current incomplete datagram to be discarded. The next received byte will be treated as potentially the start of a datagram.
+
+Can be used due for, eg, a serial timeout for intra-\/datagram data.
+
+\begin{DoxyReturn}{Returns}
+Void. 
+\end{DoxyReturn}

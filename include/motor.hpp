@@ -20,7 +20,6 @@ struct Motors
 
 	void power();
 	void pause();
-	void wiimote(int *buttons);
 	uint32_t run(float *dstate, float *angles, uint32_t t);
 };
 

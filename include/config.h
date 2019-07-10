@@ -6,6 +6,9 @@ static const bool USE_INITIAL_HEADING = true;
 static const bool FAR = true;
 static const bool SIM = false;
 
+/*
+ * Relative to NED (North-East-Down) coordinate plane.
+ */
 static const int DOF = 6;
 static const int BODY_DOF = 3;
 static const int GYRO_DOF = 6;
@@ -15,9 +18,6 @@ static const int V = 2;
 static const int Y = 3;
 static const int P = 4;
 static const int R = 5;
-
-#define D2R 3.1415/180.
-#define R2D 180./3.1415
 
 /*
  * Motor ID Configuration.
@@ -69,5 +69,8 @@ static const float GAINS[6][3] =
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 }
 };
+
+#define D2R 3.1415/180.
+#define R2D 180./3.1415
 
 #endif 

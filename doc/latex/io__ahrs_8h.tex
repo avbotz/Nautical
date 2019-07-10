@@ -1,0 +1,159 @@
+\hypertarget{io__ahrs_8h}{}\section{include/ahrs/io\+\_\+ahrs.h File Reference}
+\label{io__ahrs_8h}\index{include/ahrs/io\+\_\+ahrs.\+h@{include/ahrs/io\+\_\+ahrs.\+h}}
+
+
+Low-\/level communication functions for A\+H\+RS.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for io\+\_\+ahrs.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{io__ahrs_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}{io\+\_\+ahrs\+\_\+init} (char const $\ast$path)
+\begin{DoxyCompactList}\small\item\em Prepare A\+H\+RS to receive data. \end{DoxyCompactList}\item 
+void \hyperlink{io__ahrs_8h_a9db69393e769bcdd5ddc9ec5f125d11d}{io\+\_\+ahrs\+\_\+clean} ()
+\begin{DoxyCompactList}\small\item\em Disable A\+H\+RS transmit and receive. \end{DoxyCompactList}\item 
+int \hyperlink{io__ahrs_8h_afa79bf757710a1cad094f1e15eb634b7}{io\+\_\+ahrs\+\_\+recv\+\_\+start} (int($\ast$handler)())
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to start receiving attitude data. \end{DoxyCompactList}\item 
+void \hyperlink{io__ahrs_8h_a2ee2459ddd2dca694bef3e6fb9b1cd54}{io\+\_\+ahrs\+\_\+recv\+\_\+stop} ()
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to start receiving attitude data. \end{DoxyCompactList}\item 
+bool \hyperlink{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update} ()
+\item 
+void \hyperlink{io__ahrs_8h_ac133fdc94162c623c5325f907ade9e4a}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer} ()
+\item 
+unsigned char \hyperlink{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read} ()
+\item 
+unsigned char \hyperlink{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+F\+I\+LE $\ast$ \hyperlink{io__ahrs_8h_a7c946296e6bffe77d1c08cdcbd4def85}{io\+\_\+ahrs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Low-\/level communication functions for A\+H\+RS. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{io__ahrs_8h_a9db69393e769bcdd5ddc9ec5f125d11d}\label{io__ahrs_8h_a9db69393e769bcdd5ddc9ec5f125d11d}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+clean@{io\+\_\+ahrs\+\_\+clean}}
+\index{io\+\_\+ahrs\+\_\+clean@{io\+\_\+ahrs\+\_\+clean}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+clean()}{io\_ahrs\_clean()}}
+{\footnotesize\ttfamily void io\+\_\+ahrs\+\_\+clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disable A\+H\+RS transmit and receive. 
+
+Unimplemented.
+
+\begin{DoxyReturn}{Returns}
+Void. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}\label{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+init@{io\+\_\+ahrs\+\_\+init}}
+\index{io\+\_\+ahrs\+\_\+init@{io\+\_\+ahrs\+\_\+init}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+init()}{io\_ahrs\_init()}}
+{\footnotesize\ttfamily void io\+\_\+ahrs\+\_\+init (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Prepare A\+H\+RS to receive data. 
+
+Assumes uart N\+U\+S\+A\+RT will be used and connected with the ahrs I\+E\+A-\/232 interface via a ttl$<$-\/$>$I\+E\+A-\/232 converter.
+
+Per the T\+R\+AX P\+NI user manual\+: Start Bits\+: 1 Number of Data Bits\+: 8 Stop Bits\+: 1 Parity\+: none Baud\+: B\+A\+UD
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to A\+H\+RS from main computer, unused at the moment. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Void. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__ahrs_8h_afa79bf757710a1cad094f1e15eb634b7}\label{io__ahrs_8h_afa79bf757710a1cad094f1e15eb634b7}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+recv\+\_\+start@{io\+\_\+ahrs\+\_\+recv\+\_\+start}}
+\index{io\+\_\+ahrs\+\_\+recv\+\_\+start@{io\+\_\+ahrs\+\_\+recv\+\_\+start}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+recv\+\_\+start()}{io\_ahrs\_recv\_start()}}
+{\footnotesize\ttfamily int io\+\_\+ahrs\+\_\+recv\+\_\+start (\begin{DoxyParamCaption}\item[{int($\ast$)()}]{handler }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to start receiving attitude data. 
+
+\begin{DoxyReturn}{Returns}
+0 on success 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__ahrs_8h_a2ee2459ddd2dca694bef3e6fb9b1cd54}\label{io__ahrs_8h_a2ee2459ddd2dca694bef3e6fb9b1cd54}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+recv\+\_\+stop@{io\+\_\+ahrs\+\_\+recv\+\_\+stop}}
+\index{io\+\_\+ahrs\+\_\+recv\+\_\+stop@{io\+\_\+ahrs\+\_\+recv\+\_\+stop}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+recv\+\_\+stop()}{io\_ahrs\_recv\_stop()}}
+{\footnotesize\ttfamily void io\+\_\+ahrs\+\_\+recv\+\_\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to start receiving attitude data. 
+
+\begin{DoxyReturn}{Returns}
+0 on success 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__ahrs_8h_ac133fdc94162c623c5325f907ade9e4a}\label{io__ahrs_8h_ac133fdc94162c623c5325f907ade9e4a}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer}}
+\index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer()}{io\_ahrs\_tripbuf\_offer()}}
+{\footnotesize\ttfamily void io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Makes the current write index available to io\+\_\+ahrs\+\_\+tripbuf\+\_\+update, and changes the value returned by io\+\_\+ahrs\+\_\+tripbuf\+\_\+write.
+
+May interrupt io\+\_\+ahrs\+\_\+tripbuf\+\_\+update, but may not be interrupted by it \mbox{\Hypertarget{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}\label{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+read@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read}}
+\index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read()}{io\_ahrs\_tripbuf\_read()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+ahrs\+\_\+tripbuf\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+returns the index of the buffer the data consumer should read from. Only changes if io\+\_\+ahrs\+\_\+tripbuf\+\_\+update is called and returns true. \mbox{\Hypertarget{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}\label{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+update@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update}}
+\index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update()}{io\_ahrs\_tripbuf\_update()}}
+{\footnotesize\ttfamily bool io\+\_\+ahrs\+\_\+tripbuf\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Causes io\+\_\+ahrs\+\_\+tripbuf\+\_\+read to return index that was most recently \textquotesingle{}submitted\textquotesingle{} by io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer.
+
+This should only be run between complete \textquotesingle{}uses\textquotesingle{} of the data, to avoid using disparate data.
+
+Unfortunately, since there is no way to have a lock-\/free/interruptable triple buffer implementation on the avr, this has to be platform-\/specific. A lock-\/free ring buffer would not handle cases when the producer is faster than the consumer well.
+
+May be interrupted by io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer, but cannot interrupt it (ie this can be interrupted by handler\+\_\+ahrs\+\_\+recv, but one probably does not want to call it from handler\+\_\+ahrs\+\_\+recv).
+
+returns whether there has been any new data since last call \mbox{\Hypertarget{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}\label{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+write@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write}}
+\index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write()}{io\_ahrs\_tripbuf\_write()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+ahrs\+\_\+tripbuf\+\_\+write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+returns the index of the buffer the data producer should write to. Only changes when io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer is called. 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{io__ahrs_8h_a7c946296e6bffe77d1c08cdcbd4def85}\label{io__ahrs_8h_a7c946296e6bffe77d1c08cdcbd4def85}} 
+\index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs@{io\+\_\+ahrs}}
+\index{io\+\_\+ahrs@{io\+\_\+ahrs}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+ahrs}{io\_ahrs}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ io\+\_\+ahrs}
+
+io with this is blocking, so one might use normal stdio functions directly on it when they are willing to wait, eg sending initial configuration data, but to be able to handle asynchronous io, one should use io\+\_\+ahrs\+\_\+...\+\_\+start, which allows us to process data on the fly and avoid polling. 

@@ -17,7 +17,6 @@ Kalman::Kalman()
 		m_orig[i] = 0.;
 		m_bias[i] = 0.;
 	}
-	// this->bias();
 }
 
 void Kalman::bias()
@@ -45,7 +44,7 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
-	float dt = (temp - t)/(float)(1000000);
+	float dt = (temp-t)/1000000.;
 
 	// Receive measurements, taking into account accelerometer bias. Harsh
 	// cutoff to reduce accelerometer drift.

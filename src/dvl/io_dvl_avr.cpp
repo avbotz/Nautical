@@ -82,12 +82,14 @@ ISR(CC_XXX(USART, NUSART, _RX_vect))
     io_dvl_recv_handler();
 }
 
-void io_dvl_recv_begin() {
+void io_dvl_recv_begin() 
+{
 	CC_XXX(UCSR, NUSART, B) |= (1U << CC_XXX(RXCIE, NUSART, ));
     return;
 }
 
-void io_dvl_recv_end() {
+void io_dvl_recv_end() 
+{
 	CC_XXX(UCSR, NUSART, B) &= ~(1U << CC_XXX(RXCIE, NUSART, )); // disable Receive Complete Interrupt
     return;
 }
@@ -102,11 +104,10 @@ static struct {
 
 // Used to be called tripbuf_update_crit() but I felt this was an unclear name
 // If new data is present, updates read buffer index to point to new data.
-static bool io_dvl_tripbuf_fetch() {
-    // Serial.println(F("assert 2 started"));
+static bool io_dvl_tripbuf_fetch() 
+{
     assert(IN_RANGE(0, tripbuf.write, 2) && IN_RANGE(0, tripbuf.clean, 2) &&
     IN_RANGE(0, tripbuf.read, 2) && IN_RANGE(0, tripbuf.new_data, 1));
-    // Serial.println(F("assert 2 passed"));
     if (tripbuf.new_data) {
         tripbuf.new_data = false;
         uint8_t tmp = tripbuf.read;
@@ -114,11 +115,11 @@ static bool io_dvl_tripbuf_fetch() {
         tripbuf.clean = tmp;
         return true;
     }
-    // Serial.println(F("tripbuf fetch condition failed"));
     return false;
 }
 
-bool io_dvl_tripbuf_update() {
+bool io_dvl_tripbuf_update() 
+{
 	if (CC_XXX(UCSR, NUSART, B) & (1U << CC_XXX(RXCIE, NUSART, )))
     {
 		CC_XXX(UCSR, NUSART, B) &= ~(1U << CC_XXX(RXCIE, NUSART, ));
@@ -126,12 +127,11 @@ bool io_dvl_tripbuf_update() {
 		CC_XXX(UCSR, NUSART, B) |= (1U << CC_XXX(RXCIE, NUSART, ));
         return new_data_status;
     }
-    // Serial.println(F("tripbuf update condition failed"));
     return io_dvl_tripbuf_fetch();
 }
 
-void io_dvl_tripbuf_offer() {
-    // Serial.println(F("assert 1 started"));
+void io_dvl_tripbuf_offer() 
+{
     assert(IN_RANGE(0, tripbuf.write, 2) && IN_RANGE(0, tripbuf.clean, 2) &&
     IN_RANGE(0, tripbuf.read, 2) && IN_RANGE(0, tripbuf.new_data, 1));
     uint8_t tmp = tripbuf.write;

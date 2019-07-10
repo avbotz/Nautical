@@ -1,3 +1,8 @@
+/** @file io_ahrs.h
+ *  @brief Low-level communication functions for AHRS.
+ *  
+ *  @author Seth Girvan (Lord)
+ */
 #ifndef IO_AHRS_H
 #define IO_AHRS_H
 
@@ -8,54 +13,95 @@ extern "C" {
 #include <stdio.h>
 #include <stdbool.h>
 
+/** @brief Prepare AHRS to receive data.
+ * 
+ *  Assumes uart NUSART will be used and connected with the ahrs IEA-232 
+ *  interface via a ttl<->IEA-232 converter.
+ *
+ *  Per the TRAX PNI user manual:
+ *  Start Bits: 1
+ *  Number of Data Bits: 8
+ *  Stop Bits: 1
+ *  Parity: none
+ *  Baud: BAUD
+ *
+ *  @param path Path to AHRS from main computer, unused at the moment.
+ *  @return Void.
+ */
 void io_ahrs_init(char const *path);
 
+/** @brief Disable AHRS transmit and receive.
+ *
+ *  Unimplemented.
+ *
+ *  @return Void.
+ */
 void io_ahrs_clean();
 
-/**
- * returns 0 on success
+/** @brief Tells AHRS to start receiving attitude data.
+ *
+ *  @return 0 on success
  */
 int io_ahrs_recv_start(int (*handler)());
 
+/** @brief Tells AHRS to start receiving attitude data.
+ *
+ *  @return 0 on success
+ */
 void io_ahrs_recv_stop();
 
-/**
- * io with this is blocking, so one might use normal stdio functions directly
- * on it when they are willing to wait, eg sending initial configuration data,
- * but to be able to handle asynchronous io, one should use io_ahrs_..._start,
- * which allows us to process data on the fly and avoid polling.
+/** @brief Handles IO to AHRS using file streams.
+ *
+ *  io with this is blocking, so one might use normal stdio functions directly
+ *  on it when they are willing to wait, eg sending initial configuration data,
+ *  but to be able to handle asynchronous io, one should use io_ahrs_..._start,
+ *  which allows us to process data on the fly and avoid polling.
  */
 extern FILE *io_ahrs;
 
-/**
- * Causes io_ahrs_tripbuf_read to return index that was most recently
- * 'submitted' by io_ahrs_tripbuf_offer.
+/** @brief Updates tripbuf with new data.
  *
- * This should only be run between complete 'uses' of the data, to avoid using
- * disparate data.
+ *  Causes io_ahrs_tripbuf_read to return index that was most recently
+ *  'submitted' by io_ahrs_tripbuf_offer.
  *
- * Unfortunately, since there is no way to have a lock-free/interruptable
- * triple buffer implementation on the avr, this has to be platform-specific.
- * A lock-free ring buffer would not handle cases when the producer is faster
- * than the consumer well.
+ *  This should only be run between complete 'uses' of the data, to avoid using
+ *  disparate data.
+ *
+ *  Unfortunately, since there is no way to have a lock-free/interruptable
+ *  triple buffer implementation on the avr, this has to be platform-specific.
+ *  A lock-free ring buffer would not handle cases when the producer is faster
+ *  than the consumer well.
+ *
+ *  May be interrupted by io_ahrs_tripbuf_offer, but cannot interrupt it (ie
+ *  this can be interrupted by handler_ahrs_recv, but one probably does not want
+ *  to call it from handler_ahrs_recv).
+ *
+ *  @return Whether there has been new data since last call.
  */
 bool io_ahrs_tripbuf_update();
 
-/**
- * Makes the current write index available to io_ahrs_tripbuf_update, and
- * changes the value returned by io_ahrs_tripbuf_write.
+/** @brief Allows tripbuf to be updated again. (Might need Seth's confirmation)
+ *
+ *  Makes the current write index available to io_ahrs_tripbuf_update, and
+ *  changes the value returned by io_ahrs_tripbuf_write.
+ *
+ *  May interrupt io_ahrs_tripbuf_update, but may not be interrupted by it.
+ *
+ *  @return Void.
  */
 void io_ahrs_tripbuf_offer();
 
-/**
- * returns the index of the buffer the data consumer should read from. Only
- * changes if io_ahrs_tripbuf_update is called and returns true.
+/** @brief Finds tripbuf index to read from.
+ *
+ *  @return The index of the buffer the data consumer should read from. Only
+ *  changes if io_ahrs_tripbuf_update is called and returns true.
  */
 unsigned char io_ahrs_tripbuf_read();
 
-/**
- * returns the index of the buffer the data producer should write to. Only
- * changes when io_ahrs_tripbuf_offer is called.
+/** @brief Finds tripbuf index to write to.
+ *
+ *  @return The index of the buffer the data producer should write to. Only
+ *  changes when io_ahrs_tripbuf_offer is called.
  */
 unsigned char io_ahrs_tripbuf_write();
 

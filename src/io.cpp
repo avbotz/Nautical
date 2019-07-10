@@ -14,21 +14,17 @@
 
 void io()
 {
-	// Start communication with the AHRS.
 	io_ahrs_init("/dev/ttyUSB0");
 	ahrs_set_datacomp();
 	ahrs_cont_start();
 	io_ahrs_recv_start(ahrs_att_recv);
 
-	// Start communication with the kill switch.
 	pinMode(KILL_PIN, INPUT);
 
-	// Start communication with depth.
 	pinMode(NPIN, INPUT);
 	pinMode(49, OUTPUT);
 	digitalWrite(49, HIGH); 
 
-	// Start communication with DVL.
 	if (DVL_ON)
 	{
 		pinMode(19, INPUT);  
@@ -41,7 +37,6 @@ void io()
 		dvl_begin_pinging();
 	}
 
-	// Start communication with the M5. 
 	io_m5_init("");
 	io_m5_trans_set(m5_power_trans);	
 }

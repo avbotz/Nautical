@@ -4,6 +4,8 @@
 
 float angle_difference(float a1, float a2)
 {
+	// For [0, 360].
+	/*
 	float c1 = a1 - a2;
 	float c2 = a1 - a2 + 360.;
 	float c3 = a1 - a2 - 360.;
@@ -13,15 +15,28 @@ float angle_difference(float a1, float a2)
 		return c2;
 	else 
 		return c3;
+	*/
+
+	// For [-180, 180].
+    float b1 = a1-a2;
+    if (fabs(b1) > 180.)
+    {
+        if (a1 < a2)
+            a1 += 360.;
+        else 
+            a2 += 360.;
+        b1 = a1-a2;
+    }
+    return b1;
 }
 
 float angle_add(float a1, float add)
 {
 	float temp = a1 + add;
-	if (temp > 360.)
-		return temp - 360.;
-	else if (temp < 0.)
-		return temp + 360.;
+	if (temp > 180.0)
+		return temp - 360.0;
+	else if (temp < -180.)
+		return temp + 360.0;
 
 	return temp;
 }

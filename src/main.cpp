@@ -113,8 +113,8 @@ void run()
 			}
 			else if (c == 'x' && !SIM)
 			{
-				state[F] = 0.;
-				state[H] = 0.;
+				state[0] = 0.;
+				state[3] = 0.;
 				desired[F] = 0.;
 				desired[H] = 0.;
 				desired[V] = 0.;
@@ -170,23 +170,31 @@ void run()
 		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
 			pause = false;
 
-		// Pause motor communcations after killing and reset states so sub can
+		// Pause motor communications after killing and reset states so sub can
 		// restart mission on unkill.
 		if (alive_state_prev && !alive_state && !SIM)
-		{
 			motors.pause();
-			state[0] = 0.;
-			state[3] = 0.;
-			current[F] = 0.;
-			current[H] = 0.;
-			INITIAL_YAW = ahrs_att((enum att_axis) (YAW)); 
-		}
 
 		// Allow motors time to restart after unkilling. 
 		if (!alive_state_prev && alive_state && !SIM)
 		{ 
 			pause = true;
 			pause_time = millis();
+			state[0] = 0.;
+			state[3] = 0.;
+			desired[F] = 0.;
+			desired[H] = 0.;
+			desired[V] = 0.;
+			desired[Y] = 0.;
+			current[F] = 0.;
+			current[H] = 0.;
+			current[Y] = 0.;
+			if (USE_INITIAL_HEADING)
+				INITIAL_YAW = ahrs_att((enum att_axis) (YAW));
+			else 
+				INITIAL_YAW = FAR ? 225. : 340.;
+			INITIAL_PITCH = ahrs_att((enum att_axis) (PITCH));
+			INITIAL_ROLL = ahrs_att((enum att_axis) (ROLL));
 		}
 
 		// Sub is allowed to operate.
@@ -201,6 +209,8 @@ void run()
 				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
 
 				// Handle angle overflow/underflow.
+				for (int i = BODY_DOF; i < GYRO_DOF; i++)
+					current[i] += (current[i] > 180.) ? -360. : (current[i] < -180.) ? 360. : 0.;
 			}
 			float temp[3] = { current[Y], current[P], current[R] };
 

@@ -18,7 +18,14 @@
  *  @param n The number of columns in B.
  *  @param msg The header message preceding the matrix.
  */
-void print(float* A, int m, int n);
+void print(float *A, int m, int n);
+
+/** @brief Create an identity matrix of order nxn.
+ *
+ *  @param A The address where the matrix is written.
+ *  @param n The number of rows and columns of A.
+ */
+void identity(float *A, int n);
 
 /** @brief Copies the elements from one matrix to another.
  *
@@ -27,7 +34,7 @@ void print(float* A, int m, int n);
  *  @param n The number of columns in A and B.
  *  @param B The matrix where elements are written to.
  */
-void copy(float* A, int n, int m, float* B);
+void copy(float *A, int n, int m, float *B);
 
 /** @brief Multiplies two matrices together.
  *
@@ -38,7 +45,7 @@ void copy(float* A, int n, int m, float* B);
  *  @param n The number of columns in B.
  *  @param C The multiplied matrix of order mxn.
  */
-void multiply(float* A, float* B, int m, int p, int n, float* C);
+void multiply(float *A, float *B, int m, int p, int n, float *C);
 
 /** @brief Adds two matrices together.
  *
@@ -48,7 +55,7 @@ void multiply(float* A, float* B, int m, int p, int n, float* C);
  *  @param n The number of columns in A and B.
  *  @param C The added matrix.
  */
-void add(float* A, float* B, int m, int n, float* C);
+void add(float *A, float *B, int m, int n, float *C);
 
 /** @brief Subtracts two matrices.
  *
@@ -58,7 +65,7 @@ void add(float* A, float* B, int m, int n, float* C);
  *  @param n The number of columns in A and B.
  *  @param C The subtracted matrix.
  */
-void subtract(float* A, float* B, int m, int n, float* C);
+void subtract(float *A, float *B, int m, int n, float *C);
 
 /** @brief Takes the transpose of a matrix.
  *
@@ -67,7 +74,7 @@ void subtract(float* A, float* B, int m, int n, float* C);
  *  @param n The number of columns in A.
  *  @param B The transposed matrix of order nxm.
  */
-void transpose(float* A, int m, int n, float* C);
+void transpose(float *A, int m, int n, float *B);
 
 /** @brief Multiplies a matrix by a scalar.
  *
@@ -76,7 +83,7 @@ void transpose(float* A, int m, int n, float* C);
  *  @param n The number of columns in A.
  *  @param k The scalar value.
  */
-void scale(float* A, int m, int n, float k);
+void scale(float *A, int m, int n, float k);
 
 /** @brief Takes the inverse of a matrix.
  *
@@ -84,6 +91,6 @@ void scale(float* A, int m, int n, float k);
  *  @param n The number of rows and columns in A.
  *  @param B The inverted matrix.
  */
-int invert(float* A, int n);
+int invert(float *A, int n, float *B);
 
 #endif

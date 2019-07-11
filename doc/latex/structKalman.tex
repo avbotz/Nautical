@@ -1,32 +1,95 @@
 \hypertarget{structKalman}{}\section{Kalman Struct Reference}
 \label{structKalman}\index{Kalman@{Kalman}}
+
+
+Struct to make using the \hyperlink{structKalman}{Kalman} filter easier.  
+
+
+
+
+{\ttfamily \#include $<$kalman.\+hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structKalman_a92d8a2bf6c725e8ad7da1015bbc41cdc}\label{structKalman_a92d8a2bf6c725e8ad7da1015bbc41cdc}} 
-void {\bfseries bias} ()
-\item 
-\mbox{\Hypertarget{structKalman_ab314838fbb97199c19cd0fb48fffcfc4}\label{structKalman_ab314838fbb97199c19cd0fb48fffcfc4}} 
-uint32\+\_\+t {\bfseries compute} (float $\ast$state, float $\ast$covar, float $\ast$angles, uint32\+\_\+t t)
-\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+void \hyperlink{structKalman_a92d8a2bf6c725e8ad7da1015bbc41cdc}{bias} ()
+\begin{DoxyCompactList}\small\item\em Removes bias from accelerometer data. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{structKalman_ab314838fbb97199c19cd0fb48fffcfc4}{compute} (float $\ast$state, float $\ast$covar, float $\ast$angles, uint32\+\_\+t t)
+\begin{DoxyCompactList}\small\item\em Computes one iteration of the \hyperlink{structKalman}{Kalman} filter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structKalman_a79ded01709506f54e5e2ef5d0b1c5ddf}\label{structKalman_a79ded01709506f54e5e2ef5d0b1c5ddf}} 
-int {\bfseries skip}
+int \hyperlink{structKalman_a79ded01709506f54e5e2ef5d0b1c5ddf}{skip}
 \item 
-\mbox{\Hypertarget{structKalman_a98fa8a7387b5714f1f5d9d85a2555411}\label{structKalman_a98fa8a7387b5714f1f5d9d85a2555411}} 
-int {\bfseries iter}
+int \hyperlink{structKalman_a98fa8a7387b5714f1f5d9d85a2555411}{iter}
 \item 
-\mbox{\Hypertarget{structKalman_a1672e563d4e6cc8f23b3fb4d1c546fe8}\label{structKalman_a1672e563d4e6cc8f23b3fb4d1c546fe8}} 
-float {\bfseries m\+\_\+orig} \mbox{[}M\mbox{]}
+float \hyperlink{structKalman_a1672e563d4e6cc8f23b3fb4d1c546fe8}{m\+\_\+orig} \mbox{[}M\mbox{]}
 \item 
-\mbox{\Hypertarget{structKalman_ace399cd36d8df2e905562b5d0952d11f}\label{structKalman_ace399cd36d8df2e905562b5d0952d11f}} 
-float {\bfseries m\+\_\+bias} \mbox{[}M\mbox{]}
+float \hyperlink{structKalman_ace399cd36d8df2e905562b5d0952d11f}{m\+\_\+bias} \mbox{[}M\mbox{]}
 \end{DoxyCompactItemize}
 
+
+
+\subsection{Detailed Description}
+Struct to make using the \hyperlink{structKalman}{Kalman} filter easier. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structKalman_ab314838fbb97199c19cd0fb48fffcfc4}\label{structKalman_ab314838fbb97199c19cd0fb48fffcfc4}} 
+\index{Kalman@{Kalman}!compute@{compute}}
+\index{compute@{compute}!Kalman@{Kalman}}
+\subsubsection{\texorpdfstring{compute()}{compute()}}
+{\footnotesize\ttfamily uint32\+\_\+t Kalman\+::compute (\begin{DoxyParamCaption}\item[{float $\ast$}]{state,  }\item[{float $\ast$}]{covar,  }\item[{float $\ast$}]{angles,  }\item[{uint32\+\_\+t}]{t }\end{DoxyParamCaption})}
+
+
+
+Computes one iteration of the \hyperlink{structKalman}{Kalman} filter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The current state of the sub using the \hyperlink{structKalman}{Kalman} state model. \\
+\hline
+{\em covar} & The current error of the state. \\
+\hline
+{\em angles} & The current euler angles of the sub. \\
+\hline
+{\em t} & The current time of system, used to compute time differences. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The end time of the system. 
+\end{DoxyReturn}
+
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{structKalman_a98fa8a7387b5714f1f5d9d85a2555411}\label{structKalman_a98fa8a7387b5714f1f5d9d85a2555411}} 
+\index{Kalman@{Kalman}!iter@{iter}}
+\index{iter@{iter}!Kalman@{Kalman}}
+\subsubsection{\texorpdfstring{iter}{iter}}
+{\footnotesize\ttfamily int Kalman\+::iter}
+
+Supposed to be used for accelerometer bias removal, unused for now. \mbox{\Hypertarget{structKalman_ace399cd36d8df2e905562b5d0952d11f}\label{structKalman_ace399cd36d8df2e905562b5d0952d11f}} 
+\index{Kalman@{Kalman}!m\+\_\+bias@{m\+\_\+bias}}
+\index{m\+\_\+bias@{m\+\_\+bias}!Kalman@{Kalman}}
+\subsubsection{\texorpdfstring{m\+\_\+bias}{m\_bias}}
+{\footnotesize\ttfamily float Kalman\+::m\+\_\+bias\mbox{[}M\mbox{]}}
+
+Supposed to be used for accelerometer bias removal, unused for now. \mbox{\Hypertarget{structKalman_a1672e563d4e6cc8f23b3fb4d1c546fe8}\label{structKalman_a1672e563d4e6cc8f23b3fb4d1c546fe8}} 
+\index{Kalman@{Kalman}!m\+\_\+orig@{m\+\_\+orig}}
+\index{m\+\_\+orig@{m\+\_\+orig}!Kalman@{Kalman}}
+\subsubsection{\texorpdfstring{m\+\_\+orig}{m\_orig}}
+{\footnotesize\ttfamily float Kalman\+::m\+\_\+orig\mbox{[}M\mbox{]}}
+
+Supposed to be used for accelerometer bias removal, unused for now. \mbox{\Hypertarget{structKalman_a79ded01709506f54e5e2ef5d0b1c5ddf}\label{structKalman_a79ded01709506f54e5e2ef5d0b1c5ddf}} 
+\index{Kalman@{Kalman}!skip@{skip}}
+\index{skip@{skip}!Kalman@{Kalman}}
+\subsubsection{\texorpdfstring{skip}{skip}}
+{\footnotesize\ttfamily int Kalman\+::skip}
+
+Supposed to be used for accelerometer bias removal, unused for now. 
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/kalman.\+hpp\item 
+include/\hyperlink{kalman_8hpp}{kalman.\+hpp}\item 
 src/kalman.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,303 @@
+\hypertarget{ahrs_8c}{}\section{src/ahrs/ahrs.c File Reference}
+\label{ahrs_8c}\index{src/ahrs/ahrs.\+c@{src/ahrs/ahrs.\+c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ahrs/ahrs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ahrs/io\+\_\+ahrs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ahrs/crc\+\_\+xmodem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dbg.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macrodef.\+h\char`\"{}}\newline
+Include dependency graph for ahrs.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ahrs_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries ahrs}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ahrs_8c_a62634036639f88eece6fbf226b45f84b}{B\+A\+UD}~38400\+UL
+\item 
+\#define \hyperlink{ahrs_8c_a9cf07f923dd4d65d41f710bca4a40c92}{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT}~38U
+\item 
+\#define \hyperlink{ahrs_8c_af551e913a493885fb18e8500d00fcc31}{F\+R\+A\+M\+E\+\_\+\+ID}~0x05U
+\item 
+\#define \hyperlink{ahrs_8c_a10ef5e45606c2977dd1eaf386f5d3de6}{I\+D\+\_\+\+C\+O\+U\+NT}~7U
+\item 
+\#define \hyperlink{ahrs_8c_a5d8f39571fa5f1bde1155f384dea430d}{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT}~0x\+B\+B74U
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba0cb1b2c6a7db1f1084886c98909a3f36}{I\+N\+IT}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba447bfe7992c2fe70bfe561225f74d379}{S\+Y\+NC}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba0232b08080d33dfe8f01eb0b16c09492}{C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+ID}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba6147e437116accc4d1b46db13921a124}{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E0}, 
+\newline
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba3ee7c0d9203e0c646f3c83f03e85d0a6}{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E1}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba1fb8a124cac978fcb9baa2e359837cdf}{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E2}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55bac8315e3644075509ad6bae9241e66e16}{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E3}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba4f420cd47e4156a75bcc387fc412eb19}{H\+E\+A\+D\+I\+N\+G\+S\+T\+A\+T\+US}, 
+\newline
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba31ae2bf812f4d5f3a631c1a3a90b8e57}{C\+R\+C1}, 
+\hyperlink{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55baca45a29cf27145155a3052e68f70e0f7}{C\+R\+C2}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{ahrs_8c_a5446d40bdf0645bcc63b1f4bcac7022b}{ahrs\+\_\+att} (enum \hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cf}{att\+\_\+axis} const dir)
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to return angle for a certain direction. \end{DoxyCompactList}\item 
+float \hyperlink{ahrs_8c_a30d167a7248c65f0136462a44bca5676}{ahrs\+\_\+accel} (enum \hyperlink{ahrs_8h_a98e4c2ebd3776f2226e168117904d6c1}{accel\+\_\+axis} const dir)
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to return acceleration for certain direction. \end{DoxyCompactList}\item 
+uint\+\_\+fast8\+\_\+t \hyperlink{ahrs_8c_aabcd9bcc5487394de174cb4b78f01d25}{ahrs\+\_\+headingstatus} ()
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to return accuracy of current data. \end{DoxyCompactList}\item 
+bool \hyperlink{ahrs_8c_a13682875d497e50e1b7bf5e5d173e154}{ahrs\+\_\+att\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Updates A\+H\+RS data. \end{DoxyCompactList}\item 
+void \hyperlink{ahrs_8c_a76fe8dc1638d7c89f7e14bc86238283c}{ahrs\+\_\+parse\+\_\+att\+\_\+reset} ()
+\begin{DoxyCompactList}\small\item\em Discards incomplete A\+H\+RS data. \end{DoxyCompactList}\item 
+int \hyperlink{ahrs_8c_a9298af19f8651e14c0f43505c2196876}{ahrs\+\_\+att\+\_\+recv} ()
+\begin{DoxyCompactList}\small\item\em Determines whether A\+H\+RS is returning data. \end{DoxyCompactList}\item 
+int \hyperlink{ahrs_8c_aa55ad38ec0330c9981d4d25742d1bb65}{ahrs\+\_\+set\+\_\+datacomp} ()
+\item 
+int \hyperlink{ahrs_8c_a653d935b0864f7e1ee7aa4dfbb522fcc}{ahrs\+\_\+cont\+\_\+start} ()
+\begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to start sending data in continous mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float const \hyperlink{ahrs_8c_a4f242cea3e7c041553bf2648729d6598}{ahrs\+\_\+range} \mbox{[}\hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cfa7b3b2f9df7564ad7dab89493cceed006}{N\+U\+M\+\_\+\+A\+T\+T\+\_\+\+A\+X\+ES}\mbox{]}\mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ahrs_8c_a62634036639f88eece6fbf226b45f84b}\label{ahrs_8c_a62634036639f88eece6fbf226b45f84b}} 
+\index{ahrs.\+c@{ahrs.\+c}!B\+A\+UD@{B\+A\+UD}}
+\index{B\+A\+UD@{B\+A\+UD}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{B\+A\+UD}{BAUD}}
+{\footnotesize\ttfamily \#define B\+A\+UD~38400\+UL}
+
+Description\+: Handles communication with the P\+NI T\+R\+AX above the level of \textquotesingle{}F\+I\+LE $\ast$\textquotesingle{} streams.
+
+The P\+NI T\+R\+AX user manual was used as a reference for this file, and an effort was made to use the terminology used in that document. \mbox{\Hypertarget{ahrs_8c_a5d8f39571fa5f1bde1155f384dea430d}\label{ahrs_8c_a5d8f39571fa5f1bde1155f384dea430d}} 
+\index{ahrs.\+c@{ahrs.\+c}!C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT@{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT}}
+\index{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT@{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT}{CRC\_POST\_ID\_COUNT}}
+{\footnotesize\ttfamily \#define C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+I\+D\+\_\+\+C\+O\+U\+NT~0x\+B\+B74U}
+
+\mbox{\Hypertarget{ahrs_8c_a9cf07f923dd4d65d41f710bca4a40c92}\label{ahrs_8c_a9cf07f923dd4d65d41f710bca4a40c92}} 
+\index{ahrs.\+c@{ahrs.\+c}!D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT@{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT}}
+\index{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT@{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT}{DATAGRAM\_BYTECOUNT}}
+{\footnotesize\ttfamily \#define D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+B\+Y\+T\+E\+C\+O\+U\+NT~38U}
+
+\mbox{\Hypertarget{ahrs_8c_af551e913a493885fb18e8500d00fcc31}\label{ahrs_8c_af551e913a493885fb18e8500d00fcc31}} 
+\index{ahrs.\+c@{ahrs.\+c}!F\+R\+A\+M\+E\+\_\+\+ID@{F\+R\+A\+M\+E\+\_\+\+ID}}
+\index{F\+R\+A\+M\+E\+\_\+\+ID@{F\+R\+A\+M\+E\+\_\+\+ID}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{F\+R\+A\+M\+E\+\_\+\+ID}{FRAME\_ID}}
+{\footnotesize\ttfamily \#define F\+R\+A\+M\+E\+\_\+\+ID~0x05U}
+
+\mbox{\Hypertarget{ahrs_8c_a10ef5e45606c2977dd1eaf386f5d3de6}\label{ahrs_8c_a10ef5e45606c2977dd1eaf386f5d3de6}} 
+\index{ahrs.\+c@{ahrs.\+c}!I\+D\+\_\+\+C\+O\+U\+NT@{I\+D\+\_\+\+C\+O\+U\+NT}}
+\index{I\+D\+\_\+\+C\+O\+U\+NT@{I\+D\+\_\+\+C\+O\+U\+NT}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{I\+D\+\_\+\+C\+O\+U\+NT}{ID\_COUNT}}
+{\footnotesize\ttfamily \#define I\+D\+\_\+\+C\+O\+U\+NT~7U}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55b}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55b}} 
+\subsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+IT@{I\+N\+IT}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!I\+N\+IT@{I\+N\+IT}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba0cb1b2c6a7db1f1084886c98909a3f36}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba0cb1b2c6a7db1f1084886c98909a3f36}} 
+I\+N\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+Y\+NC@{S\+Y\+NC}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!S\+Y\+NC@{S\+Y\+NC}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba447bfe7992c2fe70bfe561225f74d379}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba447bfe7992c2fe70bfe561225f74d379}} 
+S\+Y\+NC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+ID@{C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+ID}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+ID@{C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+ID}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba0232b08080d33dfe8f01eb0b16c09492}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba0232b08080d33dfe8f01eb0b16c09492}} 
+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+ID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E0@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E0}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E0@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E0}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba6147e437116accc4d1b46db13921a124}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba6147e437116accc4d1b46db13921a124}} 
+A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E0&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E1@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E1}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E1@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E1}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba3ee7c0d9203e0c646f3c83f03e85d0a6}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba3ee7c0d9203e0c646f3c83f03e85d0a6}} 
+A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E2@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E2}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E2@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E2}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba1fb8a124cac978fcb9baa2e359837cdf}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba1fb8a124cac978fcb9baa2e359837cdf}} 
+A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E3@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E3}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E3@{A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E3}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55bac8315e3644075509ad6bae9241e66e16}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55bac8315e3644075509ad6bae9241e66e16}} 
+A\+N\+G\+L\+E\+\_\+\+B\+Y\+T\+E3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{H\+E\+A\+D\+I\+N\+G\+S\+T\+A\+T\+US@{H\+E\+A\+D\+I\+N\+G\+S\+T\+A\+T\+US}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!H\+E\+A\+D\+I\+N\+G\+S\+T\+A\+T\+US@{H\+E\+A\+D\+I\+N\+G\+S\+T\+A\+T\+US}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba4f420cd47e4156a75bcc387fc412eb19}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba4f420cd47e4156a75bcc387fc412eb19}} 
+H\+E\+A\+D\+I\+N\+G\+S\+T\+A\+T\+US&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+R\+C1@{C\+R\+C1}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!C\+R\+C1@{C\+R\+C1}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba31ae2bf812f4d5f3a631c1a3a90b8e57}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55ba31ae2bf812f4d5f3a631c1a3a90b8e57}} 
+C\+R\+C1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+R\+C2@{C\+R\+C2}!ahrs.\+c@{ahrs.\+c}}\index{ahrs.\+c@{ahrs.\+c}!C\+R\+C2@{C\+R\+C2}}}\mbox{\Hypertarget{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55baca45a29cf27145155a3052e68f70e0f7}\label{ahrs_8c_a06fc87d81c62e9abb8790b6e5713c55baca45a29cf27145155a3052e68f70e0f7}} 
+C\+R\+C2&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ahrs_8c_a30d167a7248c65f0136462a44bca5676}\label{ahrs_8c_a30d167a7248c65f0136462a44bca5676}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+accel@{ahrs\+\_\+accel}}
+\index{ahrs\+\_\+accel@{ahrs\+\_\+accel}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+accel()}{ahrs\_accel()}}
+{\footnotesize\ttfamily float ahrs\+\_\+accel (\begin{DoxyParamCaption}\item[{enum \hyperlink{ahrs_8h_a98e4c2ebd3776f2226e168117904d6c1}{accel\+\_\+axis}}]{dir }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to return acceleration for certain direction. 
+
+The coordinates are left-\/handed with positive heave up, positive sway left, and positive surge back.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & The wanted direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The accelerometer value in G received from the ahrs for the dir. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8c_a5446d40bdf0645bcc63b1f4bcac7022b}\label{ahrs_8c_a5446d40bdf0645bcc63b1f4bcac7022b}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+att@{ahrs\+\_\+att}}
+\index{ahrs\+\_\+att@{ahrs\+\_\+att}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+att()}{ahrs\_att()}}
+{\footnotesize\ttfamily float ahrs\+\_\+att (\begin{DoxyParamCaption}\item[{enum \hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cf}{att\+\_\+axis}}]{dir }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to return angle for a certain direction. 
+
+If the ahrs is in degrees mode the values will range per ahrs\+\_\+range\mbox{[}dir\mbox{]}.
+
+The values returned will not changed until \hyperlink{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}{ahrs\+\_\+att\+\_\+update()} is called and it returns true.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & The wanted direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value received from the ahrs for the passed direction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8c_a9298af19f8651e14c0f43505c2196876}\label{ahrs_8c_a9298af19f8651e14c0f43505c2196876}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+att\+\_\+recv@{ahrs\+\_\+att\+\_\+recv}}
+\index{ahrs\+\_\+att\+\_\+recv@{ahrs\+\_\+att\+\_\+recv}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+att\+\_\+recv()}{ahrs\_att\_recv()}}
+{\footnotesize\ttfamily int ahrs\+\_\+att\+\_\+recv (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Determines whether A\+H\+RS is returning data. 
+
+\begin{DoxyReturn}{Returns}
+True if at least one valid data set has been completely read from the ahrs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8c_a13682875d497e50e1b7bf5e5d173e154}\label{ahrs_8c_a13682875d497e50e1b7bf5e5d173e154}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+att\+\_\+update@{ahrs\+\_\+att\+\_\+update}}
+\index{ahrs\+\_\+att\+\_\+update@{ahrs\+\_\+att\+\_\+update}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+att\+\_\+update()}{ahrs\_att\_update()}}
+{\footnotesize\ttfamily bool ahrs\+\_\+att\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates A\+H\+RS data. 
+
+Updates the values returned by ahrs\+\_\+att to the newest complete set of data that has been received from the ahrs before some point in time within this function\textquotesingle{}s lifetime.
+
+Should only be called between complete \char`\"{}uses\char`\"{} of the attitude data to avoid using disparate data together (ie between runs of a \hyperlink{structPID}{P\+ID} routine).
+
+\begin{DoxyReturn}{Returns}
+True when there has been a new complete set of data received from the ahrs since the last time \hyperlink{ahrs_8h_a13682875d497e50e1b7bf5e5d173e154}{ahrs\+\_\+att\+\_\+update()} has been called. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8c_a653d935b0864f7e1ee7aa4dfbb522fcc}\label{ahrs_8c_a653d935b0864f7e1ee7aa4dfbb522fcc}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+cont\+\_\+start@{ahrs\+\_\+cont\+\_\+start}}
+\index{ahrs\+\_\+cont\+\_\+start@{ahrs\+\_\+cont\+\_\+start}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+cont\+\_\+start()}{ahrs\_cont\_start()}}
+{\footnotesize\ttfamily int ahrs\+\_\+cont\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to start sending data in continous mode. 
+
+Make sure the desired data components are set first, such as with \hyperlink{ahrs_8h_aa55ad38ec0330c9981d4d25742d1bb65}{ahrs\+\_\+set\+\_\+datacomp()}.
+
+\begin{DoxyReturn}{Returns}
+0 on success 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8c_aabcd9bcc5487394de174cb4b78f01d25}\label{ahrs_8c_aabcd9bcc5487394de174cb4b78f01d25}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+headingstatus@{ahrs\+\_\+headingstatus}}
+\index{ahrs\+\_\+headingstatus@{ahrs\+\_\+headingstatus}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+headingstatus()}{ahrs\_headingstatus()}}
+{\footnotesize\ttfamily uint\+\_\+fast8\+\_\+t ahrs\+\_\+headingstatus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells A\+H\+RS to return accuracy of current data. 
+
+Values\+: 1\+: uncertainty less than 2 degrees 2\+: uncertainty between 2 and 10 degres 3\+: uncertainty greater than 10 degrees However, it may give other values (I have known it to give the value 0).
+
+\begin{DoxyReturn}{Returns}
+The k\+Heading\+Status component from the ahrs associated with the current attitude data. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ahrs_8c_a76fe8dc1638d7c89f7e14bc86238283c}\label{ahrs_8c_a76fe8dc1638d7c89f7e14bc86238283c}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+parse\+\_\+att\+\_\+reset@{ahrs\+\_\+parse\+\_\+att\+\_\+reset}}
+\index{ahrs\+\_\+parse\+\_\+att\+\_\+reset@{ahrs\+\_\+parse\+\_\+att\+\_\+reset}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+parse\+\_\+att\+\_\+reset()}{ahrs\_parse\_att\_reset()}}
+{\footnotesize\ttfamily void ahrs\+\_\+parse\+\_\+att\+\_\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Discards incomplete A\+H\+RS data. 
+
+Causes any data from a current incomplete datagram to be discarded. The next received byte will be treated as potentially the start of a datagram.
+
+Can be used due for, eg, a serial timeout for intra-\/datagram data. \mbox{\Hypertarget{ahrs_8c_aa55ad38ec0330c9981d4d25742d1bb65}\label{ahrs_8c_aa55ad38ec0330c9981d4d25742d1bb65}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+set\+\_\+datacomp@{ahrs\+\_\+set\+\_\+datacomp}}
+\index{ahrs\+\_\+set\+\_\+datacomp@{ahrs\+\_\+set\+\_\+datacomp}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+set\+\_\+datacomp()}{ahrs\_set\_datacomp()}}
+{\footnotesize\ttfamily int ahrs\+\_\+set\+\_\+datacomp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{ahrs_8c_a4f242cea3e7c041553bf2648729d6598}\label{ahrs_8c_a4f242cea3e7c041553bf2648729d6598}} 
+\index{ahrs.\+c@{ahrs.\+c}!ahrs\+\_\+range@{ahrs\+\_\+range}}
+\index{ahrs\+\_\+range@{ahrs\+\_\+range}!ahrs.\+c@{ahrs.\+c}}
+\subsubsection{\texorpdfstring{ahrs\+\_\+range}{ahrs\_range}}
+{\footnotesize\ttfamily float const ahrs\+\_\+range\mbox{[}\hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cfa7b3b2f9df7564ad7dab89493cceed006}{N\+U\+M\+\_\+\+A\+T\+T\+\_\+\+A\+X\+ES}\mbox{]}\mbox{[}2\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    [\hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cfaa4ed247aa19723caf868d2b2dd5cf4ff}{PITCH}] = \{[\hyperlink{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635a19feb48e6323a0f7092851aa2c701eef}{COMPONENT\_MIN}] = -90.f, [\hyperlink{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635aeda2ea41d0de1d666d58fc9f5ae2f988}{COMPONENT\_MAX}] = 90.f\},
+    [\hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cfa60ae774ecd1cf97a0e91f76970d64491}{YAW}] = \{[\hyperlink{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635a19feb48e6323a0f7092851aa2c701eef}{COMPONENT\_MIN}] = 0.f, [\hyperlink{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635aeda2ea41d0de1d666d58fc9f5ae2f988}{COMPONENT\_MAX}] = 360.f \},
+    [\hyperlink{ahrs_8h_a32d66f8d6f6a878b79f6a18c18fb85cfa2eeb9fef8a6a516fa6437a44a6efbd52}{ROLL}] = \{[\hyperlink{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635a19feb48e6323a0f7092851aa2c701eef}{COMPONENT\_MIN}] = -180.f, [\hyperlink{ahrs_8h_a726ca809ffd3d67ab4b8476646f26635aeda2ea41d0de1d666d58fc9f5ae2f988}{COMPONENT\_MAX}] = 180.f\}\}
+\end{DoxyCode}

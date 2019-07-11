@@ -61,7 +61,7 @@ float ahrs_accel(enum accel_axis dir);
  *  However, it may give other values (I have known it to give the value 0).
  *
  *  @return The kHeadingStatus component from the ahrs associated with the
- *  current attitude data. 
+ *          current attitude data. 
  */
 uint_fast8_t ahrs_headingstatus();
 
@@ -75,14 +75,14 @@ uint_fast8_t ahrs_headingstatus();
  *  avoid using disparate data together (ie between runs of a PID routine).
  *
  *  @return True when there has been a new complete set of data received from
- *  the ahrs since the last time ahrs_att_update() has been called.
+ *          the ahrs since the last time ahrs_att_update() has been called.
  */
 bool ahrs_att_update();
 
 /** @brief Determines whether AHRS is returning data.
  * 
  *  @return True if at least one valid data set has been completely read from
- *  the ahrs.
+ *          the ahrs.
  */
 int ahrs_att_recv();
 

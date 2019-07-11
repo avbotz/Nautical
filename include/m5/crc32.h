@@ -1,3 +1,8 @@
+/** @file crc32.h
+ *  @brief Helper functions for CRC.
+ *
+ *  @author Seth Girvan (Lord)
+ */
 #ifndef CRC32_H
 #define CRC32_H
 
@@ -9,7 +14,7 @@
  */
 #define CRC32_INIT_SEED ((uint32_t)0xFFFFFFFF)
 
-/** The CRC32 of any value with its little endian CRC32 appended
+/** The CRC32 of any value with its little endian CRC32 appended.
  */
 #define CRC32_LE_RESIDUE ((uint32_t)0x2144DF1C)
 

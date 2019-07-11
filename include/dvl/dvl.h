@@ -67,7 +67,7 @@ bool dvl_receive_handler();
  *
  *  @param cmd The command as a character.
  *  @param wait If true, waits until DVL is finished processing before sending
- *  the command.
+ *              the command.
  *  @return 1 on success, negative number on error.
  */
 int send_command(char* cmd, bool wait);

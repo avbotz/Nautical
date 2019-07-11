@@ -1,0 +1,209 @@
+\hypertarget{io__dvl__avr_8cpp}{}\section{src/dvl/io\+\_\+dvl\+\_\+avr.cpp File Reference}
+\label{io__dvl__avr_8cpp}\index{src/dvl/io\+\_\+dvl\+\_\+avr.\+cpp@{src/dvl/io\+\_\+dvl\+\_\+avr.\+cpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}dvl/io\+\_\+dvl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macrodef.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dbg.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$util/setbaud.\+h$>$}\newline
+Include dependency graph for io\+\_\+dvl\+\_\+avr.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{io__dvl__avr_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{io__dvl__avr_8cpp_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}~1
+\item 
+\#define \hyperlink{io__dvl__avr_8cpp_a62634036639f88eece6fbf226b45f84b}{B\+A\+UD}~9600U
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{io__dvl__avr_8cpp_ab23125b4617e1730e49d0c4e837161d8}{io\+\_\+dvl\+\_\+init} (bool($\ast$recv\+\_\+handler)())
+\begin{DoxyCompactList}\small\item\em Prepare D\+VL to receive data. \end{DoxyCompactList}\item 
+void \hyperlink{io__dvl__avr_8cpp_a519393ef88a5185eed9b25f7473a80ca}{io\+\_\+dvl\+\_\+clean} ()
+\begin{DoxyCompactList}\small\item\em Disable transmitting and receiving. \end{DoxyCompactList}\item 
+\hyperlink{io__dvl__avr_8cpp_aca6b661ab627f2832e00e2e3271592c7}{io\+\_\+dvl\+\_\+recv\+\_\+handler} ()
+\item 
+void \hyperlink{io__dvl__avr_8cpp_aa7d789d7ecda6e4e626b33334bbbbd92}{io\+\_\+dvl\+\_\+recv\+\_\+begin} ()
+\begin{DoxyCompactList}\small\item\em Tell D\+VL to begin sending data for us to receive. \end{DoxyCompactList}\item 
+void \hyperlink{io__dvl__avr_8cpp_aed4a82bee0a703f2d95983c709a7da97}{io\+\_\+dvl\+\_\+recv\+\_\+end} ()
+\begin{DoxyCompactList}\small\item\em Tell D\+VL to stop sending data. \end{DoxyCompactList}\item 
+bool \hyperlink{io__dvl__avr_8cpp_a938d90dc54f66989a252f968d7473aff}{io\+\_\+dvl\+\_\+tripbuf\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Updates tripbuf with new data if present. \end{DoxyCompactList}\item 
+void \hyperlink{io__dvl__avr_8cpp_a592a6b73d2fec484a02af3a9bb4560ed}{io\+\_\+dvl\+\_\+tripbuf\+\_\+offer} ()
+\begin{DoxyCompactList}\small\item\em Allows tripbuf to be written to again. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{io__dvl__avr_8cpp_a63da10505c470eae86bd07359367d8d8}{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx} ()
+\begin{DoxyCompactList}\small\item\em Finds tripbuf index to write to. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{io__dvl__avr_8cpp_a61e0cc77a645e785c6cab4ceaea3e8e4}{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx} ()
+\begin{DoxyCompactList}\small\item\em Finds tripbuf index to read from. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+F\+I\+LE $\ast$ \hyperlink{io__dvl__avr_8cpp_ad4f717cd1276a18e3b35940fd9242569}{io\+\_\+dvl} = fdevopen(uart\+\_\+dvl\+\_\+putchar, uart\+\_\+dvl\+\_\+getchar)
+\begin{DoxyCompactList}\small\item\em Handles communication to D\+VL using file stream format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a62634036639f88eece6fbf226b45f84b}\label{io__dvl__avr_8cpp_a62634036639f88eece6fbf226b45f84b}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!B\+A\+UD@{B\+A\+UD}}
+\index{B\+A\+UD@{B\+A\+UD}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{B\+A\+UD}{BAUD}}
+{\footnotesize\ttfamily \#define B\+A\+UD~9600U}
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a45719155cbf4258c29211c2f5db49b9b}\label{io__dvl__avr_8cpp_a45719155cbf4258c29211c2f5db49b9b}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!N\+U\+S\+A\+RT@{N\+U\+S\+A\+RT}}
+\index{N\+U\+S\+A\+RT@{N\+U\+S\+A\+RT}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{N\+U\+S\+A\+RT}{NUSART}}
+{\footnotesize\ttfamily \#define N\+U\+S\+A\+RT~1}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a519393ef88a5185eed9b25f7473a80ca}\label{io__dvl__avr_8cpp_a519393ef88a5185eed9b25f7473a80ca}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+clean@{io\+\_\+dvl\+\_\+clean}}
+\index{io\+\_\+dvl\+\_\+clean@{io\+\_\+dvl\+\_\+clean}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+clean()}{io\_dvl\_clean()}}
+{\footnotesize\ttfamily void io\+\_\+dvl\+\_\+clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disable transmitting and receiving. 
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_ab23125b4617e1730e49d0c4e837161d8}\label{io__dvl__avr_8cpp_ab23125b4617e1730e49d0c4e837161d8}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+init@{io\+\_\+dvl\+\_\+init}}
+\index{io\+\_\+dvl\+\_\+init@{io\+\_\+dvl\+\_\+init}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+init()}{io\_dvl\_init()}}
+{\footnotesize\ttfamily void io\+\_\+dvl\+\_\+init (\begin{DoxyParamCaption}\item[{bool($\ast$)()}]{recv\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Prepare D\+VL to receive data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em recv\+\_\+handler} & Function that handles data received from D\+VL. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io__dvl__avr_8cpp_aa7d789d7ecda6e4e626b33334bbbbd92}\label{io__dvl__avr_8cpp_aa7d789d7ecda6e4e626b33334bbbbd92}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+recv\+\_\+begin@{io\+\_\+dvl\+\_\+recv\+\_\+begin}}
+\index{io\+\_\+dvl\+\_\+recv\+\_\+begin@{io\+\_\+dvl\+\_\+recv\+\_\+begin}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+recv\+\_\+begin()}{io\_dvl\_recv\_begin()}}
+{\footnotesize\ttfamily void io\+\_\+dvl\+\_\+recv\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tell D\+VL to begin sending data for us to receive. 
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_aed4a82bee0a703f2d95983c709a7da97}\label{io__dvl__avr_8cpp_aed4a82bee0a703f2d95983c709a7da97}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+recv\+\_\+end@{io\+\_\+dvl\+\_\+recv\+\_\+end}}
+\index{io\+\_\+dvl\+\_\+recv\+\_\+end@{io\+\_\+dvl\+\_\+recv\+\_\+end}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+recv\+\_\+end()}{io\_dvl\_recv\_end()}}
+{\footnotesize\ttfamily void io\+\_\+dvl\+\_\+recv\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tell D\+VL to stop sending data. 
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_aca6b661ab627f2832e00e2e3271592c7}\label{io__dvl__avr_8cpp_aca6b661ab627f2832e00e2e3271592c7}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+recv\+\_\+handler@{io\+\_\+dvl\+\_\+recv\+\_\+handler}}
+\index{io\+\_\+dvl\+\_\+recv\+\_\+handler@{io\+\_\+dvl\+\_\+recv\+\_\+handler}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+recv\+\_\+handler()}{io\_dvl\_recv\_handler()}}
+{\footnotesize\ttfamily io\+\_\+dvl\+\_\+recv\+\_\+handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a61e0cc77a645e785c6cab4ceaea3e8e4}\label{io__dvl__avr_8cpp_a61e0cc77a645e785c6cab4ceaea3e8e4}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx()}{io\_dvl\_tripbuf\_get\_read\_idx()}}
+{\footnotesize\ttfamily uint8\+\_\+t io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds tripbuf index to read from. 
+
+\begin{DoxyReturn}{Returns}
+The index to read from. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a63da10505c470eae86bd07359367d8d8}\label{io__dvl__avr_8cpp_a63da10505c470eae86bd07359367d8d8}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx()}{io\_dvl\_tripbuf\_get\_write\_idx()}}
+{\footnotesize\ttfamily uint8\+\_\+t io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds tripbuf index to write to. 
+
+\begin{DoxyReturn}{Returns}
+The index to write from. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a592a6b73d2fec484a02af3a9bb4560ed}\label{io__dvl__avr_8cpp_a592a6b73d2fec484a02af3a9bb4560ed}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+tripbuf\+\_\+offer@{io\+\_\+dvl\+\_\+tripbuf\+\_\+offer}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+offer@{io\+\_\+dvl\+\_\+tripbuf\+\_\+offer}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+offer()}{io\_dvl\_tripbuf\_offer()}}
+{\footnotesize\ttfamily void io\+\_\+dvl\+\_\+tripbuf\+\_\+offer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Allows tripbuf to be written to again. 
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a938d90dc54f66989a252f968d7473aff}\label{io__dvl__avr_8cpp_a938d90dc54f66989a252f968d7473aff}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl\+\_\+tripbuf\+\_\+update@{io\+\_\+dvl\+\_\+tripbuf\+\_\+update}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+update@{io\+\_\+dvl\+\_\+tripbuf\+\_\+update}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+update()}{io\_dvl\_tripbuf\_update()}}
+{\footnotesize\ttfamily bool io\+\_\+dvl\+\_\+tripbuf\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates tripbuf with new data if present. 
+
+\begin{DoxyReturn}{Returns}
+Whether there has been new data since the last call. 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{io__dvl__avr_8cpp_aedcbafa8c03ab07cab58e088f805eab8}\label{io__dvl__avr_8cpp_aedcbafa8c03ab07cab58e088f805eab8}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!clean@{clean}}
+\index{clean@{clean}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{clean}{clean}}
+{\footnotesize\ttfamily volatile uint8\+\_\+t clean}
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_ad4f717cd1276a18e3b35940fd9242569}\label{io__dvl__avr_8cpp_ad4f717cd1276a18e3b35940fd9242569}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!io\+\_\+dvl@{io\+\_\+dvl}}
+\index{io\+\_\+dvl@{io\+\_\+dvl}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl}{io\_dvl}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ io\+\_\+dvl = fdevopen(uart\+\_\+dvl\+\_\+putchar, uart\+\_\+dvl\+\_\+getchar)}
+
+
+
+Handles communication to D\+VL using file stream format. 
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a28f0024987e4018f643bad908155a95a}\label{io__dvl__avr_8cpp_a28f0024987e4018f643bad908155a95a}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!new\+\_\+data@{new\+\_\+data}}
+\index{new\+\_\+data@{new\+\_\+data}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{new\+\_\+data}{new\_data}}
+{\footnotesize\ttfamily volatile uint8\+\_\+t new\+\_\+data}
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_ad99a3f990d972bf0b87f25fd507eb599}\label{io__dvl__avr_8cpp_ad99a3f990d972bf0b87f25fd507eb599}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!read@{read}}
+\index{read@{read}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{read}{read}}
+{\footnotesize\ttfamily uint8\+\_\+t read}
+
+\mbox{\Hypertarget{io__dvl__avr_8cpp_a60e9c75aa693ad12f404344cffc12505}\label{io__dvl__avr_8cpp_a60e9c75aa693ad12f404344cffc12505}} 
+\index{io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}!write@{write}}
+\index{write@{write}!io\+\_\+dvl\+\_\+avr.\+cpp@{io\+\_\+dvl\+\_\+avr.\+cpp}}
+\subsubsection{\texorpdfstring{write}{write}}
+{\footnotesize\ttfamily uint8\+\_\+t write}
+

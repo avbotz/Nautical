@@ -1,0 +1,88 @@
+\hypertarget{m5_8h}{}\section{include/m5/m5.h File Reference}
+\label{m5_8h}\index{include/m5/m5.\+h@{include/m5/m5.\+h}}
+
+
+Interface function definitions for Videoray M5 motors.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}config.\+h\char`\"{}}\newline
+Include dependency graph for m5.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{m5_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{m5_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{m5_8h_a5b009d85753bf6e5052b9f51cf4c4b25}{m5\+\_\+power\+\_\+trans} ()
+\begin{DoxyCompactList}\small\item\em Writes the next byte of the propulsion command packet to the M5s. \end{DoxyCompactList}\item 
+void \hyperlink{m5_8h_a825b295706601422db8d5d0fa407e0bc}{m5\+\_\+power} (enum \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}{thruster} t, float power)
+\begin{DoxyCompactList}\small\item\em Sets thruster t to \char`\"{}power\char`\"{} power. \end{DoxyCompactList}\item 
+void \hyperlink{m5_8h_aa580f305d0338c5fd86198bf4ac431a8}{m5\+\_\+power\+\_\+offer\+\_\+resume} ()
+\begin{DoxyCompactList}\small\item\em Gives power to all the motors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface function definitions for Videoray M5 motors. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{m5_8h_a825b295706601422db8d5d0fa407e0bc}\label{m5_8h_a825b295706601422db8d5d0fa407e0bc}} 
+\index{m5.\+h@{m5.\+h}!m5\+\_\+power@{m5\+\_\+power}}
+\index{m5\+\_\+power@{m5\+\_\+power}!m5.\+h@{m5.\+h}}
+\subsubsection{\texorpdfstring{m5\+\_\+power()}{m5\_power()}}
+{\footnotesize\ttfamily void m5\+\_\+power (\begin{DoxyParamCaption}\item[{enum \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}{thruster}}]{t,  }\item[{float}]{power }\end{DoxyParamCaption})}
+
+
+
+Sets thruster t to \char`\"{}power\char`\"{} power. 
+
+The new value will not actually be transmitted until m5\+\_\+power\+\_\+offer\+\_\+resume is called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The thruster that is being powered. \\
+\hline
+{\em power} & The amount of power, in range of \mbox{[}-\/1, 1\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{m5_8h_aa580f305d0338c5fd86198bf4ac431a8}\label{m5_8h_aa580f305d0338c5fd86198bf4ac431a8}} 
+\index{m5.\+h@{m5.\+h}!m5\+\_\+power\+\_\+offer\+\_\+resume@{m5\+\_\+power\+\_\+offer\+\_\+resume}}
+\index{m5\+\_\+power\+\_\+offer\+\_\+resume@{m5\+\_\+power\+\_\+offer\+\_\+resume}!m5.\+h@{m5.\+h}}
+\subsubsection{\texorpdfstring{m5\+\_\+power\+\_\+offer\+\_\+resume()}{m5\_power\_offer\_resume()}}
+{\footnotesize\ttfamily void m5\+\_\+power\+\_\+offer\+\_\+resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gives power to all the motors. 
+
+Sets the most recent power value set for each thruster with m5\+\_\+power to be transmitted as soon as the next set of thrust values begin transmission.
+
+Resumes transmission if it is currently paused. \mbox{\Hypertarget{m5_8h_a5b009d85753bf6e5052b9f51cf4c4b25}\label{m5_8h_a5b009d85753bf6e5052b9f51cf4c4b25}} 
+\index{m5.\+h@{m5.\+h}!m5\+\_\+power\+\_\+trans@{m5\+\_\+power\+\_\+trans}}
+\index{m5\+\_\+power\+\_\+trans@{m5\+\_\+power\+\_\+trans}!m5.\+h@{m5.\+h}}
+\subsubsection{\texorpdfstring{m5\+\_\+power\+\_\+trans()}{m5\_power\_trans()}}
+{\footnotesize\ttfamily int m5\+\_\+power\+\_\+trans (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Writes the next byte of the propulsion command packet to the M5s. 
+
+\begin{DoxyReturn}{Returns}
+E\+OF on failure writing byte, 1 on packet completion, and zero on non-\/packet completion. 
+\end{DoxyReturn}

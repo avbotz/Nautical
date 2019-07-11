@@ -1,0 +1,221 @@
+\hypertarget{matrix_8h}{}\section{include/matrix.h File Reference}
+\label{matrix_8h}\index{include/matrix.\+h@{include/matrix.\+h}}
+
+
+Function declarations for matrix operations.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+Include dependency graph for matrix.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{matrix_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{matrix_8h_a806a9984da7f155de1d72e4409fe41a5}{print} (float $\ast$A, int m, int n)
+\begin{DoxyCompactList}\small\item\em Print real matrix to terminal. \end{DoxyCompactList}\item 
+void \hyperlink{matrix_8h_ad2ee4eac600dbdf6950781957e8f7d14}{copy} (float $\ast$A, int n, int m, float $\ast$B)
+\begin{DoxyCompactList}\small\item\em Copies the elements from one matrix to another. \end{DoxyCompactList}\item 
+void \hyperlink{matrix_8h_a50d178d74f498878c116b677804f8a9d}{multiply} (float $\ast$A, float $\ast$B, int m, int p, int n, float $\ast$C)
+\begin{DoxyCompactList}\small\item\em Multiplies two matrices together. \end{DoxyCompactList}\item 
+void \hyperlink{matrix_8h_af4b108d76582e8d66b1c19dd1878bcbe}{add} (float $\ast$A, float $\ast$B, int m, int n, float $\ast$C)
+\begin{DoxyCompactList}\small\item\em Adds two matrices together. \end{DoxyCompactList}\item 
+void \hyperlink{matrix_8h_a4a1032bae9b5fdfaaaef2ea17ab21ef3}{subtract} (float $\ast$A, float $\ast$B, int m, int n, float $\ast$C)
+\begin{DoxyCompactList}\small\item\em Subtracts two matrices. \end{DoxyCompactList}\item 
+void \hyperlink{matrix_8h_a437752bd1f9b3c62c2844ed921e17b70}{transpose} (float $\ast$A, int m, int n, float $\ast$C)
+\begin{DoxyCompactList}\small\item\em Takes the transpose of a matrix. \end{DoxyCompactList}\item 
+void \hyperlink{matrix_8h_ae6482d1e4de05e954edf47b04492873a}{scale} (float $\ast$A, int m, int n, float k)
+\begin{DoxyCompactList}\small\item\em Multiplies a matrix by a scalar. \end{DoxyCompactList}\item 
+int \hyperlink{matrix_8h_af73a219fb4514bdf2337b8b8b7600b0a}{invert} (float $\ast$A, int n)
+\begin{DoxyCompactList}\small\item\em Takes the inverse of a matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Function declarations for matrix operations. 
+
+Matrices are stored in 1-\/D arrays. To access a cell, use \mbox{[}r$\ast$n+c\mbox{]} instead of \mbox{[}r\mbox{]}\mbox{[}c\mbox{]}.
+
+\begin{DoxyAuthor}{Author}
+David Zhang (Davarco) 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{matrix_8h_af4b108d76582e8d66b1c19dd1878bcbe}\label{matrix_8h_af4b108d76582e8d66b1c19dd1878bcbe}} 
+\index{matrix.\+h@{matrix.\+h}!add@{add}}
+\index{add@{add}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily void add (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+
+
+Adds two matrices together. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The first matrix. \\
+\hline
+{\em B} & The second matrix. \\
+\hline
+{\em m} & The number of rows in A and B. \\
+\hline
+{\em n} & The number of columns in A and B. \\
+\hline
+{\em C} & The added matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_ad2ee4eac600dbdf6950781957e8f7d14}\label{matrix_8h_ad2ee4eac600dbdf6950781957e8f7d14}} 
+\index{matrix.\+h@{matrix.\+h}!copy@{copy}}
+\index{copy@{copy}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void copy (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{n,  }\item[{int}]{m,  }\item[{float $\ast$}]{B }\end{DoxyParamCaption})}
+
+
+
+Copies the elements from one matrix to another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The matrix from where elements are copied from. \\
+\hline
+{\em m} & The number of rows in A and B. \\
+\hline
+{\em n} & The number of columns in A and B. \\
+\hline
+{\em B} & The matrix where elements are written to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_af73a219fb4514bdf2337b8b8b7600b0a}\label{matrix_8h_af73a219fb4514bdf2337b8b8b7600b0a}} 
+\index{matrix.\+h@{matrix.\+h}!invert@{invert}}
+\index{invert@{invert}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily int invert (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Takes the inverse of a matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The input matrix, must be square. \\
+\hline
+{\em n} & The number of rows and columns in A. \\
+\hline
+{\em B} & The inverted matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_a50d178d74f498878c116b677804f8a9d}\label{matrix_8h_a50d178d74f498878c116b677804f8a9d}} 
+\index{matrix.\+h@{matrix.\+h}!multiply@{multiply}}
+\index{multiply@{multiply}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily void multiply (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{p,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+
+
+Multiplies two matrices together. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The first matrix. \\
+\hline
+{\em B} & The second matrix. \\
+\hline
+{\em m} & The number of rows in A. \\
+\hline
+{\em p} & The number of columns in A and number of rows in B. \\
+\hline
+{\em n} & The number of columns in B. \\
+\hline
+{\em C} & The multiplied matrix of order mxn. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_a806a9984da7f155de1d72e4409fe41a5}\label{matrix_8h_a806a9984da7f155de1d72e4409fe41a5}} 
+\index{matrix.\+h@{matrix.\+h}!print@{print}}
+\index{print@{print}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void print (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{m,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Print real matrix to terminal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The matrix that is printed. \\
+\hline
+{\em m} & The number of rows in A. \\
+\hline
+{\em n} & The number of columns in B. \\
+\hline
+{\em msg} & The header message preceding the matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_ae6482d1e4de05e954edf47b04492873a}\label{matrix_8h_ae6482d1e4de05e954edf47b04492873a}} 
+\index{matrix.\+h@{matrix.\+h}!scale@{scale}}
+\index{scale@{scale}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily void scale (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float}]{k }\end{DoxyParamCaption})}
+
+
+
+Multiplies a matrix by a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The input matrix, where the results are written to as well. \\
+\hline
+{\em m} & The number of rows in A. \\
+\hline
+{\em n} & The number of columns in A. \\
+\hline
+{\em k} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_a4a1032bae9b5fdfaaaef2ea17ab21ef3}\label{matrix_8h_a4a1032bae9b5fdfaaaef2ea17ab21ef3}} 
+\index{matrix.\+h@{matrix.\+h}!subtract@{subtract}}
+\index{subtract@{subtract}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{subtract()}{subtract()}}
+{\footnotesize\ttfamily void subtract (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+
+
+Subtracts two matrices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The first matrix. \\
+\hline
+{\em B} & The second matrix. \\
+\hline
+{\em m} & The number of rows in A and B. \\
+\hline
+{\em n} & The number of columns in A and B. \\
+\hline
+{\em C} & The subtracted matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{matrix_8h_a437752bd1f9b3c62c2844ed921e17b70}\label{matrix_8h_a437752bd1f9b3c62c2844ed921e17b70}} 
+\index{matrix.\+h@{matrix.\+h}!transpose@{transpose}}
+\index{transpose@{transpose}!matrix.\+h@{matrix.\+h}}
+\subsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily void transpose (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+
+
+Takes the transpose of a matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The input matrix to transpose. \\
+\hline
+{\em m} & The number of rows in A. \\
+\hline
+{\em n} & The number of columns in A. \\
+\hline
+{\em B} & The transposed matrix of order nxm. \\
+\hline
+\end{DoxyParams}

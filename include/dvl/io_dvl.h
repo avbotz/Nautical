@@ -1,4 +1,4 @@
-/** @file dvl.h
+/** @file io_dvl.h
  *  @brief Low-level communication function definitions for DVL.
  *
  *  If attempting to understand DVL documentation, it is a good idea to look 

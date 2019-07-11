@@ -1,0 +1,112 @@
+\hypertarget{io__dvl_8h}{}\section{include/dvl/io\+\_\+dvl.h File Reference}
+\label{io__dvl_8h}\index{include/dvl/io\+\_\+dvl.\+h@{include/dvl/io\+\_\+dvl.\+h}}
+
+
+Low-\/level communication function definitions for D\+VL.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for io\+\_\+dvl.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{io__dvl_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{io__dvl_8h_ab23125b4617e1730e49d0c4e837161d8}{io\+\_\+dvl\+\_\+init} (bool($\ast$recv\+\_\+handler)())
+\begin{DoxyCompactList}\small\item\em Prepare D\+VL to receive data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{io__dvl_8h_a519393ef88a5185eed9b25f7473a80ca}\label{io__dvl_8h_a519393ef88a5185eed9b25f7473a80ca}} 
+void \hyperlink{io__dvl_8h_a519393ef88a5185eed9b25f7473a80ca}{io\+\_\+dvl\+\_\+clean} ()
+\begin{DoxyCompactList}\small\item\em Disable transmitting and receiving. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{io__dvl_8h_aa7d789d7ecda6e4e626b33334bbbbd92}\label{io__dvl_8h_aa7d789d7ecda6e4e626b33334bbbbd92}} 
+void \hyperlink{io__dvl_8h_aa7d789d7ecda6e4e626b33334bbbbd92}{io\+\_\+dvl\+\_\+recv\+\_\+begin} ()
+\begin{DoxyCompactList}\small\item\em Tell D\+VL to begin sending data for us to receive. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{io__dvl_8h_aed4a82bee0a703f2d95983c709a7da97}\label{io__dvl_8h_aed4a82bee0a703f2d95983c709a7da97}} 
+void \hyperlink{io__dvl_8h_aed4a82bee0a703f2d95983c709a7da97}{io\+\_\+dvl\+\_\+recv\+\_\+end} ()
+\begin{DoxyCompactList}\small\item\em Tell D\+VL to stop sending data. \end{DoxyCompactList}\item 
+bool \hyperlink{io__dvl_8h_a938d90dc54f66989a252f968d7473aff}{io\+\_\+dvl\+\_\+tripbuf\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Updates tripbuf with new data if present. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{io__dvl_8h_a592a6b73d2fec484a02af3a9bb4560ed}\label{io__dvl_8h_a592a6b73d2fec484a02af3a9bb4560ed}} 
+void \hyperlink{io__dvl_8h_a592a6b73d2fec484a02af3a9bb4560ed}{io\+\_\+dvl\+\_\+tripbuf\+\_\+offer} ()
+\begin{DoxyCompactList}\small\item\em Allows tripbuf to be written to again. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{io__dvl_8h_a1949eed459f94e0f3b521798df6f4cca}{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx} ()
+\begin{DoxyCompactList}\small\item\em Finds tripbuf index to read from. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{io__dvl_8h_a0869111c36770cdabc6c2172734aaea2}{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx} ()
+\begin{DoxyCompactList}\small\item\em Finds tripbuf index to write to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{io__dvl_8h_ad4f717cd1276a18e3b35940fd9242569}\label{io__dvl_8h_ad4f717cd1276a18e3b35940fd9242569}} 
+F\+I\+LE $\ast$ \hyperlink{io__dvl_8h_ad4f717cd1276a18e3b35940fd9242569}{io\+\_\+dvl}
+\begin{DoxyCompactList}\small\item\em Handles communication to D\+VL using file stream format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Low-\/level communication function definitions for D\+VL. 
+
+If attempting to understand D\+VL documentation, it is a good idea to look under A\+H\+RS as well, as the two are similar.
+
+\begin{DoxyAuthor}{Author}
+Timothy Kanarsky 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{io__dvl_8h_ab23125b4617e1730e49d0c4e837161d8}\label{io__dvl_8h_ab23125b4617e1730e49d0c4e837161d8}} 
+\index{io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}!io\+\_\+dvl\+\_\+init@{io\+\_\+dvl\+\_\+init}}
+\index{io\+\_\+dvl\+\_\+init@{io\+\_\+dvl\+\_\+init}!io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+init()}{io\_dvl\_init()}}
+{\footnotesize\ttfamily void io\+\_\+dvl\+\_\+init (\begin{DoxyParamCaption}\item[{bool($\ast$)()}]{recv\+\_\+handler }\end{DoxyParamCaption})}
+
+
+
+Prepare D\+VL to receive data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em recv\+\_\+handler} & Function that handles data received from D\+VL. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io__dvl_8h_a1949eed459f94e0f3b521798df6f4cca}\label{io__dvl_8h_a1949eed459f94e0f3b521798df6f4cca}} 
+\index{io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}!io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx}!io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx()}{io\_dvl\_tripbuf\_get\_read\_idx()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+read\+\_\+idx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds tripbuf index to read from. 
+
+\begin{DoxyReturn}{Returns}
+The index to read from. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__dvl_8h_a0869111c36770cdabc6c2172734aaea2}\label{io__dvl_8h_a0869111c36770cdabc6c2172734aaea2}} 
+\index{io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}!io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx@{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx}!io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx()}{io\_dvl\_tripbuf\_get\_write\_idx()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+dvl\+\_\+tripbuf\+\_\+get\+\_\+write\+\_\+idx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds tripbuf index to write to. 
+
+\begin{DoxyReturn}{Returns}
+The index to write from. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__dvl_8h_a938d90dc54f66989a252f968d7473aff}\label{io__dvl_8h_a938d90dc54f66989a252f968d7473aff}} 
+\index{io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}!io\+\_\+dvl\+\_\+tripbuf\+\_\+update@{io\+\_\+dvl\+\_\+tripbuf\+\_\+update}}
+\index{io\+\_\+dvl\+\_\+tripbuf\+\_\+update@{io\+\_\+dvl\+\_\+tripbuf\+\_\+update}!io\+\_\+dvl.\+h@{io\+\_\+dvl.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+dvl\+\_\+tripbuf\+\_\+update()}{io\_dvl\_tripbuf\_update()}}
+{\footnotesize\ttfamily bool io\+\_\+dvl\+\_\+tripbuf\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates tripbuf with new data if present. 
+
+\begin{DoxyReturn}{Returns}
+Whether there has been new data since the last call. 
+\end{DoxyReturn}

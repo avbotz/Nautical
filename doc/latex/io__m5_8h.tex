@@ -1,0 +1,192 @@
+\hypertarget{io__m5_8h}{}\section{include/m5/io\+\_\+m5.h File Reference}
+\label{io__m5_8h}\index{include/m5/io\+\_\+m5.\+h@{include/m5/io\+\_\+m5.\+h}}
+
+
+Low-\/level communication function definitions for Videoray M5 motors.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for io\+\_\+m5.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{io__m5_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{io__m5_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{io__m5_8h_ad572b5e5dccab0f1c5a962e08ce2912e}{io\+\_\+m5\+\_\+init} (char const $\ast$path)
+\begin{DoxyCompactList}\small\item\em Prepare M5 motors to receive data. \end{DoxyCompactList}\item 
+void \hyperlink{io__m5_8h_a57552be4efd362dfbaba37809d1f129d}{io\+\_\+m5\+\_\+clean} ()
+\begin{DoxyCompactList}\small\item\em Disable transmitting and receiving. \end{DoxyCompactList}\item 
+int \hyperlink{io__m5_8h_a515c36e7074c3d8f2a707f4dba147dd6}{io\+\_\+m5\+\_\+trans\+\_\+set} (int($\ast$handler)())
+\begin{DoxyCompactList}\small\item\em Tell M5 motors to start receiving data. \end{DoxyCompactList}\item 
+void \hyperlink{io__m5_8h_ab00f04dfb16c64ae321fc5294371b749}{io\+\_\+m5\+\_\+trans\+\_\+trywait} ()
+\begin{DoxyCompactList}\small\item\em Suspends data transmission until there is new data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{io__m5_8h_a1297a12a88e41ab13442adb9bcace56d}\label{io__m5_8h_a1297a12a88e41ab13442adb9bcace56d}} 
+void \hyperlink{io__m5_8h_a1297a12a88e41ab13442adb9bcace56d}{io\+\_\+m5\+\_\+trans\+\_\+stop} ()
+\begin{DoxyCompactList}\small\item\em Stops motors until resume is called. \end{DoxyCompactList}\item 
+bool \hyperlink{io__m5_8h_a0c610858e0abe25cf8e34076675ad623}{io\+\_\+m5\+\_\+tripbuf\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Updates tripbuf with new data. \end{DoxyCompactList}\item 
+void \hyperlink{io__m5_8h_a9f3c3159f49e3e0d4532b3d535a9184d}{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume} ()
+\begin{DoxyCompactList}\small\item\em Resumes motors after stopping. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{io__m5_8h_a17801e5afc9dfb2e05f1e96163cb2e84}{io\+\_\+m5\+\_\+tripbuf\+\_\+read} ()
+\begin{DoxyCompactList}\small\item\em Finds the tripbuf index to read from. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{io__m5_8h_a202b3ed317ffca6c49d8e70e7ba0d7a7}{io\+\_\+m5\+\_\+tripbuf\+\_\+write} ()
+\begin{DoxyCompactList}\small\item\em Finds the tripbuf index to write to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+F\+I\+LE $\ast$ \hyperlink{io__m5_8h_ac3eb02f1b9ff9632d44f0f20a8b18e2e}{io\+\_\+m5}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Low-\/level communication function definitions for Videoray M5 motors. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{io__m5_8h_a57552be4efd362dfbaba37809d1f129d}\label{io__m5_8h_a57552be4efd362dfbaba37809d1f129d}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+clean@{io\+\_\+m5\+\_\+clean}}
+\index{io\+\_\+m5\+\_\+clean@{io\+\_\+m5\+\_\+clean}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+clean()}{io\_m5\_clean()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disable transmitting and receiving. 
+
+Unimplemented. \mbox{\Hypertarget{io__m5_8h_ad572b5e5dccab0f1c5a962e08ce2912e}\label{io__m5_8h_ad572b5e5dccab0f1c5a962e08ce2912e}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+init@{io\+\_\+m5\+\_\+init}}
+\index{io\+\_\+m5\+\_\+init@{io\+\_\+m5\+\_\+init}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+init()}{io\_m5\_init()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+init (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Prepare M5 motors to receive data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Location of the motors, unused at the moment. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io__m5_8h_a515c36e7074c3d8f2a707f4dba147dd6}\label{io__m5_8h_a515c36e7074c3d8f2a707f4dba147dd6}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+trans\+\_\+set@{io\+\_\+m5\+\_\+trans\+\_\+set}}
+\index{io\+\_\+m5\+\_\+trans\+\_\+set@{io\+\_\+m5\+\_\+trans\+\_\+set}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+trans\+\_\+set()}{io\_m5\_trans\_set()}}
+{\footnotesize\ttfamily int io\+\_\+m5\+\_\+trans\+\_\+set (\begin{DoxyParamCaption}\item[{int($\ast$)()}]{handler }\end{DoxyParamCaption})}
+
+
+
+Tell M5 motors to start receiving data. 
+
+Asynchronous (concurrent on pc) data writing. It will not be started until io\+\_\+m5\+\_\+offer\+\_\+resume is called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Function} & that handles writing data to M5s. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io__m5_8h_ab00f04dfb16c64ae321fc5294371b749}\label{io__m5_8h_ab00f04dfb16c64ae321fc5294371b749}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+trans\+\_\+trywait@{io\+\_\+m5\+\_\+trans\+\_\+trywait}}
+\index{io\+\_\+m5\+\_\+trans\+\_\+trywait@{io\+\_\+m5\+\_\+trans\+\_\+trywait}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+trans\+\_\+trywait()}{io\_m5\_trans\_trywait()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+trans\+\_\+trywait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Suspends data transmission until there is new data. 
+
+To be called from the transmission handler (ie io\+\_\+m5\+\_\+trans\+\_\+set argument). Meant to be called after finishing transmission of a packet.
+
+If io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume has not been called since the last call of io\+\_\+m5\+\_\+tripbuf\+\_\+update, then the transmission handler is suspended for $\sim$.5 seconds or until io\+\_\+m5\+\_\+offer\+\_\+resume is called, whichever is first. If there is new triple buffer data available, returns immediately.
+
+By default, a thruster will automatically set itself to power 0 if it has not received a command for over a second. While this can be disabled, it provides useful safety in case something goes fatally wrong in our software or there are connection problems. We could just transmit continuously (on the avr, never disabling the Data Register Ready Interrupt, but at 115,200 baud, that is a lot of processing wasted on the interrupt). While could probably just rely on io\+\_\+m5\+\_\+trans\+\_\+offer\+\_\+resume being called at least once a second, this times out after .5 seconds (arbitrary margin of safety) just in case.
+
+Should only be called from handler\+\_\+m5\+\_\+trans. \mbox{\Hypertarget{io__m5_8h_a9f3c3159f49e3e0d4532b3d535a9184d}\label{io__m5_8h_a9f3c3159f49e3e0d4532b3d535a9184d}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume@{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume@{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume()}{io\_m5\_tripbuf\_offer\_resume()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resumes motors after stopping. 
+
+Makes the current write index available to io\+\_\+m5\+\_\+tripbuf\+\_\+update, and changes the value returned by io\+\_\+m5\+\_\+tripbuf\+\_\+write.
+
+Every value in the write triple buffer (eg buf\mbox{[}\hyperlink{io__m5_8h_a202b3ed317ffca6c49d8e70e7ba0d7a7}{io\+\_\+m5\+\_\+tripbuf\+\_\+write()}\mbox{]} ) should be written before calling this, as unwritten areas have unspecified value.
+
+Also resumes the transmission handler if it is paused (so it will start transmitting the new data asap). io\+\_\+m5\+\_\+trans\+\_\+set must be called before this is called.
+
+May be interrupted by io\+\_\+m5\+\_\+tripbuf\+\_\+update, but must not interrupt it.
+
+Always leaves the U\+S\+A\+RT Data Register Empty Interrupt Enabled. \mbox{\Hypertarget{io__m5_8h_a17801e5afc9dfb2e05f1e96163cb2e84}\label{io__m5_8h_a17801e5afc9dfb2e05f1e96163cb2e84}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+tripbuf\+\_\+read@{io\+\_\+m5\+\_\+tripbuf\+\_\+read}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+read@{io\+\_\+m5\+\_\+tripbuf\+\_\+read}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+read()}{io\_m5\_tripbuf\_read()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+m5\+\_\+tripbuf\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds the tripbuf index to read from. 
+
+\begin{DoxyReturn}{Returns}
+The index of the buffer the data consumer should read from. Only changes if io\+\_\+m5\+\_\+tripbuf\+\_\+update is called and returns true. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__m5_8h_a0c610858e0abe25cf8e34076675ad623}\label{io__m5_8h_a0c610858e0abe25cf8e34076675ad623}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+tripbuf\+\_\+update@{io\+\_\+m5\+\_\+tripbuf\+\_\+update}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+update@{io\+\_\+m5\+\_\+tripbuf\+\_\+update}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+update()}{io\_m5\_tripbuf\_update()}}
+{\footnotesize\ttfamily bool io\+\_\+m5\+\_\+tripbuf\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates tripbuf with new data. 
+
+Causes io\+\_\+m5\+\_\+tripbuf\+\_\+read to return index that was most recently \textquotesingle{}submitted\textquotesingle{} by io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume.
+
+This should only be run between complete \textquotesingle{}uses\textquotesingle{} of the data, to avoid using disparate data.
+
+Unfortunately, since there is no way to have a lock-\/free/interruptible triple buffer implementation on the avr, this has to be platform-\/specific. A lock-\/free ring buffer would not handle cases when the producer is faster than the consumer well.
+
+\begin{DoxyReturn}{Returns}
+True only if io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume has been called (ie there is new data) since last call. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__m5_8h_a202b3ed317ffca6c49d8e70e7ba0d7a7}\label{io__m5_8h_a202b3ed317ffca6c49d8e70e7ba0d7a7}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5\+\_\+tripbuf\+\_\+write@{io\+\_\+m5\+\_\+tripbuf\+\_\+write}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+write@{io\+\_\+m5\+\_\+tripbuf\+\_\+write}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+write()}{io\_m5\_tripbuf\_write()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+m5\+\_\+tripbuf\+\_\+write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds the tripbuf index to write to. 
+
+\begin{DoxyReturn}{Returns}
+The index of the buffer the data producer should write to. Only changes when io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume is called. 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{io__m5_8h_ac3eb02f1b9ff9632d44f0f20a8b18e2e}\label{io__m5_8h_ac3eb02f1b9ff9632d44f0f20a8b18e2e}} 
+\index{io\+\_\+m5.\+h@{io\+\_\+m5.\+h}!io\+\_\+m5@{io\+\_\+m5}}
+\index{io\+\_\+m5@{io\+\_\+m5}!io\+\_\+m5.\+h@{io\+\_\+m5.\+h}}
+\subsubsection{\texorpdfstring{io\+\_\+m5}{io\_m5}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ io\+\_\+m5}
+
+io with this is blocking, use io\+\_\+m5\+\_\+...\+\_\+set to handle async io. 

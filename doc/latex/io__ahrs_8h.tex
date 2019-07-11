@@ -88,6 +88,11 @@ Per the T\+R\+AX P\+NI user manual\+: Start Bits\+: 1 Number of Data Bits\+: 8 S
 
 Tells A\+H\+RS to start receiving attitude data. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & Function that handles data received from A\+H\+RS. \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 0 on success 
 \end{DoxyReturn}
@@ -176,4 +181,4 @@ The index of the buffer the data producer should write to. Only changes when io\
 
 Handles IO to A\+H\+RS using file streams. 
 
-io with this is blocking, so one might use normal stdio functions directly on it when they are willing to wait, eg sending initial configuration data, but to be able to handle asynchronous io, one should use io\+\_\+ahrs\+\_\+...\+\_\+start, which allows us to process data on the fly and avoid polling. 
+IO with this is blocking, so one might use normal stdio functions directly on it when they are willing to wait, eg sending initial configuration data, but to be able to handle asynchronous io, one should use io\+\_\+ahrs\+\_\+...\+\_\+start, which allows us to process data on the fly and avoid polling. 

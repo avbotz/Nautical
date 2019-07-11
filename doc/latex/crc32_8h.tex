@@ -1,0 +1,98 @@
+\hypertarget{crc32_8h}{}\section{include/m5/crc32.h File Reference}
+\label{crc32_8h}\index{include/m5/crc32.\+h@{include/m5/crc32.\+h}}
+
+
+Helper functions for C\+RC.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for crc32.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{crc32_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{crc32_8h_a6d8ef42a00579f2a84aca31d587e012d}{C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED}~((uint32\+\_\+t)0x\+F\+F\+F\+F\+F\+F\+F\+F)
+\item 
+\#define \hyperlink{crc32_8h_a8e74c976f75a347418553cf36c5573fe}{C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE}~((uint32\+\_\+t)0x2144\+D\+F1\+C)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{crc32_8h_a24d6fe2ac5fe0403bc92b23d82533164}{crc32\+\_\+update} (uint32\+\_\+t crc, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Updates a C\+RC with a byte of data. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{crc32_8h_ab31566d3a4b466db0623254d02b8d5a5}{crc32\+\_\+final\+\_\+mask} (uint32\+\_\+t crc)
+\begin{DoxyCompactList}\small\item\em Applies a final X\+OR mask to a C\+RC. (0x\+F\+F\+F\+F\+F\+F\+FF) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper functions for C\+RC. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{crc32_8h_a6d8ef42a00579f2a84aca31d587e012d}\label{crc32_8h_a6d8ef42a00579f2a84aca31d587e012d}} 
+\index{crc32.\+h@{crc32.\+h}!C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED@{C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED}}
+\index{C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED@{C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED}!crc32.\+h@{crc32.\+h}}
+\subsubsection{\texorpdfstring{C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED}{CRC32\_INIT\_SEED}}
+{\footnotesize\ttfamily \#define C\+R\+C32\+\_\+\+I\+N\+I\+T\+\_\+\+S\+E\+ED~((uint32\+\_\+t)0x\+F\+F\+F\+F\+F\+F\+F\+F)}
+
+Implements the A\+N\+SI X3.\+66 32 bit cyclic reduncy check.\+Pass to \hyperlink{crc32_8h_a24d6fe2ac5fe0403bc92b23d82533164}{crc32\+\_\+update()} as arg crc with the first byte of data. \mbox{\Hypertarget{crc32_8h_a8e74c976f75a347418553cf36c5573fe}\label{crc32_8h_a8e74c976f75a347418553cf36c5573fe}} 
+\index{crc32.\+h@{crc32.\+h}!C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE@{C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE}}
+\index{C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE@{C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE}!crc32.\+h@{crc32.\+h}}
+\subsubsection{\texorpdfstring{C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE}{CRC32\_LE\_RESIDUE}}
+{\footnotesize\ttfamily \#define C\+R\+C32\+\_\+\+L\+E\+\_\+\+R\+E\+S\+I\+D\+UE~((uint32\+\_\+t)0x2144\+D\+F1\+C)}
+
+The C\+R\+C32 of any value with its little endian C\+R\+C32 appended. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{crc32_8h_ab31566d3a4b466db0623254d02b8d5a5}\label{crc32_8h_ab31566d3a4b466db0623254d02b8d5a5}} 
+\index{crc32.\+h@{crc32.\+h}!crc32\+\_\+final\+\_\+mask@{crc32\+\_\+final\+\_\+mask}}
+\index{crc32\+\_\+final\+\_\+mask@{crc32\+\_\+final\+\_\+mask}!crc32.\+h@{crc32.\+h}}
+\subsubsection{\texorpdfstring{crc32\+\_\+final\+\_\+mask()}{crc32\_final\_mask()}}
+{\footnotesize\ttfamily uint32\+\_\+t crc32\+\_\+final\+\_\+mask (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{crc }\end{DoxyParamCaption})}
+
+
+
+Applies a final X\+OR mask to a C\+RC. (0x\+F\+F\+F\+F\+F\+F\+FF) 
+
+Should be done after \hyperlink{crc32_8h_a24d6fe2ac5fe0403bc92b23d82533164}{crc32\+\_\+update()} has been called for all data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em crc} & C\+RC that receives the mask. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New C\+RC after the mask. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{crc32_8h_a24d6fe2ac5fe0403bc92b23d82533164}\label{crc32_8h_a24d6fe2ac5fe0403bc92b23d82533164}} 
+\index{crc32.\+h@{crc32.\+h}!crc32\+\_\+update@{crc32\+\_\+update}}
+\index{crc32\+\_\+update@{crc32\+\_\+update}!crc32.\+h@{crc32.\+h}}
+\subsubsection{\texorpdfstring{crc32\+\_\+update()}{crc32\_update()}}
+{\footnotesize\ttfamily uint32\+\_\+t crc32\+\_\+update (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{crc,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Updates a C\+RC with a byte of data. 
+
+Wikipedia on C\+RC\+: \href{https://en.wikipedia.org/wiki/Cyclic_Redundancy_Check}{\tt https\+://en.\+wikipedia.\+org/wiki/\+Cyclic\+\_\+\+Redundancy\+\_\+\+Check}
+
+
+\begin{DoxyParams}{Parameters}
+{\em crc} & C\+RC to update. \\
+\hline
+{\em data} & Data to update C\+RC with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New C\+RC updated with data.
+\end{DoxyReturn}
+N\+O\+TE\+: An optimization would be to use a lookup-\/table implementation instead (with the table in flash on the avr). 

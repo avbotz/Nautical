@@ -1,0 +1,59 @@
+\hypertarget{io_8hpp}{}\section{include/io.hpp File Reference}
+\label{io_8hpp}\index{include/io.\+hpp@{include/io.\+hpp}}
+
+
+IO and kill switch function definitions.  
+
+
+{\ttfamily \#include \char`\"{}motor.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}m5/m5.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}m5/io\+\_\+m5.\+h\char`\"{}}\newline
+Include dependency graph for io.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{io_8hpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{io_8hpp_a27247678cfd6a8cb8b5a04d9c11053d7}\label{io_8hpp_a27247678cfd6a8cb8b5a04d9c11053d7}} 
+\#define {\bfseries D\+E\+P\+T\+H\+\_\+\+P\+IN}~A0
+\item 
+\mbox{\Hypertarget{io_8hpp_aff1372f6d6eba317ecc336b8e4822963}\label{io_8hpp_aff1372f6d6eba317ecc336b8e4822963}} 
+\#define {\bfseries K\+I\+L\+L\+\_\+\+P\+IN}~30
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{io_8hpp_ac2651270fddbd8b61862729764f591fe}\label{io_8hpp_ac2651270fddbd8b61862729764f591fe}} 
+void \hyperlink{io_8hpp_ac2651270fddbd8b61862729764f591fe}{io} ()
+\begin{DoxyCompactList}\small\item\em Starts IO initialization for all major hardware (A\+H\+RS, D\+VL, M5, depth sensor, kill switch). \end{DoxyCompactList}\item 
+bool \hyperlink{io_8hpp_a7c2ff3cdf102a2adb5ca47cb932acc9d}{alive} ()
+\begin{DoxyCompactList}\small\item\em Reads kill state from the kill switch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+IO and kill switch function definitions. 
+
+\begin{DoxyAuthor}{Author}
+David Zhang 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{io_8hpp_a7c2ff3cdf102a2adb5ca47cb932acc9d}\label{io_8hpp_a7c2ff3cdf102a2adb5ca47cb932acc9d}} 
+\index{io.\+hpp@{io.\+hpp}!alive@{alive}}
+\index{alive@{alive}!io.\+hpp@{io.\+hpp}}
+\subsubsection{\texorpdfstring{alive()}{alive()}}
+{\footnotesize\ttfamily bool alive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads kill state from the kill switch. 
+
+\begin{DoxyReturn}{Returns}
+True on alive. 
+\end{DoxyReturn}

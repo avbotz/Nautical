@@ -59,38 +59,155 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structKalman-members.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Kalman Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Struct to make using the <a class="el" href="structKalman.html" title="Struct to make using the Kalman filter easier. ">Kalman</a> filter easier.  
+ <a href="structKalman.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="kalman_8hpp_source.html">kalman.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a92d8a2bf6c725e8ad7da1015bbc41cdc"><td class="memItemLeft" align="right" valign="top"><a id="a92d8a2bf6c725e8ad7da1015bbc41cdc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>bias</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKalman.html#a92d8a2bf6c725e8ad7da1015bbc41cdc">bias</a> ()</td></tr>
+<tr class="memdesc:a92d8a2bf6c725e8ad7da1015bbc41cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes bias from accelerometer data. <br /></td></tr>
 <tr class="separator:a92d8a2bf6c725e8ad7da1015bbc41cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab314838fbb97199c19cd0fb48fffcfc4"><td class="memItemLeft" align="right" valign="top"><a id="ab314838fbb97199c19cd0fb48fffcfc4"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>compute</b> (float *state, float *covar, float *angles, uint32_t t)</td></tr>
+<tr class="memitem:ab314838fbb97199c19cd0fb48fffcfc4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKalman.html#ab314838fbb97199c19cd0fb48fffcfc4">compute</a> (float *state, float *covar, float *angles, uint32_t t)</td></tr>
+<tr class="memdesc:ab314838fbb97199c19cd0fb48fffcfc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes one iteration of the <a class="el" href="structKalman.html" title="Struct to make using the Kalman filter easier. ">Kalman</a> filter.  <a href="#ab314838fbb97199c19cd0fb48fffcfc4">More...</a><br /></td></tr>
 <tr class="separator:ab314838fbb97199c19cd0fb48fffcfc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a79ded01709506f54e5e2ef5d0b1c5ddf"><td class="memItemLeft" align="right" valign="top"><a id="a79ded01709506f54e5e2ef5d0b1c5ddf"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>skip</b></td></tr>
+Data Fields</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:a79ded01709506f54e5e2ef5d0b1c5ddf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKalman.html#a79ded01709506f54e5e2ef5d0b1c5ddf">skip</a></td></tr>
 <tr class="separator:a79ded01709506f54e5e2ef5d0b1c5ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98fa8a7387b5714f1f5d9d85a2555411"><td class="memItemLeft" align="right" valign="top"><a id="a98fa8a7387b5714f1f5d9d85a2555411"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>iter</b></td></tr>
+<tr class="memitem:a98fa8a7387b5714f1f5d9d85a2555411"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKalman.html#a98fa8a7387b5714f1f5d9d85a2555411">iter</a></td></tr>
 <tr class="separator:a98fa8a7387b5714f1f5d9d85a2555411"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1672e563d4e6cc8f23b3fb4d1c546fe8"><td class="memItemLeft" align="right" valign="top"><a id="a1672e563d4e6cc8f23b3fb4d1c546fe8"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>m_orig</b> [M]</td></tr>
+<tr class="memitem:a1672e563d4e6cc8f23b3fb4d1c546fe8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKalman.html#a1672e563d4e6cc8f23b3fb4d1c546fe8">m_orig</a> [M]</td></tr>
 <tr class="separator:a1672e563d4e6cc8f23b3fb4d1c546fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace399cd36d8df2e905562b5d0952d11f"><td class="memItemLeft" align="right" valign="top"><a id="ace399cd36d8df2e905562b5d0952d11f"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>m_bias</b> [M]</td></tr>
+<tr class="memitem:ace399cd36d8df2e905562b5d0952d11f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structKalman.html#ace399cd36d8df2e905562b5d0952d11f">m_bias</a> [M]</td></tr>
 <tr class="separator:ace399cd36d8df2e905562b5d0952d11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Struct to make using the <a class="el" href="structKalman.html" title="Struct to make using the Kalman filter easier. ">Kalman</a> filter easier. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab314838fbb97199c19cd0fb48fffcfc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab314838fbb97199c19cd0fb48fffcfc4">&#9670;&nbsp;</a></span>compute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Kalman::compute </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>covar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>angles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes one iteration of the <a class="el" href="structKalman.html" title="Struct to make using the Kalman filter easier. ">Kalman</a> filter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>The current state of the sub using the <a class="el" href="structKalman.html" title="Struct to make using the Kalman filter easier. ">Kalman</a> state model. </td></tr>
+    <tr><td class="paramname">covar</td><td>The current error of the state. </td></tr>
+    <tr><td class="paramname">angles</td><td>The current euler angles of the sub. </td></tr>
+    <tr><td class="paramname">t</td><td>The current time of system, used to compute time differences. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The end time of the system. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="a98fa8a7387b5714f1f5d9d85a2555411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98fa8a7387b5714f1f5d9d85a2555411">&#9670;&nbsp;</a></span>iter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Kalman::iter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Supposed to be used for accelerometer bias removal, unused for now. </p>
+
+</div>
+</div>
+<a id="ace399cd36d8df2e905562b5d0952d11f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace399cd36d8df2e905562b5d0952d11f">&#9670;&nbsp;</a></span>m_bias</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Kalman::m_bias[M]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Supposed to be used for accelerometer bias removal, unused for now. </p>
+
+</div>
+</div>
+<a id="a1672e563d4e6cc8f23b3fb4d1c546fe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1672e563d4e6cc8f23b3fb4d1c546fe8">&#9670;&nbsp;</a></span>m_orig</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Kalman::m_orig[M]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Supposed to be used for accelerometer bias removal, unused for now. </p>
+
+</div>
+</div>
+<a id="a79ded01709506f54e5e2ef5d0b1c5ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79ded01709506f54e5e2ef5d0b1c5ddf">&#9670;&nbsp;</a></span>skip</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Kalman::skip</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Supposed to be used for accelerometer bias removal, unused for now. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>include/<a class="el" href="kalman_8hpp_source.html">kalman.hpp</a></li>
 <li>src/kalman.cpp</li>

@@ -1,3 +1,8 @@
+/** @file dbg.h
+ *  @brief Debug functions for AVR.
+ *
+ *  @author Seth Girvan (Lord)
+ */
 #ifndef dbg_h
 #define dbg_h
 

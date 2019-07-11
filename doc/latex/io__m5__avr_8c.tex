@@ -1,0 +1,350 @@
+\hypertarget{io__m5__avr_8c}{}\section{src/m5/io\+\_\+m5\+\_\+avr.c File Reference}
+\label{io__m5__avr_8c}\index{src/m5/io\+\_\+m5\+\_\+avr.\+c@{src/m5/io\+\_\+m5\+\_\+avr.\+c}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$util/atomic.\+h$>$}\newline
+{\ttfamily \#include $<$stdatomic.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}m5/io\+\_\+m5.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dbg.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macrodef.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$util/setbaud.\+h$>$}\newline
+Include dependency graph for io\+\_\+m5\+\_\+avr.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{io__m5__avr_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}~3
+\item 
+\#define \hyperlink{io__m5__avr_8c_a59158b4881bf2b6001fb0d7d05dccbc5}{D\+P\+\_\+\+P\+O\+RT}~A
+\item 
+\#define \hyperlink{io__m5__avr_8c_a390c9ef41751b0c4eba2676c2d61b3dc}{N\+DP}~0
+\item 
+\#define \hyperlink{io__m5__avr_8c_a62634036639f88eece6fbf226b45f84b}{B\+A\+UD}~115200\+UL
+\item 
+\#define \hyperlink{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}{N\+T\+I\+M\+ER}~3
+\item 
+\#define \hyperlink{io__m5__avr_8c_ac1635c00de18972072ae87c2a791b464}{W\+A\+I\+T\+\_\+\+M\+I\+L\+LI}~500\+U\+LL
+\item 
+\#define \hyperlink{io__m5__avr_8c_af05806eed98b2804b0afb2207456bda6}{P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG}~(1\+U $<$$<$ C\+C\+\_\+\+X\+X\+X(\+C\+S, N\+T\+I\+M\+E\+R, 0))
+\item 
+\#define \hyperlink{io__m5__avr_8c_ab27d12aac1a3a46aed25604d4c00cc18}{P\+R\+E\+S\+C\+A\+LE}~1\+U\+LL
+\item 
+\#define \hyperlink{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}
+\item 
+\#define \hyperlink{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}~1\+U\+LL
+\item 
+\#define \hyperlink{io__m5__avr_8c_a446e415fc7a5645de4a012cf8a3cdf90}{W\+A\+I\+T\+\_\+\+C\+O\+U\+NT}~(\hyperlink{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS} -\/ 1\+U\+L\+L)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{io__m5__avr_8c_ab71437ed7a0b59f87328b61002a1abaa}{I\+SR} (\hyperlink{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}{C\+C\+\_\+\+X\+XX}(U\+S\+A\+RT, \hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}, \+\_\+\+T\+X\+\_\+vect))
+\item 
+void \hyperlink{io__m5__avr_8c_ad572b5e5dccab0f1c5a962e08ce2912e}{io\+\_\+m5\+\_\+init} (char const $\ast$path)
+\begin{DoxyCompactList}\small\item\em Prepare M5 motors to receive data. \end{DoxyCompactList}\item 
+void \hyperlink{io__m5__avr_8c_a57552be4efd362dfbaba37809d1f129d}{io\+\_\+m5\+\_\+clean} ()
+\begin{DoxyCompactList}\small\item\em Disable transmitting and receiving. \end{DoxyCompactList}\item 
+\hyperlink{io__m5__avr_8c_a3cd0140ea705c077b6df15a1f606acfd}{I\+SR} (\hyperlink{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}{C\+C\+\_\+\+X\+XX}(U\+S\+A\+RT, \hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}, \+\_\+\+U\+D\+R\+E\+\_\+vect))
+\item 
+int \hyperlink{io__m5__avr_8c_a515c36e7074c3d8f2a707f4dba147dd6}{io\+\_\+m5\+\_\+trans\+\_\+set} (int($\ast$handler)())
+\begin{DoxyCompactList}\small\item\em Tell M5 motors to start receiving data. \end{DoxyCompactList}\item 
+void \hyperlink{io__m5__avr_8c_a1297a12a88e41ab13442adb9bcace56d}{io\+\_\+m5\+\_\+trans\+\_\+stop} ()
+\begin{DoxyCompactList}\small\item\em Stops motors until resume is called. \end{DoxyCompactList}\item 
+void \hyperlink{io__m5__avr_8c_a9f3c3159f49e3e0d4532b3d535a9184d}{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume} ()
+\begin{DoxyCompactList}\small\item\em Resumes motors after stopping. \end{DoxyCompactList}\item 
+bool \hyperlink{io__m5__avr_8c_a0c610858e0abe25cf8e34076675ad623}{io\+\_\+m5\+\_\+tripbuf\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Updates tripbuf with new data. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{io__m5__avr_8c_a202b3ed317ffca6c49d8e70e7ba0d7a7}{io\+\_\+m5\+\_\+tripbuf\+\_\+write} ()
+\begin{DoxyCompactList}\small\item\em Finds the tripbuf index to write to. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{io__m5__avr_8c_a17801e5afc9dfb2e05f1e96163cb2e84}{io\+\_\+m5\+\_\+tripbuf\+\_\+read} ()
+\begin{DoxyCompactList}\small\item\em Finds the tripbuf index to read from. \end{DoxyCompactList}\item 
+\hyperlink{io__m5__avr_8c_a6b85cc358fb2a10935417f00e3daa2d8}{C\+C\+\_\+\+X\+XX} (T\+I\+M\+SK, \hyperlink{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}{N\+T\+I\+M\+ER},) \&
+\item 
+\hyperlink{io__m5__avr_8c_a8965273cef2ccefef88c849bff58d6f7}{C\+C\+\_\+\+X\+XX} (T\+C\+CR, \hyperlink{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}{N\+T\+I\+M\+ER}, B) \&
+\item 
+\hyperlink{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}{C\+C\+\_\+\+X\+XX} (U\+C\+SR, \hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}, B)$\vert$
+\item 
+void \hyperlink{io__m5__avr_8c_ab00f04dfb16c64ae321fc5294371b749}{io\+\_\+m5\+\_\+trans\+\_\+trywait} ()
+\begin{DoxyCompactList}\small\item\em Suspends data transmission until there is new data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+F\+I\+LE $\ast$ \hyperlink{io__m5__avr_8c_ac3eb02f1b9ff9632d44f0f20a8b18e2e}{io\+\_\+m5}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{io__m5__avr_8c_a62634036639f88eece6fbf226b45f84b}\label{io__m5__avr_8c_a62634036639f88eece6fbf226b45f84b}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!B\+A\+UD@{B\+A\+UD}}
+\index{B\+A\+UD@{B\+A\+UD}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{B\+A\+UD}{BAUD}}
+{\footnotesize\ttfamily \#define B\+A\+UD~115200\+UL}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a59158b4881bf2b6001fb0d7d05dccbc5}\label{io__m5__avr_8c_a59158b4881bf2b6001fb0d7d05dccbc5}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!D\+P\+\_\+\+P\+O\+RT@{D\+P\+\_\+\+P\+O\+RT}}
+\index{D\+P\+\_\+\+P\+O\+RT@{D\+P\+\_\+\+P\+O\+RT}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{D\+P\+\_\+\+P\+O\+RT}{DP\_PORT}}
+{\footnotesize\ttfamily \#define D\+P\+\_\+\+P\+O\+RT~A}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a390c9ef41751b0c4eba2676c2d61b3dc}\label{io__m5__avr_8c_a390c9ef41751b0c4eba2676c2d61b3dc}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!N\+DP@{N\+DP}}
+\index{N\+DP@{N\+DP}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{N\+DP}{NDP}}
+{\footnotesize\ttfamily \#define N\+DP~0}
+
+\mbox{\Hypertarget{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}\label{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!N\+T\+I\+M\+ER@{N\+T\+I\+M\+ER}}
+\index{N\+T\+I\+M\+ER@{N\+T\+I\+M\+ER}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{N\+T\+I\+M\+ER}{NTIMER}}
+{\footnotesize\ttfamily \#define N\+T\+I\+M\+ER~3}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}\label{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!N\+U\+S\+A\+RT@{N\+U\+S\+A\+RT}}
+\index{N\+U\+S\+A\+RT@{N\+U\+S\+A\+RT}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{N\+U\+S\+A\+RT}{NUSART}}
+{\footnotesize\ttfamily \#define N\+U\+S\+A\+RT~3}
+
+See the ahrs \hyperlink{io__ahrs__avr_8c}{io\+\_\+ahrs\+\_\+avr.\+c} file for more verbose commenting on dealing with the avr usarts and interrupts.
+
+Use is made of of atomic fences when memory ordering is desired relative to volatile access, but the standard seems to indicate atomic fences only preserve memory ordering relative to atomic type accesses. \mbox{\Hypertarget{io__m5__avr_8c_ab27d12aac1a3a46aed25604d4c00cc18}\label{io__m5__avr_8c_ab27d12aac1a3a46aed25604d4c00cc18}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!P\+R\+E\+S\+C\+A\+LE@{P\+R\+E\+S\+C\+A\+LE}}
+\index{P\+R\+E\+S\+C\+A\+LE@{P\+R\+E\+S\+C\+A\+LE}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{P\+R\+E\+S\+C\+A\+LE}{PRESCALE}}
+{\footnotesize\ttfamily \#define P\+R\+E\+S\+C\+A\+LE~1\+U\+LL}
+
+\mbox{\Hypertarget{io__m5__avr_8c_af05806eed98b2804b0afb2207456bda6}\label{io__m5__avr_8c_af05806eed98b2804b0afb2207456bda6}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG@{P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG}}
+\index{P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG@{P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG}{PRESCALE\_REG}}
+{\footnotesize\ttfamily \#define P\+R\+E\+S\+C\+A\+L\+E\+\_\+\+R\+EG~(1\+U $<$$<$ C\+C\+\_\+\+X\+X\+X(\+C\+S, N\+T\+I\+M\+E\+R, 0))}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a446e415fc7a5645de4a012cf8a3cdf90}\label{io__m5__avr_8c_a446e415fc7a5645de4a012cf8a3cdf90}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!W\+A\+I\+T\+\_\+\+C\+O\+U\+NT@{W\+A\+I\+T\+\_\+\+C\+O\+U\+NT}}
+\index{W\+A\+I\+T\+\_\+\+C\+O\+U\+NT@{W\+A\+I\+T\+\_\+\+C\+O\+U\+NT}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{W\+A\+I\+T\+\_\+\+C\+O\+U\+NT}{WAIT\_COUNT}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+C\+O\+U\+NT~(\hyperlink{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS} -\/ 1\+U\+L\+L)}
+
+\mbox{\Hypertarget{io__m5__avr_8c_ac1635c00de18972072ae87c2a791b464}\label{io__m5__avr_8c_ac1635c00de18972072ae87c2a791b464}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!W\+A\+I\+T\+\_\+\+M\+I\+L\+LI@{W\+A\+I\+T\+\_\+\+M\+I\+L\+LI}}
+\index{W\+A\+I\+T\+\_\+\+M\+I\+L\+LI@{W\+A\+I\+T\+\_\+\+M\+I\+L\+LI}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{W\+A\+I\+T\+\_\+\+M\+I\+L\+LI}{WAIT\_MILLI}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+M\+I\+L\+LI~500\+U\+LL}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}\label{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!W\+A\+I\+T\+\_\+\+T\+I\+C\+KS@{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}}
+\index{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS@{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}{WAIT\_TICKS}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+(\hyperlink{io__m5__avr_8c_ac1635c00de18972072ae87c2a791b464}{WAIT\_MILLI} * F\_CPU + 1000ULL * \hyperlink{io__m5__avr_8c_ab27d12aac1a3a46aed25604d4c00cc18}{PRESCALE} / 2ULL) / \(\backslash\)
+        (1000ULL * \hyperlink{io__m5__avr_8c_ab27d12aac1a3a46aed25604d4c00cc18}{PRESCALE})
+\end{DoxyCode}
+\mbox{\Hypertarget{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}\label{io__m5__avr_8c_a09c3ffd40113e571d84b49a185b3bf6e}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!W\+A\+I\+T\+\_\+\+T\+I\+C\+KS@{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}}
+\index{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS@{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{W\+A\+I\+T\+\_\+\+T\+I\+C\+KS}{WAIT\_TICKS}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+T\+I\+C\+KS~1\+U\+LL}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{io__m5__avr_8c_a6b85cc358fb2a10935417f00e3daa2d8}\label{io__m5__avr_8c_a6b85cc358fb2a10935417f00e3daa2d8}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!C\+C\+\_\+\+X\+XX@{C\+C\+\_\+\+X\+XX}}
+\index{C\+C\+\_\+\+X\+XX@{C\+C\+\_\+\+X\+XX}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{C\+C\+\_\+\+X\+X\+X()}{CC\_XXX()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily C\+C\+\_\+\+X\+XX (\begin{DoxyParamCaption}\item[{T\+I\+M\+SK}]{,  }\item[{\hyperlink{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}{N\+T\+I\+M\+ER}}]{ }\end{DoxyParamCaption}) \&}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a8965273cef2ccefef88c849bff58d6f7}\label{io__m5__avr_8c_a8965273cef2ccefef88c849bff58d6f7}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!C\+C\+\_\+\+X\+XX@{C\+C\+\_\+\+X\+XX}}
+\index{C\+C\+\_\+\+X\+XX@{C\+C\+\_\+\+X\+XX}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{C\+C\+\_\+\+X\+X\+X()}{CC\_XXX()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily C\+C\+\_\+\+X\+XX (\begin{DoxyParamCaption}\item[{T\+C\+CR}]{,  }\item[{\hyperlink{io__m5__avr_8c_ab14495ae1f9667df5d198613bcc8d092}{N\+T\+I\+M\+ER}}]{,  }\item[{B}]{ }\end{DoxyParamCaption}) \&}
+
+\mbox{\Hypertarget{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}\label{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!C\+C\+\_\+\+X\+XX@{C\+C\+\_\+\+X\+XX}}
+\index{C\+C\+\_\+\+X\+XX@{C\+C\+\_\+\+X\+XX}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{C\+C\+\_\+\+X\+X\+X()}{CC\_XXX()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily C\+C\+\_\+\+X\+XX (\begin{DoxyParamCaption}\item[{U\+C\+SR}]{,  }\item[{\hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}}]{,  }\item[{B}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a57552be4efd362dfbaba37809d1f129d}\label{io__m5__avr_8c_a57552be4efd362dfbaba37809d1f129d}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+clean@{io\+\_\+m5\+\_\+clean}}
+\index{io\+\_\+m5\+\_\+clean@{io\+\_\+m5\+\_\+clean}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+clean()}{io\_m5\_clean()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disable transmitting and receiving. 
+
+Unimplemented. \mbox{\Hypertarget{io__m5__avr_8c_ad572b5e5dccab0f1c5a962e08ce2912e}\label{io__m5__avr_8c_ad572b5e5dccab0f1c5a962e08ce2912e}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+init@{io\+\_\+m5\+\_\+init}}
+\index{io\+\_\+m5\+\_\+init@{io\+\_\+m5\+\_\+init}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+init()}{io\_m5\_init()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+init (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Prepare M5 motors to receive data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Location of the motors, unused at the moment. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io__m5__avr_8c_a515c36e7074c3d8f2a707f4dba147dd6}\label{io__m5__avr_8c_a515c36e7074c3d8f2a707f4dba147dd6}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+trans\+\_\+set@{io\+\_\+m5\+\_\+trans\+\_\+set}}
+\index{io\+\_\+m5\+\_\+trans\+\_\+set@{io\+\_\+m5\+\_\+trans\+\_\+set}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+trans\+\_\+set()}{io\_m5\_trans\_set()}}
+{\footnotesize\ttfamily int io\+\_\+m5\+\_\+trans\+\_\+set (\begin{DoxyParamCaption}\item[{int($\ast$)()}]{handler }\end{DoxyParamCaption})}
+
+
+
+Tell M5 motors to start receiving data. 
+
+Asynchronous (concurrent on pc) data writing. It will not be started until io\+\_\+m5\+\_\+offer\+\_\+resume is called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Function} & that handles writing data to M5s. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io__m5__avr_8c_a1297a12a88e41ab13442adb9bcace56d}\label{io__m5__avr_8c_a1297a12a88e41ab13442adb9bcace56d}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+trans\+\_\+stop@{io\+\_\+m5\+\_\+trans\+\_\+stop}}
+\index{io\+\_\+m5\+\_\+trans\+\_\+stop@{io\+\_\+m5\+\_\+trans\+\_\+stop}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+trans\+\_\+stop()}{io\_m5\_trans\_stop()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+trans\+\_\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stops motors until resume is called. 
+
+\mbox{\Hypertarget{io__m5__avr_8c_ab00f04dfb16c64ae321fc5294371b749}\label{io__m5__avr_8c_ab00f04dfb16c64ae321fc5294371b749}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+trans\+\_\+trywait@{io\+\_\+m5\+\_\+trans\+\_\+trywait}}
+\index{io\+\_\+m5\+\_\+trans\+\_\+trywait@{io\+\_\+m5\+\_\+trans\+\_\+trywait}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+trans\+\_\+trywait()}{io\_m5\_trans\_trywait()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+trans\+\_\+trywait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Suspends data transmission until there is new data. 
+
+Should only be called from handler\+\_\+m5\+\_\+trans. \mbox{\Hypertarget{io__m5__avr_8c_a9f3c3159f49e3e0d4532b3d535a9184d}\label{io__m5__avr_8c_a9f3c3159f49e3e0d4532b3d535a9184d}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume@{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume@{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume()}{io\_m5\_tripbuf\_offer\_resume()}}
+{\footnotesize\ttfamily void io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resumes motors after stopping. 
+
+May be interrupted by io\+\_\+m5\+\_\+tripbuf\+\_\+update, but must not interrupt it.
+
+Always leaves the U\+S\+A\+RT Data Register Empty Interrupt Enabled. \mbox{\Hypertarget{io__m5__avr_8c_a17801e5afc9dfb2e05f1e96163cb2e84}\label{io__m5__avr_8c_a17801e5afc9dfb2e05f1e96163cb2e84}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+tripbuf\+\_\+read@{io\+\_\+m5\+\_\+tripbuf\+\_\+read}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+read@{io\+\_\+m5\+\_\+tripbuf\+\_\+read}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+read()}{io\_m5\_tripbuf\_read()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+m5\+\_\+tripbuf\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds the tripbuf index to read from. 
+
+\begin{DoxyReturn}{Returns}
+the index of the buffer the data consumer should read from. Only changes if io\+\_\+m5\+\_\+tripbuf\+\_\+update is called and returns true. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__m5__avr_8c_a0c610858e0abe25cf8e34076675ad623}\label{io__m5__avr_8c_a0c610858e0abe25cf8e34076675ad623}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+tripbuf\+\_\+update@{io\+\_\+m5\+\_\+tripbuf\+\_\+update}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+update@{io\+\_\+m5\+\_\+tripbuf\+\_\+update}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+update()}{io\_m5\_tripbuf\_update()}}
+{\footnotesize\ttfamily bool io\+\_\+m5\+\_\+tripbuf\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates tripbuf with new data. 
+
+Causes io\+\_\+m5\+\_\+tripbuf\+\_\+read to return index that was most recently \textquotesingle{}submitted\textquotesingle{} by io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume.
+
+This should only be run between complete \textquotesingle{}uses\textquotesingle{} of the data, to avoid using disparate data.
+
+Unfortunately, since there is no way to have a lock-\/free/interruptible triple buffer implementation on the avr, this has to be platform-\/specific. A lock-\/free ring buffer would not handle cases when the producer is faster than the consumer well.
+
+\begin{DoxyReturn}{Returns}
+True only if io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume has been called (ie there is new data) since last call. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__m5__avr_8c_a202b3ed317ffca6c49d8e70e7ba0d7a7}\label{io__m5__avr_8c_a202b3ed317ffca6c49d8e70e7ba0d7a7}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5\+\_\+tripbuf\+\_\+write@{io\+\_\+m5\+\_\+tripbuf\+\_\+write}}
+\index{io\+\_\+m5\+\_\+tripbuf\+\_\+write@{io\+\_\+m5\+\_\+tripbuf\+\_\+write}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5\+\_\+tripbuf\+\_\+write()}{io\_m5\_tripbuf\_write()}}
+{\footnotesize\ttfamily unsigned char io\+\_\+m5\+\_\+tripbuf\+\_\+write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds the tripbuf index to write to. 
+
+\begin{DoxyReturn}{Returns}
+the index of the buffer the data producer should write to. Only changes when io\+\_\+m5\+\_\+tripbuf\+\_\+offer\+\_\+resume is called. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__m5__avr_8c_ab71437ed7a0b59f87328b61002a1abaa}\label{io__m5__avr_8c_ab71437ed7a0b59f87328b61002a1abaa}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!I\+SR@{I\+SR}}
+\index{I\+SR@{I\+SR}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{I\+S\+R()}{ISR()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily I\+SR (\begin{DoxyParamCaption}\item[{\hyperlink{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}{C\+C\+\_\+\+X\+XX}(U\+S\+A\+RT, \hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}, \+\_\+\+T\+X\+\_\+vect)}]{ }\end{DoxyParamCaption})}
+
+Sets the pin to indicate to T\+TL$<$-\/$>$R\+S-\/485 converter to stop driving the lines (allowing someone else to transmit).
+
+When writing to the U\+S\+A\+RT, the pin should be set, and then unsetting it once there is nothing left to transmit can be left to this interrupt.
+
+Unlike the Data Register Empty Interrupt, which triggers when U\+B\+Rn is ready for a new byte to be written, this interrupt triggers when the last available bit has been pushed out of the U\+S\+A\+RT, ie U\+B\+Rn and the serial shift register are empty. In fact, the atmega2560 datasheet specifically mentions using this for R\+S-\/485. \mbox{\Hypertarget{io__m5__avr_8c_a3cd0140ea705c077b6df15a1f606acfd}\label{io__m5__avr_8c_a3cd0140ea705c077b6df15a1f606acfd}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!I\+SR@{I\+SR}}
+\index{I\+SR@{I\+SR}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{I\+S\+R()}{ISR()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily I\+SR (\begin{DoxyParamCaption}\item[{\hyperlink{io__m5__avr_8c_ad886765314d53f6e8cb3eeaac5bffda8}{C\+C\+\_\+\+X\+XX}(U\+S\+A\+RT, \hyperlink{io__m5__avr_8c_a45719155cbf4258c29211c2f5db49b9b}{N\+U\+S\+A\+RT}, \+\_\+\+U\+D\+R\+E\+\_\+vect)}]{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{io__m5__avr_8c_a9268369c511d1843e8ca6846fdc87c19}\label{io__m5__avr_8c_a9268369c511d1843e8ca6846fdc87c19}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!clean@{clean}}
+\index{clean@{clean}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{clean}{clean}}
+{\footnotesize\ttfamily volatile unsigned char clean}
+
+\mbox{\Hypertarget{io__m5__avr_8c_ac3eb02f1b9ff9632d44f0f20a8b18e2e}\label{io__m5__avr_8c_ac3eb02f1b9ff9632d44f0f20a8b18e2e}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!io\+\_\+m5@{io\+\_\+m5}}
+\index{io\+\_\+m5@{io\+\_\+m5}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{io\+\_\+m5}{io\_m5}}
+{\footnotesize\ttfamily F\+I\+LE$\ast$ io\+\_\+m5}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= &(FILE)FDEV\_SETUP\_STREAM(uart\_m5\_putchar, uart\_m5\_getchar,
+        \_FDEV\_SETUP\_RW)
+\end{DoxyCode}
+io with this is blocking, use io\+\_\+m5\+\_\+...\+\_\+set to handle async io. \mbox{\Hypertarget{io__m5__avr_8c_aeabde82deeb112876f1360a7999bb7ff}\label{io__m5__avr_8c_aeabde82deeb112876f1360a7999bb7ff}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!new@{new}}
+\index{new@{new}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{new}{new}}
+{\footnotesize\ttfamily volatile unsigned char new}
+
+\mbox{\Hypertarget{io__m5__avr_8c_ab5ab23f12f203c3d4823a0746b033bc0}\label{io__m5__avr_8c_ab5ab23f12f203c3d4823a0746b033bc0}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!read@{read}}
+\index{read@{read}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{read}{read}}
+{\footnotesize\ttfamily unsigned char read}
+
+\mbox{\Hypertarget{io__m5__avr_8c_a1c2cd2c01f90d3bf5e20b7ae1319c6d8}\label{io__m5__avr_8c_a1c2cd2c01f90d3bf5e20b7ae1319c6d8}} 
+\index{io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}!write@{write}}
+\index{write@{write}!io\+\_\+m5\+\_\+avr.\+c@{io\+\_\+m5\+\_\+avr.\+c}}
+\subsubsection{\texorpdfstring{write}{write}}
+{\footnotesize\ttfamily unsigned char write}
+

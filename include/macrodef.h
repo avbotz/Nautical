@@ -1,7 +1,12 @@
+/** @file macrodef.h
+ *  @brief Helper macros for various parts of Nautical.
+ *
+ *  @author Seth Girvan (Lord)
+ */
 #ifndef MACRODEF_H
 #define MACRODEF_H
 
-// cause divide by zero error on non-array types
+// Cause divide by zero error on non-array types.
 #define COUNTOF(a) (sizeof(a)/sizeof(0[a])/((void *)a == (void *)&a))
 
 #define IN_RANGE(min, val, max) (min <= val && val <= max)
@@ -10,7 +15,7 @@
 
 #define STRINGIFY_N(a) #a
 
-// Macro expands a, then stringifies it
+// Macro expands a, then stringifies it.
 #define STRINGIFY_X(a) STRINGIFY_N(a)
 
 #define CC_NNN(a, b, c) a ## b ## c

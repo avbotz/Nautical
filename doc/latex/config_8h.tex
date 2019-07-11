@@ -1,0 +1,241 @@
+\hypertarget{config_8h}{}\section{include/config.h File Reference}
+\label{config_8h}\index{include/config.\+h@{include/config.\+h}}
+
+
+Configuration options for Nautical.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{config_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{Indent}\textbf{ Conversions.}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{config_8h_a0a3cc1d5cde549e408f825ddd7f5853d}\label{config_8h_a0a3cc1d5cde549e408f825ddd7f5853d}} 
+\#define {\bfseries D2R}~3.\+1415/180.
+\item 
+\mbox{\Hypertarget{config_8h_a39c663074332446065723e9be9350139}\label{config_8h_a39c663074332446065723e9be9350139}} 
+\#define {\bfseries R2D}~180./3.\+1415
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Variables}
+\begin{Indent}\textbf{ Runtime configuration.}\par
+\begin{DoxyCompactItemize}
+\item 
+static const bool \hyperlink{config_8h_a51c905eb4396ee56a3a9c095e3b58bfe}{D\+V\+L\+\_\+\+ON} = false
+\item 
+static const bool \hyperlink{config_8h_a6d006725140166599b441c1449fc7a3a}{U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG} = true
+\item 
+static const bool \hyperlink{config_8h_a3b5204d43975dfc5858dd3b59eb049bd}{F\+AR} = true
+\item 
+static const bool \hyperlink{config_8h_a589b4f622d6edccfa6c073a113fa4836}{S\+IM} = false
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Constants for degrees of freedom with North-\/\+East-\/\+Down coordinates.}\par
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{config_8h_ab5c558d88abd9517fb657be4889ee1bc}{D\+OF} = 6
+\item 
+static const int \hyperlink{config_8h_a41e6c9e69829719a154249c60cbdf1b2}{B\+O\+D\+Y\+\_\+\+D\+OF} = 3
+\item 
+static const int \hyperlink{config_8h_a776938745e0d7539a3210a2404305ee6}{G\+Y\+R\+O\+\_\+\+D\+OF} = 6
+\item 
+static const int \hyperlink{config_8h_a1c83625ec20fd09ecaf0e5b37c75f6f8}{F} = 0
+\item 
+static const int \hyperlink{config_8h_a0f4b0111b93bf2933b351bba78cc9f79}{H} = 1
+\item 
+static const int \hyperlink{config_8h_ac5dc2e25ee3e4af146d8ccdb65cf43da}{V} = 2
+\item 
+static const int \hyperlink{config_8h_a4245f3c5e8eb90ade09427f989b098ec}{Y} = 3
+\item 
+static const int \hyperlink{config_8h_aabaa1bd1eed76e739bbc16c7e4e72549}{P} = 4
+\item 
+static const int \hyperlink{config_8h_a554e63228b946db0d44c4f398b18e212}{R} = 5
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Motor orientation configuration.}\par
+\begin{DoxyCompactItemize}
+\item 
+static const float \hyperlink{config_8h_a8925b73125e9fe0a48808f4e2a3f8561}{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON} \mbox{[}8\mbox{]}\mbox{[}6\mbox{]}
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ P\+ID gains configuration.}\par
+\begin{DoxyCompactItemize}
+\item 
+static const float \hyperlink{config_8h_a15c324540eac139d826a36cacf0c7e2b}{G\+A\+I\+NS} \mbox{[}6\mbox{]}\mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Motor ID configuration.}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}{thruster} \{ \newline
+{\bfseries V\+E\+R\+T\+\_\+\+FL} = 1, 
+{\bfseries V\+E\+R\+T\+\_\+\+FR} = 2, 
+{\bfseries V\+E\+R\+T\+\_\+\+BL} = 3, 
+{\bfseries V\+E\+R\+T\+\_\+\+BR} = 4, 
+\newline
+{\bfseries S\+U\+R\+G\+E\+\_\+\+FL} = 5, 
+{\bfseries S\+U\+R\+G\+E\+\_\+\+FR} = 6, 
+{\bfseries S\+U\+R\+G\+E\+\_\+\+BL} = 7, 
+{\bfseries S\+U\+R\+G\+E\+\_\+\+BR} = 8, 
+\newline
+{\bfseries N\+U\+M\+\_\+\+T\+H\+R\+U\+S\+T\+E\+RS}
+ \}
+\item 
+static const int \hyperlink{config_8h_ae84658f12c2f1b44f59af36678cf3dcc}{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS} = 8
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Configuration options for Nautical. 
+
+\begin{DoxyAuthor}{Author}
+David Zhang 
+\end{DoxyAuthor}
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}\label{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}} 
+\index{config.\+h@{config.\+h}!thruster@{thruster}}
+\index{thruster@{thruster}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{thruster}{thruster}}
+{\footnotesize\ttfamily enum \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}{thruster}}
+
+Thruster enum makes code more readable. Do N\+OT set an ID to 0, the motor will brick. 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{config_8h_a41e6c9e69829719a154249c60cbdf1b2}\label{config_8h_a41e6c9e69829719a154249c60cbdf1b2}} 
+\index{config.\+h@{config.\+h}!B\+O\+D\+Y\+\_\+\+D\+OF@{B\+O\+D\+Y\+\_\+\+D\+OF}}
+\index{B\+O\+D\+Y\+\_\+\+D\+OF@{B\+O\+D\+Y\+\_\+\+D\+OF}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{B\+O\+D\+Y\+\_\+\+D\+OF}{BODY\_DOF}}
+{\footnotesize\ttfamily const int B\+O\+D\+Y\+\_\+\+D\+OF = 3\hspace{0.3cm}{\ttfamily [static]}}
+
+The number of linear axes (North, East, Down). \mbox{\Hypertarget{config_8h_ab5c558d88abd9517fb657be4889ee1bc}\label{config_8h_ab5c558d88abd9517fb657be4889ee1bc}} 
+\index{config.\+h@{config.\+h}!D\+OF@{D\+OF}}
+\index{D\+OF@{D\+OF}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{D\+OF}{DOF}}
+{\footnotesize\ttfamily const int D\+OF = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+The number of degrees of freedom. \mbox{\Hypertarget{config_8h_a51c905eb4396ee56a3a9c095e3b58bfe}\label{config_8h_a51c905eb4396ee56a3a9c095e3b58bfe}} 
+\index{config.\+h@{config.\+h}!D\+V\+L\+\_\+\+ON@{D\+V\+L\+\_\+\+ON}}
+\index{D\+V\+L\+\_\+\+ON@{D\+V\+L\+\_\+\+ON}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{D\+V\+L\+\_\+\+ON}{DVL\_ON}}
+{\footnotesize\ttfamily const bool D\+V\+L\+\_\+\+ON = false\hspace{0.3cm}{\ttfamily [static]}}
+
+Set to true when in a pool deep enough for the D\+VL to work (more than 5 ft).
+
+You can set this to true even if Nautical is being compiled on land, but make sure the kill switch isn\textquotesingle{}t set to alive until the sub is in the water. Otherwise, the entire program will hang and stop producing output. \mbox{\Hypertarget{config_8h_a1c83625ec20fd09ecaf0e5b37c75f6f8}\label{config_8h_a1c83625ec20fd09ecaf0e5b37c75f6f8}} 
+\index{config.\+h@{config.\+h}!F@{F}}
+\index{F@{F}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{F}{F}}
+{\footnotesize\ttfamily const int F = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+Forward, or north, state index. \mbox{\Hypertarget{config_8h_a3b5204d43975dfc5858dd3b59eb049bd}\label{config_8h_a3b5204d43975dfc5858dd3b59eb049bd}} 
+\index{config.\+h@{config.\+h}!F\+AR@{F\+AR}}
+\index{F\+AR@{F\+AR}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{F\+AR}{FAR}}
+{\footnotesize\ttfamily const bool F\+AR = true\hspace{0.3cm}{\ttfamily [static]}}
+
+This isn\textquotesingle{}t being used at the moment because the ahrs is not producing the same value after recompiling (not sure if this is supported, or if this is a bug in the code).
+
+The idea was to have the sub use an absolute value for north rather than one relative to unkill. Since this would depend less on the diver, it would be more consistent. \mbox{\Hypertarget{config_8h_a15c324540eac139d826a36cacf0c7e2b}\label{config_8h_a15c324540eac139d826a36cacf0c7e2b}} 
+\index{config.\+h@{config.\+h}!G\+A\+I\+NS@{G\+A\+I\+NS}}
+\index{G\+A\+I\+NS@{G\+A\+I\+NS}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{G\+A\+I\+NS}{GAINS}}
+{\footnotesize\ttfamily const float G\+A\+I\+NS\mbox{[}6\mbox{]}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= 
+\{
+    \{ 1.50, 0.00, 0.00 \},
+    \{ 1.50, 0.00, 0.00 \},
+    \{ 1.75, 0.00, 0.00 \},
+    \{ 0.10, 0.00, 0.05 \},
+    \{ 0.10, 0.00, 0.05 \},
+    \{ 0.10, 0.00, 0.05 \}
+\}
+\end{DoxyCode}
+Rows correspond to F, H, V, Y, P, and R while columns correspond to kp, ki, and kd. To be honest, these gains are not great. The integral component is being ignored at the moment because it doesn\textquotesingle{}t work as well in practice. \mbox{\Hypertarget{config_8h_a776938745e0d7539a3210a2404305ee6}\label{config_8h_a776938745e0d7539a3210a2404305ee6}} 
+\index{config.\+h@{config.\+h}!G\+Y\+R\+O\+\_\+\+D\+OF@{G\+Y\+R\+O\+\_\+\+D\+OF}}
+\index{G\+Y\+R\+O\+\_\+\+D\+OF@{G\+Y\+R\+O\+\_\+\+D\+OF}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{G\+Y\+R\+O\+\_\+\+D\+OF}{GYRO\_DOF}}
+{\footnotesize\ttfamily const int G\+Y\+R\+O\+\_\+\+D\+OF = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+The number of angular axes (Yaw, Pitch, Roll) plus the number of linear axes. \mbox{\Hypertarget{config_8h_a0f4b0111b93bf2933b351bba78cc9f79}\label{config_8h_a0f4b0111b93bf2933b351bba78cc9f79}} 
+\index{config.\+h@{config.\+h}!H@{H}}
+\index{H@{H}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily const int H = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+Horizontal, or east, state index. \mbox{\Hypertarget{config_8h_ae84658f12c2f1b44f59af36678cf3dcc}\label{config_8h_ae84658f12c2f1b44f59af36678cf3dcc}} 
+\index{config.\+h@{config.\+h}!N\+U\+M\+\_\+\+M\+O\+T\+O\+RS@{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS}}
+\index{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS@{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS}{NUM\_MOTORS}}
+{\footnotesize\ttfamily const int N\+U\+M\+\_\+\+M\+O\+T\+O\+RS = 8\hspace{0.3cm}{\ttfamily [static]}}
+
+Number of motors. \mbox{\Hypertarget{config_8h_a8925b73125e9fe0a48808f4e2a3f8561}\label{config_8h_a8925b73125e9fe0a48808f4e2a3f8561}} 
+\index{config.\+h@{config.\+h}!O\+R\+I\+E\+N\+T\+A\+T\+I\+ON@{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON}}
+\index{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON@{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON}{ORIENTATION}}
+{\footnotesize\ttfamily const float O\+R\+I\+E\+N\+T\+A\+T\+I\+ON\mbox{[}8\mbox{]}\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= 
+\{
+    \{ 0.00, 0.00, 1.00, 0.00, 1.00, -1.0 \},
+    \{ 0.00, 0.00, -1.0, 0.00, -1.0, -1.0 \},
+    \{ 0.00, 0.00, -1.0, 0.00, 1.00, 1.00 \},
+    \{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 \},
+    \{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 \},
+    \{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00 \},
+    \{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00 \}, 
+    \{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 \}
+\}
+\end{DoxyCode}
+Rows are motors while columns are directions. Positive numbers are for clockwise rotation and negative numbers are for counterclockwise.
+
+The multipliers are either -\/1, 1, or 0 because they are meant to be direction only. I do set 1.\+1 for some motors when the sub is moving foward because it tends to drift right. If this code ever runs on new sub, which is supposed to correct for that, then it would be a good idea to change the values back to 1. \mbox{\Hypertarget{config_8h_aabaa1bd1eed76e739bbc16c7e4e72549}\label{config_8h_aabaa1bd1eed76e739bbc16c7e4e72549}} 
+\index{config.\+h@{config.\+h}!P@{P}}
+\index{P@{P}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily const int P = 4\hspace{0.3cm}{\ttfamily [static]}}
+
+Pitch state index. \mbox{\Hypertarget{config_8h_a554e63228b946db0d44c4f398b18e212}\label{config_8h_a554e63228b946db0d44c4f398b18e212}} 
+\index{config.\+h@{config.\+h}!R@{R}}
+\index{R@{R}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily const int R = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+Roll state index. \mbox{\Hypertarget{config_8h_a589b4f622d6edccfa6c073a113fa4836}\label{config_8h_a589b4f622d6edccfa6c073a113fa4836}} 
+\index{config.\+h@{config.\+h}!S\+IM@{S\+IM}}
+\index{S\+IM@{S\+IM}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{S\+IM}{SIM}}
+{\footnotesize\ttfamily const bool S\+IM = false\hspace{0.3cm}{\ttfamily [static]}}
+
+Use this when running this code on a personal computer rather than the sub. It will ignore most of the IO functions, unless you have access to a D\+VL and M5 motors (\+:P). \mbox{\Hypertarget{config_8h_a6d006725140166599b441c1449fc7a3a}\label{config_8h_a6d006725140166599b441c1449fc7a3a}} 
+\index{config.\+h@{config.\+h}!U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG@{U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG}}
+\index{U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG@{U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG}{USE\_INITIAL\_HEADING}}
+{\footnotesize\ttfamily const bool U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG = true\hspace{0.3cm}{\ttfamily [static]}}
+
+Set to true when using the initial heading after the sub is unkilled. For example, if the diver unkills at 274.\+5 degrees, that will be treated as north for the sub during the run. \mbox{\Hypertarget{config_8h_ac5dc2e25ee3e4af146d8ccdb65cf43da}\label{config_8h_ac5dc2e25ee3e4af146d8ccdb65cf43da}} 
+\index{config.\+h@{config.\+h}!V@{V}}
+\index{V@{V}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{V}{V}}
+{\footnotesize\ttfamily const int V = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+Vertical, or down, state index. \mbox{\Hypertarget{config_8h_a4245f3c5e8eb90ade09427f989b098ec}\label{config_8h_a4245f3c5e8eb90ade09427f989b098ec}} 
+\index{config.\+h@{config.\+h}!Y@{Y}}
+\index{Y@{Y}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{Y}{Y}}
+{\footnotesize\ttfamily const int Y = 3\hspace{0.3cm}{\ttfamily [static]}}
+
+Yaw state index. 

@@ -1,0 +1,224 @@
+\hypertarget{m5_8c}{}\section{src/m5/m5.c File Reference}
+\label{m5_8c}\index{src/m5/m5.\+c@{src/m5/m5.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}m5/m5.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}m5/io\+\_\+m5.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}m5/crc32.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macrodef.\+h\char`\"{}}\newline
+Include dependency graph for m5.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{m5_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{m5_8c_a04ec98fdf714236a78ea79b976d52933}{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0}~0x\+F5U
+\item 
+\#define \hyperlink{m5_8c_a48fb3f74916ae24f42cd9223797c7a94}{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1}~0x5\+FU
+\item 
+\#define \hyperlink{m5_8c_a93684793ef7486f1b995314bd4c2068d}{R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE}
+\item 
+\#define \hyperlink{m5_8c_a1ce0a5e6c905daaf3bba17c1b8975991}{A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND}~0x\+F0U
+\item 
+\#define \hyperlink{m5_8c_ae81e0fd92a705eac6a55b2eb7e31b3d3}{T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID}~0x81U
+\item 
+\#define \hyperlink{m5_8c_a557a739a8301e784254486286afcc5b9}{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND}~0x\+A\+AU
+\item 
+\#define \hyperlink{m5_8c_a0c027afc3bc19ef51202d2d209de86de}{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID}~0x00U
+\item 
+\#define \hyperlink{m5_8c_ab9b0724d5d931ff0d0cf09f4d59705ce}{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN}~(2 + 4 $\ast$ \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9aaa813814112c12c7937b51f1a1df1d7e6}{N\+U\+M\+\_\+\+T\+H\+R\+U\+S\+T\+E\+RS})
+\item 
+\#define \hyperlink{m5_8c_ad363dda86ed2698dbf15593ec90b5466}{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC}~((uint\+\_\+fast32\+\_\+t)0x\+D\+D8\+A\+C40\+D)
+\item 
+\#define \hyperlink{m5_8c_ac508e0a848f8164d2e26831b8bbe9954}{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID}~((uint\+\_\+fast32\+\_\+t)0x\+E\+A\+C\+E\+B963)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\hyperlink{m5_8c_a61dadd085c1777f559549e05962b2c9ea0cb1b2c6a7db1f1084886c98909a3f36}{I\+N\+IT}, 
+\hyperlink{m5_8c_a61dadd085c1777f559549e05962b2c9ea2e57918a09d25b07a664e505d50a97f6}{H\+E\+A\+D\+ER}, 
+\hyperlink{m5_8c_a61dadd085c1777f559549e05962b2c9ea76df7266a0d5cbf4a1700823d154be5b}{R\+\_\+\+ID}, 
+\hyperlink{m5_8c_a61dadd085c1777f559549e05962b2c9ea316771101d4b4b1dea7d7e2a82ef1658}{P\+O\+W\+ER}, 
+\newline
+\hyperlink{m5_8c_a61dadd085c1777f559549e05962b2c9eaadc75f07a97300078de1c92bf6414827}{C\+RC}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{m5_8c_a72899a525f7b7ae5b169c1a668b3bc07}{m5\+\_\+pack\+\_\+power\+\_\+reset} ()
+\item 
+int \hyperlink{m5_8c_a5b009d85753bf6e5052b9f51cf4c4b25}{m5\+\_\+power\+\_\+trans} ()
+\begin{DoxyCompactList}\small\item\em Writes the next byte of the propulsion command packet to the M5s. \end{DoxyCompactList}\item 
+void \hyperlink{m5_8c_a825b295706601422db8d5d0fa407e0bc}{m5\+\_\+power} (enum \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}{thruster} t, float \hyperlink{m5_8c_a981240cd6ce0533ce37ae56b854de7ec}{power})
+\begin{DoxyCompactList}\small\item\em Sets thruster t to \char`\"{}power\char`\"{} power. \end{DoxyCompactList}\item 
+void \hyperlink{m5_8c_aa580f305d0338c5fd86198bf4ac431a8}{m5\+\_\+power\+\_\+offer\+\_\+resume} ()
+\begin{DoxyCompactList}\small\item\em Gives power to all the motors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{m5_8c_a1ce0a5e6c905daaf3bba17c1b8975991}\label{m5_8c_a1ce0a5e6c905daaf3bba17c1b8975991}} 
+\index{m5.\+c@{m5.\+c}!A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND@{A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND}}
+\index{A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND@{A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND}{ADDR\_CUSTOM\_COMMAND}}
+{\footnotesize\ttfamily \#define A\+D\+D\+R\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+C\+O\+M\+M\+A\+ND~0x\+F0U}
+
+\mbox{\Hypertarget{m5_8c_ac508e0a848f8164d2e26831b8bbe9954}\label{m5_8c_ac508e0a848f8164d2e26831b8bbe9954}} 
+\index{m5.\+c@{m5.\+c}!C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID@{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID}}
+\index{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID@{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID}{CRC\_POST\_R\_ID}}
+{\footnotesize\ttfamily \#define C\+R\+C\+\_\+\+P\+O\+S\+T\+\_\+\+R\+\_\+\+ID~((uint\+\_\+fast32\+\_\+t)0x\+E\+A\+C\+E\+B963)}
+
+\mbox{\Hypertarget{m5_8c_a557a739a8301e784254486286afcc5b9}\label{m5_8c_a557a739a8301e784254486286afcc5b9}} 
+\index{m5.\+c@{m5.\+c}!P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND}}
+\index{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND}{PROPULSION\_COMMAND}}
+{\footnotesize\ttfamily \#define P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+ND~0x\+A\+AU}
+
+\mbox{\Hypertarget{m5_8c_ad363dda86ed2698dbf15593ec90b5466}\label{m5_8c_ad363dda86ed2698dbf15593ec90b5466}} 
+\index{m5.\+c@{m5.\+c}!P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC}}
+\index{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC}{PROPULSION\_COMMAND\_HEADER\_CRC}}
+{\footnotesize\ttfamily \#define P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+C\+RC~((uint\+\_\+fast32\+\_\+t)0x\+D\+D8\+A\+C40\+D)}
+
+\mbox{\Hypertarget{m5_8c_ab9b0724d5d931ff0d0cf09f4d59705ce}\label{m5_8c_ab9b0724d5d931ff0d0cf09f4d59705ce}} 
+\index{m5.\+c@{m5.\+c}!P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN}}
+\index{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN}{PROPULSION\_COMMAND\_PACKET\_LEN}}
+{\footnotesize\ttfamily \#define P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+A\+C\+K\+E\+T\+\_\+\+L\+EN~(2 + 4 $\ast$ \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9aaa813814112c12c7937b51f1a1df1d7e6}{N\+U\+M\+\_\+\+T\+H\+R\+U\+S\+T\+E\+RS})}
+
+\mbox{\Hypertarget{m5_8c_a0c027afc3bc19ef51202d2d209de86de}\label{m5_8c_a0c027afc3bc19ef51202d2d209de86de}} 
+\index{m5.\+c@{m5.\+c}!P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID}}
+\index{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID@{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID}{PROPULSION\_COMMAND\_R\_ID}}
+{\footnotesize\ttfamily \#define P\+R\+O\+P\+U\+L\+S\+I\+O\+N\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+\_\+\+ID~0x00U}
+
+\mbox{\Hypertarget{m5_8c_a93684793ef7486f1b995314bd4c2068d}\label{m5_8c_a93684793ef7486f1b995314bd4c2068d}} 
+\index{m5.\+c@{m5.\+c}!R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE@{R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE}}
+\index{R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE@{R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE}{RESPONSE\_NONE}}
+{\footnotesize\ttfamily \#define R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+N\+O\+NE}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+0x00U \textcolor{comment}{/* Per the CSR doc (Per the m5 manual, 0x02 results}
+\textcolor{comment}{                               in the standard thruster response.) */}
+\end{DoxyCode}
+\mbox{\Hypertarget{m5_8c_a04ec98fdf714236a78ea79b976d52933}\label{m5_8c_a04ec98fdf714236a78ea79b976d52933}} 
+\index{m5.\+c@{m5.\+c}!S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0@{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0}}
+\index{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0@{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0}{SYNC\_REQUEST\_0}}
+{\footnotesize\ttfamily \#define S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+0~0x\+F5U}
+
+This file lacks powerful or generic packet creation (as well as any packet parsing)
+
+The V\+R\+C\+SR doc makes recommendations about data being little endian, and the m5 example Python code serializes it\textquotesingle{}s data in native byte order, indicating that all data should be little endian byte order, including, eg the synchronization bytes and floating point numbers. Indeed based on the Python code, we can assume that the m5\textquotesingle{}s want floating point numbers in little endian I\+E\+E\+E754 format. \mbox{\Hypertarget{m5_8c_a48fb3f74916ae24f42cd9223797c7a94}\label{m5_8c_a48fb3f74916ae24f42cd9223797c7a94}} 
+\index{m5.\+c@{m5.\+c}!S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1@{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1}}
+\index{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1@{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1}{SYNC\_REQUEST\_1}}
+{\footnotesize\ttfamily \#define S\+Y\+N\+C\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+1~0x5\+FU}
+
+\mbox{\Hypertarget{m5_8c_ae81e0fd92a705eac6a55b2eb7e31b3d3}\label{m5_8c_ae81e0fd92a705eac6a55b2eb7e31b3d3}} 
+\index{m5.\+c@{m5.\+c}!T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID@{T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID}}
+\index{T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID@{T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID}{THRUSTER\_GROUP\_ID}}
+{\footnotesize\ttfamily \#define T\+H\+R\+U\+S\+T\+E\+R\+\_\+\+G\+R\+O\+U\+P\+\_\+\+ID~0x81U}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{m5_8c_a61dadd085c1777f559549e05962b2c9e}\label{m5_8c_a61dadd085c1777f559549e05962b2c9e}} 
+\subsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+IT@{I\+N\+IT}!m5.\+c@{m5.\+c}}\index{m5.\+c@{m5.\+c}!I\+N\+IT@{I\+N\+IT}}}\mbox{\Hypertarget{m5_8c_a61dadd085c1777f559549e05962b2c9ea0cb1b2c6a7db1f1084886c98909a3f36}\label{m5_8c_a61dadd085c1777f559549e05962b2c9ea0cb1b2c6a7db1f1084886c98909a3f36}} 
+I\+N\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{H\+E\+A\+D\+ER@{H\+E\+A\+D\+ER}!m5.\+c@{m5.\+c}}\index{m5.\+c@{m5.\+c}!H\+E\+A\+D\+ER@{H\+E\+A\+D\+ER}}}\mbox{\Hypertarget{m5_8c_a61dadd085c1777f559549e05962b2c9ea2e57918a09d25b07a664e505d50a97f6}\label{m5_8c_a61dadd085c1777f559549e05962b2c9ea2e57918a09d25b07a664e505d50a97f6}} 
+H\+E\+A\+D\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+\_\+\+ID@{R\+\_\+\+ID}!m5.\+c@{m5.\+c}}\index{m5.\+c@{m5.\+c}!R\+\_\+\+ID@{R\+\_\+\+ID}}}\mbox{\Hypertarget{m5_8c_a61dadd085c1777f559549e05962b2c9ea76df7266a0d5cbf4a1700823d154be5b}\label{m5_8c_a61dadd085c1777f559549e05962b2c9ea76df7266a0d5cbf4a1700823d154be5b}} 
+R\+\_\+\+ID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+W\+ER@{P\+O\+W\+ER}!m5.\+c@{m5.\+c}}\index{m5.\+c@{m5.\+c}!P\+O\+W\+ER@{P\+O\+W\+ER}}}\mbox{\Hypertarget{m5_8c_a61dadd085c1777f559549e05962b2c9ea316771101d4b4b1dea7d7e2a82ef1658}\label{m5_8c_a61dadd085c1777f559549e05962b2c9ea316771101d4b4b1dea7d7e2a82ef1658}} 
+P\+O\+W\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+RC@{C\+RC}!m5.\+c@{m5.\+c}}\index{m5.\+c@{m5.\+c}!C\+RC@{C\+RC}}}\mbox{\Hypertarget{m5_8c_a61dadd085c1777f559549e05962b2c9eaadc75f07a97300078de1c92bf6414827}\label{m5_8c_a61dadd085c1777f559549e05962b2c9eaadc75f07a97300078de1c92bf6414827}} 
+C\+RC&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{m5_8c_a72899a525f7b7ae5b169c1a668b3bc07}\label{m5_8c_a72899a525f7b7ae5b169c1a668b3bc07}} 
+\index{m5.\+c@{m5.\+c}!m5\+\_\+pack\+\_\+power\+\_\+reset@{m5\+\_\+pack\+\_\+power\+\_\+reset}}
+\index{m5\+\_\+pack\+\_\+power\+\_\+reset@{m5\+\_\+pack\+\_\+power\+\_\+reset}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{m5\+\_\+pack\+\_\+power\+\_\+reset()}{m5\_pack\_power\_reset()}}
+{\footnotesize\ttfamily void m5\+\_\+pack\+\_\+power\+\_\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{m5_8c_a825b295706601422db8d5d0fa407e0bc}\label{m5_8c_a825b295706601422db8d5d0fa407e0bc}} 
+\index{m5.\+c@{m5.\+c}!m5\+\_\+power@{m5\+\_\+power}}
+\index{m5\+\_\+power@{m5\+\_\+power}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{m5\+\_\+power()}{m5\_power()}}
+{\footnotesize\ttfamily void m5\+\_\+power (\begin{DoxyParamCaption}\item[{enum \hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9a}{thruster}}]{t,  }\item[{float}]{power }\end{DoxyParamCaption})}
+
+
+
+Sets thruster t to \char`\"{}power\char`\"{} power. 
+
+The new value will not actually be transmitted until m5\+\_\+power\+\_\+offer\+\_\+resume is called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The thruster that is being powered. \\
+\hline
+{\em power} & The amount of power, in range of \mbox{[}-\/1, 1\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{m5_8c_aa580f305d0338c5fd86198bf4ac431a8}\label{m5_8c_aa580f305d0338c5fd86198bf4ac431a8}} 
+\index{m5.\+c@{m5.\+c}!m5\+\_\+power\+\_\+offer\+\_\+resume@{m5\+\_\+power\+\_\+offer\+\_\+resume}}
+\index{m5\+\_\+power\+\_\+offer\+\_\+resume@{m5\+\_\+power\+\_\+offer\+\_\+resume}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{m5\+\_\+power\+\_\+offer\+\_\+resume()}{m5\_power\_offer\_resume()}}
+{\footnotesize\ttfamily void m5\+\_\+power\+\_\+offer\+\_\+resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gives power to all the motors. 
+
+Sets the most recent power value set for each thruster with m5\+\_\+power to be transmitted as soon as the next set of thrust values begin transmission.
+
+Resumes transmission if it is currently paused. \mbox{\Hypertarget{m5_8c_a5b009d85753bf6e5052b9f51cf4c4b25}\label{m5_8c_a5b009d85753bf6e5052b9f51cf4c4b25}} 
+\index{m5.\+c@{m5.\+c}!m5\+\_\+power\+\_\+trans@{m5\+\_\+power\+\_\+trans}}
+\index{m5\+\_\+power\+\_\+trans@{m5\+\_\+power\+\_\+trans}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{m5\+\_\+power\+\_\+trans()}{m5\_power\_trans()}}
+{\footnotesize\ttfamily int m5\+\_\+power\+\_\+trans (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Writes the next byte of the propulsion command packet to the M5s. 
+
+\begin{DoxyReturn}{Returns}
+E\+OF on failure writing byte, 1 on packet completion, and zero on non-\/packet completion. 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{m5_8c_a981240cd6ce0533ce37ae56b854de7ec}\label{m5_8c_a981240cd6ce0533ce37ae56b854de7ec}} 
+\index{m5.\+c@{m5.\+c}!power@{power}}
+\index{power@{power}!m5.\+c@{m5.\+c}}
+\subsubsection{\texorpdfstring{power}{power}}
+{\footnotesize\ttfamily float power\mbox{[}\hyperlink{config_8h_a2ee7466b8ebcae32e1e733f8067a6f9aaa813814112c12c7937b51f1a1df1d7e6}{N\+U\+M\+\_\+\+T\+H\+R\+U\+S\+T\+E\+RS}\mbox{]}}
+

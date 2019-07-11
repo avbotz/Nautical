@@ -1,0 +1,54 @@
+\hypertarget{macrodef_8h}{}\section{include/macrodef.h File Reference}
+\label{macrodef_8h}\index{include/macrodef.\+h@{include/macrodef.\+h}}
+
+
+Helper macros for various parts of Nautical.  
+
+
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{macrodef_8h_ad0add60b29474b53705e3863a72935d4}\label{macrodef_8h_ad0add60b29474b53705e3863a72935d4}} 
+\#define {\bfseries C\+O\+U\+N\+T\+OF}(a)~(sizeof(a)/sizeof(0\mbox{[}a\mbox{]})/((void $\ast$)a == (void $\ast$)\&a))
+\item 
+\mbox{\Hypertarget{macrodef_8h_a994e9792448fa94d193dc4c679a03ba6}\label{macrodef_8h_a994e9792448fa94d193dc4c679a03ba6}} 
+\#define {\bfseries I\+N\+\_\+\+R\+A\+N\+GE}(min,  val,  max)~(min $<$= val \&\& val $<$= max)
+\item 
+\mbox{\Hypertarget{macrodef_8h_a0ed9e38823490c0ca01861f9506978d5}\label{macrodef_8h_a0ed9e38823490c0ca01861f9506978d5}} 
+\#define {\bfseries T\+R\+U\+NC}(min,  val,  max)~(val $<$= min ? min \+: (val $>$= max ? max \+: val))
+\item 
+\mbox{\Hypertarget{macrodef_8h_a1df61a2ed0648e55628a10f9d662ad7b}\label{macrodef_8h_a1df61a2ed0648e55628a10f9d662ad7b}} 
+\#define {\bfseries S\+T\+R\+I\+N\+G\+I\+F\+Y\+\_\+N}(a)~\#a
+\item 
+\mbox{\Hypertarget{macrodef_8h_a20b5fb7991df2f95c18b18f428032851}\label{macrodef_8h_a20b5fb7991df2f95c18b18f428032851}} 
+\#define {\bfseries S\+T\+R\+I\+N\+G\+I\+F\+Y\+\_\+X}(a)~S\+T\+R\+I\+N\+G\+I\+F\+Y\+\_\+N(a)
+\item 
+\mbox{\Hypertarget{macrodef_8h_ac3aad8fca2e1594e51c7cf43fdbd674c}\label{macrodef_8h_ac3aad8fca2e1594e51c7cf43fdbd674c}} 
+\#define {\bfseries C\+C\+\_\+\+N\+NN}(a,  b,  c)~a \#\# b \#\# c
+\item 
+\mbox{\Hypertarget{macrodef_8h_aaecffb50367b64f17cf53d6be33832c9}\label{macrodef_8h_aaecffb50367b64f17cf53d6be33832c9}} 
+\#define {\bfseries C\+C\+\_\+\+X\+XX}(a,  b,  c)~C\+C\+\_\+\+N\+NN(a, b, c)
+\item 
+\mbox{\Hypertarget{macrodef_8h_aba1028403e85d5827afe41ecbf9c7f72}\label{macrodef_8h_aba1028403e85d5827afe41ecbf9c7f72}} 
+\#define {\bfseries C\+C\+\_\+\+N\+XN}(a,  b,  c,  dum)~C\+C\+\_\+\+N\+NN(a \#\# dum, b, c \#\#dum)
+\item 
+\mbox{\Hypertarget{macrodef_8h_a8ca32837108d29eb4625f9312c254dc9}\label{macrodef_8h_a8ca32837108d29eb4625f9312c254dc9}} 
+\#define {\bfseries S\+E\+T\+\_\+\+B\+I\+T\+\_\+\+H\+I\+GH}(reg,  bit)~reg $\vert$= (1\+U $<$$<$ bit)
+\item 
+\mbox{\Hypertarget{macrodef_8h_a342b6b1c94719d0d55e131114d690fad}\label{macrodef_8h_a342b6b1c94719d0d55e131114d690fad}} 
+\#define {\bfseries S\+E\+T\+\_\+\+B\+I\+T\+\_\+\+L\+OW}(reg,  bit)~reg \&= $\sim$(1\+U $<$$<$ bit)
+\item 
+\mbox{\Hypertarget{macrodef_8h_a27d87ec86421947bafee84e2811ac5cd}\label{macrodef_8h_a27d87ec86421947bafee84e2811ac5cd}} 
+\#define {\bfseries B\+I\+T\+\_\+\+V\+A\+L\+UE}(reg,  bit)~reg \& (1\+U $<$$<$ bit)
+\item 
+\mbox{\Hypertarget{macrodef_8h_ad2d787cd2c171fde13fcabf374389fe8}\label{macrodef_8h_ad2d787cd2c171fde13fcabf374389fe8}} 
+\#define {\bfseries T\+O\+G\+G\+L\+E\+\_\+\+B\+IT}(reg,  bit)~reg $^\wedge$= (1\+U $<$$<$ bit)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper macros for various parts of Nautical. 
+
+\begin{DoxyAuthor}{Author}
+Seth Girvan (Lord) 
+\end{DoxyAuthor}

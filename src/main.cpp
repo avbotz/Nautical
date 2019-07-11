@@ -195,7 +195,7 @@ void run()
 			// Compute angles from AHRS and depth from pressure sensor.
 			if (!SIM)
 			{
-				current[V] = (analogRead(NPIN)-230.)/65.;
+				current[V] = (analogRead(DEPTH_PIN)-230.)/65.;
 				current[Y] = ahrs_att((enum att_axis) (YAW)) - INITIAL_YAW;
 				current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
 				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;

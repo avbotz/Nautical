@@ -21,7 +21,7 @@ void io()
 
 	pinMode(KILL_PIN, INPUT);
 
-	pinMode(NPIN, INPUT);
+	pinMode(DEPTH_PIN, INPUT);
 	pinMode(49, OUTPUT);
 	digitalWrite(49, HIGH); 
 

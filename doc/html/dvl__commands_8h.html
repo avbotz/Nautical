@@ -87,6 +87,7 @@ Variables</h2></td></tr>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>break_command</b> = &quot;===&quot;</td></tr>
 <tr class="separator:a8fc19b86e102436b966cc32b5748ae72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4005b50caf69d0e6e2eb922578ef2850"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dvl__commands_8h.html#a4005b50caf69d0e6e2eb922578ef2850">setup_commands</a> [NUM_COMMANDS]</td></tr>
+<tr class="memdesc:a4005b50caf69d0e6e2eb922578ef2850"><td class="mdescLeft">&#160;</td><td class="mdescRight">Important setup commands.  <a href="#a4005b50caf69d0e6e2eb922578ef2850">More...</a><br /></td></tr>
 <tr class="separator:a4005b50caf69d0e6e2eb922578ef2850"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a727a7a096d28f9baa4605f2060612184"><td class="memItemLeft" align="right" valign="top"><a id="a727a7a096d28f9baa4605f2060612184"></a>
 char *&#160;</td><td class="memItemRight" valign="bottom"><b>ping_command</b> = &quot;cs\r&quot;</td></tr>
@@ -94,9 +95,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>ping_command</b> = 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface function definitions for DVL. </p>
-<dl class="section author"><dt>Author</dt><dd>Timothy Kanarsky </dd>
-<dd>
-David Zhang </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Timothy Kanarsky </dd></dl>
 </div><h2 class="groupheader">Variable Documentation</h2>
 <a id="a4005b50caf69d0e6e2eb922578ef2850"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4005b50caf69d0e6e2eb922578ef2850">&#9670;&nbsp;</a></span>setup_commands</h2>
@@ -109,7 +108,9 @@ David Zhang </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;CR1\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;BX00100\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;#BJ000110000\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;CF11110\r&quot;</span>, </div><div class="line">    </div><div class="line">    <span class="stringliteral">&quot;EA-04500\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;ED00010\r&quot;</span>, </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="stringliteral">&quot;ES00\r&quot;</span>,</div><div class="line"></div><div class="line">    <span class="stringliteral">&quot;EX01011\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;EZ10000010\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;#EU2\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;PA\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;CK\r&quot;</span></div><div class="line">}</div></div><!-- fragment --><p>Hello there </p>
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;CR1\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;BX00100\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;#BJ000110000\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;CF11110\r&quot;</span>, </div><div class="line">    </div><div class="line">    <span class="stringliteral">&quot;EA-04500\r&quot;</span>, </div><div class="line">    <span class="stringliteral">&quot;ED00010\r&quot;</span>, </div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="stringliteral">&quot;ES00\r&quot;</span>,</div><div class="line"></div><div class="line">    <span class="stringliteral">&quot;EX01011\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;EZ10000010\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;#EU2\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;PA\r&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;CK\r&quot;</span></div><div class="line">}</div></div><!-- fragment -->
+<p>Important setup commands. </p>
+<p>CR1 - Resets DVL to factory settings BX00100 - Sets max depth to 100dm (33ft) #BJ000110000 - Enables high-res velocity and range output CF11110 - Sets auto-ping, binary output EA - Determine angle correction based on DVL mount angle. EA-04500 - Determine the angle correction based on DVL mount angle. ED00010 - Depth of transducer, set to 1m because it doesn't matter too much. </p>
 
 </div>
 </div>

@@ -1,0 +1,95 @@
+\hypertarget{matrix_8cpp}{}\section{src/matrix.cpp File Reference}
+\label{matrix_8cpp}\index{src/matrix.\+cpp@{src/matrix.\+cpp}}
+{\ttfamily \#include \char`\"{}matrix.\+h\char`\"{}}\newline
+Include dependency graph for matrix.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{matrix_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{matrix_8cpp_a71212bcd68ee44b80905c37c538cecff}{N\+R\+\_\+\+E\+ND}~1
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{matrix_8cpp_a806a9984da7f155de1d72e4409fe41a5}{print} (float $\ast$A, int m, int n)
+\item 
+void \hyperlink{matrix_8cpp_ad2ee4eac600dbdf6950781957e8f7d14}{copy} (float $\ast$A, int n, int m, float $\ast$B)
+\item 
+void \hyperlink{matrix_8cpp_a50d178d74f498878c116b677804f8a9d}{multiply} (float $\ast$A, float $\ast$B, int m, int p, int n, float $\ast$C)
+\item 
+void \hyperlink{matrix_8cpp_af4b108d76582e8d66b1c19dd1878bcbe}{add} (float $\ast$A, float $\ast$B, int m, int n, float $\ast$C)
+\item 
+void \hyperlink{matrix_8cpp_a4a1032bae9b5fdfaaaef2ea17ab21ef3}{subtract} (float $\ast$A, float $\ast$B, int m, int n, float $\ast$C)
+\item 
+void \hyperlink{matrix_8cpp_a437752bd1f9b3c62c2844ed921e17b70}{transpose} (float $\ast$A, int m, int n, float $\ast$C)
+\item 
+void \hyperlink{matrix_8cpp_ae6482d1e4de05e954edf47b04492873a}{scale} (float $\ast$A, int m, int n, float k)
+\item 
+int \hyperlink{matrix_8cpp_af73a219fb4514bdf2337b8b8b7600b0a}{invert} (float $\ast$A, int n)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{matrix_8cpp_a71212bcd68ee44b80905c37c538cecff}\label{matrix_8cpp_a71212bcd68ee44b80905c37c538cecff}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!N\+R\+\_\+\+E\+ND@{N\+R\+\_\+\+E\+ND}}
+\index{N\+R\+\_\+\+E\+ND@{N\+R\+\_\+\+E\+ND}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{N\+R\+\_\+\+E\+ND}{NR\_END}}
+{\footnotesize\ttfamily \#define N\+R\+\_\+\+E\+ND~1}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{matrix_8cpp_af4b108d76582e8d66b1c19dd1878bcbe}\label{matrix_8cpp_af4b108d76582e8d66b1c19dd1878bcbe}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!add@{add}}
+\index{add@{add}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily void add (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_ad2ee4eac600dbdf6950781957e8f7d14}\label{matrix_8cpp_ad2ee4eac600dbdf6950781957e8f7d14}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!copy@{copy}}
+\index{copy@{copy}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void copy (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{n,  }\item[{int}]{m,  }\item[{float $\ast$}]{B }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_af73a219fb4514bdf2337b8b8b7600b0a}\label{matrix_8cpp_af73a219fb4514bdf2337b8b8b7600b0a}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!invert@{invert}}
+\index{invert@{invert}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily int invert (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_a50d178d74f498878c116b677804f8a9d}\label{matrix_8cpp_a50d178d74f498878c116b677804f8a9d}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!multiply@{multiply}}
+\index{multiply@{multiply}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily void multiply (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{p,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_a806a9984da7f155de1d72e4409fe41a5}\label{matrix_8cpp_a806a9984da7f155de1d72e4409fe41a5}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!print@{print}}
+\index{print@{print}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void print (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{m,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_ae6482d1e4de05e954edf47b04492873a}\label{matrix_8cpp_ae6482d1e4de05e954edf47b04492873a}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!scale@{scale}}
+\index{scale@{scale}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily void scale (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float}]{k }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_a4a1032bae9b5fdfaaaef2ea17ab21ef3}\label{matrix_8cpp_a4a1032bae9b5fdfaaaef2ea17ab21ef3}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!subtract@{subtract}}
+\index{subtract@{subtract}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{subtract()}{subtract()}}
+{\footnotesize\ttfamily void subtract (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8cpp_a437752bd1f9b3c62c2844ed921e17b70}\label{matrix_8cpp_a437752bd1f9b3c62c2844ed921e17b70}} 
+\index{matrix.\+cpp@{matrix.\+cpp}!transpose@{transpose}}
+\index{transpose@{transpose}!matrix.\+cpp@{matrix.\+cpp}}
+\subsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily void transpose (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{int}]{m,  }\item[{int}]{n,  }\item[{float $\ast$}]{C }\end{DoxyParamCaption})}
+

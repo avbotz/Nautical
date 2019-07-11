@@ -1,0 +1,91 @@
+\hypertarget{kalman_8hpp}{}\section{include/kalman.hpp File Reference}
+\label{kalman_8hpp}\index{include/kalman.\+hpp@{include/kalman.\+hpp}}
+
+
+\hyperlink{structKalman}{Kalman} filter struct and constant definitions.  
+
+
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structKalman}{Kalman}
+\begin{DoxyCompactList}\small\item\em Struct to make using the \hyperlink{structKalman}{Kalman} filter easier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N} = 6
+\item 
+\mbox{\Hypertarget{kalman_8hpp_a9edc6895d567e0ddcdd3cc20df3f3b4b}\label{kalman_8hpp_a9edc6895d567e0ddcdd3cc20df3f3b4b}} 
+static const int {\bfseries M} = 2
+\item 
+static float \hyperlink{kalman_8hpp_a51c1d090ecb85f96345bb359da0c40d6}{Qk} \mbox{[}\hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N} $\ast$\hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N}\mbox{]}
+\item 
+static float \hyperlink{kalman_8hpp_aa70fba75014a727d78d8d3577de35beb}{Hk} \mbox{[}M $\ast$\hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N}\mbox{]}
+\item 
+static float \hyperlink{kalman_8hpp_a211f44ae6253f79a609558455c4732e9}{Rk} \mbox{[}M $\ast$M\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{structKalman}{Kalman} filter struct and constant definitions. 
+
+The state of the \hyperlink{structKalman}{Kalman} filter can be described by the following vector\+: \mbox{[}X VX AX Y VY AY\mbox{]}
+
+The main measurement instrument used for this \hyperlink{structKalman}{Kalman} filter is a D\+VL, which returns VX and VY. The exact variances of the D\+VL are on the spreadsheet.
+
+\begin{DoxyAuthor}{Author}
+David Zhang 
+\end{DoxyAuthor}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{kalman_8hpp_aa70fba75014a727d78d8d3577de35beb}\label{kalman_8hpp_aa70fba75014a727d78d8d3577de35beb}} 
+\index{kalman.\+hpp@{kalman.\+hpp}!Hk@{Hk}}
+\index{Hk@{Hk}!kalman.\+hpp@{kalman.\+hpp}}
+\subsubsection{\texorpdfstring{Hk}{Hk}}
+{\footnotesize\ttfamily float Hk\mbox{[}M $\ast$\hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    0.000, 1.000, 0.000, 0.000, 0.000, 0.000,
+    0.000, 0.000, 0.000, 0.000, 1.000, 0.000
+\}
+\end{DoxyCode}
+Hk maps the predicted state to measurements. \mbox{\Hypertarget{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}\label{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}} 
+\index{kalman.\+hpp@{kalman.\+hpp}!N@{N}}
+\index{N@{N}!kalman.\+hpp@{kalman.\+hpp}}
+\subsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily const int N = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+N represents the number of elements in the state, while M represents the number of sensors. \mbox{\Hypertarget{kalman_8hpp_a51c1d090ecb85f96345bb359da0c40d6}\label{kalman_8hpp_a51c1d090ecb85f96345bb359da0c40d6}} 
+\index{kalman.\+hpp@{kalman.\+hpp}!Qk@{Qk}}
+\index{Qk@{Qk}!kalman.\+hpp@{kalman.\+hpp}}
+\subsubsection{\texorpdfstring{Qk}{Qk}}
+{\footnotesize\ttfamily float Qk\mbox{[}\hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N} $\ast$\hyperlink{kalman_8hpp_ab2b6b0c222cd1ce70d6a831f57241e59}{N}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    0.005, 0.000, 0.000, 0.000, 0.000, 0.000,
+    0.000, 0.005, 0.000, 0.000, 0.000, 0.000,
+    0.000, 0.000, 0.005, 0.000, 0.000, 0.000,
+    0.000, 0.000, 0.000, 0.005, 0.000, 0.000,
+    0.000, 0.000, 0.000, 0.000, 0.005, 0.000,
+    0.000, 0.000, 0.000, 0.000, 0.000, 0.005
+\}
+\end{DoxyCode}
+Qk describes how accurate the model is. The variance of each element of the should be along the main diagonal of the matrix. \mbox{\Hypertarget{kalman_8hpp_a211f44ae6253f79a609558455c4732e9}\label{kalman_8hpp_a211f44ae6253f79a609558455c4732e9}} 
+\index{kalman.\+hpp@{kalman.\+hpp}!Rk@{Rk}}
+\index{Rk@{Rk}!kalman.\+hpp@{kalman.\+hpp}}
+\subsubsection{\texorpdfstring{Rk}{Rk}}
+{\footnotesize\ttfamily float Rk\mbox{[}M $\ast$M\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    5.000, 0.000,
+    0.000, 5.000
+\}
+\end{DoxyCode}
+Rk describes the precision of each measurement. 

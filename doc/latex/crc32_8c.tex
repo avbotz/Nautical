@@ -1,0 +1,66 @@
+\hypertarget{crc32_8c}{}\section{src/m5/crc32.c File Reference}
+\label{crc32_8c}\index{src/m5/crc32.\+c@{src/m5/crc32.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for crc32.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{crc32_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{crc32_8c_a39e1b7cfc3c0d80ea907e6486d288796}{C\+R\+C32\+\_\+\+P\+O\+LY}~((uint32\+\_\+t)0x\+E\+D\+B88320)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{crc32_8c_a24d6fe2ac5fe0403bc92b23d82533164}{crc32\+\_\+update} (uint32\+\_\+t crc, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Updates a C\+RC with a byte of data. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{crc32_8c_ab31566d3a4b466db0623254d02b8d5a5}{crc32\+\_\+final\+\_\+mask} (uint32\+\_\+t crc)
+\begin{DoxyCompactList}\small\item\em Applies a final X\+OR mask to a C\+RC. (0x\+F\+F\+F\+F\+F\+F\+FF) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{crc32_8c_a39e1b7cfc3c0d80ea907e6486d288796}\label{crc32_8c_a39e1b7cfc3c0d80ea907e6486d288796}} 
+\index{crc32.\+c@{crc32.\+c}!C\+R\+C32\+\_\+\+P\+O\+LY@{C\+R\+C32\+\_\+\+P\+O\+LY}}
+\index{C\+R\+C32\+\_\+\+P\+O\+LY@{C\+R\+C32\+\_\+\+P\+O\+LY}!crc32.\+c@{crc32.\+c}}
+\subsubsection{\texorpdfstring{C\+R\+C32\+\_\+\+P\+O\+LY}{CRC32\_POLY}}
+{\footnotesize\ttfamily \#define C\+R\+C32\+\_\+\+P\+O\+LY~((uint32\+\_\+t)0x\+E\+D\+B88320)}
+
+The C\+R\+C32 is reverse bit order (Most significant bit last), and data bytes are in non-\/reverse bit order (or reverse relative to the crc). 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{crc32_8c_ab31566d3a4b466db0623254d02b8d5a5}\label{crc32_8c_ab31566d3a4b466db0623254d02b8d5a5}} 
+\index{crc32.\+c@{crc32.\+c}!crc32\+\_\+final\+\_\+mask@{crc32\+\_\+final\+\_\+mask}}
+\index{crc32\+\_\+final\+\_\+mask@{crc32\+\_\+final\+\_\+mask}!crc32.\+c@{crc32.\+c}}
+\subsubsection{\texorpdfstring{crc32\+\_\+final\+\_\+mask()}{crc32\_final\_mask()}}
+{\footnotesize\ttfamily uint32\+\_\+t crc32\+\_\+final\+\_\+mask (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{crc }\end{DoxyParamCaption})}
+
+
+
+Applies a final X\+OR mask to a C\+RC. (0x\+F\+F\+F\+F\+F\+F\+FF) 
+
+Should be done after \hyperlink{crc32_8h_a24d6fe2ac5fe0403bc92b23d82533164}{crc32\+\_\+update()} has been called for all data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em crc} & C\+RC that receives the mask. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New C\+RC after the mask. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{crc32_8c_a24d6fe2ac5fe0403bc92b23d82533164}\label{crc32_8c_a24d6fe2ac5fe0403bc92b23d82533164}} 
+\index{crc32.\+c@{crc32.\+c}!crc32\+\_\+update@{crc32\+\_\+update}}
+\index{crc32\+\_\+update@{crc32\+\_\+update}!crc32.\+c@{crc32.\+c}}
+\subsubsection{\texorpdfstring{crc32\+\_\+update()}{crc32\_update()}}
+{\footnotesize\ttfamily uint32\+\_\+t crc32\+\_\+update (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{crc,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Updates a C\+RC with a byte of data. 
+
+N\+O\+TE\+: An optimization would be to use a lookup-\/table implementation instead (with the table in flash on the avr). 

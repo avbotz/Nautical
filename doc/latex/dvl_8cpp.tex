@@ -1,0 +1,339 @@
+\hypertarget{dvl_8cpp}{}\section{src/dvl/dvl.cpp File Reference}
+\label{dvl_8cpp}\index{src/dvl/dvl.\+cpp@{src/dvl/dvl.\+cpp}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}dvl/dvl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dvl/io\+\_\+dvl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dvl/dvl\+\_\+commands.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dbg.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}macrodef.\+h\char`\"{}}\newline
+Include dependency graph for dvl.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dvl_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries dvl\+\_\+data}
+\item 
+struct {\bfseries parser\+\_\+var\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dvl_8cpp_a62634036639f88eece6fbf226b45f84b}{B\+A\+UD}~9600\+U;
+\item 
+\#define \hyperlink{dvl_8cpp_a92fc3237b12bab9fd281ab53bc4ed957}{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID}~0x7f
+\item 
+\#define \hyperlink{dvl_8cpp_a1067d5f90fd4deede85bf8fe36c1c57f}{H\+E\+A\+D\+E\+R\+\_\+\+ID}~0x7f
+\item 
+\#define \hyperlink{dvl_8cpp_a067042c960937b2777090fbf4ac1da64}{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}~0x0358
+\item 
+\#define \hyperlink{dvl_8cpp_aabb4925c0937fec44403820f9e2d7160}{R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}~0x0458
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cb}{cmd\+\_\+state\+\_\+t} \{ \hyperlink{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbae3ecaea541cce8cccf66bee6717db416}{C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+E\+A\+DY}, 
+\hyperlink{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbad98fce910ccccbaefad5fc915dbbc6a3}{C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+O\+C\+E\+S\+S\+I\+NG}, 
+\hyperlink{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbaa40df4f1492f14dcc91fe4f8d7c18a7a}{P\+I\+N\+G\+I\+NG}
+ \}
+\item 
+enum \hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3}{rx\+\_\+state\+\_\+t} \{ \newline
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a447bfe7992c2fe70bfe561225f74d379}{S\+Y\+NC}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a747f2851a4dc438e6c8fa2abc7407966}{D\+A\+T\+A\+\_\+\+ID}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3af08e7d23798e3b0022d804ed82785671}{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+1}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3acafe2876d37af471aede7ffc4dfe36cd}{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+2}, 
+\newline
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a8f865e9237999e15c90cbf4ede10a9f0}{S\+P\+A\+RE}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3ade9cda1a650848407770bd7265bc5cba}{F\+R\+A\+M\+E\+\_\+\+C\+O\+U\+NT}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a65e9f500905d93460dcf2c2024e02aa6}{F\+R\+A\+M\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+L\+O\+OP}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a79a322ccb4b29b85b3cab52dbccefd17}{W\+A\+IT}, 
+\newline
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a4ebbef1457051728c23f453f9fa19aa2}{F\+R\+A\+M\+E\+\_\+\+I\+D\+\_\+\+B\+Y\+T\+E\+\_\+2}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a0b7cdba811d39e1bfb966b61c495c859}{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+SB}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3ad037203e64a9016aa0ac4351464de93a}{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+FW}, 
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a2310b428445af38866bce3f3fd88c72f}{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+UP}, 
+\newline
+\hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a6b6b45fc3c4bdf474315a1a6a4b48e7a}{R\+A\+N\+G\+E\+\_\+\+D\+A\+TA}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \hyperlink{dvl_8cpp_a836f3040e47b915729718c2cdd6a9064}{dvl\+\_\+get\+\_\+forward\+\_\+vel} ()
+\begin{DoxyCompactList}\small\item\em Finds velocity over bottom towards bow. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8cpp_a42627cfa581f9b51ed01025e5deaf16e}{dvl\+\_\+get\+\_\+starboard\+\_\+vel} ()
+\begin{DoxyCompactList}\small\item\em Finds velocity over bottom towards starboard. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8cpp_a5e5bdfedb1dcd23f982911e43552dea0}{dvl\+\_\+get\+\_\+upward\+\_\+vel} ()
+\begin{DoxyCompactList}\small\item\em Finds velocity over bottom towards surface. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8cpp_a67d1828f6fe430d9e886609d6c258f10}{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom} ()
+\begin{DoxyCompactList}\small\item\em Finds distance to bottom. \end{DoxyCompactList}\item 
+void \hyperlink{dvl_8cpp_a3e2d1045f92e30c7f8e21d2c54af5d8d}{reset\+\_\+parser} ()
+\begin{DoxyCompactList}\small\item\em Discards the datagram that is being parsed. \end{DoxyCompactList}\item 
+bool \hyperlink{dvl_8cpp_acd282756a658fc5e2fe729d9684263d1}{dvl\+\_\+data\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Replaces old data on the D\+VL with new data. \end{DoxyCompactList}\item 
+int \hyperlink{dvl_8cpp_aee5f5ff835ae272fd7d1e1fb9bf347fb}{send\+\_\+command} (char $\ast$cmd, bool wait)
+\begin{DoxyCompactList}\small\item\em Sends command for D\+VL to process. \end{DoxyCompactList}\item 
+bool \hyperlink{dvl_8cpp_ae35718ff4c189bdaaf55edc0288ad7fe}{dvl\+\_\+receive\+\_\+handler} ()
+\begin{DoxyCompactList}\small\item\em Parses and processes received data. \end{DoxyCompactList}\item 
+void \hyperlink{dvl_8cpp_ace13fbd095b6f793b7704a717902cef2}{dvl\+\_\+set\+\_\+data\+\_\+format} ()
+\begin{DoxyCompactList}\small\item\em Configures proper D\+VL data components. \end{DoxyCompactList}\item 
+void \hyperlink{dvl_8cpp_a88885ad4d9407ea44a0d1473c85e459b}{dvl\+\_\+begin\+\_\+pinging} ()
+\begin{DoxyCompactList}\small\item\em Tells D\+VL to begin pinging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dvl_8cpp_a62634036639f88eece6fbf226b45f84b}\label{dvl_8cpp_a62634036639f88eece6fbf226b45f84b}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!B\+A\+UD@{B\+A\+UD}}
+\index{B\+A\+UD@{B\+A\+UD}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{B\+A\+UD}{BAUD}}
+{\footnotesize\ttfamily \#define B\+A\+UD~9600\+U;}
+
+\mbox{\Hypertarget{dvl_8cpp_a92fc3237b12bab9fd281ab53bc4ed957}\label{dvl_8cpp_a92fc3237b12bab9fd281ab53bc4ed957}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID@{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID}}
+\index{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID@{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID}{DATAGRAM\_ID}}
+{\footnotesize\ttfamily \#define D\+A\+T\+A\+G\+R\+A\+M\+\_\+\+ID~0x7f}
+
+\mbox{\Hypertarget{dvl_8cpp_a1067d5f90fd4deede85bf8fe36c1c57f}\label{dvl_8cpp_a1067d5f90fd4deede85bf8fe36c1c57f}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!H\+E\+A\+D\+E\+R\+\_\+\+ID@{H\+E\+A\+D\+E\+R\+\_\+\+ID}}
+\index{H\+E\+A\+D\+E\+R\+\_\+\+ID@{H\+E\+A\+D\+E\+R\+\_\+\+ID}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{H\+E\+A\+D\+E\+R\+\_\+\+ID}{HEADER\_ID}}
+{\footnotesize\ttfamily \#define H\+E\+A\+D\+E\+R\+\_\+\+ID~0x7f}
+
+\mbox{\Hypertarget{dvl_8cpp_aabb4925c0937fec44403820f9e2d7160}\label{dvl_8cpp_aabb4925c0937fec44403820f9e2d7160}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID@{R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}}
+\index{R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID@{R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}{RANGE\_FRAME\_ID}}
+{\footnotesize\ttfamily \#define R\+A\+N\+G\+E\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID~0x0458}
+
+\mbox{\Hypertarget{dvl_8cpp_a067042c960937b2777090fbf4ac1da64}\label{dvl_8cpp_a067042c960937b2777090fbf4ac1da64}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}}
+\index{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID}{VELOCITY\_FRAME\_ID}}
+{\footnotesize\ttfamily \#define V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+F\+R\+A\+M\+E\+\_\+\+ID~0x0358}
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cb}\label{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cb}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!cmd\+\_\+state\+\_\+t@{cmd\+\_\+state\+\_\+t}}
+\index{cmd\+\_\+state\+\_\+t@{cmd\+\_\+state\+\_\+t}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{cmd\+\_\+state\+\_\+t}{cmd\_state\_t}}
+{\footnotesize\ttfamily enum \hyperlink{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cb}{cmd\+\_\+state\+\_\+t}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+E\+A\+DY@{C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+E\+A\+DY}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+E\+A\+DY@{C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+E\+A\+DY}}}\mbox{\Hypertarget{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbae3ecaea541cce8cccf66bee6717db416}\label{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbae3ecaea541cce8cccf66bee6717db416}} 
+C\+O\+M\+M\+A\+N\+D\+\_\+\+R\+E\+A\+DY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+O\+C\+E\+S\+S\+I\+NG@{C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+O\+C\+E\+S\+S\+I\+NG}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+O\+C\+E\+S\+S\+I\+NG@{C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+O\+C\+E\+S\+S\+I\+NG}}}\mbox{\Hypertarget{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbad98fce910ccccbaefad5fc915dbbc6a3}\label{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbad98fce910ccccbaefad5fc915dbbc6a3}} 
+C\+O\+M\+M\+A\+N\+D\+\_\+\+P\+R\+O\+C\+E\+S\+S\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+I\+N\+G\+I\+NG@{P\+I\+N\+G\+I\+NG}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!P\+I\+N\+G\+I\+NG@{P\+I\+N\+G\+I\+NG}}}\mbox{\Hypertarget{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbaa40df4f1492f14dcc91fe4f8d7c18a7a}\label{dvl_8cpp_abd24056bb9a9e8a93b5a056b54af16cbaa40df4f1492f14dcc91fe4f8d7c18a7a}} 
+P\+I\+N\+G\+I\+NG&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!rx\+\_\+state\+\_\+t@{rx\+\_\+state\+\_\+t}}
+\index{rx\+\_\+state\+\_\+t@{rx\+\_\+state\+\_\+t}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{rx\+\_\+state\+\_\+t}{rx\_state\_t}}
+{\footnotesize\ttfamily enum \hyperlink{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3}{rx\+\_\+state\+\_\+t}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+Y\+NC@{S\+Y\+NC}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!S\+Y\+NC@{S\+Y\+NC}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a447bfe7992c2fe70bfe561225f74d379}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a447bfe7992c2fe70bfe561225f74d379}} 
+S\+Y\+NC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+A\+T\+A\+\_\+\+ID@{D\+A\+T\+A\+\_\+\+ID}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!D\+A\+T\+A\+\_\+\+ID@{D\+A\+T\+A\+\_\+\+ID}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a747f2851a4dc438e6c8fa2abc7407966}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a747f2851a4dc438e6c8fa2abc7407966}} 
+D\+A\+T\+A\+\_\+\+ID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+1@{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+1}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+1@{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+1}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3af08e7d23798e3b0022d804ed82785671}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3af08e7d23798e3b0022d804ed82785671}} 
+S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+2@{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+2}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+2@{S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+2}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3acafe2876d37af471aede7ffc4dfe36cd}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3acafe2876d37af471aede7ffc4dfe36cd}} 
+S\+I\+Z\+E\+\_\+\+B\+Y\+T\+E\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+P\+A\+RE@{S\+P\+A\+RE}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!S\+P\+A\+RE@{S\+P\+A\+RE}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a8f865e9237999e15c90cbf4ede10a9f0}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a8f865e9237999e15c90cbf4ede10a9f0}} 
+S\+P\+A\+RE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+R\+A\+M\+E\+\_\+\+C\+O\+U\+NT@{F\+R\+A\+M\+E\+\_\+\+C\+O\+U\+NT}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!F\+R\+A\+M\+E\+\_\+\+C\+O\+U\+NT@{F\+R\+A\+M\+E\+\_\+\+C\+O\+U\+NT}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3ade9cda1a650848407770bd7265bc5cba}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3ade9cda1a650848407770bd7265bc5cba}} 
+F\+R\+A\+M\+E\+\_\+\+C\+O\+U\+NT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+R\+A\+M\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+L\+O\+OP@{F\+R\+A\+M\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+L\+O\+OP}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!F\+R\+A\+M\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+L\+O\+OP@{F\+R\+A\+M\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+L\+O\+OP}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a65e9f500905d93460dcf2c2024e02aa6}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a65e9f500905d93460dcf2c2024e02aa6}} 
+F\+R\+A\+M\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+L\+O\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{W\+A\+IT@{W\+A\+IT}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!W\+A\+IT@{W\+A\+IT}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a79a322ccb4b29b85b3cab52dbccefd17}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a79a322ccb4b29b85b3cab52dbccefd17}} 
+W\+A\+IT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+R\+A\+M\+E\+\_\+\+I\+D\+\_\+\+B\+Y\+T\+E\+\_\+2@{F\+R\+A\+M\+E\+\_\+\+I\+D\+\_\+\+B\+Y\+T\+E\+\_\+2}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!F\+R\+A\+M\+E\+\_\+\+I\+D\+\_\+\+B\+Y\+T\+E\+\_\+2@{F\+R\+A\+M\+E\+\_\+\+I\+D\+\_\+\+B\+Y\+T\+E\+\_\+2}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a4ebbef1457051728c23f453f9fa19aa2}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a4ebbef1457051728c23f453f9fa19aa2}} 
+F\+R\+A\+M\+E\+\_\+\+I\+D\+\_\+\+B\+Y\+T\+E\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+SB@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+SB}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+SB@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+SB}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a0b7cdba811d39e1bfb966b61c495c859}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a0b7cdba811d39e1bfb966b61c495c859}} 
+V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+FW@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+FW}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+FW@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+FW}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3ad037203e64a9016aa0ac4351464de93a}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3ad037203e64a9016aa0ac4351464de93a}} 
+V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+FW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+UP@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+UP}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+UP@{V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+UP}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a2310b428445af38866bce3f3fd88c72f}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a2310b428445af38866bce3f3fd88c72f}} 
+V\+E\+L\+O\+C\+I\+T\+Y\+\_\+\+D\+A\+T\+A\+\_\+\+UP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+A\+N\+G\+E\+\_\+\+D\+A\+TA@{R\+A\+N\+G\+E\+\_\+\+D\+A\+TA}!dvl.\+cpp@{dvl.\+cpp}}\index{dvl.\+cpp@{dvl.\+cpp}!R\+A\+N\+G\+E\+\_\+\+D\+A\+TA@{R\+A\+N\+G\+E\+\_\+\+D\+A\+TA}}}\mbox{\Hypertarget{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a6b6b45fc3c4bdf474315a1a6a4b48e7a}\label{dvl_8cpp_af0d6ead56ef385028dc0138bc816c2a3a6b6b45fc3c4bdf474315a1a6a4b48e7a}} 
+R\+A\+N\+G\+E\+\_\+\+D\+A\+TA&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dvl_8cpp_a88885ad4d9407ea44a0d1473c85e459b}\label{dvl_8cpp_a88885ad4d9407ea44a0d1473c85e459b}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+begin\+\_\+pinging@{dvl\+\_\+begin\+\_\+pinging}}
+\index{dvl\+\_\+begin\+\_\+pinging@{dvl\+\_\+begin\+\_\+pinging}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+begin\+\_\+pinging()}{dvl\_begin\_pinging()}}
+{\footnotesize\ttfamily void dvl\+\_\+begin\+\_\+pinging (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells D\+VL to begin pinging. 
+
+\mbox{\Hypertarget{dvl_8cpp_acd282756a658fc5e2fe729d9684263d1}\label{dvl_8cpp_acd282756a658fc5e2fe729d9684263d1}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+data\+\_\+update@{dvl\+\_\+data\+\_\+update}}
+\index{dvl\+\_\+data\+\_\+update@{dvl\+\_\+data\+\_\+update}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+data\+\_\+update()}{dvl\_data\_update()}}
+{\footnotesize\ttfamily bool dvl\+\_\+data\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Replaces old data on the D\+VL with new data. 
+
+\begin{DoxyReturn}{Returns}
+True on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8cpp_a836f3040e47b915729718c2cdd6a9064}\label{dvl_8cpp_a836f3040e47b915729718c2cdd6a9064}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+get\+\_\+forward\+\_\+vel@{dvl\+\_\+get\+\_\+forward\+\_\+vel}}
+\index{dvl\+\_\+get\+\_\+forward\+\_\+vel@{dvl\+\_\+get\+\_\+forward\+\_\+vel}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+forward\+\_\+vel()}{dvl\_get\_forward\_vel()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+forward\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds velocity over bottom towards bow. 
+
+\begin{DoxyReturn}{Returns}
+Velocity as 32-\/bit integer in 1um/s. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8cpp_a67d1828f6fe430d9e886609d6c258f10}\label{dvl_8cpp_a67d1828f6fe430d9e886609d6c258f10}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom@{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom}}
+\index{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom@{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom()}{dvl\_get\_range\_to\_bottom()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds distance to bottom. 
+
+Should not be negative. (\+:P)
+
+\begin{DoxyReturn}{Returns}
+Distance as 32-\/bit integer in 0.\+1mm. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8cpp_a42627cfa581f9b51ed01025e5deaf16e}\label{dvl_8cpp_a42627cfa581f9b51ed01025e5deaf16e}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+get\+\_\+starboard\+\_\+vel@{dvl\+\_\+get\+\_\+starboard\+\_\+vel}}
+\index{dvl\+\_\+get\+\_\+starboard\+\_\+vel@{dvl\+\_\+get\+\_\+starboard\+\_\+vel}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+starboard\+\_\+vel()}{dvl\_get\_starboard\_vel()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+starboard\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds velocity over bottom towards starboard. 
+
+\begin{DoxyReturn}{Returns}
+Velocity as 32-\/bit integer in 1um/s. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8cpp_a5e5bdfedb1dcd23f982911e43552dea0}\label{dvl_8cpp_a5e5bdfedb1dcd23f982911e43552dea0}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+get\+\_\+upward\+\_\+vel@{dvl\+\_\+get\+\_\+upward\+\_\+vel}}
+\index{dvl\+\_\+get\+\_\+upward\+\_\+vel@{dvl\+\_\+get\+\_\+upward\+\_\+vel}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+upward\+\_\+vel()}{dvl\_get\_upward\_vel()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+upward\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds velocity over bottom towards surface. 
+
+\begin{DoxyReturn}{Returns}
+Velocity as 32-\/bit integer in 1um/s. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8cpp_ae35718ff4c189bdaaf55edc0288ad7fe}\label{dvl_8cpp_ae35718ff4c189bdaaf55edc0288ad7fe}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+receive\+\_\+handler@{dvl\+\_\+receive\+\_\+handler}}
+\index{dvl\+\_\+receive\+\_\+handler@{dvl\+\_\+receive\+\_\+handler}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+receive\+\_\+handler()}{dvl\_receive\_handler()}}
+{\footnotesize\ttfamily bool dvl\+\_\+receive\+\_\+handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Parses and processes received data. 
+
+\begin{DoxyReturn}{Returns}
+True when a complete datagram has been parsed. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8cpp_ace13fbd095b6f793b7704a717902cef2}\label{dvl_8cpp_ace13fbd095b6f793b7704a717902cef2}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!dvl\+\_\+set\+\_\+data\+\_\+format@{dvl\+\_\+set\+\_\+data\+\_\+format}}
+\index{dvl\+\_\+set\+\_\+data\+\_\+format@{dvl\+\_\+set\+\_\+data\+\_\+format}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{dvl\+\_\+set\+\_\+data\+\_\+format()}{dvl\_set\_data\_format()}}
+{\footnotesize\ttfamily void dvl\+\_\+set\+\_\+data\+\_\+format (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Configures proper D\+VL data components. 
+
+\mbox{\Hypertarget{dvl_8cpp_a3e2d1045f92e30c7f8e21d2c54af5d8d}\label{dvl_8cpp_a3e2d1045f92e30c7f8e21d2c54af5d8d}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!reset\+\_\+parser@{reset\+\_\+parser}}
+\index{reset\+\_\+parser@{reset\+\_\+parser}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{reset\+\_\+parser()}{reset\_parser()}}
+{\footnotesize\ttfamily void reset\+\_\+parser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Discards the datagram that is being parsed. 
+
+\mbox{\Hypertarget{dvl_8cpp_aee5f5ff835ae272fd7d1e1fb9bf347fb}\label{dvl_8cpp_aee5f5ff835ae272fd7d1e1fb9bf347fb}} 
+\index{dvl.\+cpp@{dvl.\+cpp}!send\+\_\+command@{send\+\_\+command}}
+\index{send\+\_\+command@{send\+\_\+command}!dvl.\+cpp@{dvl.\+cpp}}
+\subsubsection{\texorpdfstring{send\+\_\+command()}{send\_command()}}
+{\footnotesize\ttfamily int send\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{bool}]{wait }\end{DoxyParamCaption})}
+
+
+
+Sends command for D\+VL to process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The command as a character. \\
+\hline
+{\em wait} & If true, waits until D\+VL is finished processing before sending the command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, negative number on error. 
+\end{DoxyReturn}

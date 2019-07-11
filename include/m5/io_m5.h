@@ -1,3 +1,8 @@
+/** @file io_m5.h
+ *  @brief Low-level communication function definitions for Videoray M5 motors.
+ *
+ *  @author Seth Girvan (Lord)
+ */
 #ifndef IO_M5_H
 #define IO_M5_H
 
@@ -73,7 +78,7 @@ void io_m5_trans_stop();
  *  than the consumer well.
  *
  *  @return True only if io_m5_tripbuf_offer_resume has been called (ie there is
- *  new data) since last call.
+ *          new data) since last call.
  */
 bool io_m5_tripbuf_update();
 
@@ -94,15 +99,15 @@ void io_m5_tripbuf_offer_resume();
 
 /** @brief Finds the tripbuf index to read from.
  *
- *  @return the index of the buffer the data consumer should read from. Only
- *  changes if io_m5_tripbuf_update is called and returns true.
+ *  @return The index of the buffer the data consumer should read from. Only
+ *          changes if io_m5_tripbuf_update is called and returns true.
  */
 unsigned char io_m5_tripbuf_read();
 
 /** @brief Finds the tripbuf index to write to.
  *
- *  @return the index of the buffer the data producer should write to. Only
- *  changes when io_m5_tripbuf_offer_resume is called.
+ *  @return The index of the buffer the data producer should write to. Only
+ *          changes when io_m5_tripbuf_offer_resume is called.
  */
 unsigned char io_m5_tripbuf_write();
 

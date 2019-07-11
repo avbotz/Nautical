@@ -90,14 +90,14 @@ void io_ahrs_tripbuf_offer();
 /** @brief Finds tripbuf index to read from.
  *
  *  @return The index of the buffer the data consumer should read from. Only
- *  changes if io_ahrs_tripbuf_update is called and returns true.
+ *          changes if io_ahrs_tripbuf_update is called and returns true.
  */
 unsigned char io_ahrs_tripbuf_read();
 
 /** @brief Finds tripbuf index to write to.
  *
  *  @return The index of the buffer the data producer should write to. Only
- *  changes when io_ahrs_tripbuf_offer is called.
+ *          changes when io_ahrs_tripbuf_offer is called.
  */
 unsigned char io_ahrs_tripbuf_write();
 

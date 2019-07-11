@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['io_5fahrs_5fclean',['io_ahrs_clean',['../io__ahrs_8h.html#a9db69393e769bcdd5ddc9ec5f125d11d',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5finit',['io_ahrs_init',['../io__ahrs_8h.html#a312fc51f6c9726e41cfbc780cfcfecdc',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5frecv_5fstart',['io_ahrs_recv_start',['../io__ahrs_8h.html#afa79bf757710a1cad094f1e15eb634b7',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5frecv_5fstop',['io_ahrs_recv_stop',['../io__ahrs_8h.html#a2ee2459ddd2dca694bef3e6fb9b1cd54',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5ftripbuf_5foffer',['io_ahrs_tripbuf_offer',['../io__ahrs_8h.html#ac133fdc94162c623c5325f907ade9e4a',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5ftripbuf_5fread',['io_ahrs_tripbuf_read',['../io__ahrs_8h.html#a7e158c735ff3b4a8b84cd5bd552c4954',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5ftripbuf_5fupdate',['io_ahrs_tripbuf_update',['../io__ahrs_8h.html#a7b33a09e7c9290bcdeebf2602a54ee3d',1,'io_ahrs_avr.c']]],
-  ['io_5fahrs_5ftripbuf_5fwrite',['io_ahrs_tripbuf_write',['../io__ahrs_8h.html#a7690920caf5d41a90442ca049336778c',1,'io_ahrs_avr.c']]]
+  ['dvl_5fbegin_5fpinging',['dvl_begin_pinging',['../dvl_8h.html#a88885ad4d9407ea44a0d1473c85e459b',1,'dvl.cpp']]],
+  ['dvl_5fdata_5fupdate',['dvl_data_update',['../dvl_8h.html#acd282756a658fc5e2fe729d9684263d1',1,'dvl.cpp']]],
+  ['dvl_5fget_5fforward_5fvel',['dvl_get_forward_vel',['../dvl_8h.html#a836f3040e47b915729718c2cdd6a9064',1,'dvl.cpp']]],
+  ['dvl_5fget_5frange_5fto_5fbottom',['dvl_get_range_to_bottom',['../dvl_8h.html#a67d1828f6fe430d9e886609d6c258f10',1,'dvl.cpp']]],
+  ['dvl_5fget_5fstarboard_5fvel',['dvl_get_starboard_vel',['../dvl_8h.html#a42627cfa581f9b51ed01025e5deaf16e',1,'dvl.cpp']]],
+  ['dvl_5fget_5fupward_5fvel',['dvl_get_upward_vel',['../dvl_8h.html#a5e5bdfedb1dcd23f982911e43552dea0',1,'dvl.cpp']]],
+  ['dvl_5freceive_5fhandler',['dvl_receive_handler',['../dvl_8h.html#ae35718ff4c189bdaaf55edc0288ad7fe',1,'dvl.cpp']]],
+  ['dvl_5fset_5fdata_5fformat',['dvl_set_data_format',['../dvl_8h.html#ace13fbd095b6f793b7704a717902cef2',1,'dvl.cpp']]]
 ];

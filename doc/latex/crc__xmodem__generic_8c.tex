@@ -1,0 +1,50 @@
+\hypertarget{crc__xmodem__generic_8c}{}\section{src/ahrs/crc\+\_\+xmodem\+\_\+generic.c File Reference}
+\label{crc__xmodem__generic_8c}\index{src/ahrs/crc\+\_\+xmodem\+\_\+generic.\+c@{src/ahrs/crc\+\_\+xmodem\+\_\+generic.\+c}}
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ahrs/crc\+\_\+xmodem\+\_\+generic.\+h\char`\"{}}\newline
+Include dependency graph for crc\+\_\+xmodem\+\_\+generic.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{crc__xmodem__generic_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{crc__xmodem__generic_8c_ae0f25679174357e06ed21cbb26ebd075}{C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY}~0x1021U
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{crc__xmodem__generic_8c_a618a4e92162fc58fd2f3b8ba0b452e67}{generic\+\_\+crc\+\_\+xmodem\+\_\+update} (uint16\+\_\+t crc, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Update a C\+RC with 8 bits of additional data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{crc__xmodem__generic_8c_ae0f25679174357e06ed21cbb26ebd075}\label{crc__xmodem__generic_8c_ae0f25679174357e06ed21cbb26ebd075}} 
+\index{crc\+\_\+xmodem\+\_\+generic.\+c@{crc\+\_\+xmodem\+\_\+generic.\+c}!C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY@{C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY}}
+\index{C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY@{C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY}!crc\+\_\+xmodem\+\_\+generic.\+c@{crc\+\_\+xmodem\+\_\+generic.\+c}}
+\subsubsection{\texorpdfstring{C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY}{CRC16CCIT\_XMODEM\_POLY}}
+{\footnotesize\ttfamily \#define C\+R\+C16\+C\+C\+I\+T\+\_\+\+X\+M\+O\+D\+E\+M\+\_\+\+P\+O\+LY~0x1021U}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{crc__xmodem__generic_8c_a618a4e92162fc58fd2f3b8ba0b452e67}\label{crc__xmodem__generic_8c_a618a4e92162fc58fd2f3b8ba0b452e67}} 
+\index{crc\+\_\+xmodem\+\_\+generic.\+c@{crc\+\_\+xmodem\+\_\+generic.\+c}!generic\+\_\+crc\+\_\+xmodem\+\_\+update@{generic\+\_\+crc\+\_\+xmodem\+\_\+update}}
+\index{generic\+\_\+crc\+\_\+xmodem\+\_\+update@{generic\+\_\+crc\+\_\+xmodem\+\_\+update}!crc\+\_\+xmodem\+\_\+generic.\+c@{crc\+\_\+xmodem\+\_\+generic.\+c}}
+\subsubsection{\texorpdfstring{generic\+\_\+crc\+\_\+xmodem\+\_\+update()}{generic\_crc\_xmodem\_update()}}
+{\footnotesize\ttfamily uint16\+\_\+t generic\+\_\+crc\+\_\+xmodem\+\_\+update (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{crc,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Update a C\+RC with 8 bits of additional data. 
+
+This is unoptimized and meant to be used for testing on computer. On avr, one should use the optimized \+\_\+crc\+\_\+xmodem\+\_\+update() in util/crc16.\+h
+
+\begin{DoxyReturn}{Returns}
+New C\+RC. 
+\end{DoxyReturn}

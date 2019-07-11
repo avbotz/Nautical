@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kalman',['Kalman',['../structKalman.html',1,'']]]
+  ['dvl_5fdata',['dvl_data',['../structdvl__data.html',1,'']]]
 ];

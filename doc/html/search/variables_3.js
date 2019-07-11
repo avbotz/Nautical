@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['gains',['GAINS',['../config_8h.html#a15c324540eac139d826a36cacf0c7e2b',1,'config.h']]],
-  ['gyro_5fdof',['GYRO_DOF',['../config_8h.html#a776938745e0d7539a3210a2404305ee6',1,'config.h']]]
+  ['f',['F',['../config_8h.html#a1c83625ec20fd09ecaf0e5b37c75f6f8',1,'config.h']]],
+  ['far',['FAR',['../config_8h.html#a3b5204d43975dfc5858dd3b59eb049bd',1,'config.h']]],
+  ['forces',['forces',['../structMotors.html#a17cb9b1c3fc7749984c4622439901f84',1,'Motors']]]
 ];

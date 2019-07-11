@@ -75,46 +75,179 @@ Collaboration diagram for Motors:</div>
 <div class="dyncontent">
 <div class="center"><img src="structMotors__coll__graph.png" border="0" usemap="#Motors_coll__map" alt="Collaboration graph"/></div>
 <map name="Motors_coll__map" id="Motors_coll__map">
-<area shape="rect" id="node2" href="structPID.html" title="PID" alt="" coords="14,5,59,32"/>
+<area shape="rect" id="node2" href="structPID.html" title="Helper class for PID computations. " alt="" coords="14,5,59,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac6532a754e5f1743ee4975b6722b4054"><td class="memItemLeft" align="right" valign="top"><a id="ac6532a754e5f1743ee4975b6722b4054"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>power</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#ac6532a754e5f1743ee4975b6722b4054">power</a> ()</td></tr>
+<tr class="memdesc:ac6532a754e5f1743ee4975b6722b4054"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set power to the motors using the current thrust vector. <br /></td></tr>
 <tr class="separator:ac6532a754e5f1743ee4975b6722b4054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a179c6a24115935994a13493f74f56df8"><td class="memItemLeft" align="right" valign="top"><a id="a179c6a24115935994a13493f74f56df8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a179c6a24115935994a13493f74f56df8">pause</a> ()</td></tr>
+<tr class="memdesc:a179c6a24115935994a13493f74f56df8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause power to the motors. <br /></td></tr>
 <tr class="separator:a179c6a24115935994a13493f74f56df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d3909ec9fadbb3028368e7340a2e707"><td class="memItemLeft" align="right" valign="top"><a id="a0d3909ec9fadbb3028368e7340a2e707"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (float *dstate, float *angles, uint32_t t)</td></tr>
+<tr class="memitem:a0d3909ec9fadbb3028368e7340a2e707"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a0d3909ec9fadbb3028368e7340a2e707">run</a> (float *dstate, float *angles, uint32_t t)</td></tr>
+<tr class="memdesc:a0d3909ec9fadbb3028368e7340a2e707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the motors for one iteration towards the desired state.  <a href="#a0d3909ec9fadbb3028368e7340a2e707">More...</a><br /></td></tr>
 <tr class="separator:a0d3909ec9fadbb3028368e7340a2e707"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a7cbe4b9467412e4882ff318b9375017e"><td class="memItemLeft" align="right" valign="top"><a id="a7cbe4b9467412e4882ff318b9375017e"></a>
-<a class="el" href="structPID.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><b>controllers</b> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
+<tr class="memitem:a7cbe4b9467412e4882ff318b9375017e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPID.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a7cbe4b9467412e4882ff318b9375017e">controllers</a> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
 <tr class="separator:a7cbe4b9467412e4882ff318b9375017e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84b2ea1a929743410df7ead8212b767a"><td class="memItemLeft" align="right" valign="top"><a id="a84b2ea1a929743410df7ead8212b767a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>buttons</b> [<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
-<tr class="separator:a84b2ea1a929743410df7ead8212b767a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d20987287ffda85eed109c3bf80a12"><td class="memItemLeft" align="right" valign="top"><a id="ac8d20987287ffda85eed109c3bf80a12"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>thrust</b> [<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
+<tr class="memitem:ac8d20987287ffda85eed109c3bf80a12"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#ac8d20987287ffda85eed109c3bf80a12">thrust</a> [<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
 <tr class="separator:ac8d20987287ffda85eed109c3bf80a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17cb9b1c3fc7749984c4622439901f84"><td class="memItemLeft" align="right" valign="top"><a id="a17cb9b1c3fc7749984c4622439901f84"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>forces</b> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
+<tr class="memitem:a84b2ea1a929743410df7ead8212b767a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a84b2ea1a929743410df7ead8212b767a">buttons</a> [<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
+<tr class="separator:a84b2ea1a929743410df7ead8212b767a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17cb9b1c3fc7749984c4622439901f84"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a17cb9b1c3fc7749984c4622439901f84">forces</a> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
 <tr class="separator:a17cb9b1c3fc7749984c4622439901f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94c46cb5dab8c60c9fae75cc6b7af629"><td class="memItemLeft" align="right" valign="top"><a id="a94c46cb5dab8c60c9fae75cc6b7af629"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>pid</b> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
+<tr class="memitem:a94c46cb5dab8c60c9fae75cc6b7af629"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a94c46cb5dab8c60c9fae75cc6b7af629">pid</a> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
 <tr class="separator:a94c46cb5dab8c60c9fae75cc6b7af629"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46e39ac60edebef57fca46f878e2c0b5"><td class="memItemLeft" align="right" valign="top"><a id="a46e39ac60edebef57fca46f878e2c0b5"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
+<tr class="memitem:a46e39ac60edebef57fca46f878e2c0b5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a46e39ac60edebef57fca46f878e2c0b5">p</a></td></tr>
 <tr class="separator:a46e39ac60edebef57fca46f878e2c0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Helper class for motors. </p>
-</div><hr/>The documentation for this struct was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0d3909ec9fadbb3028368e7340a2e707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3909ec9fadbb3028368e7340a2e707">&#9670;&nbsp;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Motors::run </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>dstate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>angles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run the motors for one iteration towards the desired state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dstate</td><td>Difference between desired and current state. </td></tr>
+    <tr><td class="paramname">angles</td><td>Current euler angles. </td></tr>
+    <tr><td class="paramname">t</td><td>Current time used for time difference calculations. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Time after iteration is finished. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="a84b2ea1a929743410df7ead8212b767a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84b2ea1a929743410df7ead8212b767a">&#9670;&nbsp;</a></span>buttons</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Motors::buttons[<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Holds pressed values for remote control. </p>
+
+</div>
+</div>
+<a id="a7cbe4b9467412e4882ff318b9375017e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cbe4b9467412e4882ff318b9375017e">&#9670;&nbsp;</a></span>controllers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPID.html">PID</a> Motors::controllers[<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="structPID.html" title="Helper class for PID computations. ">PID</a> controllers for each degree of freedom. </p>
+
+</div>
+</div>
+<a id="a17cb9b1c3fc7749984c4622439901f84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17cb9b1c3fc7749984c4622439901f84">&#9670;&nbsp;</a></span>forces</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Motors::forces[<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Theoretical forces for each degree of freedom. </p>
+
+</div>
+</div>
+<a id="a46e39ac60edebef57fca46f878e2c0b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46e39ac60edebef57fca46f878e2c0b5">&#9670;&nbsp;</a></span>p</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Motors::p</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current submarine power. </p>
+
+</div>
+</div>
+<a id="a94c46cb5dab8c60c9fae75cc6b7af629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94c46cb5dab8c60c9fae75cc6b7af629">&#9670;&nbsp;</a></span>pid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Motors::pid[<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Computed <a class="el" href="structPID.html" title="Helper class for PID computations. ">PID</a> values from each controller. </p>
+
+</div>
+</div>
+<a id="ac8d20987287ffda85eed109c3bf80a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8d20987287ffda85eed109c3bf80a12">&#9670;&nbsp;</a></span>thrust</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Motors::thrust[<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current thrust values for each of the motors. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
 <li>include/<a class="el" href="motor_8hpp_source.html">motor.hpp</a></li>
 <li>src/motor.cpp</li>
 </ul>

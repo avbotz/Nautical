@@ -85,6 +85,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a806a9984da7f155de1d72e4409fe41a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a806a9984da7f155de1d72e4409fe41a5">print</a> (float *A, int m, int n)</td></tr>
 <tr class="memdesc:a806a9984da7f155de1d72e4409fe41a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print real matrix to terminal.  <a href="#a806a9984da7f155de1d72e4409fe41a5">More...</a><br /></td></tr>
 <tr class="separator:a806a9984da7f155de1d72e4409fe41a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39657e5d3e105328d085477c1bedb98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ad39657e5d3e105328d085477c1bedb98">identity</a> (float *A, int n)</td></tr>
+<tr class="memdesc:ad39657e5d3e105328d085477c1bedb98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an identity matrix of order nxn.  <a href="#ad39657e5d3e105328d085477c1bedb98">More...</a><br /></td></tr>
+<tr class="separator:ad39657e5d3e105328d085477c1bedb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2ee4eac600dbdf6950781957e8f7d14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ad2ee4eac600dbdf6950781957e8f7d14">copy</a> (float *A, int n, int m, float *B)</td></tr>
 <tr class="memdesc:ad2ee4eac600dbdf6950781957e8f7d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements from one matrix to another.  <a href="#ad2ee4eac600dbdf6950781957e8f7d14">More...</a><br /></td></tr>
 <tr class="separator:ad2ee4eac600dbdf6950781957e8f7d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,15 +100,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a4a1032bae9b5fdfaaaef2ea17ab21ef3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a4a1032bae9b5fdfaaaef2ea17ab21ef3">subtract</a> (float *A, float *B, int m, int n, float *C)</td></tr>
 <tr class="memdesc:a4a1032bae9b5fdfaaaef2ea17ab21ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts two matrices.  <a href="#a4a1032bae9b5fdfaaaef2ea17ab21ef3">More...</a><br /></td></tr>
 <tr class="separator:a4a1032bae9b5fdfaaaef2ea17ab21ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a437752bd1f9b3c62c2844ed921e17b70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a437752bd1f9b3c62c2844ed921e17b70">transpose</a> (float *A, int m, int n, float *C)</td></tr>
-<tr class="memdesc:a437752bd1f9b3c62c2844ed921e17b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the transpose of a matrix.  <a href="#a437752bd1f9b3c62c2844ed921e17b70">More...</a><br /></td></tr>
-<tr class="separator:a437752bd1f9b3c62c2844ed921e17b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e28f784bbec3d07cbca106ff15080f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a1e28f784bbec3d07cbca106ff15080f1">transpose</a> (float *A, int m, int n, float *B)</td></tr>
+<tr class="memdesc:a1e28f784bbec3d07cbca106ff15080f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the transpose of a matrix.  <a href="#a1e28f784bbec3d07cbca106ff15080f1">More...</a><br /></td></tr>
+<tr class="separator:a1e28f784bbec3d07cbca106ff15080f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6482d1e4de05e954edf47b04492873a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae6482d1e4de05e954edf47b04492873a">scale</a> (float *A, int m, int n, float k)</td></tr>
 <tr class="memdesc:ae6482d1e4de05e954edf47b04492873a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a matrix by a scalar.  <a href="#ae6482d1e4de05e954edf47b04492873a">More...</a><br /></td></tr>
 <tr class="separator:ae6482d1e4de05e954edf47b04492873a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af73a219fb4514bdf2337b8b8b7600b0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#af73a219fb4514bdf2337b8b8b7600b0a">invert</a> (float *A, int n)</td></tr>
-<tr class="memdesc:af73a219fb4514bdf2337b8b8b7600b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the inverse of a matrix.  <a href="#af73a219fb4514bdf2337b8b8b7600b0a">More...</a><br /></td></tr>
-<tr class="separator:af73a219fb4514bdf2337b8b8b7600b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf491767cbc5c7bfaf8d3e84d6d4582"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#aabf491767cbc5c7bfaf8d3e84d6d4582">invert</a> (float *A, int n, float *B)</td></tr>
+<tr class="memdesc:aabf491767cbc5c7bfaf8d3e84d6d4582"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the inverse of a matrix.  <a href="#aabf491767cbc5c7bfaf8d3e84d6d4582">More...</a><br /></td></tr>
+<tr class="separator:aabf491767cbc5c7bfaf8d3e84d6d4582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Function declarations for matrix operations. </p>
@@ -221,8 +224,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af73a219fb4514bdf2337b8b8b7600b0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af73a219fb4514bdf2337b8b8b7600b0a">&#9670;&nbsp;</a></span>invert()</h2>
+<a id="ad39657e5d3e105328d085477c1bedb98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad39657e5d3e105328d085477c1bedb98">&#9670;&nbsp;</a></span>identity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void identity </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create an identity matrix of order nxn. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>The address where the matrix is written. </td></tr>
+    <tr><td class="paramname">n</td><td>The number of rows and columns of A. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aabf491767cbc5c7bfaf8d3e84d6d4582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabf491767cbc5c7bfaf8d3e84d6d4582">&#9670;&nbsp;</a></span>invert()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +277,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em>&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -478,8 +524,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a437752bd1f9b3c62c2844ed921e17b70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a437752bd1f9b3c62c2844ed921e17b70">&#9670;&nbsp;</a></span>transpose()</h2>
+<a id="a1e28f784bbec3d07cbca106ff15080f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e28f784bbec3d07cbca106ff15080f1">&#9670;&nbsp;</a></span>transpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -506,7 +552,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>C</em>&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

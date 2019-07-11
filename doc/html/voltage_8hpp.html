@@ -69,57 +69,46 @@ $(function() {
 <div class="title">voltage.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="voltage_8hpp__dep__incl.png" border="0" usemap="#include_2voltage_8hppdep" alt=""/></div>
-<map name="include_2voltage_8hppdep" id="include_2voltage_8hppdep">
-<area shape="rect" id="node2" href="main_8cpp.html" title="src/main.cpp" alt="" coords="24,80,121,107"/>
-</map>
-</div>
-</div>
+
+<p>Calculates remaining voltage on batteries.  
+<a href="#details">More...</a></p>
+
 <p><a href="voltage_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:af0b23eedf2352de4c1eff77e1401730c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="voltage_8hpp.html#af0b23eedf2352de4c1eff77e1401730c">NUM_SAMPLES</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memitem:af0b23eedf2352de4c1eff77e1401730c"><td class="memItemLeft" align="right" valign="top"><a id="af0b23eedf2352de4c1eff77e1401730c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NUM_SAMPLES</b>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:af0b23eedf2352de4c1eff77e1401730c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3877dd4a466ccd2dd621b450dc067cdb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="voltage_8hpp.html#a3877dd4a466ccd2dd621b450dc067cdb">measure_voltage</a> ()</td></tr>
-<tr class="separator:a3877dd4a466ccd2dd621b450dc067cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ab804d9cd1eeff73ed9fd825583aaee"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="voltage_8hpp.html#a2ab804d9cd1eeff73ed9fd825583aaee">voltage</a> ()</td></tr>
+<tr class="memdesc:a2ab804d9cd1eeff73ed9fd825583aaee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate voltage left.  <a href="#a2ab804d9cd1eeff73ed9fd825583aaee">More...</a><br /></td></tr>
+<tr class="separator:a2ab804d9cd1eeff73ed9fd825583aaee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="af0b23eedf2352de4c1eff77e1401730c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0b23eedf2352de4c1eff77e1401730c">&#9670;&nbsp;</a></span>NUM_SAMPLES</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Calculates remaining voltage on batteries. </p>
+<dl class="section author"><dt>Author</dt><dd>Maxim Vovenko </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a2ab804d9cd1eeff73ed9fd825583aaee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ab804d9cd1eeff73ed9fd825583aaee">&#9670;&nbsp;</a></span>voltage()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define NUM_SAMPLES&#160;&#160;&#160;10</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a3877dd4a466ccd2dd621b450dc067cdb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3877dd4a466ccd2dd621b450dc067cdb">&#9670;&nbsp;</a></span>measure_voltage()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float measure_voltage </td>
+          <td class="memname">float voltage </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculate voltage left. </p>
+<p>I'm not sure how well this function works, it is untested at the moment. It needs to be calibrated for sure.</p>
+<dl class="section return"><dt>Returns</dt><dd>Remaining voltage. </dd></dl>
 
 </div>
 </div>

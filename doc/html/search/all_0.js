@@ -10,5 +10,7 @@ var searchData=
   ['ahrs_5fcont_5fstart',['ahrs_cont_start',['../ahrs_8h.html#a653d935b0864f7e1ee7aa4dfbb522fcc',1,'ahrs.c']]],
   ['ahrs_5fheadingstatus',['ahrs_headingstatus',['../ahrs_8h.html#aabcd9bcc5487394de174cb4b78f01d25',1,'ahrs.c']]],
   ['ahrs_5fparse_5fatt_5freset',['ahrs_parse_att_reset',['../ahrs_8h.html#a76fe8dc1638d7c89f7e14bc86238283c',1,'ahrs.c']]],
-  ['alive',['alive',['../io_8hpp.html#a7c2ff3cdf102a2adb5ca47cb932acc9d',1,'io.cpp']]]
+  ['alive',['alive',['../io_8hpp.html#a7c2ff3cdf102a2adb5ca47cb932acc9d',1,'io.cpp']]],
+  ['angle_5fadd',['angle_add',['../util_8hpp.html#a0dbc8211a74764ec6221ce5edb90281f',1,'util.cpp']]],
+  ['angle_5fdifference',['angle_difference',['../util_8hpp.html#a42be7886eea180f69cb7d7ec7ced8618',1,'util.cpp']]]
 ];

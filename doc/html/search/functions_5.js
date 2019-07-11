@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['invert',['invert',['../matrix_8h.html#af73a219fb4514bdf2337b8b8b7600b0a',1,'matrix.cpp']]],
+  ['identity',['identity',['../matrix_8h.html#ad39657e5d3e105328d085477c1bedb98',1,'matrix.h']]],
+  ['init',['init',['../structPID.html#a43370ace90e60c06253f9322101e3517',1,'PID']]],
+  ['invert',['invert',['../matrix_8h.html#aabf491767cbc5c7bfaf8d3e84d6d4582',1,'matrix.cpp']]],
   ['io',['io',['../io_8hpp.html#ac2651270fddbd8b61862729764f591fe',1,'io.cpp']]],
   ['io_5fahrs_5fclean',['io_ahrs_clean',['../io__ahrs_8h.html#a9db69393e769bcdd5ddc9ec5f125d11d',1,'io_ahrs_avr.c']]],
   ['io_5fahrs_5finit',['io_ahrs_init',['../io__ahrs_8h.html#a312fc51f6c9726e41cfbc780cfcfecdc',1,'io_ahrs_avr.c']]],

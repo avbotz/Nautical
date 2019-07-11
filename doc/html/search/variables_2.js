@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['f',['F',['../config_8h.html#a1c83625ec20fd09ecaf0e5b37c75f6f8',1,'config.h']]],
-  ['far',['FAR',['../config_8h.html#a3b5204d43975dfc5858dd3b59eb049bd',1,'config.h']]]
+  ['dof',['DOF',['../config_8h.html#ab5c558d88abd9517fb657be4889ee1bc',1,'config.h']]],
+  ['dvl_5fon',['DVL_ON',['../config_8h.html#a51c905eb4396ee56a3a9c095e3b58bfe',1,'config.h']]]
 ];

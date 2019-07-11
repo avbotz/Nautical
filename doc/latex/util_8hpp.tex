@@ -1,24 +1,29 @@
 \hypertarget{util_8hpp}{}\section{include/util.hpp File Reference}
 \label{util_8hpp}\index{include/util.\+hpp@{include/util.\+hpp}}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{util_8hpp__dep__incl}
-\end{center}
-\end{figure}
+
+
+Helper functions for other Nautical functions.  
+
+
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 float \hyperlink{util_8hpp_a42be7886eea180f69cb7d7ec7ced8618}{angle\+\_\+difference} (float a1, float a2)
-\item 
+\begin{DoxyCompactList}\small\item\em Difference between two angles. \end{DoxyCompactList}\item 
 float \hyperlink{util_8hpp_a0dbc8211a74764ec6221ce5edb90281f}{angle\+\_\+add} (float a1, float \hyperlink{matrix_8h_af4b108d76582e8d66b1c19dd1878bcbe}{add})
-\item 
+\begin{DoxyCompactList}\small\item\em Sum of two angles. \end{DoxyCompactList}\item 
 float \hyperlink{util_8hpp_aab7a0cd8ee46a32eace3304ff438952d}{limit} (float input, float lower, float upper)
-\item 
+\begin{DoxyCompactList}\small\item\em Limits input between two numbers. \end{DoxyCompactList}\item 
 float \hyperlink{util_8hpp_a523c1f0de0918a29de986ba27d383853}{limit} (float input, float min)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Limits input to be at least a certain number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper functions for other Nautical functions. 
+
+\begin{DoxyAuthor}{Author}
+David Zhang 
+\end{DoxyAuthor}
 
 
 \subsection{Function Documentation}
@@ -28,21 +33,83 @@ float \hyperlink{util_8hpp_a523c1f0de0918a29de986ba27d383853}{limit} (float inpu
 \subsubsection{\texorpdfstring{angle\+\_\+add()}{angle\_add()}}
 {\footnotesize\ttfamily float angle\+\_\+add (\begin{DoxyParamCaption}\item[{float}]{a1,  }\item[{float}]{add }\end{DoxyParamCaption})}
 
+
+
+Sum of two angles. 
+
+For example, if a1 is 50 and a2 is 150, a1+a2 = 200, which isn\textquotesingle{}t how much the true angle difference is. Instead, it should be -\/160. This functions covers the edge cases.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a1} & Desired angle. \\
+\hline
+{\em a2} & Current angle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Angle difference. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{util_8hpp_a42be7886eea180f69cb7d7ec7ced8618}\label{util_8hpp_a42be7886eea180f69cb7d7ec7ced8618}} 
 \index{util.\+hpp@{util.\+hpp}!angle\+\_\+difference@{angle\+\_\+difference}}
 \index{angle\+\_\+difference@{angle\+\_\+difference}!util.\+hpp@{util.\+hpp}}
 \subsubsection{\texorpdfstring{angle\+\_\+difference()}{angle\_difference()}}
 {\footnotesize\ttfamily float angle\+\_\+difference (\begin{DoxyParamCaption}\item[{float}]{a1,  }\item[{float}]{a2 }\end{DoxyParamCaption})}
 
+
+
+Difference between two angles. 
+
+For example, if a1 is -\/170 and a2 is 170, a1-\/a2 = -\/340, which isn\textquotesingle{}t how much the true angle difference is. Instead, it should be -\/20. This functions covers the edge cases.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a1} & Desired angle. \\
+\hline
+{\em a2} & Current angle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Angle difference. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{util_8hpp_aab7a0cd8ee46a32eace3304ff438952d}\label{util_8hpp_aab7a0cd8ee46a32eace3304ff438952d}} 
 \index{util.\+hpp@{util.\+hpp}!limit@{limit}}
 \index{limit@{limit}!util.\+hpp@{util.\+hpp}}
 \subsubsection{\texorpdfstring{limit()}{limit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily float limit (\begin{DoxyParamCaption}\item[{float}]{input,  }\item[{float}]{lower,  }\item[{float}]{upper }\end{DoxyParamCaption})}
 
+
+
+Limits input between two numbers. 
+
+This functions is used for \hyperlink{structPID}{P\+ID}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lower} & Lower bound. \\
+\hline
+{\em upper} & Upper bound. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Input after limiting. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{util_8hpp_a523c1f0de0918a29de986ba27d383853}\label{util_8hpp_a523c1f0de0918a29de986ba27d383853}} 
 \index{util.\+hpp@{util.\+hpp}!limit@{limit}}
 \index{limit@{limit}!util.\+hpp@{util.\+hpp}}
 \subsubsection{\texorpdfstring{limit()}{limit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily float limit (\begin{DoxyParamCaption}\item[{float}]{input,  }\item[{float}]{min }\end{DoxyParamCaption})}
 
+
+
+Limits input to be at least a certain number. 
+
+This functions is used for \hyperlink{structPID}{P\+ID}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em min} & Lower bound. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Input after limiting. 
+\end{DoxyReturn}

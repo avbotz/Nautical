@@ -1,3 +1,8 @@
+/** @file rotation.h
+ *  @brief Converts between frames of reference.
+ *
+ *  @author David Zhang
+ */
 #ifndef ROTATION_H
 #define ROTATION_H
 

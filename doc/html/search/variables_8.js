@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['orientation',['ORIENTATION',['../config_8h.html#a8925b73125e9fe0a48808f4e2a3f8561',1,'config.h']]]
+  ['m_5fbias',['m_bias',['../structKalman.html#ace399cd36d8df2e905562b5d0952d11f',1,'Kalman']]],
+  ['m_5forig',['m_orig',['../structKalman.html#a1672e563d4e6cc8f23b3fb4d1c546fe8',1,'Kalman']]]
 ];

@@ -68,32 +68,31 @@ $(function() {
 <div class="title">util.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="util_8hpp__dep__incl.png" border="0" usemap="#include_2util_8hppdep" alt=""/></div>
-<map name="include_2util_8hppdep" id="include_2util_8hppdep">
-<area shape="rect" id="node2" href="main_8cpp.html" title="src/main.cpp" alt="" coords="5,80,103,107"/>
-<area shape="rect" id="node3" href="motor_8cpp.html" title="src/motor.cpp" alt="" coords="127,80,229,107"/>
-<area shape="rect" id="node4" href="pid_8cpp.html" title="src/pid.cpp" alt="" coords="253,80,340,107"/>
-<area shape="rect" id="node5" href="util_8cpp.html" title="src/util.cpp" alt="" coords="364,80,451,107"/>
-</map>
-</div>
-</div>
+
+<p>Helper functions for other Nautical functions.  
+<a href="#details">More...</a></p>
+
 <p><a href="util_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a42be7886eea180f69cb7d7ec7ced8618"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8hpp.html#a42be7886eea180f69cb7d7ec7ced8618">angle_difference</a> (float a1, float a2)</td></tr>
+<tr class="memdesc:a42be7886eea180f69cb7d7ec7ced8618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Difference between two angles.  <a href="#a42be7886eea180f69cb7d7ec7ced8618">More...</a><br /></td></tr>
 <tr class="separator:a42be7886eea180f69cb7d7ec7ced8618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dbc8211a74764ec6221ce5edb90281f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8hpp.html#a0dbc8211a74764ec6221ce5edb90281f">angle_add</a> (float a1, float <a class="el" href="matrix_8h.html#af4b108d76582e8d66b1c19dd1878bcbe">add</a>)</td></tr>
+<tr class="memdesc:a0dbc8211a74764ec6221ce5edb90281f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum of two angles.  <a href="#a0dbc8211a74764ec6221ce5edb90281f">More...</a><br /></td></tr>
 <tr class="separator:a0dbc8211a74764ec6221ce5edb90281f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab7a0cd8ee46a32eace3304ff438952d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8hpp.html#aab7a0cd8ee46a32eace3304ff438952d">limit</a> (float input, float lower, float upper)</td></tr>
+<tr class="memdesc:aab7a0cd8ee46a32eace3304ff438952d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits input between two numbers.  <a href="#aab7a0cd8ee46a32eace3304ff438952d">More...</a><br /></td></tr>
 <tr class="separator:aab7a0cd8ee46a32eace3304ff438952d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a523c1f0de0918a29de986ba27d383853"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="util_8hpp.html#a523c1f0de0918a29de986ba27d383853">limit</a> (float input, float min)</td></tr>
+<tr class="memdesc:a523c1f0de0918a29de986ba27d383853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limits input to be at least a certain number.  <a href="#a523c1f0de0918a29de986ba27d383853">More...</a><br /></td></tr>
 <tr class="separator:a523c1f0de0918a29de986ba27d383853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper functions for other Nautical functions. </p>
+<dl class="section author"><dt>Author</dt><dd>David Zhang </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a0dbc8211a74764ec6221ce5edb90281f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0dbc8211a74764ec6221ce5edb90281f">&#9670;&nbsp;</a></span>angle_add()</h2>
 
@@ -119,6 +118,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Sum of two angles. </p>
+<p>For example, if a1 is 50 and a2 is 150, a1+a2 = 200, which isn't how much the true angle difference is. Instead, it should be -160. This functions covers the edge cases.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Desired angle. </td></tr>
+    <tr><td class="paramname">a2</td><td>Current angle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Angle difference. </dd></dl>
 
 </div>
 </div>
@@ -147,6 +157,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Difference between two angles. </p>
+<p>For example, if a1 is -170 and a2 is 170, a1-a2 = -340, which isn't how much the true angle difference is. Instead, it should be -20. This functions covers the edge cases.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Desired angle. </td></tr>
+    <tr><td class="paramname">a2</td><td>Current angle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Angle difference. </dd></dl>
 
 </div>
 </div>
@@ -182,6 +203,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Limits input between two numbers. </p>
+<p>This functions is used for <a class="el" href="structPID.html" title="Helper class for PID computations. ">PID</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lower</td><td>Lower bound. </td></tr>
+    <tr><td class="paramname">upper</td><td>Upper bound. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Input after limiting. </dd></dl>
+
 </div>
 </div>
 <a id="a523c1f0de0918a29de986ba27d383853"></a>
@@ -209,6 +241,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Limits input to be at least a certain number. </p>
+<p>This functions is used for <a class="el" href="structPID.html" title="Helper class for PID computations. ">PID</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>Lower bound. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Input after limiting. </dd></dl>
 
 </div>
 </div>

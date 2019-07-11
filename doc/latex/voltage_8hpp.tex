@@ -1,38 +1,44 @@
 \hypertarget{voltage_8hpp}{}\section{include/voltage.hpp File Reference}
 \label{voltage_8hpp}\index{include/voltage.\+hpp@{include/voltage.\+hpp}}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=181pt]{voltage_8hpp__dep__incl}
-\end{center}
-\end{figure}
+
+
+Calculates remaining voltage on batteries.  
+
+
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \hyperlink{voltage_8hpp_af0b23eedf2352de4c1eff77e1401730c}{N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES}~10
+\mbox{\Hypertarget{voltage_8hpp_af0b23eedf2352de4c1eff77e1401730c}\label{voltage_8hpp_af0b23eedf2352de4c1eff77e1401730c}} 
+\#define {\bfseries N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES}~10
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-float \hyperlink{voltage_8hpp_a3877dd4a466ccd2dd621b450dc067cdb}{measure\+\_\+voltage} ()
-\end{DoxyCompactItemize}
+float \hyperlink{voltage_8hpp_a2ab804d9cd1eeff73ed9fd825583aaee}{voltage} ()
+\begin{DoxyCompactList}\small\item\em Calculate voltage left. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Macro Definition Documentation}
-\mbox{\Hypertarget{voltage_8hpp_af0b23eedf2352de4c1eff77e1401730c}\label{voltage_8hpp_af0b23eedf2352de4c1eff77e1401730c}} 
-\index{voltage.\+hpp@{voltage.\+hpp}!N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES@{N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES}}
-\index{N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES@{N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES}!voltage.\+hpp@{voltage.\+hpp}}
-\subsubsection{\texorpdfstring{N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES}{NUM\_SAMPLES}}
-{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+S\+A\+M\+P\+L\+ES~10}
+\subsection{Detailed Description}
+Calculates remaining voltage on batteries. 
 
+\begin{DoxyAuthor}{Author}
+Maxim Vovenko 
+\end{DoxyAuthor}
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{voltage_8hpp_a3877dd4a466ccd2dd621b450dc067cdb}\label{voltage_8hpp_a3877dd4a466ccd2dd621b450dc067cdb}} 
-\index{voltage.\+hpp@{voltage.\+hpp}!measure\+\_\+voltage@{measure\+\_\+voltage}}
-\index{measure\+\_\+voltage@{measure\+\_\+voltage}!voltage.\+hpp@{voltage.\+hpp}}
-\subsubsection{\texorpdfstring{measure\+\_\+voltage()}{measure\_voltage()}}
-{\footnotesize\ttfamily float measure\+\_\+voltage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{voltage_8hpp_a2ab804d9cd1eeff73ed9fd825583aaee}\label{voltage_8hpp_a2ab804d9cd1eeff73ed9fd825583aaee}} 
+\index{voltage.\+hpp@{voltage.\+hpp}!voltage@{voltage}}
+\index{voltage@{voltage}!voltage.\+hpp@{voltage.\+hpp}}
+\subsubsection{\texorpdfstring{voltage()}{voltage()}}
+{\footnotesize\ttfamily float voltage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Calculate voltage left. 
+
+I\textquotesingle{}m not sure how well this function works, it is untested at the moment. It needs to be calibrated for sure.
+
+\begin{DoxyReturn}{Returns}
+Remaining voltage. 
+\end{DoxyReturn}

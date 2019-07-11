@@ -1,22 +1,28 @@
 \hypertarget{structPID}{}\section{P\+ID Struct Reference}
 \label{structPID}\index{P\+ID@{P\+ID}}
+
+
+Helper class for \hyperlink{structPID}{P\+ID} computations.  
+
+
+
+
+{\ttfamily \#include $<$pid.\+hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structPID_ac5b3e2a5ad35e07517f40b8164821f8e}\label{structPID_ac5b3e2a5ad35e07517f40b8164821f8e}} 
 {\bfseries P\+ID} (float a, float b, float c)
 \item 
-\mbox{\Hypertarget{structPID_a43370ace90e60c06253f9322101e3517}\label{structPID_a43370ace90e60c06253f9322101e3517}} 
-float {\bfseries init} (float a, float b, float c)
-\item 
-\mbox{\Hypertarget{structPID_a7d7903c58db1a8b6c63a6f40672d3765}\label{structPID_a7d7903c58db1a8b6c63a6f40672d3765}} 
-float {\bfseries calculate} (float error, float dt, float min)
-\end{DoxyCompactItemize}
+float \hyperlink{structPID_a43370ace90e60c06253f9322101e3517}{init} (float a, float b, float c)
+\begin{DoxyCompactList}\small\item\em Initialize the \hyperlink{structPID}{P\+ID} gains from the config. \end{DoxyCompactList}\item 
+float \hyperlink{structPID_a7d7903c58db1a8b6c63a6f40672d3765}{calculate} (float error, float dt, float min)
+\begin{DoxyCompactList}\small\item\em Compute total \hyperlink{structPID}{P\+ID} constant. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structPID_a9bff6d497fdd262f6f0f74a76604d22a}\label{structPID_a9bff6d497fdd262f6f0f74a76604d22a}} 
-float {\bfseries kp}
+float \hyperlink{structPID_a9bff6d497fdd262f6f0f74a76604d22a}{kp}
 \item 
 \mbox{\Hypertarget{structPID_af2b185d6025a735e294c3ca698562648}\label{structPID_af2b185d6025a735e294c3ca698562648}} 
 float {\bfseries ki}
@@ -24,13 +30,82 @@ float {\bfseries ki}
 \mbox{\Hypertarget{structPID_ac8f8dd4ddd347ff859db4e1dc3af90d5}\label{structPID_ac8f8dd4ddd347ff859db4e1dc3af90d5}} 
 float {\bfseries kd}
 \item 
-\mbox{\Hypertarget{structPID_ab1935e94bf22e1c6f8565a0677ab0871}\label{structPID_ab1935e94bf22e1c6f8565a0677ab0871}} 
-float {\bfseries prev}
+float \hyperlink{structPID_ab1935e94bf22e1c6f8565a0677ab0871}{prev}
 \item 
-\mbox{\Hypertarget{structPID_a04f280906a9f186e64100b3a58775a71}\label{structPID_a04f280906a9f186e64100b3a58775a71}} 
-float {\bfseries sum}
+float \hyperlink{structPID_a04f280906a9f186e64100b3a58775a71}{sum}
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Helper class for \hyperlink{structPID}{P\+ID} computations. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structPID_a7d7903c58db1a8b6c63a6f40672d3765}\label{structPID_a7d7903c58db1a8b6c63a6f40672d3765}} 
+\index{P\+ID@{P\+ID}!calculate@{calculate}}
+\index{calculate@{calculate}!P\+ID@{P\+ID}}
+\subsubsection{\texorpdfstring{calculate()}{calculate()}}
+{\footnotesize\ttfamily float P\+I\+D\+::calculate (\begin{DoxyParamCaption}\item[{float}]{error,  }\item[{float}]{dt,  }\item[{float}]{min }\end{DoxyParamCaption})}
+
+
+
+Compute total \hyperlink{structPID}{P\+ID} constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & Difference between setpoint and current point. \\
+\hline
+{\em dt} & Time difference. \\
+\hline
+{\em min} & Minimum value of \hyperlink{structPID}{P\+ID}, which is usefull to ensure small changes are adjusted for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total \hyperlink{structPID}{P\+ID} constant. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structPID_a43370ace90e60c06253f9322101e3517}\label{structPID_a43370ace90e60c06253f9322101e3517}} 
+\index{P\+ID@{P\+ID}!init@{init}}
+\index{init@{init}!P\+ID@{P\+ID}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily float P\+I\+D\+::init (\begin{DoxyParamCaption}\item[{float}]{a,  }\item[{float}]{b,  }\item[{float}]{c }\end{DoxyParamCaption})}
+
+
+
+Initialize the \hyperlink{structPID}{P\+ID} gains from the config. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Proportional gain. \\
+\hline
+{\em b} & Integral gain. \\
+\hline
+{\em c} & Derivative gain. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success. 
+\end{DoxyReturn}
+
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{structPID_a9bff6d497fdd262f6f0f74a76604d22a}\label{structPID_a9bff6d497fdd262f6f0f74a76604d22a}} 
+\index{P\+ID@{P\+ID}!kp@{kp}}
+\index{kp@{kp}!P\+ID@{P\+ID}}
+\subsubsection{\texorpdfstring{kp}{kp}}
+{\footnotesize\ttfamily float P\+I\+D\+::kp}
+
+\hyperlink{structPID}{P\+ID} gains for proportional, integral, and derivative. \mbox{\Hypertarget{structPID_ab1935e94bf22e1c6f8565a0677ab0871}\label{structPID_ab1935e94bf22e1c6f8565a0677ab0871}} 
+\index{P\+ID@{P\+ID}!prev@{prev}}
+\index{prev@{prev}!P\+ID@{P\+ID}}
+\subsubsection{\texorpdfstring{prev}{prev}}
+{\footnotesize\ttfamily float P\+I\+D\+::prev}
+
+Previous error value. \mbox{\Hypertarget{structPID_a04f280906a9f186e64100b3a58775a71}\label{structPID_a04f280906a9f186e64100b3a58775a71}} 
+\index{P\+ID@{P\+ID}!sum@{sum}}
+\index{sum@{sum}!P\+ID@{P\+ID}}
+\subsubsection{\texorpdfstring{sum}{sum}}
+{\footnotesize\ttfamily float P\+I\+D\+::sum}
+
+Sum of all of the errors. 
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

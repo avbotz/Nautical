@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['v',['V',['../config_8h.html#ac5dc2e25ee3e4af146d8ccdb65cf43da',1,'config.h']]]
+  ['use_5finitial_5fheading',['USE_INITIAL_HEADING',['../config_8h.html#a6d006725140166599b441c1449fc7a3a',1,'config.h']]],
+  ['util_2ehpp',['util.hpp',['../util_8hpp.html',1,'']]]
 ];

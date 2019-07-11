@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['h',['H',['../config_8h.html#a0f4b0111b93bf2933b351bba78cc9f79',1,'config.h']]],
-  ['hk',['Hk',['../kalman_8hpp.html#aa70fba75014a727d78d8d3577de35beb',1,'kalman.hpp']]]
+  ['gains',['GAINS',['../config_8h.html#a15c324540eac139d826a36cacf0c7e2b',1,'config.h']]],
+  ['gyro_5fdof',['GYRO_DOF',['../config_8h.html#a776938745e0d7539a3210a2404305ee6',1,'config.h']]]
 ];

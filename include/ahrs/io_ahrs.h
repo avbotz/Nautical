@@ -37,6 +37,7 @@ void io_ahrs_clean();
 
 /** @brief Tells AHRS to start receiving attitude data.
  *
+ *  @param handler Function that handles data received from AHRS.
  *  @return 0 on success
  */
 int io_ahrs_recv_start(int (*handler)());
@@ -49,7 +50,7 @@ void io_ahrs_recv_stop();
 
 /** @brief Handles IO to AHRS using file streams.
  *
- *  io with this is blocking, so one might use normal stdio functions directly
+ *  IO with this is blocking, so one might use normal stdio functions directly
  *  on it when they are willing to wait, eg sending initial configuration data,
  *  but to be able to handle asynchronous io, one should use io_ahrs_..._start,
  *  which allows us to process data on the fly and avoid polling.

@@ -2,13 +2,12 @@
 \label{io__ahrs_8h}\index{include/ahrs/io\+\_\+ahrs.\+h@{include/ahrs/io\+\_\+ahrs.\+h}}
 
 
-Low-\/level communication functions for A\+H\+RS.  
+Low-\/level communication function definitions for A\+H\+RS.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
-Include dependency graph for io\+\_\+ahrs.\+h\+:
-\nopagebreak
+Include dependency graph for io\+\_\+ahrs.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,22 +26,22 @@ int \hyperlink{io__ahrs_8h_afa79bf757710a1cad094f1e15eb634b7}{io\+\_\+ahrs\+\_\+
 void \hyperlink{io__ahrs_8h_a2ee2459ddd2dca694bef3e6fb9b1cd54}{io\+\_\+ahrs\+\_\+recv\+\_\+stop} ()
 \begin{DoxyCompactList}\small\item\em Tells A\+H\+RS to start receiving attitude data. \end{DoxyCompactList}\item 
 bool \hyperlink{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Updates tripbuf with new data. \end{DoxyCompactList}\item 
 void \hyperlink{io__ahrs_8h_ac133fdc94162c623c5325f907ade9e4a}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Allows tripbuf to be updated again. (Might need Seth\textquotesingle{}s confirmation) \end{DoxyCompactList}\item 
 unsigned char \hyperlink{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Finds tripbuf index to read from. \end{DoxyCompactList}\item 
 unsigned char \hyperlink{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Finds tripbuf index to write to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 F\+I\+LE $\ast$ \hyperlink{io__ahrs_8h_a7c946296e6bffe77d1c08cdcbd4def85}{io\+\_\+ahrs}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Handles IO to A\+H\+RS using file streams. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Low-\/level communication functions for A\+H\+RS. 
+Low-\/level communication function definitions for A\+H\+RS. 
 
 \begin{DoxyAuthor}{Author}
 Seth Girvan (Lord) 
@@ -60,12 +59,7 @@ Seth Girvan (Lord)
 
 Disable A\+H\+RS transmit and receive. 
 
-Unimplemented.
-
-\begin{DoxyReturn}{Returns}
-Void. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}\label{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}} 
+Unimplemented. \mbox{\Hypertarget{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}\label{io__ahrs_8h_a312fc51f6c9726e41cfbc780cfcfecdc}} 
 \index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+init@{io\+\_\+ahrs\+\_\+init}}
 \index{io\+\_\+ahrs\+\_\+init@{io\+\_\+ahrs\+\_\+init}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
 \subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+init()}{io\_ahrs\_init()}}
@@ -84,9 +78,6 @@ Per the T\+R\+AX P\+NI user manual\+: Start Bits\+: 1 Number of Data Bits\+: 8 S
 {\em path} & Path to A\+H\+RS from main computer, unused at the moment. \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Void. 
-\end{DoxyReturn}
 \mbox{\Hypertarget{io__ahrs_8h_afa79bf757710a1cad094f1e15eb634b7}\label{io__ahrs_8h_afa79bf757710a1cad094f1e15eb634b7}} 
 \index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+recv\+\_\+start@{io\+\_\+ahrs\+\_\+recv\+\_\+start}}
 \index{io\+\_\+ahrs\+\_\+recv\+\_\+start@{io\+\_\+ahrs\+\_\+recv\+\_\+start}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
@@ -119,19 +110,34 @@ Tells A\+H\+RS to start receiving attitude data.
 \subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer()}{io\_ahrs\_tripbuf\_offer()}}
 {\footnotesize\ttfamily void io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Allows tripbuf to be updated again. (Might need Seth\textquotesingle{}s confirmation) 
+
 Makes the current write index available to io\+\_\+ahrs\+\_\+tripbuf\+\_\+update, and changes the value returned by io\+\_\+ahrs\+\_\+tripbuf\+\_\+write.
 
-May interrupt io\+\_\+ahrs\+\_\+tripbuf\+\_\+update, but may not be interrupted by it \mbox{\Hypertarget{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}\label{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}} 
+May interrupt io\+\_\+ahrs\+\_\+tripbuf\+\_\+update, but may not be interrupted by it. \mbox{\Hypertarget{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}\label{io__ahrs_8h_a7e158c735ff3b4a8b84cd5bd552c4954}} 
 \index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+read@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read}}
 \index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
 \subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+read()}{io\_ahrs\_tripbuf\_read()}}
 {\footnotesize\ttfamily unsigned char io\+\_\+ahrs\+\_\+tripbuf\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-returns the index of the buffer the data consumer should read from. Only changes if io\+\_\+ahrs\+\_\+tripbuf\+\_\+update is called and returns true. \mbox{\Hypertarget{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}\label{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}} 
+
+
+Finds tripbuf index to read from. 
+
+\begin{DoxyReturn}{Returns}
+The index of the buffer the data consumer should read from. Only changes if io\+\_\+ahrs\+\_\+tripbuf\+\_\+update is called and returns true. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}\label{io__ahrs_8h_a7b33a09e7c9290bcdeebf2602a54ee3d}} 
 \index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+update@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update}}
 \index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
 \subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+update()}{io\_ahrs\_tripbuf\_update()}}
 {\footnotesize\ttfamily bool io\+\_\+ahrs\+\_\+tripbuf\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates tripbuf with new data. 
 
 Causes io\+\_\+ahrs\+\_\+tripbuf\+\_\+read to return index that was most recently \textquotesingle{}submitted\textquotesingle{} by io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer.
 
@@ -141,13 +147,23 @@ Unfortunately, since there is no way to have a lock-\/free/interruptable triple 
 
 May be interrupted by io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer, but cannot interrupt it (ie this can be interrupted by handler\+\_\+ahrs\+\_\+recv, but one probably does not want to call it from handler\+\_\+ahrs\+\_\+recv).
 
-returns whether there has been any new data since last call \mbox{\Hypertarget{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}\label{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}} 
+\begin{DoxyReturn}{Returns}
+Whether there has been new data since last call. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}\label{io__ahrs_8h_a7690920caf5d41a90442ca049336778c}} 
 \index{io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}!io\+\_\+ahrs\+\_\+tripbuf\+\_\+write@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write}}
 \index{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write@{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
 \subsubsection{\texorpdfstring{io\+\_\+ahrs\+\_\+tripbuf\+\_\+write()}{io\_ahrs\_tripbuf\_write()}}
 {\footnotesize\ttfamily unsigned char io\+\_\+ahrs\+\_\+tripbuf\+\_\+write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-returns the index of the buffer the data producer should write to. Only changes when io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer is called. 
+
+
+Finds tripbuf index to write to. 
+
+\begin{DoxyReturn}{Returns}
+The index of the buffer the data producer should write to. Only changes when io\+\_\+ahrs\+\_\+tripbuf\+\_\+offer is called. 
+\end{DoxyReturn}
+
 
 \subsection{Variable Documentation}
 \mbox{\Hypertarget{io__ahrs_8h_a7c946296e6bffe77d1c08cdcbd4def85}\label{io__ahrs_8h_a7c946296e6bffe77d1c08cdcbd4def85}} 
@@ -155,5 +171,9 @@ returns the index of the buffer the data producer should write to. Only changes 
 \index{io\+\_\+ahrs@{io\+\_\+ahrs}!io\+\_\+ahrs.\+h@{io\+\_\+ahrs.\+h}}
 \subsubsection{\texorpdfstring{io\+\_\+ahrs}{io\_ahrs}}
 {\footnotesize\ttfamily F\+I\+LE$\ast$ io\+\_\+ahrs}
+
+
+
+Handles IO to A\+H\+RS using file streams. 
 
 io with this is blocking, so one might use normal stdio functions directly on it when they are willing to wait, eg sending initial configuration data, but to be able to handle asynchronous io, one should use io\+\_\+ahrs\+\_\+...\+\_\+start, which allows us to process data on the fly and avoid polling. 

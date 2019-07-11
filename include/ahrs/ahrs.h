@@ -16,7 +16,7 @@ enum {COMPONENT_MIN, COMPONENT_MAX};
 
 enum att_axis {YAW, PITCH, ROLL, NUM_ATT_AXES};
 
-// Rotational axes must correspond with linear axes
+// Rotational axes must correspond with linear axes.
 enum accel_axis {SWAY, HEAVE, SURGE, NUM_ACCEL_AXES};
 
 extern float const ahrs_range[NUM_ATT_AXES][2];

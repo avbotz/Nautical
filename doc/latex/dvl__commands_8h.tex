@@ -1,0 +1,66 @@
+\hypertarget{dvl__commands_8h}{}\section{include/dvl/dvl\+\_\+commands.h File Reference}
+\label{dvl__commands_8h}\index{include/dvl/dvl\+\_\+commands.\+h@{include/dvl/dvl\+\_\+commands.\+h}}
+
+
+Interface function definitions for D\+VL.  
+
+
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dvl__commands_8h_adef3034178d2e2de064a8709350e8f01}\label{dvl__commands_8h_adef3034178d2e2de064a8709350e8f01}} 
+\#define {\bfseries N\+U\+M\+\_\+\+C\+O\+M\+M\+A\+N\+DS}~12
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dvl__commands_8h_a8fc19b86e102436b966cc32b5748ae72}\label{dvl__commands_8h_a8fc19b86e102436b966cc32b5748ae72}} 
+char $\ast$ {\bfseries break\+\_\+command} = \char`\"{}===\char`\"{}
+\item 
+char $\ast$ \hyperlink{dvl__commands_8h_a4005b50caf69d0e6e2eb922578ef2850}{setup\+\_\+commands} \mbox{[}N\+U\+M\+\_\+\+C\+O\+M\+M\+A\+N\+DS\mbox{]}
+\item 
+\mbox{\Hypertarget{dvl__commands_8h_a727a7a096d28f9baa4605f2060612184}\label{dvl__commands_8h_a727a7a096d28f9baa4605f2060612184}} 
+char $\ast$ {\bfseries ping\+\_\+command} = \char`\"{}cs\textbackslash{}r\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface function definitions for D\+VL. 
+
+\begin{DoxyAuthor}{Author}
+Timothy Kanarsky 
+
+David Zhang 
+\end{DoxyAuthor}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dvl__commands_8h_a4005b50caf69d0e6e2eb922578ef2850}\label{dvl__commands_8h_a4005b50caf69d0e6e2eb922578ef2850}} 
+\index{dvl\+\_\+commands.\+h@{dvl\+\_\+commands.\+h}!setup\+\_\+commands@{setup\+\_\+commands}}
+\index{setup\+\_\+commands@{setup\+\_\+commands}!dvl\+\_\+commands.\+h@{dvl\+\_\+commands.\+h}}
+\subsubsection{\texorpdfstring{setup\+\_\+commands}{setup\_commands}}
+{\footnotesize\ttfamily char$\ast$ setup\+\_\+commands\mbox{[}N\+U\+M\+\_\+\+C\+O\+M\+M\+A\+N\+DS\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    \textcolor{stringliteral}{"CR1\(\backslash\)r"}, 
+    \textcolor{stringliteral}{"BX00100\(\backslash\)r"}, 
+    \textcolor{stringliteral}{"#BJ000110000\(\backslash\)r"}, 
+    \textcolor{stringliteral}{"CF11110\(\backslash\)r"}, 
+    
+    \textcolor{stringliteral}{"EA-04500\(\backslash\)r"}, 
+    \textcolor{stringliteral}{"ED00010\(\backslash\)r"}, 
+
+
+
+    \textcolor{stringliteral}{"ES00\(\backslash\)r"},
+
+    \textcolor{stringliteral}{"EX01011\(\backslash\)r"},
+    \textcolor{stringliteral}{"EZ10000010\(\backslash\)r"},
+    \textcolor{stringliteral}{"#EU2\(\backslash\)r"},
+    \textcolor{stringliteral}{"PA\(\backslash\)r"},
+    \textcolor{stringliteral}{"CK\(\backslash\)r"}
+\}
+\end{DoxyCode}
+Hello there 

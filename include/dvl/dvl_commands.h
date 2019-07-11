@@ -2,7 +2,6 @@
  *  @brief Interface function definitions for DVL.
  *
  *  @author Timothy Kanarsky
- *  @author David Zhang
  */
 #ifndef DVL_COMMANDS_H
 #define DVL_COMMANDS_H
@@ -15,17 +14,24 @@ extern "C" {
 
 char* break_command = "===";
 
-/**
- * Hello there
+/** @brief Important setup commands.
+ *
+ *  CR1 - Resets DVL to factory settings
+ *  BX00100 - Sets max depth to 100dm (33ft)
+ *  #BJ000110000 - Enables high-res velocity and range output
+ *  CF11110 - Sets auto-ping, binary output
+ *  EA - Determine angle correction based on DVL mount angle.
+ *  EA-04500 - Determine the angle correction based on DVL mount angle.
+ *  ED00010 - Depth of transducer, set to 1m because it doesn't matter too much.
  */
 char* setup_commands[NUM_COMMANDS] = {
-    "CR1\r", // Resets DVL to factory settings
-    "BX00100\r", // Sets max depth to 100dm (33ft)
-    "#BJ000110000\r", // enables high-res velocity and range output
-    "CF11110\r", // sets auto-ping, binary output
-    //"EA????, //TODO: Determine the angle correction based on DVL mount angle
-    "EA-04500\r", //TODO: Determine the angle correction based on DVL mount angle
-    "ED00010\r", // Depth of transducer - setting to 1 meter because it's pretty irrelevant
+    "CR1\r", 
+    "BX00100\r", 
+    "#BJ000110000\r", 
+    "CF11110\r", 
+    //"EA????, 
+    "EA-04500\r", 
+    "ED00010\r", 
 #ifdef SALTWATER
     "ES35\r",
 #else

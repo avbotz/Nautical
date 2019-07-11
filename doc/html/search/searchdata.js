@@ -1,10 +1,10 @@
 var indexSectionsWithContent =
 {
-  0: "_acgikmp",
+  0: "_acdgikmprs",
   1: "_kmp",
-  2: "aci",
-  3: "agi",
-  4: "i"
+  2: "acdi",
+  3: "adgirs",
+  4: "is"
 };
 
 var indexSectionNames =

@@ -1,0 +1,155 @@
+\hypertarget{dvl_8h}{}\section{include/dvl/dvl.h File Reference}
+\label{dvl_8h}\index{include/dvl/dvl.\+h@{include/dvl/dvl.\+h}}
+
+
+Interface function definitions for D\+VL.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for dvl.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{dvl_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dvl_8h_ace13fbd095b6f793b7704a717902cef2}\label{dvl_8h_ace13fbd095b6f793b7704a717902cef2}} 
+void \hyperlink{dvl_8h_ace13fbd095b6f793b7704a717902cef2}{dvl\+\_\+set\+\_\+data\+\_\+format} ()
+\begin{DoxyCompactList}\small\item\em Configures proper D\+VL data components. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{dvl_8h_a88885ad4d9407ea44a0d1473c85e459b}\label{dvl_8h_a88885ad4d9407ea44a0d1473c85e459b}} 
+void \hyperlink{dvl_8h_a88885ad4d9407ea44a0d1473c85e459b}{dvl\+\_\+begin\+\_\+pinging} ()
+\begin{DoxyCompactList}\small\item\em Tells D\+VL to begin pinging. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{dvl_8h_a3e2d1045f92e30c7f8e21d2c54af5d8d}\label{dvl_8h_a3e2d1045f92e30c7f8e21d2c54af5d8d}} 
+void \hyperlink{dvl_8h_a3e2d1045f92e30c7f8e21d2c54af5d8d}{reset\+\_\+parser} ()
+\begin{DoxyCompactList}\small\item\em Discards the datagram that is being parsed. \end{DoxyCompactList}\item 
+bool \hyperlink{dvl_8h_acd282756a658fc5e2fe729d9684263d1}{dvl\+\_\+data\+\_\+update} ()
+\begin{DoxyCompactList}\small\item\em Replaces old data on the D\+VL with new data. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8h_a42627cfa581f9b51ed01025e5deaf16e}{dvl\+\_\+get\+\_\+starboard\+\_\+vel} ()
+\begin{DoxyCompactList}\small\item\em Finds velocity over bottom towards starboard. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8h_a836f3040e47b915729718c2cdd6a9064}{dvl\+\_\+get\+\_\+forward\+\_\+vel} ()
+\begin{DoxyCompactList}\small\item\em Finds velocity over bottom towards bow. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8h_a5e5bdfedb1dcd23f982911e43552dea0}{dvl\+\_\+get\+\_\+upward\+\_\+vel} ()
+\begin{DoxyCompactList}\small\item\em Finds velocity over bottom towards surface. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{dvl_8h_a67d1828f6fe430d9e886609d6c258f10}{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom} ()
+\begin{DoxyCompactList}\small\item\em Finds distance to bottom. \end{DoxyCompactList}\item 
+bool \hyperlink{dvl_8h_ae35718ff4c189bdaaf55edc0288ad7fe}{dvl\+\_\+receive\+\_\+handler} ()
+\begin{DoxyCompactList}\small\item\em Parses and processes received data. \end{DoxyCompactList}\item 
+int \hyperlink{dvl_8h_aee5f5ff835ae272fd7d1e1fb9bf347fb}{send\+\_\+command} (char $\ast$cmd, bool wait)
+\begin{DoxyCompactList}\small\item\em Sends command for D\+VL to process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface function definitions for D\+VL. 
+
+\begin{DoxyAuthor}{Author}
+Timothy Kanarsky 
+
+David Zhang 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dvl_8h_acd282756a658fc5e2fe729d9684263d1}\label{dvl_8h_acd282756a658fc5e2fe729d9684263d1}} 
+\index{dvl.\+h@{dvl.\+h}!dvl\+\_\+data\+\_\+update@{dvl\+\_\+data\+\_\+update}}
+\index{dvl\+\_\+data\+\_\+update@{dvl\+\_\+data\+\_\+update}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{dvl\+\_\+data\+\_\+update()}{dvl\_data\_update()}}
+{\footnotesize\ttfamily bool dvl\+\_\+data\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Replaces old data on the D\+VL with new data. 
+
+\begin{DoxyReturn}{Returns}
+True on success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8h_a836f3040e47b915729718c2cdd6a9064}\label{dvl_8h_a836f3040e47b915729718c2cdd6a9064}} 
+\index{dvl.\+h@{dvl.\+h}!dvl\+\_\+get\+\_\+forward\+\_\+vel@{dvl\+\_\+get\+\_\+forward\+\_\+vel}}
+\index{dvl\+\_\+get\+\_\+forward\+\_\+vel@{dvl\+\_\+get\+\_\+forward\+\_\+vel}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+forward\+\_\+vel()}{dvl\_get\_forward\_vel()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+forward\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds velocity over bottom towards bow. 
+
+\begin{DoxyReturn}{Returns}
+Velocity as 32-\/bit integer in 1um/s. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8h_a67d1828f6fe430d9e886609d6c258f10}\label{dvl_8h_a67d1828f6fe430d9e886609d6c258f10}} 
+\index{dvl.\+h@{dvl.\+h}!dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom@{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom}}
+\index{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom@{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom()}{dvl\_get\_range\_to\_bottom()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+range\+\_\+to\+\_\+bottom (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds distance to bottom. 
+
+Should not be negative. (\+:P)
+
+\begin{DoxyReturn}{Returns}
+Distance as 32-\/bit integer in 0.\+1mm. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8h_a42627cfa581f9b51ed01025e5deaf16e}\label{dvl_8h_a42627cfa581f9b51ed01025e5deaf16e}} 
+\index{dvl.\+h@{dvl.\+h}!dvl\+\_\+get\+\_\+starboard\+\_\+vel@{dvl\+\_\+get\+\_\+starboard\+\_\+vel}}
+\index{dvl\+\_\+get\+\_\+starboard\+\_\+vel@{dvl\+\_\+get\+\_\+starboard\+\_\+vel}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+starboard\+\_\+vel()}{dvl\_get\_starboard\_vel()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+starboard\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds velocity over bottom towards starboard. 
+
+\begin{DoxyReturn}{Returns}
+Velocity as 32-\/bit integer in 1um/s. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8h_a5e5bdfedb1dcd23f982911e43552dea0}\label{dvl_8h_a5e5bdfedb1dcd23f982911e43552dea0}} 
+\index{dvl.\+h@{dvl.\+h}!dvl\+\_\+get\+\_\+upward\+\_\+vel@{dvl\+\_\+get\+\_\+upward\+\_\+vel}}
+\index{dvl\+\_\+get\+\_\+upward\+\_\+vel@{dvl\+\_\+get\+\_\+upward\+\_\+vel}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{dvl\+\_\+get\+\_\+upward\+\_\+vel()}{dvl\_get\_upward\_vel()}}
+{\footnotesize\ttfamily int32\+\_\+t dvl\+\_\+get\+\_\+upward\+\_\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds velocity over bottom towards surface. 
+
+\begin{DoxyReturn}{Returns}
+Velocity as 32-\/bit integer in 1um/s. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8h_ae35718ff4c189bdaaf55edc0288ad7fe}\label{dvl_8h_ae35718ff4c189bdaaf55edc0288ad7fe}} 
+\index{dvl.\+h@{dvl.\+h}!dvl\+\_\+receive\+\_\+handler@{dvl\+\_\+receive\+\_\+handler}}
+\index{dvl\+\_\+receive\+\_\+handler@{dvl\+\_\+receive\+\_\+handler}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{dvl\+\_\+receive\+\_\+handler()}{dvl\_receive\_handler()}}
+{\footnotesize\ttfamily bool dvl\+\_\+receive\+\_\+handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Parses and processes received data. 
+
+\begin{DoxyReturn}{Returns}
+True when a complete datagram has been parsed. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dvl_8h_aee5f5ff835ae272fd7d1e1fb9bf347fb}\label{dvl_8h_aee5f5ff835ae272fd7d1e1fb9bf347fb}} 
+\index{dvl.\+h@{dvl.\+h}!send\+\_\+command@{send\+\_\+command}}
+\index{send\+\_\+command@{send\+\_\+command}!dvl.\+h@{dvl.\+h}}
+\subsubsection{\texorpdfstring{send\+\_\+command()}{send\_command()}}
+{\footnotesize\ttfamily int send\+\_\+command (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd,  }\item[{bool}]{wait }\end{DoxyParamCaption})}
+
+
+
+Sends command for D\+VL to process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & The command as a character. \\
+\hline
+{\em wait} & If true, waits until D\+VL is finished processing before sending the command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, negative number on error. 
+\end{DoxyReturn}

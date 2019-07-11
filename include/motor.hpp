@@ -24,6 +24,9 @@ struct Motors
 	/** Current thrust values for each of the motors. */
 	float thrust[NUM_MOTORS];
 
+	/** Holds pressed values for remote control. */
+	int buttons[NUM_MOTORS];
+
 	/** Theoretical forces for each degree of freedom. */
 	float forces[DOF];
 

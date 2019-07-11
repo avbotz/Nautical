@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 
-float measure_voltage() 
+float voltage() 
 {
 	uint8_t num_samples = 10;
 	float cal_constant = 23.88349514563107;

@@ -12,8 +12,6 @@ Motors::Motors()
 		this->controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
 	for (int i = 0; i < NUM_MOTORS; i++)
 		this->thrust[i] = 0.;
-	for (int i = 0; i < NUM_MOTORS; i++)
-		this->buttons[i] = 0;
 	for (int i = 0; i < DOF; i++)
 		this->forces[i] = 0.;
 	for (int i = 0; i < DOF; i++)

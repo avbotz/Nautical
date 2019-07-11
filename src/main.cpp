@@ -131,8 +131,8 @@ void run()
 			}
 			else if (c == 'v') 
 			{
-				float voltage = measure_voltage();
-				Serial << voltage << '\n';
+				float v = voltage();
+				Serial << v << '\n';
 			}
 			else if (c == 'w')
 			{

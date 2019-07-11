@@ -92,8 +92,6 @@ int ahrs_att_recv();
  *  next received byte will be treated as potentially the start of a datagram.
  *
  *  Can be used due for, eg, a serial timeout for intra-datagram data.
- *
- *  @return Void.
  */
 void ahrs_parse_att_reset();
 

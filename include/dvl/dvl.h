@@ -1,3 +1,9 @@
+/** @file dvl.h
+ *  @brief Interface function definitions for DVL.
+ *
+ *  @author Timothy Kanarsky
+ *  @author David Zhang
+ */
 #ifndef DVL_H
 #define DVL_H
 
@@ -7,38 +13,67 @@ extern "C" {
 
 #include <stdbool.h>
 
-// Configures proper DVL data components (high-res velocity and range to bottom)
+/** @brief Configures proper DVL data components.
+ */
 void dvl_set_data_format();
-// Tells DVL to begin pinging.
+
+/** @brief Tells DVL to begin pinging.
+ */
 void dvl_begin_pinging();
-// Discards the datagram that is currently being parsed. 
+
+/** @brief Discards the datagram that is being parsed.
+ */
 void reset_parser();
 
+/** @brief Replaces old data on the DVL with new data.
+ *
+ *  @return True on success.
+ */
 bool dvl_data_update();
 
-// Returns signed 32-bit integer, representing velocity over bottom towards starboard in 0.01mm/s.
+/** @brief Finds velocity over bottom towards starboard.
+ *
+ *  @return Velocity as 32-bit integer in 1um/s.  
+ */
 int32_t dvl_get_starboard_vel();
 
-// Returns signed 32-bit integer, representing velocity over bottom towards bow in 0.01mm/s.
+/** @brief Finds velocity over bottom towards bow.
+ *
+ *  @return Velocity as 32-bit integer in 1um/s.  
+ */
 int32_t dvl_get_forward_vel();
 
-// Returns signed 32-bit integer, representing velocity over bottom towards surface in 0.01mm/s.
+/** @brief Finds velocity over bottom towards surface.
+ *
+ *  @return Velocity as 32-bit integer in 1um/s.  
+ */
 int32_t dvl_get_upward_vel();
 
-// Returns signed 32-bit integer, representing range from bottom in 0.1mm.
-// I'd be worried if this value is ever negative, though.
+/** @brief Finds distance to bottom.
+ *
+ *  Should not be negative. (:P)
+ *
+ *  @return Distance as 32-bit integer in 0.1mm.
+ */
 int32_t dvl_get_range_to_bottom();
 
-// A function that is called whenever the receive interrupt fires. Calls parsing function.
-// Returns true when a complete datagram has just been parsed.
+/** @brief Parses and processes received data.
+ *
+ *  @return True when a complete datagram has been parsed.
+ */
 bool dvl_receive_handler();
 
+/** @brief Sends command for DVL to process.
+ *
+ *  @param cmd The command as a character.
+ *  @param wait If true, waits until DVL is finished processing before sending
+ *  the command.
+ *  @return 1 on success, negative number on error.
+ */
 int send_command(char* cmd, bool wait);
-
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

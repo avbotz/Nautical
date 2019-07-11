@@ -1,5 +1,5 @@
 /** @file io_ahrs.h
- *  @brief Low-level communication functions for AHRS.
+ *  @brief Low-level communication function definitions for AHRS.
  *  
  *  @author Seth Girvan (Lord)
  */
@@ -26,15 +26,12 @@ extern "C" {
  *  Baud: BAUD
  *
  *  @param path Path to AHRS from main computer, unused at the moment.
- *  @return Void.
  */
 void io_ahrs_init(char const *path);
 
 /** @brief Disable AHRS transmit and receive.
  *
  *  Unimplemented.
- *
- *  @return Void.
  */
 void io_ahrs_clean();
 
@@ -86,8 +83,6 @@ bool io_ahrs_tripbuf_update();
  *  changes the value returned by io_ahrs_tripbuf_write.
  *
  *  May interrupt io_ahrs_tripbuf_update, but may not be interrupted by it.
- *
- *  @return Void.
  */
 void io_ahrs_tripbuf_offer();
 

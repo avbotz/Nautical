@@ -16,11 +16,6 @@
 #define VELOCITY_FRAME_ID 0x0358
 #define RANGE_FRAME_ID 0x0458
 
-static bool velocity_good(int32_t const velocity)
-{
-    return (-500000 < velocity && velocity < 500000); //We don't expect our sub to go faster than
-}
-
 static struct dvl_data
 {
     int32_t velocity_starboard;
@@ -119,20 +114,7 @@ void reset_parser()
 
 bool dvl_data_update()
 {
-    bool temp = io_dvl_tripbuf_update();
-    /*
-    if (temp)
-    {
-        Serial.write('c');
-        Serial.write('\n');
-    }
-    else 
-    {
-        Serial.write('d');
-        Serial.write('\n');
-    }
-    */
-    return temp;
+    return io_dvl_tripbuf_update();
 }
 
 int send_command(char *cmd, bool wait)
@@ -143,7 +125,9 @@ int send_command(char *cmd, bool wait)
     if (wait)
         while (cmd_state != COMMAND_READY)
         {
-        } // Wait for the DVL to print out welcome message, etc until command prompt is shown.
+        } 
+		// Wait for the DVL to print out welcome message, etc until command 
+		// prompt is shown.
     return status;
 }
 
@@ -154,60 +138,41 @@ static void send_break()
 
 static bool parse_velocities(unsigned char const c)
 {
-    // Serial.println('\n');
     switch (parser_vars.rx_state)
     {
-    case SYNC:; // Semicolon is necessary because if next line is a declaration, C goes REEEEE
-        // Serial.write('a');
+    case SYNC:; 
+		// Semicolon is necessary because if next line is a declaration, C will 
+		// produce an error.
         if (c == DATAGRAM_ID)
             parser_vars.rx_state = DATA_ID;
         return false;
-
     case DATA_ID:;
-        // Serial.write('b');
         if (c == HEADER_ID)
             parser_vars.rx_state = SIZE_BYTE_1;
         else
             parser_vars.rx_state = SYNC;
         return false;
-
     case SIZE_BYTE_1:;
-        // Serial.write('c');
         parser_vars.datagram_bytecount = (uint16_t)(c);
         parser_vars.rx_state = SIZE_BYTE_2;
         return false;
-
     case SIZE_BYTE_2:;
-        // Serial.write('d');
         parser_vars.datagram_bytecount |= (((uint16_t)(c)) << 8);
         parser_vars.rx_state = SPARE;
         return false;
-
     case SPARE:;
-        // Serial.write('e');
         parser_vars.rx_state = FRAME_COUNT;
         return false;
-
     case FRAME_COUNT:;
-        // Serial.write('f');
         parser_vars.num_data_types = c;
         parser_vars.rx_state = FRAME_OFFSET_LOOP;
         return false;
-
     case FRAME_OFFSET_LOOP:;
-        // Serial.write('g');
         if (!(parser_vars.offset_loop_idx % 2))
-        {
-            // Serial.write('p');
-            parser_vars.offsets[(parser_vars.offset_loop_idx / 2)] = (uint16_t)(c);
-        }
+            parser_vars.offsets[(parser_vars.offset_loop_idx/2)] = (uint16_t)(c);
         else
-        {
-            // Serial.write('q');
             parser_vars.offsets[(parser_vars.offset_loop_idx / 2)] |= ((uint16_t)(c) << 8);
-        }
-        // Serial.println(parser_vars.num_data_types*2-1);
-        // if (parser_vars.offset_loop_idx == (parser_vars.num_data_types * 2) - 1)
+        // if (parser_vars.offset_loop_idx == (parser_vars.num_data_types*2)-1)
         if (parser_vars.offset_loop_idx == 7)
         {
             // Serial.write('r');
@@ -333,7 +298,6 @@ static bool parse_velocities(unsigned char const c)
         return false;
 
     case RANGE_DATA:;
-        // Serial.write('m');
         switch (parser_vars.range_byte_idx)
         {
         case 0:;

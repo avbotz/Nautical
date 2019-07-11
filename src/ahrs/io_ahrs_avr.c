@@ -177,11 +177,6 @@ static bool io_ahrs_tripbuf_update_crit()
 	return false;
 }
 
-/**
- * May be interrupted by io_ahrs_tripbuf_offer, but cannot interrupt it (ie
- * this can be interrupted by handler_ahrs_recv, but one probably does not want
- * to call it from handler_ahrs_recv).
- */
 bool io_ahrs_tripbuf_update()
 {
 	if (CC_XXX(UCSR, NUSART, B) & (1U << CC_XXX(RXCIE, NUSART, )))
@@ -197,9 +192,6 @@ bool io_ahrs_tripbuf_update()
 	return io_ahrs_tripbuf_update_crit();
 }
 
-/**
- * May interrupt io_ahrs_tripbuf_update, but may not be interrupted by it
- */
 void io_ahrs_tripbuf_offer()
 {
 	assert(IN_RANGE(0, tripbuf.write, 2) && IN_RANGE(0, tripbuf.clean, 2) &&

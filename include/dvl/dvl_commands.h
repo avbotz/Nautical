@@ -1,3 +1,9 @@
+/** @file dvl_commands.h
+ *  @brief Interface function definitions for DVL.
+ *
+ *  @author Timothy Kanarsky
+ *  @author David Zhang
+ */
 #ifndef DVL_COMMANDS_H
 #define DVL_COMMANDS_H
 
@@ -9,9 +15,12 @@ extern "C" {
 
 char* break_command = "===";
 
+/**
+ * Hello there
+ */
 char* setup_commands[NUM_COMMANDS] = {
-    "CR1\r", // resets DVL to factory settings
-    "BX00100\r", // sets max depth to 100dm (33ft)
+    "CR1\r", // Resets DVL to factory settings
+    "BX00100\r", // Sets max depth to 100dm (33ft)
     "#BJ000110000\r", // enables high-res velocity and range output
     "CF11110\r", // sets auto-ping, binary output
     //"EA????, //TODO: Determine the angle correction based on DVL mount angle

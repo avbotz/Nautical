@@ -1,27 +1,31 @@
 \hypertarget{rotation_8h}{}\section{include/rotation.h File Reference}
 \label{rotation_8h}\index{include/rotation.\+h@{include/rotation.\+h}}
+
+
+Converts between frames of reference.  
+
+
 {\ttfamily \#include $<$Arduino.\+h$>$}\newline
-Include dependency graph for rotation.\+h\+:
-\nopagebreak
+Include dependency graph for rotation.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=171pt]{rotation_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{rotation_8h__dep__incl}
-\end{center}
-\end{figure}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{rotation_8h_a126ae2cbc321ef71141dda6c4bc70dc1}{body\+\_\+to\+\_\+inertial} (float $\ast$input, float $\ast$angles, float $\ast$output)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Converts values from body frame of reference to inertial frame of reference. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Converts between frames of reference. 
+
+\begin{DoxyAuthor}{Author}
+David Zhang 
+\end{DoxyAuthor}
 
 
 \subsection{Function Documentation}
@@ -31,3 +35,16 @@ void \hyperlink{rotation_8h_a126ae2cbc321ef71141dda6c4bc70dc1}{body\+\_\+to\+\_\
 \subsubsection{\texorpdfstring{body\+\_\+to\+\_\+inertial()}{body\_to\_inertial()}}
 {\footnotesize\ttfamily void body\+\_\+to\+\_\+inertial (\begin{DoxyParamCaption}\item[{float $\ast$}]{input,  }\item[{float $\ast$}]{angles,  }\item[{float $\ast$}]{output }\end{DoxyParamCaption})}
 
+
+
+Converts values from body frame of reference to inertial frame of reference. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Pointer to where the values of the body frame are. \\
+\hline
+{\em angles} & Current euler angles. \\
+\hline
+{\em output} & Pointer to where the values in the inertial frame will be stored. \\
+\hline
+\end{DoxyParams}

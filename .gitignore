@@ -1,5 +1,6 @@
 **/*.swp
 bin/*/*
+tuning/data.txt
 .idea/
 .pioenvs
 .piolibdeps

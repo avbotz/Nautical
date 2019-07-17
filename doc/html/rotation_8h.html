@@ -68,24 +68,14 @@ $(function() {
 <div class="title">rotation.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Converts between frames of reference.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for rotation.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="rotation_8h__incl.png" border="0" usemap="#include_2rotation_8h" alt=""/></div>
-<map name="include_2rotation_8h" id="include_2rotation_8h">
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="rotation_8h__dep__incl.png" border="0" usemap="#include_2rotation_8hdep" alt=""/></div>
-<map name="include_2rotation_8hdep" id="include_2rotation_8hdep">
-<area shape="rect" id="node2" href="kalman_8cpp.html" title="src/kalman.cpp" alt="" coords="5,80,116,107"/>
-<area shape="rect" id="node3" href="main_8cpp.html" title="src/main.cpp" alt="" coords="140,80,237,107"/>
-<area shape="rect" id="node4" href="motor_8cpp.html" title="src/motor.cpp" alt="" coords="261,80,364,107"/>
-<area shape="rect" id="node5" href="rotation_8cpp.html" title="src/rotation.cpp" alt="" coords="389,80,501,107"/>
-</map>
 </div>
 </div>
 <p><a href="rotation_8h_source.html">Go to the source code of this file.</a></p>
@@ -93,9 +83,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a126ae2cbc321ef71141dda6c4bc70dc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rotation_8h.html#a126ae2cbc321ef71141dda6c4bc70dc1">body_to_inertial</a> (float *input, float *angles, float *output)</td></tr>
+<tr class="memdesc:a126ae2cbc321ef71141dda6c4bc70dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts values from body frame of reference to inertial frame of reference.  <a href="#a126ae2cbc321ef71141dda6c4bc70dc1">More...</a><br /></td></tr>
 <tr class="separator:a126ae2cbc321ef71141dda6c4bc70dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Converts between frames of reference. </p>
+<dl class="section author"><dt>Author</dt><dd>David Zhang </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a126ae2cbc321ef71141dda6c4bc70dc1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a126ae2cbc321ef71141dda6c4bc70dc1">&#9670;&nbsp;</a></span>body_to_inertial()</h2>
 
@@ -127,6 +121,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Converts values from body frame of reference to inertial frame of reference. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Pointer to where the values of the body frame are. </td></tr>
+    <tr><td class="paramname">angles</td><td>Current euler angles. </td></tr>
+    <tr><td class="paramname">output</td><td>Pointer to where the values in the inertial frame will be stored. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

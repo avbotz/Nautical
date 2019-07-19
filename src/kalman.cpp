@@ -46,13 +46,17 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	uint32_t temp = micros();
 	float dt = (temp-t)/1000000.;
 
-	// Receive measurements, taking into account accelerometer bias. Harsh
-	// cutoff to reduce accelerometer drift.
+	// Convert DVL velocities from um/s to m/s.
 	float *m = new float[3];
 	float t1 = dvl_get_forward_vel()/100000.;
 	float t2 = dvl_get_starboard_vel()/100000.;
+
+	// DVL is oriented at a 45 degree offset from what we want. U and V
+	// represent the velocities with respect to the body orientation.
 	float u = cos(45.*D2R)*t1 - sin(45.*D2R)*t2;
 	float v = sin(45.*D2R)*t1 + cos(45.*D2R)*t2;
+
+	// Check if DVL has returned error velocity.
 	m_orig[0] = dvl_get_forward_vel();
 	m_orig[1] = dvl_get_starboard_vel();
 	if (fabs(t1) > 3. || fabs(t2) > 3.)
@@ -61,6 +65,9 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 		// delete[] Kk;
 		return temp;
 	}
+
+	// Convert from body to inertial reference frame and multiply by time
+	// difference to get change in distance.
 	float temparr[3] = {u, v, 0};
 	body_to_inertial(temparr, angles, m);
 	m_orig[0] = m[0];
@@ -69,6 +76,14 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	state[3] += m[1]*dt;
 	delete[] m; 
 
+	/*
+	 * The Kalman filter is turned off until a better sub movement model can be
+	 * found. This would require manual calibration for power/acceleration
+	 * ratios and a lot of testing. 
+	 *
+	 * It might be a good idea to Kalman filter depth or attitude data, but
+	 * these seem to be accurate for now.
+	 */
 	/*
 	// Predict new state using model.
 	// X, VX, AX, Y, VY, AY.

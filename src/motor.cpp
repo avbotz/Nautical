@@ -43,14 +43,17 @@ uint32_t Motors::run(float *dstate, float *angles, uint32_t t)
 	uint32_t temp = micros();
 	float dt = (temp - t)/(float)(1000000);
 
-	// Calculate PID values.
+	// Calculate PID values. Third argument is minimum PID value, which allows
+	// changes for small values, though it doesn't seem to affect the code for
+	// now.
 	pid[F] = controllers[F].calculate(dstate[F], dt, 0.20);
 	pid[H] = controllers[H].calculate(dstate[H], dt, 0.20);
 	pid[V] = controllers[V].calculate(dstate[V], dt, 0.00);
 	for (int i = BODY_DOF; i < GYRO_DOF; i++)
 		pid[i] = controllers[i].calculate(dstate[i], dt, 0.0);
 
-	// Default body motors to 0.
+	// Default motor thrusts are 0. Add 0.15 to vertical thrusts so the sub
+	// remains at the same depth.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		thrust[i] = 0.;
 	if (p > 0.01)
@@ -61,13 +64,16 @@ uint32_t Motors::run(float *dstate, float *angles, uint32_t t)
 		thrust[3] += 0.15;
 	}
 
-	// Compute final thrust given to each motor based on orientation matrix.
+	// Compute final thrust given to each motor based on orientation matrix and
+	// PID values.
 	for (int i = 0; i < NUM_MOTORS; i++)
 		for (int j = 0; j < DOF; j++) 
 			thrust[i] += p*pid[j]*ORIENTATION[i][j];
 	if (!SIM) power();
 
-	// Compute forces from motors.
+	// Compute forces from motors. This isn't used at the moment, though it
+	// could be useful if someone wanted to integrate a simulator with Nautical
+	// at some point.
 	float bforces[BODY_DOF];
 	float MOUNT_ANGLE = sin(45.);
 	for (int i = 0; i < BODY_DOF; i++)

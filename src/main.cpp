@@ -166,8 +166,9 @@ void run()
 		alive_state_prev = alive_state;
 		alive_state = alive();
 
-		// Start motors after pause time has elapsed. Don't forget to reset time
-		// so the time different for the first set of velocities is correct.
+		// Enough time has elapsed for motors to start up. Don't forget to reset
+		// time so the time difference for the first set of velocities from the
+		// DVL are correct.
 		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
 		{
 			pause = false;
@@ -175,14 +176,17 @@ void run()
 			ktime = micros();
 		}
 
-		// Pause motor communications after killing and reset states so sub can
-		// restart mission on unkill.
+		// Kill switch has just been switched from alive to dead. Pause motor
+		// communications. Until the sub has been set back to alive, none of
+		// these "if" statements will run.
 		if (alive_state_prev && !alive_state && !SIM)
 		{
 			motors.pause();
 		}
 
-		// Allow motors time to restart after unkilling. 
+		// Kill switch has just been switched from dead to alive. Reset all
+		// values, including states and initial headings. Pause so motors have
+		// time to start up. 
 		if (!alive_state_prev && alive_state && !SIM)
 		{ 
 			state[0] = 0.;
@@ -204,7 +208,8 @@ void run()
 			pause_time = millis();
 		}
 
-		// Sub is allowed to operate.
+		// Motors are done starting up and the sub is alive. Run the sub as
+		// intended.
 		if (SIM || (!pause && alive_state))
 		{
 			// Compute angles from AHRS and depth from pressure sensor.

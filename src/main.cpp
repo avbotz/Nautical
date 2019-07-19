@@ -166,20 +166,25 @@ void run()
 		alive_state_prev = alive_state;
 		alive_state = alive();
 
-		// Start motors after pause time has elapsed.
+		// Start motors after pause time has elapsed. Don't forget to reset time
+		// so the time different for the first set of velocities is correct.
 		if (pause && millis() - pause_time > PAUSE_TIME && !SIM)
+		{
 			pause = false;
+			mtime = micros();
+			ktime = micros();
+		}
 
 		// Pause motor communications after killing and reset states so sub can
 		// restart mission on unkill.
 		if (alive_state_prev && !alive_state && !SIM)
+		{
 			motors.pause();
+		}
 
 		// Allow motors time to restart after unkilling. 
 		if (!alive_state_prev && alive_state && !SIM)
 		{ 
-			pause = true;
-			pause_time = millis();
 			state[0] = 0.;
 			state[3] = 0.;
 			desired[F] = 0.;
@@ -195,6 +200,8 @@ void run()
 				INITIAL_YAW = FAR ? 225. : 340.;
 			INITIAL_PITCH = ahrs_att((enum att_axis) (PITCH));
 			INITIAL_ROLL = ahrs_att((enum att_axis) (ROLL));
+			pause = true;
+			pause_time = millis();
 		}
 
 		// Sub is allowed to operate.

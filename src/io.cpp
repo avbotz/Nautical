@@ -32,7 +32,6 @@ void io()
 		digitalWrite(19, HIGH);
 		io_dvl_init(dvl_receive_handler);
 		io_dvl_recv_begin();
-		// delay(5000);
 		dvl_set_data_format();
 		dvl_begin_pinging();
 	}

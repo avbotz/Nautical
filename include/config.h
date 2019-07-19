@@ -15,7 +15,7 @@
  *  make sure the kill switch isn't set to alive until the sub is in the water.
  *  Otherwise, the entire program will hang and stop producing output. 
  */
-static const bool DVL_ON = false;
+static const bool DVL_ON = true;
 
 /** Set to true when using the initial heading after the sub is unkilled. For
  *  example, if the diver unkills at 274.5 degrees, that will be treated as
@@ -117,10 +117,10 @@ static const int NUM_MOTORS = 8;
  */
 static const float ORIENTATION[8][6] = 
 {
-	{ 0.00, 0.00, 1.00, 0.00, 1.00, -1.0 },
-	{ 0.00, 0.00, -1.0, 0.00, -1.0, -1.0 },
-	{ 0.00, 0.00, -1.0, 0.00, 1.00, 1.00 },
-	{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 },
+	{ -.15, 0.00, 1.00, 0.00, 1.00, -1.0 },
+	{ 0.15, 0.00, -1.0, 0.00, -1.0, -1.0 },
+	{ -.15, 0.00, -1.0, 0.00, 1.00, 1.00 },
+	{ 0.15, 0.00, 1.00, 0.00, -1.0, 1.00 },
 	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },
 	{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00 },
 	{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00 }, 
@@ -135,8 +135,8 @@ static const float ORIENTATION[8][6] =
  */
 static const float GAINS[6][3] = 
 {
-	{ 1.50, 0.00, 0.00 },
-	{ 1.50, 0.00, 0.00 },
+	{ 2.00, 0.00, 2.50 },
+	{ 2.50, 0.00, 2.00 },
 	{ 1.75, 0.00, 0.00 },
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 },

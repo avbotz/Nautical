@@ -2,6 +2,7 @@
 bin/*/*
 tuning/data.txt
 .idea/
+.pio/*
 .pioenvs
 .piolibdeps
 .clang_complete

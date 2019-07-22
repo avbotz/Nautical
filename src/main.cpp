@@ -45,8 +45,11 @@ void run()
 
 	float current[DOF] = { 0., 0., 0., 0., 0., 0. };
 	float desired[DOF] = { 0., 0., 0., 0., 0., 0. };
+	float altitude;
+	float desired_altitude = -1.;
 
 	float dstate[DOF] = { 0., 0., 0., 0., 0., 0. };
+	float daltitude;
 
 	uint32_t ktime = micros();
 	uint32_t mtime = micros();
@@ -91,6 +94,10 @@ void run()
 			{
 				for (int i = 0; i < DOF; i++)
 					desired[i] = Serial.parseFloat();
+			}
+			else if (c == 'z')
+			{
+				desired_altitude = Serial.parseFloat();
 			}
 			else if (c == 'r')
 			{
@@ -225,6 +232,8 @@ void run()
 				current[Y] = ahrs_att((enum att_axis) (YAW)) - INITIAL_YAW;
 				current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
 				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
+				if (DVL_ON)
+					altitude = dvl_get_range_to_bottom()/1000.;
 
 				// Handle angle overflow/underflow.
 				for (int i = BODY_DOF; i < GYRO_DOF; i++)
@@ -265,9 +274,10 @@ void run()
 				dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
 			}
 			dstate[V] = desired[V] - current[V];
+			daltitude = desired_altitude > 0. ? desired_altitude-altitude : -9999.;
 
 			// Compute PID within motors and set thrust.
-			mtime = motors.run(dstate, temp, mtime);
+			mtime = motors.run(dstate, daltitude, temp, mtime);
 		}
 	}
 }

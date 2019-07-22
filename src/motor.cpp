@@ -10,6 +10,7 @@ Motors::Motors()
 {
 	for (int i = 0; i < DOF; i++)
 		this->controllers[i].init(GAINS[i][0], GAINS[i][1], GAINS[i][2]);
+	this->controllers[D].init(GAINS[D][0], GAINS[D][1], GAINS[D][2]);
 	for (int i = 0; i < NUM_MOTORS; i++)
 		this->thrust[i] = 0.;
 	for (int i = 0; i < DOF; i++)
@@ -37,7 +38,7 @@ void Motors::pause()
 	io_m5_trans_stop();
 }
 
-uint32_t Motors::run(float *dstate, float *angles, uint32_t t)
+uint32_t Motors::run(float *dstate, float daltitude, float *angles, uint32_t t)
 {
 	// Calculate time difference since last iteration.
 	uint32_t temp = micros();
@@ -48,9 +49,14 @@ uint32_t Motors::run(float *dstate, float *angles, uint32_t t)
 	// now.
 	pid[F] = controllers[F].calculate(dstate[F], dt, 0.20);
 	pid[H] = controllers[H].calculate(dstate[H], dt, 0.20);
-	pid[V] = controllers[V].calculate(dstate[V], dt, 0.00);
 	for (int i = BODY_DOF; i < GYRO_DOF; i++)
 		pid[i] = controllers[i].calculate(dstate[i], dt, 0.0);
+
+	// Choose between depth from bottom or depth sensor. 
+	if (daltitude < -999.)
+		pid[V] = controllers[V].calculate(dstate[V], dt, 0.00);
+	else 
+		pid[V] = controllers[D].calculate(daltitude, dt, 0.00);
 
 	// Default motor thrusts are 0. Add 0.15 to vertical thrusts so the sub
 	// remains at the same depth.

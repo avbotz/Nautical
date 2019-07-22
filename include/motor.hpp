@@ -49,11 +49,12 @@ struct Motors
 	/** @brief Run the motors for one iteration towards the desired state.
 	 *
 	 *  @param dstate Difference between desired and current state.
+	 *  @param daltitude Difference between distances from bottom. 
 	 *  @param angles Current euler angles.
 	 *  @param t Current time used for time difference calculations.
 	 *  @return Time after iteration is finished.
 	 */
-	uint32_t run(float *dstate, float *angles, uint32_t t);
+	uint32_t run(float *dstate, float daltitude, float *angles, uint32_t t);
 };
 
 #endif 

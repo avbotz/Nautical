@@ -15,7 +15,7 @@
  *  make sure the kill switch isn't set to alive until the sub is in the water.
  *  Otherwise, the entire program will hang and stop producing output. 
  */
-static const bool DVL_ON = true;
+static const bool DVL_ON = false;
 
 /** Set to true when using the initial heading after the sub is unkilled. For
  *  example, if the diver unkills at 274.5 degrees, that will be treated as
@@ -37,10 +37,13 @@ static const bool FAR = true;
  *  It will ignore most of the IO functions, unless you have access to a DVL and
  *  M5 motors (:P).
  */
-static const bool SIM = false;
+static const bool SIM = true;
 ///@}
 
 /*! @name Constants for degrees of freedom with North-East-Down coordinates. 
+ *
+ *  The degrees of freedom are X, Y, Z, Yaw, Pitch, Roll. The 7th degree of
+ *  option is to replace Z (down) with depth from bottom instead.
  */
 ///@{
 /** The number of degrees of freedom.
@@ -78,6 +81,10 @@ static const int P = 4;
 /** Roll state index.
  */
 static const int R = 5;
+
+/** Depth from bottom index.
+ */
+static const int D = 6;
 ///@}
 
 /*! @name Motor ID configuration.
@@ -115,16 +122,16 @@ static const int NUM_MOTORS = 8;
  *  supposed to correct for that, then it would be a good idea to change the
  *  values back to 1.
  */
-static const float ORIENTATION[8][6] = 
+static const float ORIENTATION[8][7] = 
 {
-	{ -.15, 0.00, 1.00, 0.00, 1.00, -1.0 },
-	{ 0.15, 0.00, -1.0, 0.00, -1.0, -1.0 },
-	{ -.15, 0.00, -1.0, 0.00, 1.00, 1.00 },
-	{ 0.15, 0.00, 1.00, 0.00, -1.0, 1.00 },
-	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },
-	{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00 },
-	{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00 }, 
-	{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 }
+	{ -.15, 0.00, 1.00, 0.00, 1.00, -1.0, 1.00 },
+	{ 0.15, 0.00, -1.0, 0.00, -1.0, -1.0, -1.0 },
+	{ -.15, 0.00, -1.0, 0.00, 1.00, 1.00, -1.0 },
+	{ 0.15, 0.00, 1.00, 0.00, -1.0, 1.00, 1.00 },
+	{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00, 0.00 },
+	{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00, 0.00 },
+	{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00, 0.00 }, 
+	{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00, 0.00 }
 };
 
 /*! @name PID gains configuration.
@@ -133,14 +140,15 @@ static const float ORIENTATION[8][6] =
  *  and kd. To be honest, these gains are not great. The integral component is
  *  being ignored at the moment because it doesn't work as well in practice. 
  */
-static const float GAINS[6][3] = 
+static const float GAINS[7][3] = 
 {
 	{ 2.00, 0.00, 2.50 },
 	{ 2.50, 0.00, 2.00 },
 	{ 1.75, 0.00, 0.00 },
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 },
-	{ 0.10, 0.00, 0.05 }
+	{ 0.10, 0.00, 0.05 },
+	{ 1.75, 0.00, 0.00 }
 };
 
 /*! @name Conversions.

@@ -9,14 +9,25 @@
 #include "motor.hpp"
 #include "m5/m5.h"
 #include "m5/io_m5.h"
+#include "io.hpp"
+#include "servo.h"
 
 #define DEPTH_PIN A0
 #define KILL_PIN 30
+
+extern ServoTimer2 dropper1;
+extern ServoTimer2 dropper2;
 
 /** @brief Starts IO initialization for all major hardware (AHRS, DVL, M5, depth
  *         sensor, kill switch).
  */
 void io();
+
+/** @brief Turns servo to drop ball from dropper.
+ *  
+ *  @param idx 0 drops first servo, 1 drops second.
+ */
+void drop(int idx);
 
 /** @brief Reads kill state from the kill switch.
  *  

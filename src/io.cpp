@@ -11,6 +11,9 @@
 #include "io.hpp"
 #include "motor.hpp"
 
+ServoTimer2 dropper1;
+ServoTimer2 dropper2; 
+
 
 void io()
 {
@@ -25,6 +28,11 @@ void io()
 	pinMode(49, OUTPUT);
 	digitalWrite(49, HIGH); 
 
+	dropper1.attach(6);
+	dropper2.attach(7);
+	dropper1.write(2700);
+	dropper2.write(2700);
+	
 	if (DVL_ON)
 	{
 		pinMode(19, INPUT);  
@@ -38,6 +46,26 @@ void io()
 
 	io_m5_init("");
 	io_m5_trans_set(m5_power_trans);	
+}
+
+void drop(int idx)
+{
+	if (idx == 0)
+	{
+		int angle = dropper1.read();
+		if (angle > 1700)
+			dropper1.write(700);
+		if (angle <= 1700)
+			dropper1.write(2700);
+	}
+	else
+	{
+		int angle = dropper2.read();
+		if (angle > 1700)
+			dropper2.write(700);
+		if (angle <= 1700)
+			dropper2.write(2700);
+	}
 }
 
 bool alive()

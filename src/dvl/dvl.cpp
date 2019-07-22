@@ -172,6 +172,9 @@ static bool parse_velocities(unsigned char const c)
             parser_vars.offsets[(parser_vars.offset_loop_idx/2)] = (uint16_t)(c);
         else
             parser_vars.offsets[(parser_vars.offset_loop_idx / 2)] |= ((uint16_t)(c) << 8);
+		// IMPORTANT: The "if" statement below will force the DVL to hang over
+		// extended periods of time. This is the famous competition bug we
+		// encountered.
         // if (parser_vars.offset_loop_idx == (parser_vars.num_data_types*2)-1)
         if (parser_vars.offset_loop_idx == 7)
         {

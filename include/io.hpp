@@ -26,8 +26,9 @@ void io();
 /** @brief Turns servo to drop ball from dropper.
  *  
  *  @param idx 0 drops first servo, 1 drops second.
+ *  @param val 0 means in, 1 means out.
  */
-void drop(int idx);
+void drop(int idx, int val);
 
 /** @brief Reads kill state from the kill switch.
  *  

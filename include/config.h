@@ -37,7 +37,7 @@ static const bool FAR = true;
  *  It will ignore most of the IO functions, unless you have access to a DVL and
  *  M5 motors (:P).
  */
-static const bool SIM = true;
+static const bool SIM = false;
 ///@}
 
 /*! @name Constants for degrees of freedom with North-East-Down coordinates. 

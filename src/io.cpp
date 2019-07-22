@@ -48,23 +48,19 @@ void io()
 	io_m5_trans_set(m5_power_trans);	
 }
 
-void drop(int idx)
+void drop(int idx, int val)
 {
 	if (idx == 0)
 	{
 		int angle = dropper1.read();
-		if (angle > 1700)
-			dropper1.write(700);
-		if (angle <= 1700)
-			dropper1.write(2700);
+		if (val == 0) dropper1.write(2400);
+		if (val == 1) dropper1.write(700);
 	}
-	else
+	else if (idx == 1)
 	{
 		int angle = dropper2.read();
-		if (angle > 1700)
-			dropper2.write(700);
-		if (angle <= 1700)
-			dropper2.write(2700);
+		if (val == 0) dropper2.write(2400);
+		if (val == 1) dropper2.write(700);
 	}
 }
 

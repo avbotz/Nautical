@@ -161,6 +161,12 @@ void run()
 					desired[H] = current[H] + temp[1];
 				}
 			}
+			else if (c == 'g')
+			{
+				int idx = Serial.parseInt();
+				int val = Serial.parseInt();
+				drop(idx, val);
+			}
 		}
 
 		alive_state_prev = alive_state;

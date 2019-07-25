@@ -54,9 +54,15 @@ uint32_t Motors::run(float *dstate, float daltitude, float *angles, uint32_t t)
 
 	// Choose between depth from bottom or depth sensor. 
 	if (daltitude < -999.)
+	{
 		pid[V] = controllers[V].calculate(dstate[V], dt, 0.00);
+		// Serial << dstate[V] << " " << pid[V] << '\n';
+	}
 	else 
-		pid[V] = controllers[D].calculate(daltitude, dt, 0.00);
+	{
+		pid[V] = -1.*controllers[D].calculate(daltitude, dt, 0.00);
+		// Serial << daltitude << " " << pid[V] << '\n';
+	}
 
 	// Default motor thrusts are 0. Add 0.15 to vertical thrusts so the sub
 	// remains at the same depth.

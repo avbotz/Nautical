@@ -16,10 +16,10 @@ float PID::init(float a, float b, float c)
  */
 float PID::calculate(float error, float dt, float min)
 {
-	float pout = this->kp * error;
-	this->sum += error * dt;
-	float iout = this->ki * this->sum;
-	float dout = this->kd * (error - this->prev) / dt;
+	float pout = this->kp*error;
+	this->sum += error*dt;
+	float iout = this->ki*this->sum;
+	float dout = this->kd*(error-this->prev)/dt;
 	this->prev = error;
 	float output = pout + iout + dout;
 	float dir = 1.;

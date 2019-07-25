@@ -19,7 +19,7 @@
 struct Motors
 {
 	/** PID controllers for each degree of freedom. */
-	PID controllers[DOF];
+	PID controllers[DOF+1];
 
 	/** Current thrust values for each of the motors. */
 	float thrust[NUM_MOTORS];

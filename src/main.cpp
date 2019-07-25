@@ -99,6 +99,10 @@ void run()
 			{
 				desired_altitude = Serial.parseFloat();
 			}
+			else if (c == 'w')
+			{
+				Serial << altitude << '\n';
+			}
 			else if (c == 'r')
 			{
 				for (int i = 0; i < DOF; i++)
@@ -174,6 +178,11 @@ void run()
 				int val = Serial.parseInt();
 				drop(idx, val);
 			}
+			else if (c == 't')
+			{
+				for (int i = 0; i < 8; i++)
+					Serial << _FLOAT(motors.thrust[i], 6) << " "; Serial << '\n';
+			}
 		}
 
 		alive_state_prev = alive_state;
@@ -208,6 +217,7 @@ void run()
 			desired[H] = 0.;
 			desired[V] = 0.;
 			desired[Y] = 0.;
+			desired_altitude = -1.;
 			current[F] = 0.;
 			current[H] = 0.;
 			current[Y] = 0.;
@@ -233,7 +243,7 @@ void run()
 				current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
 				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
 				if (DVL_ON)
-					altitude = dvl_get_range_to_bottom()/1000.;
+					altitude = dvl_get_range_to_bottom()/10000.;
 
 				// Handle angle overflow/underflow.
 				for (int i = BODY_DOF; i < GYRO_DOF; i++)

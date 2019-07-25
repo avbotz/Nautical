@@ -61,6 +61,7 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	m_orig[1] = dvl_get_starboard_vel();
 	if (fabs(t1) > 3. || fabs(t2) > 3.)
 	{
+		// Serial << "DVL did not return data." << '\n';
 		delete[] m;
 		// delete[] Kk;
 		return temp;

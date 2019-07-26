@@ -283,11 +283,11 @@ void run()
 			{
 				dstate[Y] = angle_difference(desired[Y], current[Y]);
 			}
-			else if (fabs(i0) > 2.)
+			else if (fabs(i1) > 2.)
 			{
 				dstate[Y] = angle_difference(desired[Y], current[Y]);
-				dstate[F] = i0; 
-				dstate[H] = i1 < i0/3. ? i1 : i0/3.;
+				dstate[F] = i0 < i1/3. ? i0 : i1/3.;
+				dstate[H] = i1; 
 			}
 			else 
 			{

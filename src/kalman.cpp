@@ -59,10 +59,10 @@ uint32_t Kalman::compute(float *state, float *covar, float *angles, uint32_t t)
 	// Check if DVL has returned error velocity.
 	m_orig[0] = dvl_get_forward_vel();
 	m_orig[1] = dvl_get_starboard_vel();
-	if (fabs(t1) > 3. || fabs(t2) > 3.)
+	if (fabs(t1) > 32. || fabs(t2) > 32.)
 	{
-		Serial << "DVL did not return data." << _FLOAT(t1, 6) << " " << 
-			_FLOAT(t2, 6) << endl;
+		// Serial << "DVL did not return data." << _FLOAT(t1, 6) << " " << 
+		//	_FLOAT(t2, 6) << endl;
 		delete[] m;
 		// delete[] Kk;
 		return temp;

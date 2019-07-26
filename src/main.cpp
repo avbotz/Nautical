@@ -214,13 +214,11 @@ void run()
 		{ 
 			state[0] = 0.;
 			state[3] = 0.;
-			/*
 			desired[F] = 0.;
 			desired[H] = 0.;
 			desired[V] = 0.;
 			desired[Y] = 0.;
 			desired_altitude = -1.;
-			*/
 			current[F] = 0.;
 			current[H] = 0.;
 			current[Y] = 0.;

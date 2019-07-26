@@ -15,7 +15,7 @@
  *  make sure the kill switch isn't set to alive until the sub is in the water.
  *  Otherwise, the entire program will hang and stop producing output. 
  */
-static const bool DVL_ON = false;
+static const bool DVL_ON = true;
 
 /** Set to true when using the initial heading after the sub is unkilled. For
  *  example, if the diver unkills at 274.5 degrees, that will be treated as
@@ -148,7 +148,7 @@ static const float GAINS[7][3] =
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 },
 	{ 0.10, 0.00, 0.05 },
-	{ 1.75, 0.00, 0.00 }
+	{ 0.85, 0.00, 0.10 }
 };
 
 /*! @name Conversions.

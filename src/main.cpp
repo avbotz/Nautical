@@ -99,6 +99,10 @@ void run()
 			{
 				desired_altitude = Serial.parseFloat();
 			}
+			else if (c == 'w')
+			{
+				Serial << altitude << '\n';
+			}
 			else if (c == 'r')
 			{
 				for (int i = 0; i < DOF; i++)
@@ -174,6 +178,11 @@ void run()
 				int val = Serial.parseInt();
 				drop(idx, val);
 			}
+			else if (c == 't')
+			{
+				for (int i = 0; i < 8; i++)
+					Serial << _FLOAT(motors.thrust[i], 6) << " "; Serial << '\n';
+			}
 		}
 
 		alive_state_prev = alive_state;
@@ -195,6 +204,7 @@ void run()
 		if (alive_state_prev && !alive_state && !SIM)
 		{
 			motors.pause();
+			// Serial << "Desired states being reset." << endl;
 		}
 
 		// Kill switch has just been switched from dead to alive. Reset all
@@ -204,10 +214,13 @@ void run()
 		{ 
 			state[0] = 0.;
 			state[3] = 0.;
+			/*
 			desired[F] = 0.;
 			desired[H] = 0.;
 			desired[V] = 0.;
 			desired[Y] = 0.;
+			desired_altitude = -1.;
+			*/
 			current[F] = 0.;
 			current[H] = 0.;
 			current[Y] = 0.;
@@ -219,6 +232,7 @@ void run()
 			INITIAL_ROLL = ahrs_att((enum att_axis) (ROLL));
 			pause = true;
 			pause_time = millis();
+			// Serial << "Current states being reset." << endl;
 		}
 
 		// Motors are done starting up and the sub is alive. Run the sub as
@@ -230,10 +244,12 @@ void run()
 			{
 				current[V] = (analogRead(DEPTH_PIN)-230.)/65.;
 				current[Y] = ahrs_att((enum att_axis) (YAW)) - INITIAL_YAW;
-				current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
-				current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
+				// current[P] = ahrs_att((enum att_axis) (PITCH)) - INITIAL_PITCH;
+				// current[R] = ahrs_att((enum att_axis) (ROLL)) - INITIAL_ROLL;
+				current[P] = ahrs_att((enum att_axis) (PITCH));
+				current[R] = ahrs_att((enum att_axis) (ROLL));
 				if (DVL_ON)
-					altitude = dvl_get_range_to_bottom()/1000.;
+					altitude = dvl_get_range_to_bottom()/10000.;
 
 				// Handle angle overflow/underflow.
 				for (int i = BODY_DOF; i < GYRO_DOF; i++)
@@ -261,17 +277,25 @@ void run()
 			// is high. Make depth changes regardless. 
 			for (int i = 0; i < DOF; i++)
 				dstate[i] = 0.;
+			float d0 = desired[F] - current[F];
+			float d1 = desired[H] - current[H];
+			float i0 = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
+			float i1 = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
 			if (fabs(angle_difference(desired[Y], current[Y])) > 5.)
 			{
 				dstate[Y] = angle_difference(desired[Y], current[Y]);
 			}
+			else if (fabs(i0) > 2.)
+			{
+				dstate[Y] = angle_difference(desired[Y], current[Y]);
+				dstate[F] = i0; 
+				dstate[H] = i1 < i0/3. ? i1 : i0/3.;
+			}
 			else 
 			{
 				dstate[Y] = angle_difference(desired[Y], current[Y]);
-				float d0 = desired[F] - current[F];
-				float d1 = desired[H] - current[H];
-				dstate[F] = d0*cos(D2R*current[Y]) + d1*sin(D2R*current[Y]);
-				dstate[H] = d1*cos(D2R*current[Y]) - d0*sin(D2R*current[Y]);
+				dstate[F] = i0;
+				dstate[H] = i1;
 			}
 			dstate[V] = desired[V] - current[V];
 			daltitude = desired_altitude > 0. ? desired_altitude-altitude : -9999.;

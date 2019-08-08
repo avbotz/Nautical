@@ -8,11 +8,22 @@ IO and kill switch function definitions.
 {\ttfamily \#include \char`\"{}motor.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}m5/m5.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}m5/io\+\_\+m5.\+h\char`\"{}}\newline
-Include dependency graph for io.\+hpp\+:\nopagebreak
+{\ttfamily \#include \char`\"{}io.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}servo.\+h\char`\"{}}\newline
+Include dependency graph for io.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=290pt]{io_8hpp__incl}
+\includegraphics[width=350pt]{io_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{io_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \subsection*{Macros}
@@ -30,8 +41,19 @@ Include dependency graph for io.\+hpp\+:\nopagebreak
 \mbox{\Hypertarget{io_8hpp_ac2651270fddbd8b61862729764f591fe}\label{io_8hpp_ac2651270fddbd8b61862729764f591fe}} 
 void \hyperlink{io_8hpp_ac2651270fddbd8b61862729764f591fe}{io} ()
 \begin{DoxyCompactList}\small\item\em Starts IO initialization for all major hardware (A\+H\+RS, D\+VL, M5, depth sensor, kill switch). \end{DoxyCompactList}\item 
+void \hyperlink{io_8hpp_ae779516839d36e47d80e8faabfa03259}{drop} (int idx, int val)
+\begin{DoxyCompactList}\small\item\em Turns servo to drop ball from dropper. \end{DoxyCompactList}\item 
 bool \hyperlink{io_8hpp_a7c2ff3cdf102a2adb5ca47cb932acc9d}{alive} ()
 \begin{DoxyCompactList}\small\item\em Reads kill state from the kill switch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{io_8hpp_a3e9350a91f7cb9ec3989955b454ef68e}\label{io_8hpp_a3e9350a91f7cb9ec3989955b454ef68e}} 
+\hyperlink{classServoTimer2}{Servo\+Timer2} {\bfseries dropper1}
+\item 
+\mbox{\Hypertarget{io_8hpp_af6b1b58029f5269374c846cd1eadb70c}\label{io_8hpp_af6b1b58029f5269374c846cd1eadb70c}} 
+\hyperlink{classServoTimer2}{Servo\+Timer2} {\bfseries dropper2}
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -56,3 +78,20 @@ Reads kill state from the kill switch.
 \begin{DoxyReturn}{Returns}
 True on alive. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{io_8hpp_ae779516839d36e47d80e8faabfa03259}\label{io_8hpp_ae779516839d36e47d80e8faabfa03259}} 
+\index{io.\+hpp@{io.\+hpp}!drop@{drop}}
+\index{drop@{drop}!io.\+hpp@{io.\+hpp}}
+\subsubsection{\texorpdfstring{drop()}{drop()}}
+{\footnotesize\ttfamily void drop (\begin{DoxyParamCaption}\item[{int}]{idx,  }\item[{int}]{val }\end{DoxyParamCaption})}
+
+
+
+Turns servo to drop ball from dropper. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & 0 drops first servo, 1 drops second. \\
+\hline
+{\em val} & 0 means in, 1 means out. \\
+\hline
+\end{DoxyParams}

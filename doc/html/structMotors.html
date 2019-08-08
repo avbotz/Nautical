@@ -89,14 +89,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a179c6a24115935994a13493f74f56df8">pause</a> ()</td></tr>
 <tr class="memdesc:a179c6a24115935994a13493f74f56df8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause power to the motors. <br /></td></tr>
 <tr class="separator:a179c6a24115935994a13493f74f56df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d3909ec9fadbb3028368e7340a2e707"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a0d3909ec9fadbb3028368e7340a2e707">run</a> (float *dstate, float *angles, uint32_t t)</td></tr>
-<tr class="memdesc:a0d3909ec9fadbb3028368e7340a2e707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the motors for one iteration towards the desired state.  <a href="#a0d3909ec9fadbb3028368e7340a2e707">More...</a><br /></td></tr>
-<tr class="separator:a0d3909ec9fadbb3028368e7340a2e707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfcaebaa831f46e37b33757ad2c131f8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#adfcaebaa831f46e37b33757ad2c131f8">run</a> (float *dstate, float daltitude, float *angles, uint32_t t)</td></tr>
+<tr class="memdesc:adfcaebaa831f46e37b33757ad2c131f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the motors for one iteration towards the desired state.  <a href="#adfcaebaa831f46e37b33757ad2c131f8">More...</a><br /></td></tr>
+<tr class="separator:adfcaebaa831f46e37b33757ad2c131f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a7cbe4b9467412e4882ff318b9375017e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPID.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a7cbe4b9467412e4882ff318b9375017e">controllers</a> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td></tr>
-<tr class="separator:a7cbe4b9467412e4882ff318b9375017e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b5a477eb6136d5aff447d7ced589d89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPID.html">PID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a6b5a477eb6136d5aff447d7ced589d89">controllers</a> [<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>+1]</td></tr>
+<tr class="separator:a6b5a477eb6136d5aff447d7ced589d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d20987287ffda85eed109c3bf80a12"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#ac8d20987287ffda85eed109c3bf80a12">thrust</a> [<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
 <tr class="separator:ac8d20987287ffda85eed109c3bf80a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84b2ea1a929743410df7ead8212b767a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMotors.html#a84b2ea1a929743410df7ead8212b767a">buttons</a> [<a class="el" href="config_8h.html#ae84658f12c2f1b44f59af36678cf3dcc">NUM_MOTORS</a>]</td></tr>
@@ -111,8 +111,8 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Helper class for motors. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0d3909ec9fadbb3028368e7340a2e707"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d3909ec9fadbb3028368e7340a2e707">&#9670;&nbsp;</a></span>run()</h2>
+<a id="adfcaebaa831f46e37b33757ad2c131f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfcaebaa831f46e37b33757ad2c131f8">&#9670;&nbsp;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -122,6 +122,12 @@ Data Fields</h2></td></tr>
           <td>(</td>
           <td class="paramtype">float *&#160;</td>
           <td class="paramname"><em>dstate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>daltitude</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -147,6 +153,7 @@ Data Fields</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dstate</td><td>Difference between desired and current state. </td></tr>
+    <tr><td class="paramname">daltitude</td><td>Difference between distances from bottom. </td></tr>
     <tr><td class="paramname">angles</td><td>Current euler angles. </td></tr>
     <tr><td class="paramname">t</td><td>Current time used for time difference calculations. </td></tr>
   </table>
@@ -172,14 +179,14 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a7cbe4b9467412e4882ff318b9375017e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7cbe4b9467412e4882ff318b9375017e">&#9670;&nbsp;</a></span>controllers</h2>
+<a id="a6b5a477eb6136d5aff447d7ced589d89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b5a477eb6136d5aff447d7ced589d89">&#9670;&nbsp;</a></span>controllers</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structPID.html">PID</a> Motors::controllers[<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>]</td>
+          <td class="memname"><a class="el" href="structPID.html">PID</a> Motors::controllers[<a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a>+1]</td>
         </tr>
       </table>
 </div><div class="memdoc">

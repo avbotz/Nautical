@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['drop',['drop',['../io_8hpp.html#ae779516839d36e47d80e8faabfa03259',1,'io.cpp']]],
   ['dvl_5fbegin_5fpinging',['dvl_begin_pinging',['../dvl_8h.html#a88885ad4d9407ea44a0d1473c85e459b',1,'dvl.cpp']]],
   ['dvl_5fdata_5fupdate',['dvl_data_update',['../dvl_8h.html#acd282756a658fc5e2fe729d9684263d1',1,'dvl.cpp']]],
   ['dvl_5fget_5fforward_5fvel',['dvl_get_forward_vel',['../dvl_8h.html#a836f3040e47b915729718c2cdd6a9064',1,'dvl.cpp']]],

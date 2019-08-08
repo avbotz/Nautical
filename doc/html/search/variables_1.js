@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['controllers',['controllers',['../structMotors.html#a7cbe4b9467412e4882ff318b9375017e',1,'Motors']]]
+  ['controllers',['controllers',['../structMotors.html#a6b5a477eb6136d5aff447d7ced589d89',1,'Motors']]]
 ];

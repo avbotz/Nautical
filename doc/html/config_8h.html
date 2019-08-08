@@ -95,7 +95,7 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Runtime configuration.</div></td></tr>
-<tr class="memitem:a51c905eb4396ee56a3a9c095e3b58bfe"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a51c905eb4396ee56a3a9c095e3b58bfe">DVL_ON</a> = false</td></tr>
+<tr class="memitem:a51c905eb4396ee56a3a9c095e3b58bfe"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a51c905eb4396ee56a3a9c095e3b58bfe">DVL_ON</a> = true</td></tr>
 <tr class="separator:a51c905eb4396ee56a3a9c095e3b58bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d006725140166599b441c1449fc7a3a"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a6d006725140166599b441c1449fc7a3a">USE_INITIAL_HEADING</a> = true</td></tr>
 <tr class="separator:a6d006725140166599b441c1449fc7a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,6 +104,8 @@ Variables</h2></td></tr>
 <tr class="memitem:a589b4f622d6edccfa6c073a113fa4836"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a589b4f622d6edccfa6c073a113fa4836">SIM</a> = false</td></tr>
 <tr class="separator:a589b4f622d6edccfa6c073a113fa4836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Constants for degrees of freedom with North-East-Down coordinates.</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>The degrees of freedom are X, Y, Z, Yaw, Pitch, Roll. The 7th degree of option is to replace Z (down) with depth from bottom instead. </p>
+</div></td></tr>
 <tr class="memitem:ab5c558d88abd9517fb657be4889ee1bc"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#ab5c558d88abd9517fb657be4889ee1bc">DOF</a> = 6</td></tr>
 <tr class="separator:ab5c558d88abd9517fb657be4889ee1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41e6c9e69829719a154249c60cbdf1b2"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a41e6c9e69829719a154249c60cbdf1b2">BODY_DOF</a> = 3</td></tr>
@@ -122,12 +124,14 @@ Variables</h2></td></tr>
 <tr class="separator:aabaa1bd1eed76e739bbc16c7e4e72549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a554e63228b946db0d44c4f398b18e212"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a554e63228b946db0d44c4f398b18e212">R</a> = 5</td></tr>
 <tr class="separator:a554e63228b946db0d44c4f398b18e212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf1e03a8a1d3f8754ef7ed73b2577adb"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#acf1e03a8a1d3f8754ef7ed73b2577adb">D</a> = 6</td></tr>
+<tr class="separator:acf1e03a8a1d3f8754ef7ed73b2577adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Motor orientation configuration.</div></td></tr>
-<tr class="memitem:a8925b73125e9fe0a48808f4e2a3f8561"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a8925b73125e9fe0a48808f4e2a3f8561">ORIENTATION</a> [8][6]</td></tr>
-<tr class="separator:a8925b73125e9fe0a48808f4e2a3f8561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a107a25a18149edef8fffd0fcb3237a21"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a107a25a18149edef8fffd0fcb3237a21">ORIENTATION</a> [8][7]</td></tr>
+<tr class="separator:a107a25a18149edef8fffd0fcb3237a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">PID gains configuration.</div></td></tr>
-<tr class="memitem:a15c324540eac139d826a36cacf0c7e2b"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a15c324540eac139d826a36cacf0c7e2b">GAINS</a> [6][3]</td></tr>
-<tr class="separator:a15c324540eac139d826a36cacf0c7e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64488d72d747c5a849e94699fc0a7f99"><td class="memItemLeft" align="right" valign="top">static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config_8h.html#a64488d72d747c5a849e94699fc0a7f99">GAINS</a> [7][3]</td></tr>
+<tr class="separator:a64488d72d747c5a849e94699fc0a7f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Motor ID configuration.</h2></td></tr>
@@ -192,6 +196,29 @@ Motor ID configuration.</h2></td></tr>
 
 </div>
 </div>
+<a id="acf1e03a8a1d3f8754ef7ed73b2577adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf1e03a8a1d3f8754ef7ed73b2577adb">&#9670;&nbsp;</a></span>D</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int D = 6</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Depth from bottom index. </p>
+
+</div>
+</div>
 <a id="ab5c558d88abd9517fb657be4889ee1bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab5c558d88abd9517fb657be4889ee1bc">&#9670;&nbsp;</a></span>DOF</h2>
 
@@ -225,7 +252,7 @@ Motor ID configuration.</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool DVL_ON = false</td>
+          <td class="memname">const bool DVL_ON = true</td>
         </tr>
       </table>
   </td>
@@ -286,8 +313,8 @@ Motor ID configuration.</h2></td></tr>
 
 </div>
 </div>
-<a id="a15c324540eac139d826a36cacf0c7e2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15c324540eac139d826a36cacf0c7e2b">&#9670;&nbsp;</a></span>GAINS</h2>
+<a id="a64488d72d747c5a849e94699fc0a7f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64488d72d747c5a849e94699fc0a7f99">&#9670;&nbsp;</a></span>GAINS</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,7 +323,7 @@ Motor ID configuration.</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const float GAINS[6][3]</td>
+          <td class="memname">const float GAINS[7][3]</td>
         </tr>
       </table>
   </td>
@@ -305,7 +332,7 @@ Motor ID configuration.</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= </div><div class="line">{</div><div class="line">    { 1.50, 0.00, 0.00 },</div><div class="line">    { 1.50, 0.00, 0.00 },</div><div class="line">    { 1.75, 0.00, 0.00 },</div><div class="line">    { 0.10, 0.00, 0.05 },</div><div class="line">    { 0.10, 0.00, 0.05 },</div><div class="line">    { 0.10, 0.00, 0.05 }</div><div class="line">}</div></div><!-- fragment --><p>Rows correspond to F, H, V, Y, P, and R while columns correspond to kp, ki, and kd. To be honest, these gains are not great. The integral component is being ignored at the moment because it doesn't work as well in practice. </p>
+<b>Initial value:</b><div class="fragment"><div class="line">= </div><div class="line">{</div><div class="line">    { 2.00, 0.00, 2.50 },</div><div class="line">    { 2.50, 0.00, 2.00 },</div><div class="line">    { 1.75, 0.00, 0.00 },</div><div class="line">    { 0.10, 0.00, 0.05 },</div><div class="line">    { 0.10, 0.00, 0.05 },</div><div class="line">    { 0.10, 0.00, 0.05 },</div><div class="line">    { 0.85, 0.00, 0.10 }</div><div class="line">}</div></div><!-- fragment --><p>Rows correspond to F, H, V, Y, P, and R while columns correspond to kp, ki, and kd. To be honest, these gains are not great. The integral component is being ignored at the moment because it doesn't work as well in practice. </p>
 
 </div>
 </div>
@@ -378,8 +405,8 @@ Motor ID configuration.</h2></td></tr>
 
 </div>
 </div>
-<a id="a8925b73125e9fe0a48808f4e2a3f8561"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8925b73125e9fe0a48808f4e2a3f8561">&#9670;&nbsp;</a></span>ORIENTATION</h2>
+<a id="a107a25a18149edef8fffd0fcb3237a21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a107a25a18149edef8fffd0fcb3237a21">&#9670;&nbsp;</a></span>ORIENTATION</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -388,7 +415,7 @@ Motor ID configuration.</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const float ORIENTATION[8][6]</td>
+          <td class="memname">const float ORIENTATION[8][7]</td>
         </tr>
       </table>
   </td>
@@ -397,7 +424,7 @@ Motor ID configuration.</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= </div><div class="line">{</div><div class="line">    { 0.00, 0.00, 1.00, 0.00, 1.00, -1.0 },</div><div class="line">    { 0.00, 0.00, -1.0, 0.00, -1.0, -1.0 },</div><div class="line">    { 0.00, 0.00, -1.0, 0.00, 1.00, 1.00 },</div><div class="line">    { 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 },</div><div class="line">    { 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 },</div><div class="line">    { -1.1, 1.00, 0.00, 1.00, 0.00, 0.00 },</div><div class="line">    { -1.1, 1.00, 0.00, -1.0, 0.00, 0.00 }, </div><div class="line">    { 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 }</div><div class="line">}</div></div><!-- fragment --><p>Rows are motors while columns are directions. Positive numbers are for clockwise rotation and negative numbers are for counterclockwise.</p>
+<b>Initial value:</b><div class="fragment"><div class="line">= </div><div class="line">{</div><div class="line">    { -.15, 0.00, 1.00, 0.00, 1.00, -1.0, 1.00 },</div><div class="line">    { 0.15, 0.00, -1.0, 0.00, -1.0, -1.0, -1.0 },</div><div class="line">    { -.15, 0.00, -1.0, 0.00, 1.00, 1.00, -1.0 },</div><div class="line">    { 0.15, 0.00, 1.00, 0.00, -1.0, 1.00, 1.00 },</div><div class="line">    { 1.00, 1.00, 0.00, 1.00, 0.00, 0.00, 0.00 },</div><div class="line">    { -1.1, 1.00, 0.00, 1.00, 0.00, 0.00, 0.00 },</div><div class="line">    { -1.1, 1.00, 0.00, -1.0, 0.00, 0.00, 0.00 }, </div><div class="line">    { 1.00, 1.00, 0.00, -1.0, 0.00, 0.00, 0.00 }</div><div class="line">}</div></div><!-- fragment --><p>Rows are motors while columns are directions. Positive numbers are for clockwise rotation and negative numbers are for counterclockwise.</p>
 <p>The multipliers are either -1, 1, or 0 because they are meant to be direction only. I do set 1.1 for some motors when the sub is moving foward because it tends to drift right. If this code ever runs on new sub, which is supposed to correct for that, then it would be a good idea to change the values back to 1. </p>
 
 </div>

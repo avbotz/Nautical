@@ -27,12 +27,12 @@ void \hyperlink{structMotors_ac6532a754e5f1743ee4975b6722b4054}{power} ()
 \mbox{\Hypertarget{structMotors_a179c6a24115935994a13493f74f56df8}\label{structMotors_a179c6a24115935994a13493f74f56df8}} 
 void \hyperlink{structMotors_a179c6a24115935994a13493f74f56df8}{pause} ()
 \begin{DoxyCompactList}\small\item\em Pause power to the motors. \end{DoxyCompactList}\item 
-uint32\+\_\+t \hyperlink{structMotors_a0d3909ec9fadbb3028368e7340a2e707}{run} (float $\ast$dstate, float $\ast$angles, uint32\+\_\+t t)
+uint32\+\_\+t \hyperlink{structMotors_adfcaebaa831f46e37b33757ad2c131f8}{run} (float $\ast$dstate, float daltitude, float $\ast$angles, uint32\+\_\+t t)
 \begin{DoxyCompactList}\small\item\em Run the motors for one iteration towards the desired state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structPID}{P\+ID} \hyperlink{structMotors_a7cbe4b9467412e4882ff318b9375017e}{controllers} \mbox{[}\hyperlink{config_8h_ab5c558d88abd9517fb657be4889ee1bc}{D\+OF}\mbox{]}
+\hyperlink{structPID}{P\+ID} \hyperlink{structMotors_a6b5a477eb6136d5aff447d7ced589d89}{controllers} \mbox{[}\hyperlink{config_8h_ab5c558d88abd9517fb657be4889ee1bc}{D\+OF}+1\mbox{]}
 \item 
 float \hyperlink{structMotors_ac8d20987287ffda85eed109c3bf80a12}{thrust} \mbox{[}\hyperlink{config_8h_ae84658f12c2f1b44f59af36678cf3dcc}{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS}\mbox{]}
 \item 
@@ -50,11 +50,11 @@ float \hyperlink{structMotors_a46e39ac60edebef57fca46f878e2c0b5}{p}
 Helper class for motors. 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{structMotors_a0d3909ec9fadbb3028368e7340a2e707}\label{structMotors_a0d3909ec9fadbb3028368e7340a2e707}} 
+\mbox{\Hypertarget{structMotors_adfcaebaa831f46e37b33757ad2c131f8}\label{structMotors_adfcaebaa831f46e37b33757ad2c131f8}} 
 \index{Motors@{Motors}!run@{run}}
 \index{run@{run}!Motors@{Motors}}
 \subsubsection{\texorpdfstring{run()}{run()}}
-{\footnotesize\ttfamily uint32\+\_\+t Motors\+::run (\begin{DoxyParamCaption}\item[{float $\ast$}]{dstate,  }\item[{float $\ast$}]{angles,  }\item[{uint32\+\_\+t}]{t }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily uint32\+\_\+t Motors\+::run (\begin{DoxyParamCaption}\item[{float $\ast$}]{dstate,  }\item[{float}]{daltitude,  }\item[{float $\ast$}]{angles,  }\item[{uint32\+\_\+t}]{t }\end{DoxyParamCaption})}
 
 
 
@@ -63,6 +63,8 @@ Run the motors for one iteration towards the desired state.
 
 \begin{DoxyParams}{Parameters}
 {\em dstate} & Difference between desired and current state. \\
+\hline
+{\em daltitude} & Difference between distances from bottom. \\
 \hline
 {\em angles} & Current euler angles. \\
 \hline
@@ -81,11 +83,11 @@ Time after iteration is finished.
 \subsubsection{\texorpdfstring{buttons}{buttons}}
 {\footnotesize\ttfamily int Motors\+::buttons\mbox{[}\hyperlink{config_8h_ae84658f12c2f1b44f59af36678cf3dcc}{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS}\mbox{]}}
 
-Holds pressed values for remote control. \mbox{\Hypertarget{structMotors_a7cbe4b9467412e4882ff318b9375017e}\label{structMotors_a7cbe4b9467412e4882ff318b9375017e}} 
+Holds pressed values for remote control. \mbox{\Hypertarget{structMotors_a6b5a477eb6136d5aff447d7ced589d89}\label{structMotors_a6b5a477eb6136d5aff447d7ced589d89}} 
 \index{Motors@{Motors}!controllers@{controllers}}
 \index{controllers@{controllers}!Motors@{Motors}}
 \subsubsection{\texorpdfstring{controllers}{controllers}}
-{\footnotesize\ttfamily \hyperlink{structPID}{P\+ID} Motors\+::controllers\mbox{[}\hyperlink{config_8h_ab5c558d88abd9517fb657be4889ee1bc}{D\+OF}\mbox{]}}
+{\footnotesize\ttfamily \hyperlink{structPID}{P\+ID} Motors\+::controllers\mbox{[}\hyperlink{config_8h_ab5c558d88abd9517fb657be4889ee1bc}{D\+OF}+1\mbox{]}}
 
 \hyperlink{structPID}{P\+ID} controllers for each degree of freedom. \mbox{\Hypertarget{structMotors_a17cb9b1c3fc7749984c4622439901f84}\label{structMotors_a17cb9b1c3fc7749984c4622439901f84}} 
 \index{Motors@{Motors}!forces@{forces}}

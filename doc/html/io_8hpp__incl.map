@@ -1,7 +1,8 @@
 <map id="include/io.hpp" name="include/io.hpp">
-<area shape="rect" id="node2" href="$motor_8hpp.html" title="Helper class to use all of the motors at once and do computations. " alt="" coords="21,80,101,107"/>
-<area shape="rect" id="node3" href="$m5_8h.html" title="Interface function definitions for Videoray M5 motors. " alt="" coords="110,155,183,181"/>
-<area shape="rect" id="node7" href="$io__m5_8h.html" title="Low&#45;level communication function definitions for Videoray M5 motors. " alt="" coords="193,80,284,107"/>
-<area shape="rect" id="node5" href="$config_8h.html" title="Configuration options for Nautical. " alt="" coords="47,229,115,256"/>
-<area shape="rect" id="node6" href="$pid_8hpp.html" title="Helper class to compute PID for motors. " alt="" coords="21,155,85,181"/>
+<area shape="rect" id="node2" href="$motor_8hpp.html" title="Helper class to use all of the motors at once and do computations. " alt="" coords="20,81,100,108"/>
+<area shape="rect" id="node3" href="$m5_8h.html" title="Interface function definitions for Videoray M5 motors. " alt="" coords="109,156,182,183"/>
+<area shape="rect" id="node7" href="$io__m5_8h.html" title="Low&#45;level communication function definitions for Videoray M5 motors. " alt="" coords="183,81,273,108"/>
+<area shape="rect" id="node9" href="$servo_8h_source.html" title="servo.h" alt="" coords="323,81,389,108"/>
+<area shape="rect" id="node5" href="$config_8h.html" title="Configuration options for Nautical. " alt="" coords="19,231,87,257"/>
+<area shape="rect" id="node6" href="$pid_8hpp.html" title="Helper class to compute PID for motors. " alt="" coords="20,156,84,183"/>
 </map>

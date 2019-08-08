@@ -1,7 +1,9 @@
 var searchData=
 [
+  ['d',['D',['../config_8h.html#acf1e03a8a1d3f8754ef7ed73b2577adb',1,'config.h']]],
   ['dbg_2eh',['dbg.h',['../dbg_8h.html',1,'']]],
   ['dof',['DOF',['../config_8h.html#ab5c558d88abd9517fb657be4889ee1bc',1,'config.h']]],
+  ['drop',['drop',['../io_8hpp.html#ae779516839d36e47d80e8faabfa03259',1,'io.cpp']]],
   ['dvl_2eh',['dvl.h',['../dvl_8h.html',1,'']]],
   ['dvl_5fbegin_5fpinging',['dvl_begin_pinging',['../dvl_8h.html#a88885ad4d9407ea44a0d1473c85e459b',1,'dvl.cpp']]],
   ['dvl_5fcommands_2eh',['dvl_commands.h',['../dvl__commands_8h.html',1,'']]],

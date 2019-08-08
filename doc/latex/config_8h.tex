@@ -5,7 +5,8 @@
 Configuration options for Nautical.  
 
 
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,7 +28,7 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{Indent}\textbf{ Runtime configuration.}\par
 \begin{DoxyCompactItemize}
 \item 
-static const bool \hyperlink{config_8h_a51c905eb4396ee56a3a9c095e3b58bfe}{D\+V\+L\+\_\+\+ON} = false
+static const bool \hyperlink{config_8h_a51c905eb4396ee56a3a9c095e3b58bfe}{D\+V\+L\+\_\+\+ON} = true
 \item 
 static const bool \hyperlink{config_8h_a6d006725140166599b441c1449fc7a3a}{U\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+H\+E\+A\+D\+I\+NG} = true
 \item 
@@ -37,7 +38,7 @@ static const bool \hyperlink{config_8h_a589b4f622d6edccfa6c073a113fa4836}{S\+IM}
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Constants for degrees of freedom with North-\/\+East-\/\+Down coordinates.}\par
-\begin{DoxyCompactItemize}
+{\em The degrees of freedom are X, Y, Z, Yaw, Pitch, Roll. The 7th degree of option is to replace Z (down) with depth from bottom instead. }\begin{DoxyCompactItemize}
 \item 
 static const int \hyperlink{config_8h_ab5c558d88abd9517fb657be4889ee1bc}{D\+OF} = 6
 \item 
@@ -56,18 +57,20 @@ static const int \hyperlink{config_8h_a4245f3c5e8eb90ade09427f989b098ec}{Y} = 3
 static const int \hyperlink{config_8h_aabaa1bd1eed76e739bbc16c7e4e72549}{P} = 4
 \item 
 static const int \hyperlink{config_8h_a554e63228b946db0d44c4f398b18e212}{R} = 5
+\item 
+static const int \hyperlink{config_8h_acf1e03a8a1d3f8754ef7ed73b2577adb}{D} = 6
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ Motor orientation configuration.}\par
 \begin{DoxyCompactItemize}
 \item 
-static const float \hyperlink{config_8h_a8925b73125e9fe0a48808f4e2a3f8561}{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON} \mbox{[}8\mbox{]}\mbox{[}6\mbox{]}
+static const float \hyperlink{config_8h_a107a25a18149edef8fffd0fcb3237a21}{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON} \mbox{[}8\mbox{]}\mbox{[}7\mbox{]}
 \end{DoxyCompactItemize}
 \end{Indent}
 \begin{Indent}\textbf{ P\+ID gains configuration.}\par
 \begin{DoxyCompactItemize}
 \item 
-static const float \hyperlink{config_8h_a15c324540eac139d826a36cacf0c7e2b}{G\+A\+I\+NS} \mbox{[}6\mbox{]}\mbox{[}3\mbox{]}
+static const float \hyperlink{config_8h_a64488d72d747c5a849e94699fc0a7f99}{G\+A\+I\+NS} \mbox{[}7\mbox{]}\mbox{[}3\mbox{]}
 \end{DoxyCompactItemize}
 \end{Indent}
 \subsection*{Motor ID configuration.}
@@ -115,7 +118,13 @@ Thruster enum makes code more readable. Do N\+OT set an ID to 0, the motor will 
 \subsubsection{\texorpdfstring{B\+O\+D\+Y\+\_\+\+D\+OF}{BODY\_DOF}}
 {\footnotesize\ttfamily const int B\+O\+D\+Y\+\_\+\+D\+OF = 3\hspace{0.3cm}{\ttfamily [static]}}
 
-The number of linear axes (North, East, Down). \mbox{\Hypertarget{config_8h_ab5c558d88abd9517fb657be4889ee1bc}\label{config_8h_ab5c558d88abd9517fb657be4889ee1bc}} 
+The number of linear axes (North, East, Down). \mbox{\Hypertarget{config_8h_acf1e03a8a1d3f8754ef7ed73b2577adb}\label{config_8h_acf1e03a8a1d3f8754ef7ed73b2577adb}} 
+\index{config.\+h@{config.\+h}!D@{D}}
+\index{D@{D}!config.\+h@{config.\+h}}
+\subsubsection{\texorpdfstring{D}{D}}
+{\footnotesize\ttfamily const int D = 6\hspace{0.3cm}{\ttfamily [static]}}
+
+Depth from bottom index. \mbox{\Hypertarget{config_8h_ab5c558d88abd9517fb657be4889ee1bc}\label{config_8h_ab5c558d88abd9517fb657be4889ee1bc}} 
 \index{config.\+h@{config.\+h}!D\+OF@{D\+OF}}
 \index{D\+OF@{D\+OF}!config.\+h@{config.\+h}}
 \subsubsection{\texorpdfstring{D\+OF}{DOF}}
@@ -125,7 +134,7 @@ The number of degrees of freedom. \mbox{\Hypertarget{config_8h_a51c905eb4396ee56
 \index{config.\+h@{config.\+h}!D\+V\+L\+\_\+\+ON@{D\+V\+L\+\_\+\+ON}}
 \index{D\+V\+L\+\_\+\+ON@{D\+V\+L\+\_\+\+ON}!config.\+h@{config.\+h}}
 \subsubsection{\texorpdfstring{D\+V\+L\+\_\+\+ON}{DVL\_ON}}
-{\footnotesize\ttfamily const bool D\+V\+L\+\_\+\+ON = false\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const bool D\+V\+L\+\_\+\+ON = true\hspace{0.3cm}{\ttfamily [static]}}
 
 Set to true when in a pool deep enough for the D\+VL to work (more than 5 ft).
 
@@ -143,22 +152,23 @@ Forward, or north, state index. \mbox{\Hypertarget{config_8h_a3b5204d43975dfc585
 
 This isn\textquotesingle{}t being used at the moment because the ahrs is not producing the same value after recompiling (not sure if this is supported, or if this is a bug in the code).
 
-The idea was to have the sub use an absolute value for north rather than one relative to unkill. Since this would depend less on the diver, it would be more consistent. \mbox{\Hypertarget{config_8h_a15c324540eac139d826a36cacf0c7e2b}\label{config_8h_a15c324540eac139d826a36cacf0c7e2b}} 
+The idea was to have the sub use an absolute value for north rather than one relative to unkill. Since this would depend less on the diver, it would be more consistent. \mbox{\Hypertarget{config_8h_a64488d72d747c5a849e94699fc0a7f99}\label{config_8h_a64488d72d747c5a849e94699fc0a7f99}} 
 \index{config.\+h@{config.\+h}!G\+A\+I\+NS@{G\+A\+I\+NS}}
 \index{G\+A\+I\+NS@{G\+A\+I\+NS}!config.\+h@{config.\+h}}
 \subsubsection{\texorpdfstring{G\+A\+I\+NS}{GAINS}}
-{\footnotesize\ttfamily const float G\+A\+I\+NS\mbox{[}6\mbox{]}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const float G\+A\+I\+NS\mbox{[}7\mbox{]}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = 
 \{
-    \{ 1.50, 0.00, 0.00 \},
-    \{ 1.50, 0.00, 0.00 \},
+    \{ 2.00, 0.00, 2.50 \},
+    \{ 2.50, 0.00, 2.00 \},
     \{ 1.75, 0.00, 0.00 \},
     \{ 0.10, 0.00, 0.05 \},
     \{ 0.10, 0.00, 0.05 \},
-    \{ 0.10, 0.00, 0.05 \}
+    \{ 0.10, 0.00, 0.05 \},
+    \{ 0.85, 0.00, 0.10 \}
 \}
 \end{DoxyCode}
 Rows correspond to F, H, V, Y, P, and R while columns correspond to kp, ki, and kd. To be honest, these gains are not great. The integral component is being ignored at the moment because it doesn\textquotesingle{}t work as well in practice. \mbox{\Hypertarget{config_8h_a776938745e0d7539a3210a2404305ee6}\label{config_8h_a776938745e0d7539a3210a2404305ee6}} 
@@ -179,24 +189,24 @@ Horizontal, or east, state index. \mbox{\Hypertarget{config_8h_ae84658f12c2f1b44
 \subsubsection{\texorpdfstring{N\+U\+M\+\_\+\+M\+O\+T\+O\+RS}{NUM\_MOTORS}}
 {\footnotesize\ttfamily const int N\+U\+M\+\_\+\+M\+O\+T\+O\+RS = 8\hspace{0.3cm}{\ttfamily [static]}}
 
-Number of motors. \mbox{\Hypertarget{config_8h_a8925b73125e9fe0a48808f4e2a3f8561}\label{config_8h_a8925b73125e9fe0a48808f4e2a3f8561}} 
+Number of motors. \mbox{\Hypertarget{config_8h_a107a25a18149edef8fffd0fcb3237a21}\label{config_8h_a107a25a18149edef8fffd0fcb3237a21}} 
 \index{config.\+h@{config.\+h}!O\+R\+I\+E\+N\+T\+A\+T\+I\+ON@{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON}}
 \index{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON@{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON}!config.\+h@{config.\+h}}
 \subsubsection{\texorpdfstring{O\+R\+I\+E\+N\+T\+A\+T\+I\+ON}{ORIENTATION}}
-{\footnotesize\ttfamily const float O\+R\+I\+E\+N\+T\+A\+T\+I\+ON\mbox{[}8\mbox{]}\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily const float O\+R\+I\+E\+N\+T\+A\+T\+I\+ON\mbox{[}8\mbox{]}\mbox{[}7\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = 
 \{
-    \{ 0.00, 0.00, 1.00, 0.00, 1.00, -1.0 \},
-    \{ 0.00, 0.00, -1.0, 0.00, -1.0, -1.0 \},
-    \{ 0.00, 0.00, -1.0, 0.00, 1.00, 1.00 \},
-    \{ 0.00, 0.00, 1.00, 0.00, -1.0, 1.00 \},
-    \{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00 \},
-    \{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00 \},
-    \{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00 \}, 
-    \{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00 \}
+    \{ -.15, 0.00, 1.00, 0.00, 1.00, -1.0, 1.00 \},
+    \{ 0.15, 0.00, -1.0, 0.00, -1.0, -1.0, -1.0 \},
+    \{ -.15, 0.00, -1.0, 0.00, 1.00, 1.00, -1.0 \},
+    \{ 0.15, 0.00, 1.00, 0.00, -1.0, 1.00, 1.00 \},
+    \{ 1.00, 1.00, 0.00, 1.00, 0.00, 0.00, 0.00 \},
+    \{ -1.1, 1.00, 0.00, 1.00, 0.00, 0.00, 0.00 \},
+    \{ -1.1, 1.00, 0.00, -1.0, 0.00, 0.00, 0.00 \}, 
+    \{ 1.00, 1.00, 0.00, -1.0, 0.00, 0.00, 0.00 \}
 \}
 \end{DoxyCode}
 Rows are motors while columns are directions. Positive numbers are for clockwise rotation and negative numbers are for counterclockwise.

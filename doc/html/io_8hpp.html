@@ -64,7 +64,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">io.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -75,16 +76,26 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="motor_8hpp_source.html">motor.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="m5_8h_source.html">m5/m5.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="io__m5_8h_source.html">m5/io_m5.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="io_8hpp_source.html">io.hpp</a>&quot;</code><br />
+<code>#include &quot;servo.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for io.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="io_8hpp__incl.png" border="0" usemap="#include_2io_8hpp" alt=""/></div>
 <map name="include_2io_8hpp" id="include_2io_8hpp">
-<area shape="rect" id="node2" href="motor_8hpp.html" title="Helper class to use all of the motors at once and do computations. " alt="" coords="21,80,101,107"/>
-<area shape="rect" id="node3" href="m5_8h.html" title="Interface function definitions for Videoray M5 motors. " alt="" coords="110,155,183,181"/>
-<area shape="rect" id="node7" href="io__m5_8h.html" title="Low&#45;level communication function definitions for Videoray M5 motors. " alt="" coords="193,80,284,107"/>
-<area shape="rect" id="node5" href="config_8h.html" title="Configuration options for Nautical. " alt="" coords="47,229,115,256"/>
-<area shape="rect" id="node6" href="pid_8hpp.html" title="Helper class to compute PID for motors. " alt="" coords="21,155,85,181"/>
+<area shape="rect" id="node2" href="motor_8hpp.html" title="Helper class to use all of the motors at once and do computations. " alt="" coords="20,81,100,108"/>
+<area shape="rect" id="node3" href="m5_8h.html" title="Interface function definitions for Videoray M5 motors. " alt="" coords="109,156,182,183"/>
+<area shape="rect" id="node7" href="io__m5_8h.html" title="Low&#45;level communication function definitions for Videoray M5 motors. " alt="" coords="183,81,273,108"/>
+<area shape="rect" id="node9" href="servo_8h_source.html" title="servo.h" alt="" coords="323,81,389,108"/>
+<area shape="rect" id="node5" href="config_8h.html" title="Configuration options for Nautical. " alt="" coords="19,231,87,257"/>
+<area shape="rect" id="node6" href="pid_8hpp.html" title="Helper class to compute PID for motors. " alt="" coords="20,156,84,183"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="io_8hpp__dep__incl.png" border="0" usemap="#include_2io_8hppdep" alt=""/></div>
+<map name="include_2io_8hppdep" id="include_2io_8hppdep">
 </map>
 </div>
 </div>
@@ -105,9 +116,21 @@ Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8hpp.html#ac2651270fddbd8b61862729764f591fe">io</a> ()</td></tr>
 <tr class="memdesc:ac2651270fddbd8b61862729764f591fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts IO initialization for all major hardware (AHRS, DVL, M5, depth sensor, kill switch). <br /></td></tr>
 <tr class="separator:ac2651270fddbd8b61862729764f591fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae779516839d36e47d80e8faabfa03259"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8hpp.html#ae779516839d36e47d80e8faabfa03259">drop</a> (int idx, int val)</td></tr>
+<tr class="memdesc:ae779516839d36e47d80e8faabfa03259"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns servo to drop ball from dropper.  <a href="#ae779516839d36e47d80e8faabfa03259">More...</a><br /></td></tr>
+<tr class="separator:ae779516839d36e47d80e8faabfa03259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c2ff3cdf102a2adb5ca47cb932acc9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8hpp.html#a7c2ff3cdf102a2adb5ca47cb932acc9d">alive</a> ()</td></tr>
 <tr class="memdesc:a7c2ff3cdf102a2adb5ca47cb932acc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads kill state from the kill switch.  <a href="#a7c2ff3cdf102a2adb5ca47cb932acc9d">More...</a><br /></td></tr>
 <tr class="separator:a7c2ff3cdf102a2adb5ca47cb932acc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a3e9350a91f7cb9ec3989955b454ef68e"><td class="memItemLeft" align="right" valign="top"><a id="a3e9350a91f7cb9ec3989955b454ef68e"></a>
+<a class="el" href="classServoTimer2.html">ServoTimer2</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dropper1</b></td></tr>
+<tr class="separator:a3e9350a91f7cb9ec3989955b454ef68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6b1b58029f5269374c846cd1eadb70c"><td class="memItemLeft" align="right" valign="top"><a id="af6b1b58029f5269374c846cd1eadb70c"></a>
+<a class="el" href="classServoTimer2.html">ServoTimer2</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dropper2</b></td></tr>
+<tr class="separator:af6b1b58029f5269374c846cd1eadb70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>IO and kill switch function definitions. </p>
@@ -130,6 +153,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="io_8
 
 <p>Reads kill state from the kill switch. </p>
 <dl class="section return"><dt>Returns</dt><dd>True on alive. </dd></dl>
+
+</div>
+</div>
+<a id="ae779516839d36e47d80e8faabfa03259"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae779516839d36e47d80e8faabfa03259">&#9670;&nbsp;</a></span>drop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void drop </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Turns servo to drop ball from dropper. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>0 drops first servo, 1 drops second. </td></tr>
+    <tr><td class="paramname">val</td><td>0 means in, 1 means out. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

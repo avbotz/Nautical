@@ -10,51 +10,51 @@ Copyright (C) 2019 AVBotz
 
 REQUIREMENTS 
 
-    Unix environment w/ connected Arduino.
-    Platformio. (sudo pip install -U platformio) 
-    Tmux (recommended, sudo apt-get install tmux)
+	Unix environment w/ connected Arduino.
+	Platformio. (sudo pip install -U platformio) 
+	Tmux (recommended, sudo apt-get install tmux)
 
 COMPILING
 
-    sudo make (local compile)
-    sudo make upload (compiles and uploads onto board, if connected)
-    sudo ./comms.sh && sudo chmod 666 /dev/ttyACM* (init serial communication)
+	sudo make (local compile)
+	sudo make upload (compiles and uploads onto board, if connected)
+	sudo ./comms.sh && sudo chmod 666 /dev/ttyACM* (init serial communication)
 
 STARTUP
 
-    After compiling and uploading, run tmux in a terminal. Split the tmux window
-    into two panes. Run "cat < /dev/ttyACM*" in one and "cat > /dev/ttyACM*" in 
-    the other. The former pane is the DISPLAY pane, it will show the output from
-    Nautical. The latter is the COMMAND pane, it is where Nautical receives its
-    input.
-	
+	After compiling and uploading, run tmux in a terminal. Split the tmux window
+	into two panes. Run "cat < /dev/ttyACM*" in one and "cat > /dev/ttyACM*" in 
+	the other. The former pane is the DISPLAY pane, it will show the output from
+	Nautical. The latter is the COMMAND pane, it is where Nautical receives its
+	input.
+
 CONFIG
-    
-    All important configs are located and explained in "include/config.h". 
-    
+
+	All important configs are located and explained in "include/config.h". 
+
 COMMANDS
 
-    (Check "src/main.cpp" for full list of commands.)
+	(Check "src/main.cpp" for full list of commands.)
 
-    +---------------------+----------------------+-------------------+
-    |        Input        |     Description      |      Output       |
-    +---------------------+----------------------+-------------------+
-    | a                   | Kill switch (1=on).  | %i                |
-    | c                   | Sub location.        | %f %f %f %f %f %f |
-    | d                   | Sub destination.     | %f %f %f %f %f %f |
-    | p %f                | Set power (0-1).     | N/A               |
-    | s %f %f %f %f %f %f | Set destination.     | N/A               |
-    | r %f %f %f %f %f %f | Add relative state.  | N/A               |
-    | h                   | Raw heading (0-360). | N/A               |
-    | x                   | Reset all states.    | N/A               |
-    +---------------------+----------------------+-------------------+
-    
-    Each 6 %f's represent a state, or sub position. The order of the numbers is
-    X, Y, Z, Yaw, Pitch, Roll. This is relative to a North-East-Down coordinate
-    frame.
+	+---------------------+----------------------+-------------------+
+	|        Input        |     Description      |      Output       |
+	+---------------------+----------------------+-------------------+
+	| a                   | Kill switch (1=on).  | %i                |
+	| c                   | Sub location.        | %f %f %f %f %f %f |
+	| d                   | Sub destination.     | %f %f %f %f %f %f |
+	| p %f                | Set power (0-1).     | N/A               |
+	| s %f %f %f %f %f %f | Set destination.     | N/A               |
+	| r %f %f %f %f %f %f | Add relative state.  | N/A               |
+	| h                   | Raw heading (0-360). | N/A               |
+	| x                   | Reset all states.    | N/A               |
+	+---------------------+----------------------+-------------------+
+
+	Each 6 %f's represent a state, or sub position. The order of the numbers is
+	X, Y, Z, Yaw, Pitch, Roll. This is relative to a North-East-Down coordinate
+	frame.
 
 DOCUMENTATION
-	
+
 	All of the header files are documented using Doxygen. They describe how all
 	of the functions work and interact each other at a higher level. More
 	specific implementation details are explained using regular comment blocks
@@ -66,21 +66,21 @@ DOCUMENTATION
 
 REMOTE
 
-    Marlin can also be controlled with WASD and arrow keys over a socket. To do
-    this, ensure that the remote_control node on Marlin's ROS stack is running
-    first. Then run "sudo python manual.py".
+	Marlin can also be controlled with WASD and arrow keys over a socket. To do
+	this, ensure that the remote_control node on Marlin's ROS stack is running
+	first. Then run "sudo python manual.py".
 
 ADDITIONAL 
 
-    Nautical uses a Kalman filter to reduce noise from DVL and other sensor
-    readings. However, the current movement model doesn't represent Marlin's
-    movement well enough to provide a substantial upgrade over raw DVL data.
+	Nautical uses a Kalman filter to reduce noise from DVL and other sensor
+	readings. However, the current movement model doesn't represent Marlin's
+	movement well enough to provide a substantial upgrade over raw DVL data.
 
-    Nautical also needs better PID tunings or a slight change in the orientation
-    matrix. Marlin tends to pitch downward and strafe a bit to the right when
-    moving forward at high speeds.
+	Nautical also needs better PID tunings or a slight change in the orientation
+	matrix. Marlin tends to pitch downward and strafe a bit to the right when
+	moving forward at high speeds.
 
-    Nautical can also be improved with quaternions over euler angles (:P).
+	Nautical can also be improved with quaternions over euler angles (:P).
 
 LICENSE
 

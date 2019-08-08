@@ -27,7 +27,7 @@ STARTUP
     the other. The former pane is the DISPLAY pane, it will show the output from
     Nautical. The latter is the COMMAND pane, it is where Nautical receives its
     input.
-
+	
 CONFIG
     
     All important configs are located and explained in "include/config.h". 
@@ -53,6 +53,17 @@ COMMANDS
     X, Y, Z, Yaw, Pitch, Roll. This is relative to a North-East-Down coordinate
     frame.
 
+DOCUMENTATION
+	
+	All of the header files are documented using Doxygen. They describe how all
+	of the functions work and interact each other at a higher level. More
+	specific implementation details are explained using regular comment blocks
+	in the .c/.cpp files. 
+
+	For general questions about the software stack, contact David Zhang.
+	Questions about low-level drivers can also be directed towards Seth Girvan
+	(AHRS, M5) and Timothy Kanarsky (DVL).
+
 REMOTE
 
     Marlin can also be controlled with WASD and arrow keys over a socket. To do
@@ -70,4 +81,9 @@ ADDITIONAL
     moving forward at high speeds.
 
     Nautical can also be improved with quaternions over euler angles (:P).
+
+LICENSE
+
+	This code is under the MIT license. Check the LICENSE file for more details.
+
 
